@@ -10,7 +10,7 @@
 
 `data/status.json` ist der **freigegebene** öffentliche Status. Inhalte und FAQ werden manuell gepflegt, Statusänderungen nach einem Review übernommen. GitHub Pages veröffentlicht Änderungen auf `main` automatisch (Branch `main`, Ordner `/ (root)`). Es existiert **kein** automatischer Direktzugriff auf das private Repository.
 
-Die Seite zeigt Sprachweg-Schaubild, Gerätefilter, Sicherheitsgrundsätze und den freigegebenen Pilotstand (aus `data/status.json`). Sie lädt keine externen Ressourcen.
+Die Seite zeigt Sprachweg-Schaubild, Gerätefilter, Sicherheitsgrundsätze und den freigegebenen Pilotstand (aus `data/status.json`). Sie lädt keine externen Ressourcen. Es gibt eine deutsche und eine englische Fassung (`en/`), siehe `docs/REDAKTION.md`.
 
 Die Grundlagen stammen aus „Amazon-Geräte als offene Sprach- und Smart-Home-Geräte“ (Redaktionsstand 22.10.2026). Geräteunterstützung und tatsächliche Projektabnahme werden getrennt dargestellt.
 

@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Lokale Alexa: Echo-Hardware weiterverwenden, Home Assistant und Hermes anbinden. Öffentlicher Entwicklungsstand, Sprachweg, Gerätecheck, Sicherheitsgrundsätze und FAQ.">
 <meta name="theme-color" content="#0f1114">
+<link rel="canonical" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<link rel="alternate" hreflang="de" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<link rel="alternate" hreflang="en" href="https://kinetic-it.github.io/lokale-alexa-website/en/">
+<link rel="alternate" hreflang="x-default" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<meta property="og:locale" content="de_DE"><meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="Lokale Alexa | Ein Echo bekommt ein zweites Leben">
 <meta property="og:description" content="Wiederverwendete Echo-Hardware als selbst betriebener Sprachassistent mit Home Assistant. Offener Projektstand, ehrlich getrennt in getestet und geplant.">
 <title>Lokale Alexa | Ein Echo bekommt ein zweites Leben</title>
@@ -44,6 +49,11 @@ nav.main::-webkit-scrollbar{display:none}
 nav.main a{color:var(--dim);text-decoration:none;font-size:.88rem;padding:19px 10px 17px;border-bottom:2px solid transparent;white-space:nowrap}
 nav.main a:hover{color:var(--fg)}
 nav.main a[aria-current="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+
+.lang{display:flex;gap:2px;font:600 .74rem/1 var(--mono);letter-spacing:.06em;flex:none}
+.lang a{color:var(--dim);text-decoration:none;padding:7px 8px;border:1px solid transparent;border-radius:2px}
+.lang a:hover{color:var(--fg)}
+.lang a[aria-current="true"]{color:var(--accent);border-color:var(--line)}
 
 /* Typografie */
 .eyebrow{font:600 .74rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
@@ -188,6 +198,7 @@ footer p{font-size:.86rem}
     <nav class="main" aria-label="Hauptnavigation">
       <a href="#idee">Warum?</a><a href="#technik">Sprachweg</a><a href="#geraete">Geräte</a><a href="#stand">Stand</a><a href="#sicherheit">Sicherheit</a><a href="#faq">FAQ</a><a href="#leitfaden">Leitfaden</a>
     </nav>
+    <div class="lang" role="group" aria-label="Sprache"><a href="./" lang="de" hreflang="de" aria-current="true">DE</a><a href="./en/" lang="en" hreflang="en">EN</a></div>
   </div>
 </header>
 
@@ -209,7 +220,7 @@ footer p{font-size:.86rem}
         <ul class="ms" id="ms">
           <li><i class="mk owner_reported"></i><span>Echo-2-Bootzugang</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk owner_reported"></i><span>Home-Assistant-Anbindung</span><span class="st">Owner-Bericht</span></li>
-          <li><i class="mk owner_reported"></i><span>Lokales Wakeword, Kurztest</span><span class="st">Owner-Bericht</span></li>
+          <li><i class="mk owner_reported"></i><span>Lokales Wakeword Kurztest</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk in_progress"></i><span>Freigaben und Berechtigungen prüfen</span><span class="st">in Arbeit</span></li>
           <li><i class="mk open"></i><span>Hausbefehle Ende-zu-Ende</span><span class="st">offen</span></li>
           <li><i class="mk open"></i><span>Hermes-Konversation Ende-zu-Ende</span><span class="st">offen</span></li>
@@ -465,19 +476,25 @@ footer p{font-size:.86rem}
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 
-  /* Statusdaten (freigegebener Stand) laden; ohne JavaScript bleibt der statische Text stehen */
-  var ST={owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen'};
-  function fmt(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');return m?m[3]+'.'+m[2]+'.'+m[1]:d}
+  /* Statusdaten (freigegebener Stand) laden; ohne JavaScript bleibt der statische Text stehen.
+     Sprache ergibt sich aus <html lang>; Englisch liest das Objekt "en" in status.json. */
+  var EN=document.documentElement.lang==='en';
+  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen'};
+  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmt(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');if(!m)return d;return EN?(+m[3])+' '+MON[+m[2]-1]+' '+m[1]:m[3]+'.'+m[2]+'.'+m[1]}
   function bind(k,v){if(typeof v!=='string')return;$$('[data-bind="'+k+'"]').forEach(function(e){e.textContent=v})}
   function list(id,items){var ul=$(id);if(!ul||!Array.isArray(items)||!items.length)return;ul.textContent='';items.forEach(function(t){var li=document.createElement('li');li.textContent=String(t);ul.appendChild(li)})}
-  function miles(items){var ul=$('#ms');if(!ul||!Array.isArray(items)||!items.length)return;ul.textContent='';items.forEach(function(m){
+  function miles(items,names){var ul=$('#ms');if(!ul||!Array.isArray(items)||!items.length)return;ul.textContent='';items.forEach(function(m){
     var li=document.createElement('li'),i=document.createElement('i'),n=document.createElement('span'),s=document.createElement('span');
-    var st=ST[m.state]?m.state:'open';i.className='mk '+st;n.textContent=String(m.name);s.className='st';s.textContent=ST[st];
+    var st=ST[m.state]?m.state:'open';i.className='mk '+st;n.textContent=String((names&&names[m.id])||m.name);s.className='st';s.textContent=ST[st];
     li.appendChild(i);li.appendChild(n);li.appendChild(s);ul.appendChild(li)})}
-  fetch('./data/status.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('status');return r.json()}).then(function(d){
+  fetch((EN?'../':'./')+'data/status.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('status');return r.json()}).then(function(d){
     if(d.visibility!=='public'||d.approved!==true)return;
-    bind('title',d.title);bind('asof',fmt(d.as_of));bind('evidence',d.evidence);bind('meta','Stand: '+fmt(d.as_of)+' · '+d.evidence);
-    list('#l-confirmed',d.confirmed);list('#l-open',d.not_yet_verified);list('#l-issues',d.known_issues);miles(d.milestones);
+    var t=(EN&&d.en)?d.en:d;
+    bind('title',t.title||d.title);bind('asof',fmt(d.as_of));bind('evidence',t.evidence||d.evidence);
+    bind('meta',(EN?'As of ':'Stand: ')+fmt(d.as_of)+' \u00b7 '+(t.evidence||d.evidence));
+    list('#l-confirmed',t.confirmed||d.confirmed);list('#l-open',t.not_yet_verified||d.not_yet_verified);list('#l-issues',t.known_issues||d.known_issues);
+    miles(d.milestones,EN&&d.en?d.en.milestones:null);
   }).catch(function(){});
 
   /* Geräte filtern */

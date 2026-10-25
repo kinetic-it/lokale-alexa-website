@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Local Alexa: reuse Echo hardware and connect Home Assistant and Hermes. Public project status, voice path, device check, security principles and FAQ.">
+<meta name="theme-color" content="#0f1114">
+<link rel="canonical" href="https://kinetic-it.github.io/lokale-alexa-website/en/">
+<link rel="alternate" hreflang="de" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<link rel="alternate" hreflang="en" href="https://kinetic-it.github.io/lokale-alexa-website/en/">
+<link rel="alternate" hreflang="x-default" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="de_DE">
+<meta property="og:title" content="Local Alexa | An Echo gets a second life">
+<meta property="og:description" content="Repurposed Echo hardware as a self-hosted voice assistant with Home Assistant. Open project status, honestly separated into tested and planned.">
+<title>Local Alexa | An Echo gets a second life</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f1114'/%3E%3Cpath d='M3 16h6l3-8 4 16 3-8h10' fill='none' stroke='%23d5b77e' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+/* Konzept: Signalweg. Ein Sprachsignal läuft von links nach rechts durch die Seite;
+   ruhige Flächen, dünne Linien, Mono-Beschriftungen, ein warmer Akzent. Kein Material-Look (Regel 32). */
+:root{
+  --bg:#0f1114; --bg2:#121519; --panel:#171b20; --panel2:#1b2026;
+  --line:#363c43; --line2:#292e34;
+  --fg:#e8e9e6; --dim:#aab1b6; --faint:#7f898f;
+  --accent:#d5b77e; --accent-ink:#17130a; --ok:#8fbba6; --risk:#d4907f;
+  --lane:#14181c; --lane-cloud:#1d1a15;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 14px;border-radius:3px;font-weight:700;z-index:50}
+.skip:focus{left:16px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* Kopf */
+header.site{position:sticky;top:0;z-index:20;background:rgba(18,21,25,.96);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.05em;color:var(--fg);text-decoration:none;white-space:nowrap}
+.brand svg{width:26px;height:26px;display:block}
+.brand b{color:var(--accent);font-weight:800}
+nav.main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{color:var(--dim);text-decoration:none;font-size:.88rem;padding:19px 10px 17px;border-bottom:2px solid transparent;white-space:nowrap}
+nav.main a:hover{color:var(--fg)}
+nav.main a[aria-current="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+
+.lang{display:flex;gap:2px;font:600 .74rem/1 var(--mono);letter-spacing:.06em;flex:none}
+.lang a{color:var(--dim);text-decoration:none;padding:7px 8px;border:1px solid transparent;border-radius:2px}
+.lang a:hover{color:var(--fg)}
+.lang a[aria-current="true"]{color:var(--accent);border-color:var(--line)}
+
+/* Typografie */
+.eyebrow{font:600 .74rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(2.6rem,5.4vw,4.1rem);line-height:1.04;letter-spacing:-.055em;margin:18px 0 26px;font-weight:800;text-wrap:balance}
+h2{font-size:clamp(1.8rem,3.4vw,2.55rem);line-height:1.15;letter-spacing:-.04em;margin:14px 0 14px;text-wrap:balance}
+h3{font-size:1.08rem;line-height:1.3;margin:0 0 6px;text-wrap:balance}
+p{margin:0 0 14px;max-width:70ch;color:var(--dim)}
+p:last-child{margin-bottom:0}
+.lead{font-size:1.22rem;color:var(--dim);max-width:46ch}
+.intro{max-width:64ch;margin-bottom:34px}
+.small{font-size:.84rem}
+code{font:.88em var(--mono);background:#20262c;border:1px solid var(--line);padding:1px 5px;border-radius:2px;color:#e2c992}
+
+/* Hero */
+.hero{position:relative;padding:76px 0 36px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M48 0H0V48' fill='none' stroke='%23262c32' stroke-width='1'/%3E%3C/svg%3E");
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 55%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 55%,#000 100%)}
+.hero .wrap.cols{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);gap:56px;align-items:center}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.button{display:inline-block;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;padding:11px 20px;font-weight:700;border-radius:3px}
+.button:hover{background:#e3c88f;text-decoration:none}
+.button.alt{background:transparent;color:var(--fg);border-color:#657078}
+.button.alt:hover{border-color:var(--accent);color:var(--accent)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 24px;margin-top:40px;font:.78rem/1.4 var(--mono);color:var(--faint);letter-spacing:.04em;text-transform:uppercase}
+.wave{display:block;width:100%;height:60px;margin-top:34px}
+.wave path{fill:none;stroke:var(--accent);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){.wave path{animation:draw 2.4s cubic-bezier(.3,.6,.2,1) .2s both}@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}}
+
+/* Statuskarte */
+.statuscard{background:var(--panel);border:1px solid var(--line);border-radius:3px}
+.statuscard .head{display:flex;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);font:600 .7rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.statuscard .body{padding:18px}
+.statuscard h2{font-size:1.25rem;letter-spacing:-.02em;margin:0 0 4px}
+.statuscard .m{font:.74rem/1.5 var(--mono);color:var(--faint);margin:0 0 16px;max-width:none}
+.ms{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.ms li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line2);font-size:.92rem;color:var(--fg)}
+.ms li:first-child{border-top:0}
+.ms .st{font:.7rem/1 var(--mono);color:var(--faint);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.mk{width:12px;height:12px;border-radius:50%;border:2px solid var(--faint);display:block}
+.mk.owner_reported{background:var(--ok);border-color:var(--ok)}
+.mk.in_progress{border-color:var(--accent);background:linear-gradient(90deg,var(--accent) 50%,transparent 50%)}
+
+/* Abschnitte */
+section{padding:92px 0;border-top:1px solid var(--line2)}
+section.alt{background:var(--bg2)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.grid.four{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px;min-width:0}
+.card p{max-width:none;font-size:.95rem}
+.label{display:block;font:600 .7rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.card.risk{border-color:#5a3f39}
+.callout{border-left:3px solid var(--accent);background:#1c1b17;padding:16px 22px;margin:30px 0 0}
+.callout p{margin:0;color:var(--fg);max-width:none}
+
+/* Schaubild */
+figure.diagram{margin:30px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px}
+.scroll{overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:660px;height:auto;color:var(--fg);font-family:var(--sans)}
+.diagram figcaption{color:var(--dim);font-size:.88rem;margin-top:12px;max-width:86ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 0;font-size:.82rem;color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.lg{width:12px;height:12px;border-radius:50%;border:2px solid var(--faint);display:inline-block}
+.lg.ok{background:var(--ok);border-color:var(--ok)}
+.lg.cloud{width:18px;height:11px;border-radius:2px;border:1px solid var(--line);background:var(--lane-cloud)}
+.lg.block{width:18px;height:0;border:0;border-top:2px dashed var(--risk);border-radius:0}
+.d-lane{fill:var(--lane)} .d-cloud{fill:var(--lane-cloud)}
+.d-box{fill:var(--panel2);stroke:var(--fg);stroke-width:1.2}
+.d-hd{font:600 11px var(--mono);fill:var(--dim);letter-spacing:.09em}
+.d-t1{font-size:12.5px;font-weight:700;fill:currentColor}
+.d-t2{font-size:11px;fill:var(--dim)}
+.d-lb{font:10.5px var(--mono);fill:var(--dim)}
+.d-lb.risk{fill:var(--risk)}
+.d-arr{fill:none;stroke:currentColor;stroke-width:1.4}
+.d-arr.block{stroke:var(--risk);stroke-dasharray:4 3}
+.d-ok{fill:var(--ok)} .d-open{fill:none;stroke:var(--faint);stroke-width:1.6}
+
+/* Tabellen */
+.tablewrap{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line2)}
+tr:last-child td{border-bottom:0}
+th{font:600 .7rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:#14181c;white-space:nowrap}
+td{color:var(--dim)}
+td:first-child{color:var(--fg);font-weight:600}
+tbody tr:hover td{background:#1a1f25}
+.tag{display:inline-block;font:500 .72rem/1 var(--mono);border:1px solid #4f6b5e;color:var(--ok);padding:4px 7px;border-radius:2px;white-space:nowrap}
+.tag.warn{color:var(--accent);border-color:#736648}
+.tag.no{color:#c79e9e;border-color:#725454}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chips button{font:500 .76rem/1 var(--mono);color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:2px;padding:9px 12px;cursor:pointer}
+.chips button:hover{border-color:#657078;color:var(--fg)}
+.chips button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+h3.sub{margin-top:44px}
+
+/* Stand */
+.board{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+.board ul{list-style:none;margin:0;padding:0}
+.board li{position:relative;padding:9px 0 9px 20px;border-top:1px solid var(--line2);font-size:.93rem;color:var(--dim)}
+.board li:first-child{border-top:0}
+.board li::before{content:"";position:absolute;left:0;top:17px;width:8px;height:8px;border:2px solid var(--faint)}
+.board .good li::before{background:var(--ok);border-color:var(--ok)}
+.board .issues li::before{border-color:var(--risk)}
+.board .card.wide{grid-column:1/-1}
+
+/* FAQ */
+details{border-top:1px solid var(--line2)}
+details:last-of-type{border-bottom:1px solid var(--line2)}
+summary{list-style:none;cursor:pointer;font-weight:650;padding:17px 36px 17px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-52%);font:500 1.2rem/1 var(--mono);color:var(--accent)}
+details[open] summary::after{content:"\2013"}
+details p{padding-bottom:18px;margin:0}
+
+footer{padding:44px 0 70px;border-top:1px solid var(--line);color:var(--dim);font-size:.86rem}
+footer p{font-size:.86rem}
+
+@media (max-width:900px){
+  .hero .wrap.cols{grid-template-columns:1fr;gap:34px}
+  .grid,.grid.four{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .hero{padding-top:52px}
+  section{padding:64px 0}
+  .grid,.grid.two,.grid.four,.board{grid-template-columns:1fr}
+  .bar{gap:12px}
+  .brand span.t{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#idee">Skip to content</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="#start" aria-label="Local Alexa, back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="3" fill="#171b20" stroke="#363c43"/><path d="M4 16h6l3-8 4 16 3-8h8" fill="none" stroke="#d5b77e" stroke-width="2"/></svg>
+      <span class="t">KINETIC<b>/</b>IT &nbsp;LOCAL ALEXA</span>
+    </a>
+    <nav class="main" aria-label="Main navigation">
+      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#stand">Status</a><a href="#sicherheit">Security</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language"><a href="../" lang="de" hreflang="de">DE</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div>
+  </div>
+</header>
+
+<main>
+<div class="hero" id="start">
+  <div class="wrap cols">
+    <div>
+      <div class="eyebrow">Open Hardware · Home Assistant · Privacy by Design</div>
+      <h1>An Echo gets<br>a second life.</h1>
+      <p class="lead">We want to reuse existing Amazon Echo hardware as an independent, self-hosted voice assistant: Home Assistant for everyday use, Hermes for open-ended questions.</p>
+      <div class="actions"><a class="button" href="#stand">View project status</a><a class="button alt" href="#technik">Understand the voice path</a><a class="button alt" href="#geraete">Check my device</a></div>
+      <div class="meta"><span>Public project journal</span><span>One pilot: Echo 2 (2017)</span><span>Not a ready-made installation</span></div>
+    </div>
+    <aside class="statuscard" aria-label="Project status at a glance">
+      <div class="head"><span>Project status</span><span data-bind="asof">25 Oct 2026</span></div>
+      <div class="body">
+        <h2 data-bind="title">Echo 2 pilot · partial functions confirmed</h2>
+        <p class="m" data-bind="evidence">Owner reports and private project records; no independent live acceptance</p>
+        <ul class="ms" id="ms">
+          <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Owner report</span></li>
+          <li><i class="mk owner_reported"></i><span>Home Assistant integration</span><span class="st">Owner report</span></li>
+          <li><i class="mk owner_reported"></i><span>Local wake word short test</span><span class="st">Owner report</span></li>
+          <li><i class="mk in_progress"></i><span>Review permissions and exposures</span><span class="st">in progress</span></li>
+          <li><i class="mk open"></i><span>Home commands end to end</span><span class="st">open</span></li>
+          <li><i class="mk open"></i><span>Hermes conversation end to end</span><span class="st">open</span></li>
+          <li><i class="mk open"></i><span>Everyday functions and continuous operation</span><span class="st">open</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap"><svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M0 30.0 L5 30.5 L10 31.0 L15 31.4 L20 31.6 L25 31.6 L30 31.4 L35 31.0 L40 30.5 L45 30.0 L50 29.4 L55 29.0 L60 28.6 L65 28.4 L70 28.4 L75 28.6 L80 29.0 L85 29.5 L90 30.0 L95 30.6 L100 31.1 L105 31.4 L110 31.6 L115 31.6 L120 31.4 L125 31.0 L130 30.5 L135 30.0 L140 29.4 L145 28.9 L150 28.6 L155 28.4 L160 28.4 L165 28.6 L170 29.0 L175 29.5 L180 30.1 L185 30.6 L190 31.1 L195 31.4 L200 31.6 L205 31.6 L210 31.4 L215 31.0 L220 30.5 L225 29.9 L230 29.4 L235 28.9 L240 28.6 L245 28.4 L250 28.4 L255 28.7 L260 29.0 L265 29.5 L270 30.1 L275 30.7 L280 30.9 L285 31.5 L290 31.8 L295 31.2 L300 31.5 L305 31.2 L310 30.1 L315 30.0 L320 29.5 L325 28.8 L330 28.6 L335 28.5 L340 28.2 L345 28.9 L350 29.6 L355 28.3 L360 30.8 L365 31.9 L370 28.9 L375 32.3 L380 32.7 L385 30.0 L390 31.8 L395 31.3 L400 30.0 L405 30.1 L410 29.9 L415 26.8 L420 30.1 L425 31.0 L430 22.3 L435 32.0 L440 33.0 L445 22.4 L450 33.1 L455 33.1 L460 28.0 L465 32.3 L470 32.2 L475 30.0 L480 32.8 L485 33.5 L490 22.0 L495 36.0 L500 36.0 L505 12.8 L510 37.4 L515 35.2 L520 16.0 L525 33.8 L530 31.7 L535 26.3 L540 31.3 L545 31.8 L550 26.1 L555 36.7 L560 37.2 L565 13.5 L570 44.2 L575 40.0 L580 7.7 L585 42.3 L590 35.5 L595 17.3 L600 33.0 L605 29.8 L610 26.1 L615 30.7 L620 31.1 L625 20.0 L630 39.4 L635 36.7 L640 10.5 L645 46.0 L650 38.1 L655 14.0 L660 40.6 L665 33.7 L670 24.9 L675 31.8 L680 29.8 L685 26.6 L690 31.4 L695 30.2 L700 19.2 L705 37.2 L710 32.4 L715 16.8 L720 39.0 L725 33.1 L730 23.9 L735 35.2 L740 32.2 L745 30.1 L750 31.9 L755 31.1 L760 28.5 L765 32.1 L770 30.0 L775 24.1 L780 32.6 L785 29.3 L790 24.1 L795 31.6 L800 29.6 L805 28.1 L810 31.0 L815 30.8 L820 30.9 L825 31.8 L830 31.7 L835 30.7 L840 32.2 L845 31.0 L850 29.0 L855 30.8 L860 29.3 L865 28.0 L870 29.0 L875 28.4 L880 28.3 L885 28.8 L890 29.2 L895 29.6 L900 30.4 L905 30.8 L910 31.0 L915 31.7 L920 31.6 L925 31.3 L930 31.4 L935 30.8 L940 30.2 L945 29.8 L950 29.2 L955 28.8 L960 28.5 L965 28.4 L970 28.5 L975 28.8 L980 29.2 L985 29.7 L990 30.3 L995 30.8 L1000 31.2 L1005 31.5 L1010 31.6 L1015 31.5 L1020 31.2 L1025 30.8 L1030 30.2 L1035 29.7 L1040 29.2 L1045 28.8 L1050 28.5 L1055 28.4 L1060 28.5 L1065 28.8 L1070 29.2 L1075 29.8 L1080 30.3 L1085 30.8 L1090 31.3 L1095 31.5 L1100 31.6 L1105 31.5 L1110 31.2 L1115 30.8 L1120 30.2 L1125 29.7 L1130 29.1 L1135 28.7 L1140 28.5 L1145 28.4 L1150 28.5 L1155 28.8 L1160 29.3 L1165 29.8 L1170 30.3 L1175 30.9 L1180 31.3 L1185 31.5 L1190 31.6 L1195 31.5 L1200 31.2"/></svg></div>
+</div>
+
+<section id="idee">
+  <div class="wrap">
+    <div class="eyebrow">Motivation</div>
+    <h2>Why convert at all?</h2>
+    <p class="intro">Many Echo devices have good microphones, decent speakers and sometimes displays. When the software no longer meets your requirements, that hardware does not have to become e-waste.</p>
+    <div class="grid">
+      <div class="card"><span class="label">Reuse</span><h3>Use the hardware you have</h3><p>Unlock existing devices technically before buying new ones.</p></div>
+      <div class="card"><span class="label">Control</span><h3>A data path you choose</h3><p>Choose speech recognition, control and speech output separately, and see when cloud services are involved.</p></div>
+      <div class="card"><span class="label">Everyday use</span><h3>More than a hobby demo</h3><p>Lights, timers, alarms, weather, lists, music and open questions should later work reliably from a single voice interface.</p></div>
+    </div>
+    <div class="callout"><p><strong>Important:</strong> This is a development goal. Root access or a single spoken answer is not yet proof of a system that works in daily life.</p></div>
+  </div>
+</section>
+
+<section id="technik" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Architecture</div>
+    <h2>The voice path: from “Okay Nabu” to the answer</h2>
+    <p class="intro">The Echo listens and speaks. Home Assistant is the hub for the household and checks every sentence for its own commands first. Only what is not a home command goes to Hermes. Columns show <strong>where</strong> something happens; top to bottom shows the <strong>order</strong>.</p>
+
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 760 746" role="img" aria-labelledby="dg-t dg-d">
+        <title id="dg-t">Voice path of Local Alexa</title>
+        <desc id="dg-d">The Echo detects the wake word locally. A cloud service turns speech into text. Home Assistant checks its own commands first and switches only approved devices. Everything else goes to Hermes and an external language model. A cloud service turns the answer text into speech, which the Echo plays. Hermes is not meant to have direct access to home control.</desc>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--risk)"/></marker>
+        </defs>
+        <rect class="d-lane" x="10" y="44" width="180" height="692" rx="3"/>
+        <rect class="d-lane" x="200" y="44" width="180" height="692" rx="3"/>
+        <rect class="d-lane" x="390" y="44" width="180" height="692" rx="3"/>
+        <rect class="d-cloud" x="580" y="44" width="170" height="692" rx="3"/>
+        <text class="d-hd" x="100" y="30" text-anchor="middle">ECHO 2</text>
+        <text class="d-hd" x="290" y="30" text-anchor="middle">HOME ASSISTANT</text>
+        <text class="d-hd" x="480" y="30" text-anchor="middle">HERMES (OPTIONAL)</text>
+        <text class="d-hd" x="665" y="30" text-anchor="middle">CLOUD (CURRENTLY)</text>
+
+        <rect class="d-box" x="25" y="70" width="150" height="56" rx="3"/><circle class="d-ok" cx="163" cy="80" r="5"/>
+        <text class="d-t1" x="37" y="94">1 Activation</text><text class="d-t2" x="37" y="112">Wake word, local</text>
+
+        <rect class="d-box" x="215" y="160" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="170" r="4.5"/>
+        <text class="d-t1" x="227" y="184">2 Receive speech</text><text class="d-t2" x="227" y="202">forwards audio</text>
+
+        <rect class="d-box" x="590" y="160" width="150" height="56" rx="3"/><circle class="d-open" cx="728" cy="170" r="4.5"/>
+        <text class="d-t1" x="602" y="184">3 Speech recognition</text><text class="d-t2" x="602" y="202">Audio → Text</text>
+
+        <rect class="d-box" x="215" y="260" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="270" r="4.5"/>
+        <text class="d-t1" x="227" y="284">4 Own command?</text><text class="d-t2" x="227" y="302">local commands first</text>
+
+        <rect class="d-box" x="215" y="370" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="380" r="4.5"/>
+        <text class="d-t1" x="227" y="394">5a Action at home</text><text class="d-t2" x="227" y="412">approved only</text>
+
+        <rect class="d-box" x="405" y="260" width="150" height="56" rx="3"/><circle class="d-open" cx="543" cy="270" r="4.5"/>
+        <text class="d-t1" x="417" y="284">5b Hermes</text><text class="d-t2" x="417" y="302">open questions</text>
+
+        <rect class="d-box" x="590" y="260" width="150" height="56" rx="3"/><circle class="d-open" cx="728" cy="270" r="4.5"/>
+        <text class="d-t1" x="602" y="284">5c Language model</text><text class="d-t2" x="602" y="302">external</text>
+
+        <rect class="d-box" x="215" y="490" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="500" r="4.5"/>
+        <text class="d-t1" x="227" y="514">6 Answer text</text><text class="d-t2" x="227" y="532">from HA or Hermes</text>
+
+        <rect class="d-box" x="590" y="560" width="150" height="56" rx="3"/><circle class="d-open" cx="728" cy="570" r="4.5"/>
+        <text class="d-t1" x="602" y="584">7 Speech output</text><text class="d-t2" x="602" y="602">Text → Audio</text>
+
+        <rect class="d-box" x="25" y="660" width="150" height="56" rx="3"/><circle class="d-open" cx="163" cy="670" r="4.5"/>
+        <text class="d-t1" x="37" y="684">8 Speaker</text><text class="d-t2" x="37" y="702">answer audible</text>
+
+        <polyline class="d-arr" points="100,126 100,188 213,188" marker-end="url(#ah)"/><text class="d-lb" x="108" y="181">Speech</text>
+        <line class="d-arr" x1="365" y1="180" x2="588" y2="180" marker-end="url(#ah)"/><text class="d-lb" x="476" y="173" text-anchor="middle">Audio</text>
+        <line class="d-arr" x1="590" y1="200" x2="367" y2="200" marker-end="url(#ah)"/><text class="d-lb" x="476" y="215" text-anchor="middle">Text</text>
+        <line class="d-arr" x1="290" y1="216" x2="290" y2="258" marker-end="url(#ah)"/>
+        <line class="d-arr" x1="290" y1="316" x2="290" y2="368" marker-end="url(#ah)"/><text class="d-lb" x="298" y="347">yes</text>
+        <line class="d-arr" x1="365" y1="288" x2="403" y2="288" marker-end="url(#ah)"/><text class="d-lb" x="384" y="280" text-anchor="middle">no</text>
+        <line class="d-arr" x1="555" y1="280" x2="588" y2="280" marker-end="url(#ah)"/>
+        <line class="d-arr" x1="590" y1="300" x2="557" y2="300" marker-end="url(#ah)"/>
+        <polyline class="d-arr" points="530,316 530,518 367,518" marker-end="url(#ah)"/><text class="d-lb" x="522" y="440" text-anchor="end">Answer</text>
+        <line class="d-arr" x1="290" y1="426" x2="290" y2="488" marker-end="url(#ah)"/><text class="d-lb" x="298" y="461">Confirmation</text>
+        <polyline class="d-arr" points="290,546 290,588 588,588" marker-end="url(#ah)"/><text class="d-lb" x="440" y="581" text-anchor="middle">Text</text>
+        <polyline class="d-arr" points="665,616 665,688 177,688" marker-end="url(#ah)"/><text class="d-lb" x="420" y="681" text-anchor="middle">Audio</text>
+
+        <polyline class="d-arr block" points="420,316 420,398 368,398" marker-end="url(#ahr)"/>
+        <path d="M388,391 L400,405 M400,391 L388,405" style="stroke:var(--risk)" stroke-width="2" fill="none"/>
+        <text class="d-lb risk" x="430" y="342">no access</text><text class="d-lb risk" x="430" y="356">to the home</text><text class="d-lb risk" x="430" y="370">(goal)</text>
+      </svg>
+      </div>
+      <div class="legend" aria-label="Legend">
+        <span><i class="lg ok"></i>Short test passed (owner report)</span>
+        <span><i class="lg"></i>configured or planned, not yet accepted</span>
+        <span><i class="lg cloud"></i>Cloud service, data leaves the home</span>
+        <span><i class="lg block"></i>should not be possible</span>
+      </div>
+      <figcaption>A request takes one of two paths: if Home Assistant recognises one of its own commands, it runs it itself (5a), but only for explicitly approved devices. Everything else goes to Hermes and an external language model as a question (5b, 5c). Both paths end as text that is turned into speech in the cloud. Speech recognition, speech output and the language model currently run on cloud services; local alternatives are being compared.</figcaption>
+    </figure>
+
+    <div class="grid two">
+      <div class="card"><span class="label">Fast home command</span><h3>“Turn on the light.”</h3><p>Local commands first, without sending every command to a language model. Goal: a few seconds, preferably without internet too.</p></div>
+      <div class="card"><span class="label">Open conversation</span><h3>“Explain to me why …”</h3><p>Only pass questions to the separate Hermes profile after a verified integration. User permissions and private content stay explicitly regulated.</p></div>
+    </div>
+
+    <h3 class="sub">What software is there?</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Project</th><th>Purpose</th><th>Assessment</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist / hassmic</a></td><td>Echo as a Home Assistant voice satellite via ESPHome/Wyoming</td><td>Path of the Echo 2 pilot</td></tr>
+        <tr><td>EchoLocal</td><td>Local voice/media/display service based on Fire OS</td><td>Alternative community port</td></tr>
+        <tr><td>EchoMuse / emOS</td><td>Dot 2 solution with a controller and its own Linux base</td><td>Mainly Dot 2</td></tr>
+        <tr><td>TECHO5 family</td><td>Linux ports for certain Echo, Dot, Show and Spot devices</td><td>Check each model separately</td></tr>
+        <tr><td>LibreEcho</td><td>Open Linux for Echo 2 and Dot 2</td><td>Own installation and update path</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small" style="margin-top:12px">Software overview summarised from the guide dated 22 Oct 2026; third-party project descriptions are not our own tests.</p>
+  </div>
+</section>
+
+<section id="geraete">
+  <div class="wrap">
+    <div class="eyebrow">Hardware</div>
+    <h2>Which Echo devices are candidates?</h2>
+    <p class="intro">What matters are <strong>model number, codename, generation and software version</strong>. “Rootable” only means system access and is not the same as a working voice assistant.</p>
+    <div class="chips" id="chips" role="group" aria-label="Filter devices" hidden>
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="port" aria-pressed="false">Published voice port</button>
+      <button type="button" data-f="exp" aria-pressed="false">Experimental</button>
+      <button type="button" data-f="root" aria-pressed="false">Root proof only</button>
+      <button type="button" data-f="none" aria-pressed="false">No proven port</button>
+    </div>
+    <div class="tablewrap"><table id="devices">
+      <caption class="sr">Echo devices with model number, codename and assessment</caption>
+      <thead><tr><th>Device</th><th>Model / codename</th><th>Assessment from the guide</th></tr></thead>
+      <tbody>
+        <tr data-c="port"><td>Echo Dot 2</td><td>RS03QR / biscuit</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo 2 (2017)</td><td>XC56PY / radar</td><td><span class="tag">Published voice port</span> · pilot device</td></tr>
+        <tr data-c="port"><td>Echo Dot 3 original (2018)</td><td>D9N29T / donut</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Show 5 Gen. 1</td><td>H23K37 / checkers</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Show 5 Gen. 2</td><td>C76N8S / cronos</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Show 8 Gen. 1</td><td>C7H6N3 / crown</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Spot original (2017)</td><td>VN94DQ / rook</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="exp"><td>Echo Show 8 Gen. 2</td><td>A8H3N2 / athena</td><td><span class="tag warn">Experimental path</span></td></tr>
+        <tr data-c="root"><td>Echo 1</td><td>SK705DI</td><td><span class="tag warn">Historical root proof</span></td></tr>
+        <tr data-c="none"><td>Echo Dot 3 Refresh</td><td>C78MP8 / crumpet</td><td><span class="tag no">No proven full port</span></td></tr>
+        <tr data-c="none"><td>Echo Dot 3 with clock</td><td>36EBT3 / doebrite</td><td><span class="tag no">No proven full port</span></td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:18px">Newer Echo, Show, Spot, Studio and Plus variants must not simply be equated with the listed models. Fire TV, Cube and Fire tablets can have their own root or unlock paths without being usable as a local Echo voice satellite.</p>
+    <div class="callout"><p>Before buying or converting: photograph the type label, check the firmware and read the matching project guide. Before any risky flashing, a verified backup including a restore path is required.</p></div>
+  </div>
+</section>
+
+<section id="stand" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Transparency</div>
+    <h2>Current public project status</h2>
+    <p class="intro">Only statements released for publication appear here. The internal development and security status stays in private repositories. The status deliberately distinguishes between <strong>reported</strong> and <strong>accepted</strong>.</p>
+    <p class="small" data-bind="meta">As of 25 Oct 2026 · Owner reports and private project records; no independent live acceptance</p>
+    <div class="board">
+      <div class="card good"><span class="label">Reported so far</span>
+        <ul id="l-confirmed">
+          <li>Echo 2 (XC56PY/radar): unlock and TWRP documented</li>
+          <li>echo-dot-assist connected to Home Assistant (owner report)</li>
+          <li>Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven</li>
+          <li>Separate Hermes speaker answered an authenticated API test request and is registered in Home Assistant as a conversation agent; not yet tested through the Echo</li>
+        </ul>
+      </div>
+      <div class="card"><span class="label">Not yet accepted</span>
+        <ul id="l-open">
+          <li>Stable continuous operation and audio while music is playing</li>
+          <li>Echo → HA → Hermes → audible answer</li>
+          <li>Timers, alarms, reminders, lists and media</li>
+          <li>Multi-user permissions, guest mode and sensitive answers</li>
+          <li>Recovery, full raw backup and long-term tests</li>
+        </ul>
+      </div>
+      <div class="card issues wide"><span class="label">Known issues</span>
+        <ul id="l-issues">
+          <li>The streaming wake word path was unstable; the local wake word is therefore preferred</li>
+          <li>An open question was not understood in an earlier test, via a conversation agent that has since been replaced</li>
+          <li>Permissions for voice commands are reviewed before the first home-command test</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" style="margin-top:20px">Automatic publication is not automatic functional testing. The status is adopted after expert approval; the page then updates via GitHub Pages.</p>
+  </div>
+</section>
+
+<section id="sicherheit">
+  <div class="wrap">
+    <div class="eyebrow">Security and privacy</div>
+    <h2>What may happen by voice</h2>
+    <p class="intro">A voice assistant in the living room listens to everyone, including guests. So the principle is: lock first, then approve selectively. The technical implementation is currently being verified.</p>
+    <div class="grid four">
+      <div class="card"><span class="label">Principle</span><h3>Locked by default</h3><p>By voice you can only control what has been explicitly approved. New things stay locked until they are approved.</p></div>
+      <div class="card"><span class="label">Verification</span><h3>Approvals are tested</h3><p>That a device is on a list or has a harmless name proves nothing. Every approval is checked for its actual effect.</p></div>
+      <div class="card"><span class="label">Limits</span><h3>Critical things stay out</h3><p>Network and server equipment, pairing new devices and personal data such as calendars are not approved for voice control across the board.</p></div>
+      <div class="card"><span class="label">AI</span><h3>Hermes without keys</h3><p>The assistant for open questions is meant to work without its own access to home control. It receives questions and returns text.</p></div>
+    </div>
+    <div class="callout"><p><strong>Current status:</strong> The approvals are currently being cleaned up and verified. Until that is finished, the pilot does not count as accepted.</p></div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Frequently asked questions</div>
+    <h2>FAQ</h2>
+    <div style="margin-top:26px">
+      <details><summary>Is this an official Amazon project?</summary><p>No. It is an independent community/homelab project with no connection to Amazon.</p></details>
+      <details><summary>Can I root any Echo?</summary><p>No. Many devices have no documented, repeatable path. Even similar-looking housings can contain completely different hardware. Always compare the full model number.</p></details>
+      <details><summary>Does “local” mean no data ever goes to the cloud?</summary><p>Not necessarily. Locally controllable is not the same as fully offline. If cloud speech-to-text, cloud text-to-speech or an online AI model is chosen, parts of the processing leave the home network. We want to be transparent about that; the cloud steps are marked in the diagram above.</p></details>
+      <details><summary>Can anyone in the room control everything?</summary><p>No, that is not the goal. By voice only explicitly approved, harmless actions should be possible. Personal data such as calendars and reminders need additional authentication. Guests are not recognised automatically.</p></details>
+      <details><summary>What about Alexa skills, Amazon Music and multiroom?</summary><p>These features are not carried over automatically. Replacement features must be integrated and tested one by one.</p></details>
+      <details><summary>Is the solution ready for my household yet?</summary><p>No. The Echo 2 pilot has some proven partial functions, but no complete long-term and end-to-end acceptance yet.</p></details>
+      <details><summary>Why Home Assistant and Hermes together?</summary><p>Home Assistant can manage everyday home functions and permissions. Hermes is intended for open questions and more demanding conversations; this separates simple switching commands from complex AI processing.</p></details>
+      <details><summary>What about timers, alarms, reminders and multiple people?</summary><p>These are core goals but not fully tested yet. For private reminders and guests in particular, permissions, ownership and confirmation are needed before sensitive answers.</p></details>
+      <details><summary>How can I help?</summary><p>Verifiable tests with the exact model number, firmware version and traceable error descriptions are valuable. Public sources and questions can be reported via the <a href="https://github.com/kinetic-it/lokale-alexa-website/issues">website repository</a>; please do not post tokens, serial numbers or voice recordings.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="leitfaden">
+  <div class="wrap">
+    <div class="eyebrow">Background</div>
+    <h2>The complete device guide</h2>
+    <p class="intro">Our 21-page guide dated 22 October 2026 covers software alternatives, voices and speech output, pogo pins and soldering effort, Echo/Fire TV/tablet models, root proofs, limitations, costs and a purchase and test checklist. The guide is written in German.</p>
+    <div class="grid two">
+      <div class="card"><h3>Explained here</h3><p>This page explains the core questions in short sections. The original source distinguishes between third-party publications, historical root methods and verified local voice ports.</p></div>
+      <div class="card"><h3>Original PDF</h3><p>The unchanged 21-page PDF edition dated 22 October 2026 is available for direct download (in German).</p><p style="margin-top:14px"><a class="button" href="../downloads/Amazon-Geraete-Leitfaden-2026-10-22-neutral.pdf" download>Download original PDF (German)</a></p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--fg)">KINETIC/IT · LOCAL ALEXA</strong></p>
+    <p>An independent, non-commercial development project. Hardware statements come from the research guide dated 22 Oct 2026; publicly approved pilot status dated 25 Oct 2026. All brand names belong to their respective owners.</p>
+    <p>This page does not include external fonts, scripts or trackers.</p>
+    <p><a href="https://github.com/kinetic-it/lokale-alexa-website">Source code of this page on GitHub</a> · <a href="#start">Back to top</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  /* Statusdaten (freigegebener Stand) laden; ohne JavaScript bleibt der statische Text stehen.
+     Sprache ergibt sich aus <html lang>; Englisch liest das Objekt "en" in status.json. */
+  var EN=document.documentElement.lang==='en';
+  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen'};
+  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmt(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');if(!m)return d;return EN?(+m[3])+' '+MON[+m[2]-1]+' '+m[1]:m[3]+'.'+m[2]+'.'+m[1]}
+  function bind(k,v){if(typeof v!=='string')return;$$('[data-bind="'+k+'"]').forEach(function(e){e.textContent=v})}
+  function list(id,items){var ul=$(id);if(!ul||!Array.isArray(items)||!items.length)return;ul.textContent='';items.forEach(function(t){var li=document.createElement('li');li.textContent=String(t);ul.appendChild(li)})}
+  function miles(items,names){var ul=$('#ms');if(!ul||!Array.isArray(items)||!items.length)return;ul.textContent='';items.forEach(function(m){
+    var li=document.createElement('li'),i=document.createElement('i'),n=document.createElement('span'),s=document.createElement('span');
+    var st=ST[m.state]?m.state:'open';i.className='mk '+st;n.textContent=String((names&&names[m.id])||m.name);s.className='st';s.textContent=ST[st];
+    li.appendChild(i);li.appendChild(n);li.appendChild(s);ul.appendChild(li)})}
+  fetch((EN?'../':'./')+'data/status.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('status');return r.json()}).then(function(d){
+    if(d.visibility!=='public'||d.approved!==true)return;
+    var t=(EN&&d.en)?d.en:d;
+    bind('title',t.title||d.title);bind('asof',fmt(d.as_of));bind('evidence',t.evidence||d.evidence);
+    bind('meta',(EN?'As of ':'Stand: ')+fmt(d.as_of)+' \u00b7 '+(t.evidence||d.evidence));
+    list('#l-confirmed',t.confirmed||d.confirmed);list('#l-open',t.not_yet_verified||d.not_yet_verified);list('#l-issues',t.known_issues||d.known_issues);
+    miles(d.milestones,EN&&d.en?d.en.milestones:null);
+  }).catch(function(){});
+
+  /* Geräte filtern */
+  var chips=$('#chips'),rows=$$('#devices tbody tr');
+  if(chips){chips.hidden=false;chips.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    $$('button',chips).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    var f=b.getAttribute('data-f');rows.forEach(function(r){r.hidden=!(f==='all'||r.getAttribute('data-c')===f)})})}
+
+  /* Navigation: aktuellen Abschnitt markieren */
+  var links=$$('nav.main a'),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});var a=map[e.target.id];if(a){a.setAttribute('aria-current','true');if(a.scrollIntoView&&window.matchMedia('(max-width:900px)').matches)a.scrollIntoView({inline:'center',block:'nearest'})}}})},{rootMargin:'-45% 0px -50% 0px'});
+    Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s)});
+  }
+})();
+</script>
+</body>
+</html>
