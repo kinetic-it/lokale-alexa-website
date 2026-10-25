@@ -9,7 +9,7 @@
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)",
     "Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt",
-    "Separater Hermes-Speaker beantwortete authentifizierte API-Testanfrage; noch nicht mit Echo-End-to-End verbunden"
+    "Separater Hermes-Speaker beantwortete authentifizierte API-Testanfrage und ist in Home Assistant als Gesprächsagent eingetragen; noch kein Test über den Echo"
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
@@ -52,8 +52,8 @@
   ],
   "known_issues": [
     "Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt",
-    "Freie Frage wurde in einem früheren Test nicht verstanden",
-    "Sprachausgabe-Provider und Berechtigungen sind noch nicht vollständig integriert/abgenommen"
+    "Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden",
+    "Berechtigungen für Sprachbefehle werden vor dem ersten Haushaltsbefehl-Test geprüft"
   ],
   "source": "manual-public-review",
   "internal_reference": "not_public",

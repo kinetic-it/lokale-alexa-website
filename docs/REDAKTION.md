@@ -15,7 +15,7 @@ Stand: 25.10.2026 · Work Item: WI-0181
 2. Änderungen fachlich einordnen: direkt getestet / Owner-Bericht / Fremdprojekt-Aussage / Plan / ungeprüft.
 3. Nur geeignete Aussagen **manuell redaktionell freigeben** und `data/status.json` ändern. `approved: true` ist eine deklarierte redaktionelle Freigabe, keine technische Sicherheitsprüfung.
 4. Pull Request prüfen: keine Secrets, keine privaten URLs, keine falschen PASS-Behauptungen, Quellen-/Modellnummern korrekt.
-5. Merge nach `main`; GitHub Pages veröffentlicht die neue Seite automatisch, **wenn Pages konfiguriert ist**. Das ist Veröffentlichung eines bereits geprüften Standes, kein Live-Sync aus Home Assistant.
+5. Merge nach `main`; GitHub Pages veröffentlicht die neue Seite automatisch. Das ist Veröffentlichung eines bereits geprüften Standes, kein Live-Sync aus Home Assistant.
 
 Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nicht eingerichtet**. Für einen späteren automatischen Export wären ein minimaler öffentlicher Datensatz, ein begrenzter Lesekanal, ein menschliches Freigabegate, ein Validierer und eine sichere Deployment-Kette nötig. Ein Job mit privatem Repo-Token im öffentlichen Repo ist ausgeschlossen.
 
@@ -40,8 +40,8 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 
 **Ziel:** `https://kinetic-it.github.io/lokale-alexa-website/`.
 
-GitHub → Repository → Settings → Pages → **Deploy from a branch**, Branch `main`, Ordner `/ (root)`. Diese Einstellung wird in dieser Erstfassung nicht automatisch vorgenommen; Live-Status über GitHub Pages gesondert prüfen.
+GitHub → Repository → Settings → Pages → **Deploy from a branch**, Branch `main`, Ordner `/ (root)`. Seit 25.10.2026 aktiv; Website, `data/status.json` und PDF waren live erreichbar. Offen: vollständige Mobilansicht und Test aller Navigationspunkte.
 
 ## Open Source / Copyright
 
-Eigene Seiteninhalte sind zunächst nur gemäß GitHub-Sichtbarkeit lesbar, **keine** freie Lizenz ist damit automatisch eingeräumt. Die Original-PDF wird erst mit ausdrücklicher Dateifreigabe öffentlich abgelegt; diese Freigabe ist durch den Owner gegeben, die technische Übertragung muss noch ausgeführt werden.
+Eigene Seiteninhalte sind zunächst nur gemäß GitHub-Sichtbarkeit lesbar, **keine** freie Lizenz ist damit automatisch eingeräumt. Die Original-PDF ist mit ausdrücklicher Owner-Freigabe unter `downloads/` öffentlich abgelegt.
