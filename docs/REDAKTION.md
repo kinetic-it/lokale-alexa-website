@@ -27,11 +27,19 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 - `README.md`: Repo-Zweck und Betrieb.
 - `.github/workflows/`: optional späterer automatischer Validierungs-/Build-Prozess. GitHub Pages kann die Root-Dateien auch ohne Build auf `main` bereitstellen.
 
+## Sprachen (Deutsch und Englisch)
+
+- Deutsch: `index.html`, Englisch: `en/index.html`. Beide sind eigenständige statische Seiten mit Umschalter DE/EN im Kopf, `hreflang`-Verweisen und eigenem `canonical`.
+- Die Seiten werden **beide von Hand gepflegt**. Jede inhaltliche Änderung gehört in beide Dateien.
+- Die dynamischen Statusdaten liegen in `data/status.json`. Deutsche Texte stehen auf oberster Ebene, die englischen im Objekt `en` (mit `milestones` als Zuordnung von ID zu Name). Ohne `en` zeigt die englische Seite den deutschen Text.
+- Das PDF ist nur auf Deutsch; die englische Seite weist darauf hin.
+- Vor jedem Merge: `python3 tools/check_i18n.py`. Das Skript prüft gleiche IDs, Anker, Tag-Anzahlen, Umlaute im englischen Text und die Vollständigkeit von `status.json`. Es prüft **nicht** die Qualität der Übersetzung.
+
 ## Vor jedem Merge prüfen
 
 - **Schaubild und Texte sind öffentlich bereinigt.** Keine Ports, VM- oder Hostnamen, IP-Adressen, Entity-Namen, Zahlen zu Freigaben, Modell- oder Anbieternamen interner Dienste, keine ungeschlossenen Schwachstellen. Sicherheitsaussagen nur als Grundsatz oder Ziel formulieren, nie als Zusicherung. Quelle ist der freigegebene Stand, nicht die private `SICHERHEIT.md`.
 - Kein Zugriff des Website-Codes auf private GitHub-Repos; keine Geheimnisse im JS/HTML/JSON.
-- `data/status.json` valide und explizit freigegeben; Version und Datum aktualisiert.
+- `data/status.json` valide und explizit freigegeben; Version und Datum aktualisiert; englisches Objekt `en` mitgepflegt.
 - Jede Gerätebehauptung trennt Unlock, historischen Root, experimentellen Port und funktionierenden Sprachsatelliten.
 - Aushänge zum aktuellen Pilotstatus entsprechen den zuletzt geprüften privaten Canonicals.
 - PDF-Download nur als verfügbar bezeichnen, wenn Binärdatei im öffentlichen Git vorhanden und abrufbar ist.

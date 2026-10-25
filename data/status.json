@@ -62,5 +62,36 @@
   ],
   "source": "manual-public-review",
   "internal_reference": "not_public",
-  "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben."
+  "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
+  "en": {
+    "title": "Echo 2 pilot · partial functions confirmed",
+    "evidence": "Owner reports and private project records; no independent live acceptance",
+    "confirmed": [
+      "Echo 2 (XC56PY/radar): unlock and TWRP documented",
+      "echo-dot-assist connected to Home Assistant (owner report)",
+      "Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven",
+      "Separate Hermes speaker answered an authenticated API test request and is registered in Home Assistant as a conversation agent; not yet tested through the Echo"
+    ],
+    "not_yet_verified": [
+      "Stable continuous operation and audio while music is playing",
+      "Echo → HA → Hermes → audible answer",
+      "Timers, alarms, reminders, lists and media",
+      "Multi-user permissions, guest mode and sensitive answers",
+      "Recovery, full raw backup and long-term tests"
+    ],
+    "known_issues": [
+      "The streaming wake word path was unstable; the local wake word is therefore preferred",
+      "An open question was not understood in an earlier test, via a conversation agent that has since been replaced",
+      "Permissions for voice commands are reviewed before the first home-command test"
+    ],
+    "milestones": {
+      "m1": "Echo 2 boot access",
+      "m2": "Home Assistant integration",
+      "m3": "Local wake word short test",
+      "m7": "Review permissions and exposures",
+      "m4": "Home commands end to end",
+      "m5": "Hermes conversation end to end",
+      "m6": "Everyday functions and continuous operation"
+    }
+  }
 }
