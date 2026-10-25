@@ -21,7 +21,7 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 
 ## Redaktioneller Umfang
 
-- `index.html`: dauerhafte Erklärungen, Architektur, Geräte, FAQ und Quellenkontext – Änderungen bewusst von Hand.
+- `index.html`: dauerhafte Erklärungen, Sprachweg-Schaubild, Geräte, Sicherheitsgrundsätze, FAQ und Quellenkontext – Änderungen bewusst von Hand. Die Seite bindet keine externen Schriften, Skripte oder Tracker ein; das soll so bleiben.
 - `data/status.json`: freigegebener aktueller Projektstand; die Website lädt diesen beim Aufruf.
 - `downloads/`: freigegebene PDFs / öffentliche Dokumente. Datei muss separat tatsächlich hochgeladen und im HTML korrekt verlinkt werden.
 - `README.md`: Repo-Zweck und Betrieb.
@@ -29,6 +29,7 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 
 ## Vor jedem Merge prüfen
 
+- **Schaubild und Texte sind öffentlich bereinigt.** Keine Ports, VM- oder Hostnamen, IP-Adressen, Entity-Namen, Zahlen zu Freigaben, Modell- oder Anbieternamen interner Dienste, keine ungeschlossenen Schwachstellen. Sicherheitsaussagen nur als Grundsatz oder Ziel formulieren, nie als Zusicherung. Quelle ist der freigegebene Stand, nicht die private `SICHERHEIT.md`.
 - Kein Zugriff des Website-Codes auf private GitHub-Repos; keine Geheimnisse im JS/HTML/JSON.
 - `data/status.json` valide und explizit freigegeben; Version und Datum aktualisiert.
 - Jede Gerätebehauptung trennt Unlock, historischen Root, experimentellen Port und funktionierenden Sprachsatelliten.

@@ -35,13 +35,18 @@
       "state": "owner_reported"
     },
     {
+      "id": "m7",
+      "name": "Freigaben und Berechtigungen prüfen",
+      "state": "in_progress"
+    },
+    {
       "id": "m4",
-      "name": "Hausbefehle E2E",
+      "name": "Hausbefehle Ende-zu-Ende",
       "state": "open"
     },
     {
       "id": "m5",
-      "name": "Hermes-Konversation E2E",
+      "name": "Hermes-Konversation Ende-zu-Ende",
       "state": "open"
     },
     {
