@@ -28,11 +28,13 @@ Layoutprüfung: Das deutsche PDF, das aus `content.de.json` gebaut wird, hat die
 4. PDFs bauen. Bei neuer Fassung Datum in `meta` (Titel, Stand, Fußzeile) und im Dateinamen anpassen.
 5. Links in `index.html` und `en/index.html` anpassen.
 
-Hinweis: Das PDF enthält keine Web-Links. Die Quellen Q1 bis Q32 sind nur benannt, ohne URL. Intern gibt es Lesezeichen und ein verlinktes Inhaltsverzeichnis.
+Links: Die Quellen Q1 bis Q32 sind im deutschen Original als klickbare Web-Links hinterlegt (URL nicht sichtbar im Text). Die URLs stehen im Quellblock beider JSON-Dateien unter `urls` und werden in beiden PDFs als Links gesetzt; `check_i18n.py` prüft, dass sie in de und en gleich sind. Dazu kommen Lesezeichen und ein verlinktes Inhaltsverzeichnis.
+
+Korrektur 26.10.2026: Die erste neu gebaute englische Fassung (PR #7) hatte diese 32 Links nicht, und die Doku behauptete fälschlich, das Original habe keine Web-Links. Behoben; die englische PDF hat jetzt dieselben 32 Links in derselben Reihenfolge wie das Original.
 
 ## Stand der Prüfung der englischen Fassung
 
-Geprüft: Zahlen (alle Ziffern je Block wie im Deutschen), Quellen-IDs je Block, Fettdruck-Labels, Tabellenform, keine deutschen Reste, Seitenbilder von Titelseite, Inhaltsverzeichnis, Tabellen- und Listenseiten.
+Geprüft: Zahlen (alle Ziffern je Block wie im Deutschen), Quellen-IDs je Block, 32 Quellen-Links wie im Original, Fettdruck-Labels, Tabellenform, keine deutschen Reste, Seitenbilder von Titelseite, Inhaltsverzeichnis, Tabellen- und Listenseiten.
 Nicht geprüft: Lesung durch einen Muttersprachler, Fachbegriffe gegen die Projektseiten der Quellen.
 
 Die erste englische Fassung (vom 26.10.2026 morgens) hatte Übersetzungsfehler, unter anderem "Measurement measure", "language assistant" statt "voice assistant" und ein falsches deutsches Anführungszeichen. Sie wurde durch diese Fassung ersetzt.

@@ -59,6 +59,7 @@ try:
             if qid(x)!=qid(y): errors.append(f"leitfaden {x['id']}: Quellen-IDs in de und en unterschiedlich")
             if x['t']=='table' and [len(r) for r in x['rows']]!=[len(r) for r in y['rows']]: errors.append(f"leitfaden {x['id']}: Tabellenform unterschiedlich")
             if x['t']=='bullets' and len(x['items'])!=len(y['items']): errors.append(f"leitfaden {x['id']}: Anzahl Listenpunkte unterschiedlich")
+            if x.get('urls')!=y.get('urls'): errors.append(f"leitfaden {x['id']}: Quellen-Links in de und en unterschiedlich")
         if re.search(r'[äöüÄÖÜß]',json.dumps(be,ensure_ascii=False).replace('Arbeitszimmer','')): errors.append('leitfaden: content.en.json enthält Umlaute')
 except FileNotFoundError:
     errors.append('leitfaden: tools/leitfaden/content.*.json fehlt')
