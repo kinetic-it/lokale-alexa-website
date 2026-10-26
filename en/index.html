@@ -160,6 +160,22 @@ h3.sub{margin-top:44px}
 .board .issues li::before{border-color:var(--risk)}
 .board .card.wide{grid-column:1/-1}
 
+/* Nachbauen */
+.steps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px;min-width:0}
+.step h3{margin-top:0}
+.step p{font-size:.95rem;max-width:none}
+.step .ref{margin:12px 0 0;font:500 .74rem/1.4 var(--mono);color:var(--faint)}
+/* Verlauf */
+.hist{list-style:none;margin:0;padding:0}
+.hist li{display:grid;grid-template-columns:7.5em 1fr;gap:14px;padding:9px 0;border-top:1px solid var(--line2);font-size:.93rem;color:var(--dim)}
+.hist li:first-child{border-top:0}
+.board .hist li{padding-left:0}
+.board .hist li::before{display:none}
+.hist time{font:500 .8rem/1.6 var(--mono);color:var(--accent)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.steps{grid-template-columns:1fr}.hist li{grid-template-columns:1fr;gap:2px}}
+
 /* SOUL-Beispiel */
 .soul{margin-top:28px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
 .shead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;padding:10px 18px;background:#14181c;font:600 .7rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
@@ -206,7 +222,7 @@ footer p{font-size:.86rem}
       <span class="t">KINETIC<b>/</b>IT &nbsp;LOCAL ALEXA</span>
     </a>
     <nav class="main" aria-label="Main navigation">
-      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#stand">Status</a><a href="#sicherheit">Security</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
+      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#nachbauen">Build</a><a href="#stand">Status</a><a href="#sicherheit">Security</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
     </nav>
     <div class="lang" role="group" aria-label="Language"><a href="../" lang="de" hreflang="de">DE</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div>
   </div>
@@ -391,7 +407,26 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="stand" class="alt">
+<!-- nachbauen:start -->
+<section id="nachbauen" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Build your own</div>
+    <h2>The route in six steps</h2>
+    <p class="intro">A rough guide, not build instructions. What counts is always the guide of the respective project for exactly your device.</p>
+    <ol class="steps">
+      <li class="step"><span class="label">Step 1</span><h3>Identify the device</h3><p>Read the model number from the label on the device, not from the power supply. Note the codename and software version. Similar housings often contain different hardware.</p><p class="ref">Guide: Chapter 6.2</p></li>
+      <li class="step"><span class="label">Step 2</span><h3>Choose a route</h3><p>Check which project supports exactly this model and whether it provides the functions you want: voice satellite, media, display.</p><p class="ref">Guide: Chapters 1, 6.3, 6.4</p></li>
+      <li class="step"><span class="label">Step 3</span><h3>Back up, then unlock</h3><p>Keep the guide, version and files together. No precautionary updates. Back up the device data as the guide describes and verify the copies. Only then unlock and install.</p><p class="ref">Guide: Chapters 5, 11.2</p></li>
+      <li class="step"><span class="label">Step 4</span><h3>Connect to Home Assistant</h3><p>Add the device as the project describes, for example via ESPHome or Wyoming. Then choose an Assist pipeline: speech recognition, processing, voice output. Our Echo 2 runs echo-dot-assist with a local wake word.</p><p class="ref">Guide: Chapters 1.1, 3</p></li>
+      <li class="step"><span class="label">Step 5</span><h3>Set exposures</h3><p>Expose only individual, harmless devices to voice. Test every exposure for its real effect; do not go by the name.</p><p class="ref">See the security section</p></li>
+      <li class="step"><span class="label">Step 6</span><h3>Everyday test</h3><p>Detection from several positions and during music, mute after a reboot, timers, Wi-Fi, server and internet outages. Several days without manual reboots.</p><p class="ref">Guide: Chapter 11.3</p></li>
+    </ol>
+    <div class="callout"><p>Results help everyone. Please report test results with model number and software version via the website repository: <a href="https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md">Create a test report</a></p></div>
+  </div>
+</section>
+<!-- nachbauen:end -->
+
+<section id="stand">
   <div class="wrap">
     <div class="eyebrow">Transparency</div>
     <h2>Current public project status</h2>
@@ -422,12 +457,21 @@ footer p{font-size:.86rem}
           <li>Permissions for voice commands are reviewed before the first home-command test</li>
         </ul>
       </div>
+      <div class="card wide"><span class="label">History</span>
+        <ol class="hist" id="l-history"><!-- history:start -->
+          <li><time datetime="2026-10-22">22 Oct 2026</time><span>Research guide on Amazon devices completed (21 pages)</span></li>
+          <li><time datetime="2026-10-23">23 Oct 2026</time><span>Local wake word “Okay Nabu” on the Echo 2: 10 of 10 in a short test; server-side route dropped because it was unstable</span></li>
+          <li><time datetime="2026-10-24">24 Oct 2026</time><span>Separate Hermes speaker set up; authenticated API test successful</span></li>
+          <li><time datetime="2026-10-25">25 Oct 2026</time><span>Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published</span></li>
+          <li><time datetime="2026-10-26">26 Oct 2026</time><span>English edition of the guide, SOUL.md example and build overview</span></li>
+<!-- history:end --></ol>
+      </div>
     </div>
     <p class="small" style="margin-top:20px">Automatic publication is not automatic functional testing. The status is adopted after expert approval; the page then updates via GitHub Pages.</p>
   </div>
 </section>
 
-<section id="sicherheit">
+<section id="sicherheit" class="alt">
   <div class="wrap">
     <div class="eyebrow">Security and privacy</div>
     <h2>What may happen by voice</h2>
@@ -443,7 +487,7 @@ footer p{font-size:.86rem}
 </section>
 
 <!-- soul:start -->
-<section id="soul" class="alt">
+<section id="soul">
   <div class="wrap">
     <div class="eyebrow">Example</div>
     <h2>How a voice assistant gets its character</h2>
@@ -478,7 +522,7 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
 </section>
 <!-- soul:end -->
 
-<section id="faq">
+<section id="faq" class="alt">
   <div class="wrap">
     <div class="eyebrow">Frequently asked questions</div>
     <h2>FAQ</h2>
@@ -491,12 +535,12 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
       <details><summary>Is the solution ready for my household yet?</summary><p>No. The Echo 2 pilot has some proven partial functions, but no complete long-term and end-to-end acceptance yet.</p></details>
       <details><summary>Why Home Assistant and Hermes together?</summary><p>Home Assistant can manage everyday home functions and permissions. Hermes is intended for open questions and more demanding conversations; this separates simple switching commands from complex AI processing.</p></details>
       <details><summary>What about timers, alarms, reminders and multiple people?</summary><p>These are core goals but not fully tested yet. For private reminders and guests in particular, permissions, ownership and confirmation are needed before sensitive answers.</p></details>
-      <details><summary>How can I help?</summary><p>Verifiable tests with the exact model number, firmware version and traceable error descriptions are valuable. Public sources and questions can be reported via the <a href="https://github.com/kinetic-it/lokale-alexa-website/issues">website repository</a>; please do not post tokens, serial numbers or voice recordings.</p></details>
+      <details><summary>How can I help?</summary><p>Verifiable tests with the exact model number, firmware version and traceable error descriptions are valuable. There is a <a href="https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md">test report template</a> for this. Public sources and questions can be reported via the <a href="https://github.com/kinetic-it/lokale-alexa-website/issues">website repository</a>; please do not post tokens, serial numbers or voice recordings.</p></details>
     </div>
   </div>
 </section>
 
-<section id="leitfaden" class="alt">
+<section id="leitfaden">
   <div class="wrap">
     <div class="eyebrow">Background</div>
     <h2>The complete device guide</h2>
@@ -534,6 +578,10 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
     var li=document.createElement('li'),i=document.createElement('i'),n=document.createElement('span'),s=document.createElement('span');
     var st=ST[m.state]?m.state:'open';i.className='mk '+st;n.textContent=String((names&&names[m.id])||m.name);s.className='st';s.textContent=ST[st];
     li.appendChild(i);li.appendChild(n);li.appendChild(s);ul.appendChild(li)})}
+  function hist(items,texts){var ol=$('#l-history');if(!ol||!Array.isArray(items)||!items.length)return;ol.textContent='';items.forEach(function(h,i){
+    var li=document.createElement('li'),t=document.createElement('time'),s=document.createElement('span');
+    t.setAttribute('datetime',String(h.date));t.textContent=fmt(h.date);s.textContent=String((texts&&texts[i])||h.text);
+    li.appendChild(t);li.appendChild(s);ol.appendChild(li)})}
   fetch((EN?'../':'./')+'data/status.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('status');return r.json()}).then(function(d){
     if(d.visibility!=='public'||d.approved!==true)return;
     var t=(EN&&d.en)?d.en:d;
@@ -541,6 +589,7 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
     bind('meta',(EN?'As of ':'Stand: ')+fmt(d.as_of)+' \u00b7 '+(t.evidence||d.evidence));
     list('#l-confirmed',t.confirmed||d.confirmed);list('#l-open',t.not_yet_verified||d.not_yet_verified);list('#l-issues',t.known_issues||d.known_issues);
     miles(d.milestones,EN&&d.en?d.en.milestones:null);
+    hist(d.history,EN&&d.en?d.en.history:null);
   }).catch(function(){});
 
   /* Geräte filtern */

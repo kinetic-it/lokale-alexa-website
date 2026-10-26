@@ -1,0 +1,82 @@
+{
+  "de": {
+    "eyebrow": "Nachbauen",
+    "h2": "Der Weg in sechs Schritten",
+    "intro": "Eine Orientierung, keine Bauanleitung. Maßgeblich ist immer die Anleitung des jeweiligen Projekts für genau dein Gerät.",
+    "step": "Schritt",
+    "steps": [
+      [
+        "Gerät bestimmen",
+        "Modellnummer vom Typenschild am Gerät ablesen, nicht vom Netzteil. Codename und Softwarestand notieren. Ähnliche Gehäuse enthalten oft andere Hardware.",
+        "Leitfaden: Kapitel 6.2"
+      ],
+      [
+        "Weg wählen",
+        "Prüfen, welches Projekt genau dieses Modell unterstützt und ob es die gewünschten Funktionen liefert: Sprachsatellit, Medien, Display.",
+        "Leitfaden: Kapitel 1, 6.3, 6.4"
+      ],
+      [
+        "Sichern, dann entsperren",
+        "Anleitung, Version und Dateien zusammen ablegen. Keine vorsorglichen Updates. Gerätedaten nach Anleitung sichern und die Kopien prüfen. Erst dann Unlock und Installation.",
+        "Leitfaden: Kapitel 5, 11.2"
+      ],
+      [
+        "Mit Home Assistant verbinden",
+        "Das Gerät je nach Projekt einbinden, etwa über ESPHome oder Wyoming. Dann eine Assist-Pipeline wählen: Spracherkennung, Verarbeitung, Sprachausgabe. Unser Echo 2 läuft mit echo-dot-assist und lokalem Aktivierungswort.",
+        "Leitfaden: Kapitel 1.1, 3"
+      ],
+      [
+        "Freigaben setzen",
+        "Für Sprache nur einzelne, harmlose Geräte freigeben. Jede Freigabe auf ihre echte Wirkung testen, nicht nach dem Namen gehen.",
+        "Siehe Abschnitt Sicherheit"
+      ],
+      [
+        "Alltagstest",
+        "Erkennung aus mehreren Positionen und bei Musik, Mute nach Neustart, Timer, Ausfall von WLAN, Server und Internet. Mehrere Tage ohne manuelle Neustarts.",
+        "Leitfaden: Kapitel 11.3"
+      ]
+    ],
+    "callout": "Gefundene Ergebnisse helfen allen. Testberichte mit Modellnummer und Softwarestand gerne über das Website-Repository melden:",
+    "callout_link": "Testbericht anlegen"
+  },
+  "en": {
+    "eyebrow": "Build your own",
+    "h2": "The route in six steps",
+    "intro": "A rough guide, not build instructions. What counts is always the guide of the respective project for exactly your device.",
+    "step": "Step",
+    "steps": [
+      [
+        "Identify the device",
+        "Read the model number from the label on the device, not from the power supply. Note the codename and software version. Similar housings often contain different hardware.",
+        "Guide: Chapter 6.2"
+      ],
+      [
+        "Choose a route",
+        "Check which project supports exactly this model and whether it provides the functions you want: voice satellite, media, display.",
+        "Guide: Chapters 1, 6.3, 6.4"
+      ],
+      [
+        "Back up, then unlock",
+        "Keep the guide, version and files together. No precautionary updates. Back up the device data as the guide describes and verify the copies. Only then unlock and install.",
+        "Guide: Chapters 5, 11.2"
+      ],
+      [
+        "Connect to Home Assistant",
+        "Add the device as the project describes, for example via ESPHome or Wyoming. Then choose an Assist pipeline: speech recognition, processing, voice output. Our Echo 2 runs echo-dot-assist with a local wake word.",
+        "Guide: Chapters 1.1, 3"
+      ],
+      [
+        "Set exposures",
+        "Expose only individual, harmless devices to voice. Test every exposure for its real effect; do not go by the name.",
+        "See the security section"
+      ],
+      [
+        "Everyday test",
+        "Detection from several positions and during music, mute after a reboot, timers, Wi-Fi, server and internet outages. Several days without manual reboots.",
+        "Guide: Chapter 11.3"
+      ]
+    ],
+    "callout": "Results help everyone. Please report test results with model number and software version via the website repository:",
+    "callout_link": "Create a test report"
+  }
+}

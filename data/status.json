@@ -92,6 +92,35 @@
       "m4": "Home commands end to end",
       "m5": "Hermes conversation end to end",
       "m6": "Everyday functions and continuous operation"
+    },
+    "history": [
+      "Research guide on Amazon devices completed (21 pages)",
+      "Local wake word “Okay Nabu” on the Echo 2: 10 of 10 in a short test; server-side route dropped because it was unstable",
+      "Separate Hermes speaker set up; authenticated API test successful",
+      "Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published",
+      "English edition of the guide, SOUL.md example and build overview"
+    ]
+  },
+  "history": [
+    {
+      "date": "2026-10-22",
+      "text": "Recherche-Leitfaden zu Amazon-Geräten fertiggestellt (21 Seiten)"
+    },
+    {
+      "date": "2026-10-23",
+      "text": "Lokales Aktivierungswort „Okay Nabu“ am Echo 2: 10 von 10 im Kurztest; serverseitiger Weg wegen Instabilität verworfen"
+    },
+    {
+      "date": "2026-10-24",
+      "text": "Getrennter Hermes-Speaker eingerichtet; authentifizierter API-Test erfolgreich"
+    },
+    {
+      "date": "2026-10-25",
+      "text": "Hermes-Speaker in Home Assistant als Gesprächsagent eingetragen; Prüfung der Sprachfreigaben begonnen; Website veröffentlicht"
+    },
+    {
+      "date": "2026-10-26",
+      "text": "Englische Fassung des Leitfadens, SOUL.md-Beispiel und Übersicht zum Nachbauen"
     }
-  }
+  ]
 }
