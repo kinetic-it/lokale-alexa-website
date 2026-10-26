@@ -54,3 +54,11 @@ GitHub → Repository → Settings → Pages → **Deploy from a branch**, Branc
 ## Open Source / Copyright
 
 Eigene Seiteninhalte sind zunächst nur gemäß GitHub-Sichtbarkeit lesbar, **keine** freie Lizenz ist damit automatisch eingeräumt. Die Original-PDF ist mit ausdrücklicher Owner-Freigabe unter `downloads/` öffentlich abgelegt.
+
+## SOUL.md-Beispiel
+
+Abschnitt `#soul` (Navigation „Persona“) und die Downloads `downloads/SOUL-beispiel.md` / `SOUL-example.md` entstehen aus **einer** Quelle: `tools/soul/content.json` (Deutsch und Englisch je Block). Ändern, dann `python3 tools/soul/build_soul.py`, dann `python3 tools/check_i18n.py`. Seiten und Downloads nicht von Hand ändern.
+
+- Das Beispiel ist erfunden (Figur „Mika“). Nie die echte Persona (Nexis, Speaker) oder Namen, IPs, Schlüssel aus dem Projekt einfügen.
+- Aussagen zur Datei (Ablage `~/.hermes/SOUL.md`, Identität am Anfang des Systemprompts, leere Datei = Standard-Identität, Einlesen beim Sitzungsstart, Abgrenzung zu AGENTS.md) stammen aus der Hermes-Dokumentation (Abschnitt Personality). Stand 26.10.2026: nur über eine Suchzusammenfassung gelesen, die Originalseite war aus der Arbeitsumgebung nicht abrufbar, und nicht am eigenen Gerät geprüft. Vor einer Aussage wie „so funktioniert es bei uns“ gegen die Originalseite und die echte Installation prüfen.
+
