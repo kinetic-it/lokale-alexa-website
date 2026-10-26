@@ -9,6 +9,10 @@
 <link rel="alternate" hreflang="de" href="https://kinetic-it.github.io/lokale-alexa-website/">
 <link rel="alternate" hreflang="en" href="https://kinetic-it.github.io/lokale-alexa-website/en/">
 <link rel="alternate" hreflang="x-default" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Lokale Alexa">
+<meta property="og:url" content="https://kinetic-it.github.io/lokale-alexa-website/en/">
+<meta property="og:image" content="https://kinetic-it.github.io/lokale-alexa-website/og-en.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Local Alexa: an Echo gets a second life">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="de_DE">
 <meta property="og:title" content="Local Alexa | An Echo gets a second life">
 <meta property="og:description" content="Repurposed Echo hardware as a self-hosted voice assistant with Home Assistant. Open project status, honestly separated into tested and planned.">
@@ -120,6 +124,13 @@ code{font:.88em var(--mono);background:#20262c;border:1px solid var(--line);padd
 .ms .st{font:.7rem/1 var(--mono);color:var(--faint);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .mk{width:12px;height:12px;border-radius:50%;border:2px solid var(--faint);display:block}
 .mk.owner_reported{background:var(--ok);border-color:var(--ok)}
+.mk.failed{border-color:var(--risk);background:var(--risk)}
+.last{margin:16px 0 0;padding:12px 14px;border:1px solid #5a3f39;background:#1d1816;border-radius:3px;font-size:.88rem;color:var(--dim);max-width:none}
+.last strong{display:block;font:600 .68rem/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--risk);margin-bottom:4px}
+.stale{color:var(--risk)!important}
+/* abwechselnde Abschnittsflächen */
+main>section:nth-of-type(even){background:var(--bg2)}
+@media print{header.site,nav.main,.menu,.lang,.chips,.hero::before{display:none!important}main,footer{margin-left:0!important}body{background:#fff;color:#000}section{padding:24px 0}}
 .mk.in_progress{border-color:var(--accent);background:linear-gradient(90deg,var(--accent) 50%,transparent 50%)}
 
 /* Abschnitte */
@@ -259,24 +270,26 @@ footer p{font-size:.86rem}
     <div>
       <div class="eyebrow">Open Hardware · Home Assistant · Privacy by Design</div>
       <h1>An Echo gets<br>a second life.</h1>
-      <p class="lead">We want to reuse existing Amazon Echo hardware as an independent, self-hosted voice assistant: Home Assistant for everyday use, Hermes for open-ended questions.</p>
+      <p class="lead">An Amazon Echo as a self-hosted voice assistant: Home Assistant runs the house, Hermes answers open questions. An open pilot project with an honest status, not a finished solution.</p>
       <div class="actions"><a class="button" href="#stand">View project status</a><a class="button alt" href="#technik">Understand the voice path</a><a class="button alt" href="#geraete">Check my device</a></div>
       <div class="meta"><span>Public project journal</span><span>One pilot: Echo 2 (2017)</span><span>Not a ready-made installation</span></div>
     </div>
     <aside class="statuscard" aria-label="Project status at a glance">
-      <div class="head"><span>Project status</span><span data-bind="asof">25 Oct 2026</span></div>
+      <div class="head"><span>Project status</span><span data-bind="asof">26 Oct 2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo 2 pilot · partial functions confirmed</h2>
+        <h2 data-bind="title">Echo 2 pilot · partial functions confirmed, first switching command failed</h2>
         <p class="m" data-bind="evidence">Owner reports and private project records; no independent live acceptance</p>
-        <ul class="ms" id="ms">
+        <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Owner report</span></li>
           <li><i class="mk owner_reported"></i><span>Home Assistant integration</span><span class="st">Owner report</span></li>
           <li><i class="mk owner_reported"></i><span>Local wake word short test</span><span class="st">Owner report</span></li>
           <li><i class="mk in_progress"></i><span>Review permissions and exposures</span><span class="st">in progress</span></li>
-          <li><i class="mk open"></i><span>Home commands end to end</span><span class="st">open</span></li>
+          <li><i class="mk failed"></i><span>Home commands end to end</span><span class="st">test failed</span></li>
           <li><i class="mk open"></i><span>Hermes conversation end to end</span><span class="st">open</span></li>
           <li><i class="mk open"></i><span>Everyday functions and continuous operation</span><span class="st">open</span></li>
+<!-- ms:end -->
         </ul>
+        <p class="last"><strong data-bind="lastdate">Latest test · 26 Oct 2026</strong><span data-bind="lasttest">Voice switching command on the Echo: failed. Answered with AI text instead of switching; cause unknown.</span></p>
       </div>
     </aside>
   </div>
@@ -297,14 +310,14 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="technik" class="alt">
+<section id="technik">
   <div class="wrap">
     <div class="eyebrow">Architecture</div>
     <h2>The voice path: from “Okay Nabu” to the answer</h2>
     <p class="intro">The Echo listens and speaks. Home Assistant is the hub for the household and checks every sentence for its own commands first. Only what is not a home command goes to Hermes. Columns show <strong>where</strong> something happens; top to bottom shows the <strong>order</strong>.</p>
 
     <figure class="diagram">
-      <div class="scroll">
+      <div class="scroll" tabindex="0" role="region" aria-label="Voice path diagram, scrolls horizontally">
       <svg viewBox="0 0 760 746" role="img" aria-labelledby="dg-t dg-d">
         <title id="dg-t">Voice path of Local Alexa</title>
         <desc id="dg-d">The Echo detects the wake word locally. A cloud service turns speech into text. Home Assistant checks its own commands first and switches only approved devices. Everything else goes to Hermes and an external language model. A cloud service turns the answer text into speech, which the Echo plays. Hermes is not meant to have direct access to home control.</desc>
@@ -384,7 +397,7 @@ footer p{font-size:.86rem}
     </div>
 
     <h3 class="sub">What software is there?</h3>
-    <div class="tablewrap"><table>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Table: software options for Echo devices"><table>
       <thead><tr><th>Project</th><th>Purpose</th><th>Assessment</th></tr></thead>
       <tbody>
         <tr><td><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist / hassmic</a></td><td>Echo as a Home Assistant voice satellite via ESPHome/Wyoming</td><td>Path of the Echo 2 pilot</td></tr>
@@ -410,7 +423,7 @@ footer p{font-size:.86rem}
       <button type="button" data-f="root" aria-pressed="false">Root proof only</button>
       <button type="button" data-f="none" aria-pressed="false">No proven port</button>
     </div>
-    <div class="tablewrap"><table id="devices">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Table: Echo devices and their classification"><table id="devices">
       <caption class="sr">Echo devices with model number, codename and assessment</caption>
       <thead><tr><th>Device</th><th>Model / codename</th><th>Assessment from the guide</th></tr></thead>
       <tbody>
@@ -433,7 +446,7 @@ footer p{font-size:.86rem}
 </section>
 
 <!-- nachbauen:start -->
-<section id="nachbauen" class="alt">
+<section id="nachbauen">
   <div class="wrap">
     <div class="eyebrow">Build your own</div>
     <h2>The route in six steps</h2>
@@ -456,30 +469,34 @@ footer p{font-size:.86rem}
     <div class="eyebrow">Transparency</div>
     <h2>Current public project status</h2>
     <p class="intro">Only statements released for publication appear here. The internal development and security status stays in private repositories. The status deliberately distinguishes between <strong>reported</strong> and <strong>accepted</strong>.</p>
-    <p class="small" data-bind="meta">As of 25 Oct 2026 · Owner reports and private project records; no independent live acceptance</p>
+    <p class="small" data-bind="meta">As of 26 Oct 2026 · Owner reports and private project records; no independent live acceptance</p>
     <div class="board">
       <div class="card good"><span class="label">Reported so far</span>
-        <ul id="l-confirmed">
+        <ul id="l-confirmed"><!-- confirmed:start -->
           <li>Echo 2 (XC56PY/radar): unlock and TWRP documented</li>
           <li>echo-dot-assist connected to Home Assistant (owner report)</li>
           <li>Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven</li>
           <li>Separate Hermes speaker answered an authenticated API test request and is registered in Home Assistant as a conversation agent; not yet tested through the Echo</li>
+<!-- confirmed:end -->
         </ul>
       </div>
       <div class="card"><span class="label">Not yet accepted</span>
-        <ul id="l-open">
+        <ul id="l-open"><!-- open:start -->
           <li>Stable continuous operation and audio while music is playing</li>
           <li>Echo → HA → Hermes → audible answer</li>
           <li>Timers, alarms, reminders, lists and media</li>
           <li>Multi-user permissions, guest mode and sensitive answers</li>
           <li>Recovery, full raw backup and long-term tests</li>
+<!-- open:end -->
         </ul>
       </div>
       <div class="card issues wide"><span class="label">Known issues</span>
-        <ul id="l-issues">
+        <ul id="l-issues"><!-- issues:start -->
+          <li>First voice test of a switching command (26 Oct): the device was not switched; the Echo answered with an AI text instead. The cause is unknown and is being investigated in the Home Assistant debug view</li>
           <li>The streaming wake word path was unstable; the local wake word is therefore preferred</li>
           <li>An open question was not understood in an earlier test, via a conversation agent that has since been replaced</li>
           <li>Permissions for voice commands are reviewed before the first home-command test</li>
+<!-- issues:end -->
         </ul>
       </div>
       <div class="card wide"><span class="label">History</span>
@@ -489,6 +506,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-24">24 Oct 2026</time><span>Separate Hermes speaker set up; authenticated API test successful</span></li>
           <li><time datetime="2026-10-25">25 Oct 2026</time><span>Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>English edition of the guide, SOUL.md example and build overview</span></li>
+          <li><time datetime="2026-10-26">26 Oct 2026</time><span>First voice test of a switching command on the Echo failed; investigation under way</span></li>
 <!-- history:end --></ol>
       </div>
     </div>
@@ -496,7 +514,7 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="sicherheit" class="alt">
+<section id="sicherheit">
   <div class="wrap">
     <div class="eyebrow">Security and privacy</div>
     <h2>What may happen by voice</h2>
@@ -547,7 +565,7 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
 </section>
 <!-- soul:end -->
 
-<section id="faq" class="alt">
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow">Frequently asked questions</div>
     <h2>FAQ</h2>
@@ -594,7 +612,7 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
   /* Statusdaten (freigegebener Stand) laden; ohne JavaScript bleibt der statische Text stehen.
      Sprache ergibt sich aus <html lang>; Englisch liest das Objekt "en" in status.json. */
   var EN=document.documentElement.lang==='en';
-  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen'};
+  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open',failed:'test failed'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen',failed:'Test fehlgeschlagen'};
   var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function fmt(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');if(!m)return d;return EN?(+m[3])+' '+MON[+m[2]-1]+' '+m[1]:m[3]+'.'+m[2]+'.'+m[1]}
   function bind(k,v){if(typeof v!=='string')return;$$('[data-bind="'+k+'"]').forEach(function(e){e.textContent=v})}
@@ -612,6 +630,9 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
     var t=(EN&&d.en)?d.en:d;
     bind('title',t.title||d.title);bind('asof',fmt(d.as_of));bind('evidence',t.evidence||d.evidence);
     bind('meta',(EN?'As of ':'Stand: ')+fmt(d.as_of)+' \u00b7 '+(t.evidence||d.evidence));
+    if(d.last_test){bind('lasttest',EN?(d.en&&d.en.last_test)||d.last_test.text:d.last_test.text);bind('lastdate',(EN?'Latest test':'Letzter Test')+' \u00b7 '+fmt(d.last_test.date))}
+    var age=(Date.now()-Date.parse(d.as_of))/864e5;
+    if(age>14){var mt=$('[data-bind="meta"]');if(mt){mt.classList.add('stale');mt.textContent+=' \u00b7 Status older than 14 days'}}
     list('#l-confirmed',t.confirmed||d.confirmed);list('#l-open',t.not_yet_verified||d.not_yet_verified);list('#l-issues',t.known_issues||d.known_issues);
     miles(d.milestones,EN&&d.en?d.en.milestones:null);
     hist(d.history,EN&&d.en?d.en.history:null);

@@ -2,9 +2,9 @@
   "schema_version": 1,
   "visibility": "public",
   "approved": true,
-  "as_of": "2026-10-25",
+  "as_of": "2026-10-26",
   "evidence": "Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Teilfunktionen bestätigt",
+  "title": "Echo-2-Pilot · Teilfunktionen belegt, erster Schaltbefehl fehlgeschlagen",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)",
@@ -42,7 +42,7 @@
     {
       "id": "m4",
       "name": "Hausbefehle Ende-zu-Ende",
-      "state": "open"
+      "state": "failed"
     },
     {
       "id": "m5",
@@ -56,6 +56,7 @@
     }
   ],
   "known_issues": [
+    "Erster Sprachtest eines Schaltbefehls (26.10.): Das Gerät wurde nicht geschaltet, der Echo antwortete stattdessen mit einem KI-Text. Die Ursache ist ungeklärt und wird in der Debug-Ansicht von Home Assistant untersucht",
     "Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt",
     "Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden",
     "Berechtigungen für Sprachbefehle werden vor dem ersten Haushaltsbefehl-Test geprüft"
@@ -64,7 +65,7 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · partial functions confirmed",
+    "title": "Echo 2 pilot · partial functions confirmed, first switching command failed",
     "evidence": "Owner reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
@@ -80,6 +81,7 @@
       "Recovery, full raw backup and long-term tests"
     ],
     "known_issues": [
+      "First voice test of a switching command (26 Oct): the device was not switched; the Echo answered with an AI text instead. The cause is unknown and is being investigated in the Home Assistant debug view",
       "The streaming wake word path was unstable; the local wake word is therefore preferred",
       "An open question was not understood in an earlier test, via a conversation agent that has since been replaced",
       "Permissions for voice commands are reviewed before the first home-command test"
@@ -98,8 +100,10 @@
       "Local wake word “Okay Nabu” on the Echo 2: 10 of 10 in a short test; server-side route dropped because it was unstable",
       "Separate Hermes speaker set up; authenticated API test successful",
       "Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published",
-      "English edition of the guide, SOUL.md example and build overview"
-    ]
+      "English edition of the guide, SOUL.md example and build overview",
+      "First voice test of a switching command on the Echo failed; investigation under way"
+    ],
+    "last_test": "Voice switching command on the Echo: failed. Answered with AI text instead of switching; cause unknown."
   },
   "history": [
     {
@@ -121,6 +125,14 @@
     {
       "date": "2026-10-26",
       "text": "Englische Fassung des Leitfadens, SOUL.md-Beispiel und Übersicht zum Nachbauen"
+    },
+    {
+      "date": "2026-10-26",
+      "text": "Erster Sprachtest eines Schaltbefehls am Echo fehlgeschlagen; Ursachenprüfung läuft"
     }
-  ]
+  ],
+  "last_test": {
+    "date": "2026-10-26",
+    "text": "Schaltbefehl per Sprache am Echo: fehlgeschlagen. Antwort als KI-Text statt Schaltung; Ursache ungeklärt."
+  }
 }

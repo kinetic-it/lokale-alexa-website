@@ -9,6 +9,10 @@
 <link rel="alternate" hreflang="de" href="https://kinetic-it.github.io/lokale-alexa-website/">
 <link rel="alternate" hreflang="en" href="https://kinetic-it.github.io/lokale-alexa-website/en/">
 <link rel="alternate" hreflang="x-default" href="https://kinetic-it.github.io/lokale-alexa-website/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Lokale Alexa">
+<meta property="og:url" content="https://kinetic-it.github.io/lokale-alexa-website/">
+<meta property="og:image" content="https://kinetic-it.github.io/lokale-alexa-website/og-de.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Lokale Alexa: Ein Echo bekommt ein zweites Leben">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:locale" content="de_DE"><meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="Lokale Alexa | Ein Echo bekommt ein zweites Leben">
 <meta property="og:description" content="Wiederverwendete Echo-Hardware als selbst betriebener Sprachassistent mit Home Assistant. Offener Projektstand, ehrlich getrennt in getestet und geplant.">
@@ -120,6 +124,13 @@ code{font:.88em var(--mono);background:#20262c;border:1px solid var(--line);padd
 .ms .st{font:.7rem/1 var(--mono);color:var(--faint);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .mk{width:12px;height:12px;border-radius:50%;border:2px solid var(--faint);display:block}
 .mk.owner_reported{background:var(--ok);border-color:var(--ok)}
+.mk.failed{border-color:var(--risk);background:var(--risk)}
+.last{margin:16px 0 0;padding:12px 14px;border:1px solid #5a3f39;background:#1d1816;border-radius:3px;font-size:.88rem;color:var(--dim);max-width:none}
+.last strong{display:block;font:600 .68rem/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--risk);margin-bottom:4px}
+.stale{color:var(--risk)!important}
+/* abwechselnde Abschnittsflächen */
+main>section:nth-of-type(even){background:var(--bg2)}
+@media print{header.site,nav.main,.menu,.lang,.chips,.hero::before{display:none!important}main,footer{margin-left:0!important}body{background:#fff;color:#000}section{padding:24px 0}}
 .mk.in_progress{border-color:var(--accent);background:linear-gradient(90deg,var(--accent) 50%,transparent 50%)}
 
 /* Abschnitte */
@@ -259,24 +270,26 @@ footer p{font-size:.86rem}
     <div>
       <div class="eyebrow">Open Hardware · Home Assistant · Privacy by Design</div>
       <h1>Ein Echo bekommt<br>ein zweites Leben.</h1>
-      <p class="lead">Wir möchten vorhandene Amazon-Echo-Hardware als möglichst unabhängigen, selbst betriebenen Sprachassistenten weiterverwenden: Home Assistant für den Alltag, Hermes für freie Fragen.</p>
+      <p class="lead">Ein Amazon Echo als selbst betriebener Sprachassistent: Home Assistant steuert das Haus, Hermes beantwortet freie Fragen. Offenes Pilotprojekt mit ehrlichem Stand, keine fertige Lösung.</p>
       <div class="actions"><a class="button" href="#stand">Projektstand ansehen</a><a class="button alt" href="#technik">Sprachweg verstehen</a><a class="button alt" href="#geraete">Mein Gerät prüfen</a></div>
       <div class="meta"><span>Öffentliches Projektjournal</span><span>Ein Pilot: Echo 2 (2017)</span><span>Keine fertige Installationslösung</span></div>
     </div>
     <aside class="statuscard" aria-label="Projektstand in Kurzform">
-      <div class="head"><span>Projektstand</span><span data-bind="asof">25.10.2026</span></div>
+      <div class="head"><span>Projektstand</span><span data-bind="asof">26.10.2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo-2-Pilot · Teilfunktionen bestätigt</h2>
+        <h2 data-bind="title">Echo-2-Pilot · Teilfunktionen belegt, erster Schaltbefehl fehlgeschlagen</h2>
         <p class="m" data-bind="evidence">Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
-        <ul class="ms" id="ms">
+        <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo-2-Bootzugang</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk owner_reported"></i><span>Home-Assistant-Anbindung</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk owner_reported"></i><span>Lokales Wakeword Kurztest</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk in_progress"></i><span>Freigaben und Berechtigungen prüfen</span><span class="st">in Arbeit</span></li>
-          <li><i class="mk open"></i><span>Hausbefehle Ende-zu-Ende</span><span class="st">offen</span></li>
+          <li><i class="mk failed"></i><span>Hausbefehle Ende-zu-Ende</span><span class="st">Test fehlgeschlagen</span></li>
           <li><i class="mk open"></i><span>Hermes-Konversation Ende-zu-Ende</span><span class="st">offen</span></li>
           <li><i class="mk open"></i><span>Alltagsfunktionen und Dauerbetrieb</span><span class="st">offen</span></li>
+<!-- ms:end -->
         </ul>
+        <p class="last"><strong data-bind="lastdate">Letzter Test · 26.10.2026</strong><span data-bind="lasttest">Schaltbefehl per Sprache am Echo: fehlgeschlagen. Antwort als KI-Text statt Schaltung; Ursache ungeklärt.</span></p>
       </div>
     </aside>
   </div>
@@ -297,14 +310,14 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="technik" class="alt">
+<section id="technik">
   <div class="wrap">
     <div class="eyebrow">Aufbau</div>
     <h2>Der Sprachweg: von „Okay Nabu“ bis zur Antwort</h2>
     <p class="intro">Der Echo hört zu und spricht. Home Assistant ist die Zentrale für den Haushalt und prüft jeden Satz zuerst auf eigene Befehle. Nur was kein Hausbefehl ist, geht an Hermes. Spalten zeigen, <strong>wo</strong> etwas passiert, von oben nach unten die <strong>Reihenfolge</strong>.</p>
 
     <figure class="diagram">
-      <div class="scroll">
+      <div class="scroll" tabindex="0" role="region" aria-label="Schaubild Sprachweg, waagerecht scrollbar">
       <svg viewBox="0 0 760 746" role="img" aria-labelledby="dg-t dg-d">
         <title id="dg-t">Sprachweg der Lokalen Alexa</title>
         <desc id="dg-d">Der Echo erkennt das Aktivierungswort lokal. Ein Cloud-Dienst wandelt die Sprache in Text. Home Assistant prüft zuerst eigene Befehle und schaltet nur freigegebene Geräte. Alles andere geht an Hermes und ein externes Sprachmodell. Ein Cloud-Dienst macht aus dem Antworttext Sprache, die der Echo abspielt. Hermes soll keinen direkten Zugriff auf die Haussteuerung haben.</desc>
@@ -384,7 +397,7 @@ footer p{font-size:.86rem}
     </div>
 
     <h3 class="sub">Welche Software gibt es?</h3>
-    <div class="tablewrap"><table>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Tabelle: Softwarelösungen für Echo-Geräte"><table>
       <thead><tr><th>Projekt</th><th>Zweck</th><th>Einordnung</th></tr></thead>
       <tbody>
         <tr><td><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist / hassmic</a></td><td>Echo als Home-Assistant-Sprachsatellit über ESPHome/Wyoming</td><td>Weg des Echo-2-Piloten</td></tr>
@@ -410,7 +423,7 @@ footer p{font-size:.86rem}
       <button type="button" data-f="root" aria-pressed="false">Nur Root-Nachweis</button>
       <button type="button" data-f="none" aria-pressed="false">Kein belegter Port</button>
     </div>
-    <div class="tablewrap"><table id="devices">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Tabelle: Echo-Geräte mit Einordnung"><table id="devices">
       <caption class="sr">Echo-Geräte mit Modellnummer, Codename und Einordnung</caption>
       <thead><tr><th>Gerät</th><th>Modell / Codename</th><th>Einordnung aus Leitfaden</th></tr></thead>
       <tbody>
@@ -433,7 +446,7 @@ footer p{font-size:.86rem}
 </section>
 
 <!-- nachbauen:start -->
-<section id="nachbauen" class="alt">
+<section id="nachbauen">
   <div class="wrap">
     <div class="eyebrow">Nachbauen</div>
     <h2>Der Weg in sechs Schritten</h2>
@@ -456,30 +469,34 @@ footer p{font-size:.86rem}
     <div class="eyebrow">Transparenz</div>
     <h2>Aktueller öffentlicher Projektstand</h2>
     <p class="intro">Hier erscheinen ausschließlich zur Veröffentlichung freigegebene Aussagen. Der interne Entwicklungs- und Sicherheitsstatus bleibt in privaten Repositories. Der Stand unterscheidet bewusst zwischen <strong>berichtet</strong> und <strong>abgenommen</strong>.</p>
-    <p class="small" data-bind="meta">Stand: 25.10.2026 · Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
+    <p class="small" data-bind="meta">Stand: 26.10.2026 · Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
     <div class="board">
       <div class="card good"><span class="label">Bereits berichtet</span>
-        <ul id="l-confirmed">
+        <ul id="l-confirmed"><!-- confirmed:start -->
           <li>Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert</li>
           <li>echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)</li>
           <li>Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt</li>
           <li>Separater Hermes-Speaker beantwortete authentifizierte API-Testanfrage und ist in Home Assistant als Gesprächsagent eingetragen; noch kein Test über den Echo</li>
+<!-- confirmed:end -->
         </ul>
       </div>
       <div class="card"><span class="label">Noch nicht abgenommen</span>
-        <ul id="l-open">
+        <ul id="l-open"><!-- open:start -->
           <li>Stabiler Dauerbetrieb und Audio unter Musik</li>
           <li>Echo → HA → Hermes → hörbare Antwort</li>
           <li>Timer, Wecker, Erinnerungen, Listen und Medien</li>
           <li>Mehrbenutzerrechte, Gastmodus und sensible Antworten</li>
           <li>Recovery, vollständiges Rohbackup und Langzeittests</li>
+<!-- open:end -->
         </ul>
       </div>
       <div class="card issues wide"><span class="label">Bekannte Probleme</span>
-        <ul id="l-issues">
+        <ul id="l-issues"><!-- issues:start -->
+          <li>Erster Sprachtest eines Schaltbefehls (26.10.): Das Gerät wurde nicht geschaltet, der Echo antwortete stattdessen mit einem KI-Text. Die Ursache ist ungeklärt und wird in der Debug-Ansicht von Home Assistant untersucht</li>
           <li>Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt</li>
           <li>Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden</li>
           <li>Berechtigungen für Sprachbefehle werden vor dem ersten Haushaltsbefehl-Test geprüft</li>
+<!-- issues:end -->
         </ul>
       </div>
       <div class="card wide"><span class="label">Verlauf</span>
@@ -489,6 +506,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-24">24.10.2026</time><span>Getrennter Hermes-Speaker eingerichtet; authentifizierter API-Test erfolgreich</span></li>
           <li><time datetime="2026-10-25">25.10.2026</time><span>Hermes-Speaker in Home Assistant als Gesprächsagent eingetragen; Prüfung der Sprachfreigaben begonnen; Website veröffentlicht</span></li>
           <li><time datetime="2026-10-26">26.10.2026</time><span>Englische Fassung des Leitfadens, SOUL.md-Beispiel und Übersicht zum Nachbauen</span></li>
+          <li><time datetime="2026-10-26">26.10.2026</time><span>Erster Sprachtest eines Schaltbefehls am Echo fehlgeschlagen; Ursachenprüfung läuft</span></li>
 <!-- history:end --></ol>
       </div>
     </div>
@@ -496,7 +514,7 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="sicherheit" class="alt">
+<section id="sicherheit">
   <div class="wrap">
     <div class="eyebrow">Sicherheit und Datenschutz</div>
     <h2>Was per Sprache passieren darf</h2>
@@ -547,7 +565,7 @@ Frage nur nach, wenn du sonst falsch antworten würdest. Eine Frage, nicht mehre
 </section>
 <!-- soul:end -->
 
-<section id="faq" class="alt">
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow">Häufige Fragen</div>
     <h2>FAQ</h2>
@@ -594,7 +612,7 @@ Frage nur nach, wenn du sonst falsch antworten würdest. Eine Frage, nicht mehre
   /* Statusdaten (freigegebener Stand) laden; ohne JavaScript bleibt der statische Text stehen.
      Sprache ergibt sich aus <html lang>; Englisch liest das Objekt "en" in status.json. */
   var EN=document.documentElement.lang==='en';
-  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen'};
+  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open',failed:'test failed'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen',failed:'Test fehlgeschlagen'};
   var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function fmt(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');if(!m)return d;return EN?(+m[3])+' '+MON[+m[2]-1]+' '+m[1]:m[3]+'.'+m[2]+'.'+m[1]}
   function bind(k,v){if(typeof v!=='string')return;$$('[data-bind="'+k+'"]').forEach(function(e){e.textContent=v})}
@@ -612,6 +630,9 @@ Frage nur nach, wenn du sonst falsch antworten würdest. Eine Frage, nicht mehre
     var t=(EN&&d.en)?d.en:d;
     bind('title',t.title||d.title);bind('asof',fmt(d.as_of));bind('evidence',t.evidence||d.evidence);
     bind('meta',(EN?'As of ':'Stand: ')+fmt(d.as_of)+' \u00b7 '+(t.evidence||d.evidence));
+    if(d.last_test){bind('lasttest',EN?(d.en&&d.en.last_test)||d.last_test.text:d.last_test.text);bind('lastdate',(EN?'Latest test':'Letzter Test')+' \u00b7 '+fmt(d.last_test.date))}
+    var age=(Date.now()-Date.parse(d.as_of))/864e5;
+    if(age>14){var mt=$('[data-bind="meta"]');if(mt){mt.classList.add('stale');mt.textContent+=' \u00b7 Stand älter als 14 Tage'}}
     list('#l-confirmed',t.confirmed||d.confirmed);list('#l-open',t.not_yet_verified||d.not_yet_verified);list('#l-issues',t.known_issues||d.known_issues);
     miles(d.milestones,EN&&d.en?d.en.milestones:null);
     hist(d.history,EN&&d.en?d.en.history:null);

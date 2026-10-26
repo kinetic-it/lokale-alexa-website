@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kinetic-it.github.io/lokale-alexa-website/sitemap.xml
