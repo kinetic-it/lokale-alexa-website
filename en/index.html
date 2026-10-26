@@ -293,7 +293,7 @@ footer p{font-size:.86rem}
     <aside class="statuscard" aria-label="Project status at a glance">
       <div class="head"><span>Project status</span><span data-bind="asof">26 Oct 2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo 2 pilot · partial functions confirmed, first switching command failed</h2>
+        <h2 data-bind="title">Echo 2 pilot · speaker personality confirmed in voice test; home control unresolved</h2>
         <p class="m" data-bind="evidence">Owner reports and private project records; no independent live acceptance</p>
         <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Owner report</span></li>
@@ -301,11 +301,11 @@ footer p{font-size:.86rem}
           <li><i class="mk owner_reported"></i><span>Local wake word short test</span><span class="st">Owner report</span></li>
           <li><i class="mk in_progress"></i><span>Review permissions and exposures</span><span class="st">in progress</span></li>
           <li><i class="mk failed"></i><span>Home commands end to end</span><span class="st">test failed</span></li>
-          <li><i class="mk open"></i><span>Hermes conversation end to end</span><span class="st">open</span></li>
+          <li><i class="mk in_progress"></i><span>Hermes conversation end to end</span><span class="st">in progress</span></li>
           <li><i class="mk open"></i><span>Everyday functions and continuous operation</span><span class="st">open</span></li>
 <!-- ms:end -->
         </ul>
-        <p class="last"><strong data-bind="lastdate">Latest test · 26 Oct 2026</strong><span data-bind="lasttest">Voice switching command on the Echo: failed. Answered with AI text instead of switching; cause unknown.</span></p>
+        <p class="last"><strong data-bind="lastdate">Latest test · 26 Oct 2026</strong><span data-bind="lasttest">Echo voice test: audible self-introduction in the intended speaker personality and natural closing response succeeded (owner observation). Earlier failed device switching is not fixed.</span></p>
       </div>
     </aside>
   </div>
@@ -492,14 +492,14 @@ footer p{font-size:.86rem}
           <li>Echo 2 (XC56PY/radar): unlock and TWRP documented</li>
           <li>echo-dot-assist connected to Home Assistant (owner report)</li>
           <li>Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven</li>
-          <li>Separate Hermes speaker answered an authenticated API test request and is registered in Home Assistant as a conversation agent; not yet tested through the Echo</li>
+          <li>Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (owner observation).</li>
 <!-- confirmed:end -->
         </ul>
       </div>
       <div class="card"><span class="label">Not yet accepted</span>
         <ul id="l-open"><!-- open:start -->
           <li>Stable continuous operation and audio while music is playing</li>
-          <li>Echo → HA → Hermes → audible answer</li>
+          <li>Complex knowledge queries, conversational follow-up and technical end-to-end measurements</li>
           <li>Timers, alarms, reminders, lists and media</li>
           <li>Multi-user permissions, guest mode and sensitive answers</li>
           <li>Recovery, full raw backup and long-term tests</li>
@@ -523,6 +523,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-25">25 Oct 2026</time><span>Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>English edition of the guide, SOUL.md example and build overview</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>First voice test of a switching command on the Echo failed; investigation under way</span></li>
+          <li><time datetime="2026-10-26">26 Oct 2026</time><span>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.</span></li>
 <!-- history:end --></ol>
       </div>
     </div>
@@ -537,6 +538,7 @@ footer p{font-size:.86rem}
     <h2>Findings and lessons</h2>
     <p class="intro">This is where we record what went wrong or what we learned, newest first. We name open security details only once they are fixed; what we learned is published then.</p>
     <ol class="finds">
+      <li class="find problem" id="f5"><div class="fhead"><span class="ftype">Problem</span><span class="fstate resolved">resolved</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>Conversation route initially bypassed the speaker personality</h3><p>Although the separate voice assistant was reachable, the voice integration initially replied via a direct model path instead of its configured personality. The conversation integration was not fully linked to the speaker service. After a targeted correction, the Echo spoke its introduction in the intended personality and gave a natural closing response in a voice test. This does not yet prove home control or long-term stability.</p></li>
       <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">open</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>First voice test: switching command not executed</h3><p>The Echo answered audibly, but with an AI text. The device was not switched. The cause is unknown. Next, the recorded run is read in the Home Assistant debug view; until then we change nothing on a hunch.</p></li>
       <li class="find correction" id="f3"><div class="fhead"><span class="ftype">Correction</span><span class="fstate resolved">resolved</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>English PDF: errors in the first edition</h3><p>The first English edition of the guide had translation errors and left out the 32 source links of the original. Both are fixed; the edition is now built from the same source as the German one.</p></li>
       <li class="find finding" id="f2"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-25">25 Oct 2026</time></div><h3>A list entry is not proof</h3><p>That a device is exposed to voice or has a harmless name says nothing about what it actually does. Every exposure is tested individually before it counts as safe.</p></li>
