@@ -32,7 +32,7 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 - Deutsch: `index.html`, Englisch: `en/index.html`. Beide sind eigenständige statische Seiten mit Umschalter DE/EN im Kopf, `hreflang`-Verweisen und eigenem `canonical`.
 - Die Seiten werden **beide von Hand gepflegt**. Jede inhaltliche Änderung gehört in beide Dateien.
 - Die dynamischen Statusdaten liegen in `data/status.json`. Deutsche Texte stehen auf oberster Ebene, die englischen im Objekt `en` (mit `milestones` als Zuordnung von ID zu Name). Ohne `en` zeigt die englische Seite den deutschen Text.
-- PDF: Deutsch ist der Master (`downloads/Amazon-Geraete-Leitfaden-2026-10-22-neutral.pdf`, unverändert). Die englische Fassung (`downloads/Amazon-Devices-Guide-2026-10-22-neutral-en.pdf`, 20 Seiten) ist eine maschinengestützte Übersetzung ohne Muttersprachler-Prüfung und liegt ohne Quelldatei im Repo. Bekannte Übersetzungsmängel: siehe `docs/PDF-EN-MAENGEL.md`. Bei neuer deutscher Fassung die englische neu erzeugen lassen.
+- PDF: Deutsch ist der Master (`downloads/Amazon-Geraete-Leitfaden-2026-10-22-neutral.pdf`, unverändert). Die englische Fassung wird aus `tools/leitfaden/` gebaut und ist maschinell übersetzt, ohne Muttersprachler-Prüfung. Pflegeprozess: `docs/PDF-LEITFADEN.md`.
 - Vor jedem Merge: `python3 tools/check_i18n.py`. Das Skript prüft gleiche IDs, Anker, Tag-Anzahlen, Umlaute im englischen Text und die Vollständigkeit von `status.json`. Es prüft **nicht** die Qualität der Übersetzung.
 
 ## Vor jedem Merge prüfen

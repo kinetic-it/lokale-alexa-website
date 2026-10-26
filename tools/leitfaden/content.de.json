@@ -1,0 +1,1334 @@
+{
+ "meta": {
+  "lang": "de",
+  "pdf_title": "Amazon-Geräte als offene Sprach- und Smart-Home-Geräte – Stand 22.10.2026",
+  "pdf_subject": "Software, Root-Kompatibilität, Stimmen und Hardwareaufwand",
+  "cover_title": [
+   "Amazon-Geräte als offene",
+   "Sprach- und",
+   "Smart-Home-Geräte"
+  ],
+  "cover_subtitle": "Software, Root-Kompatibilität, Stimmen und Hardwareaufwand",
+  "cover_status": "Redaktions- und Recherchestand: 22. Oktober 2026",
+  "cover_paragraphs": [
+   "Ein unabhängiger Überblick über Software, Gerätevarianten und Voraussetzungen für die Weiterverwendung von Amazon-Geräten. Behandelt werden Echo, Fire TV, Fire TV Cube und Fire-Tablets; Kindle-E-Reader werden ergänzend eingeordnet.",
+   "Die Angaben beschreiben öffentlich dokumentierte Möglichkeiten. Es wurden keine Geräte geflasht und keine eigenen Hardware- oder Langzeittests durchgeführt. „Dokumentiert nutzbar“ gilt immer für das passende Modell, die passende Hardwarevariante und den beschriebenen Softwarestand. Eine Garantie für jedes gebraucht gekaufte Exemplar lässt sich daraus nicht ableiten."
+  ],
+  "cover_note": [],
+  "header": "AMAZON-GERÄTE · SOFTWARE UND KOMPATIBILITÄT",
+  "footer": "Stand: 22. Oktober 2026",
+  "toc_title": "Inhaltsverzeichnis"
+ },
+ "blocks": [
+  {
+   "t": "h1",
+   "text": "1. Softwareüberblick: Was gibt es und was macht es?",
+   "id": "b000"
+  },
+  {
+   "t": "h2",
+   "text": "1.1 Die Bausteine eines Sprachassistenten",
+   "id": "b001"
+  },
+  {
+   "t": "p",
+   "text": "Ein Sprachassistent besteht aus mehreren austauschbaren Teilen. Die Software auf dem Echo nimmt Ton auf und spielt Antworten ab. Die eigentliche Verarbeitung kann auf einem Server im Heimnetz oder bei einem Cloudanbieter stattfinden.",
+   "id": "b002"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Baustein</b>",
+     "<b>Aufgabe</b>",
+     "<b>Beispiele und Abgrenzung</b>"
+    ],
+    [
+     "Gerätebetriebssystem und Audiotreiber",
+     "Mikrofone, Lautsprecher, Tasten und Display betreiben",
+     "Fire OS mit Änderungen, emOS, TECHO5, LibreEcho; ein anderer Kernel allein reicht nicht"
+    ],
+    [
+     "Sprachsatellit",
+     "Audio und Gerätezustand mit der Zentrale austauschen",
+     "hassmic, EchoLocal, EchoMuse; ein Satellit ist das Mikrofon und der Lautsprecher im Raum"
+    ],
+    [
+     "Aktivierungswort",
+     "Beginn einer Anfrage erkennen",
+     "Amazon-Wake-Word-Engine, microWakeWord, openWakeWord; Unterstützung hängt vom Port ab"
+    ],
+    [
+     "STT: Sprache zu Text",
+     "Gesprochenen Befehl verschriftlichen",
+     "Whisper, Speech-to-Phrase oder Cloud-STT"
+    ],
+    [
+     "Befehlsverarbeitung",
+     "Aktion oder Antwort bestimmen",
+     "Home Assistant Assist; optional ein Sprachmodell oder Agent"
+    ],
+    [
+     "TTS: Text zu Sprache",
+     "Antwort hörbar machen",
+     "Katja über Microsoft Speech, Piper, ElevenLabs, Home Assistant Cloud"
+    ],
+    [
+     "Medienverwaltung",
+     "Musikquellen und Wiedergabe verbinden",
+     "Music Assistant; Konten, Anbieter und Player müssen zusammenpassen"
+    ]
+   ],
+   "id": "b003"
+  },
+  {
+   "t": "p",
+   "text": "Die technische Reihenfolge lautet: Mikrofon → Aktivierungswort → STT → Assist oder Agent → TTS → Lautsprecher. Die Stimme entscheidet weder über den Root-Zugang noch darüber, wie gut das Gerät einen gesprochenen Befehl versteht. [Q10, Q11]",
+   "id": "b004"
+  },
+  {
+   "t": "h2",
+   "text": "1.2 echo-dot-assist / hassmic",
+   "id": "b005"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aufgabe:</b> Echo-Geräte als Home-Assistant-Sprachsatelliten nutzen und dabei Teile der ursprünglichen Mikrofonverarbeitung beibehalten. Die Anbindung erfolgt wahlweise über die ESPHome-API oder Wyoming; der Funktionsumfang ist je nach Modus unterschiedlich.",
+   "id": "b006"
+  },
+  {
+   "t": "p",
+   "text": "<b>Geräte:</b> Echo Dot 2, Echo 2 und der ursprüngliche Echo Dot 3 von 2018. Die genaue Modellnummer ist entscheidend. <b>Nutzen:</b> Sprache, Medienwiedergabe und je nach Modus weitere Gerätefunktionen. <b>Voraussetzung:</b> gerätespezifischer Unlock und exakt passende Firmware.",
+   "id": "b007"
+  },
+  {
+   "t": "p",
+   "text": "<b>Grenzen und Community:</b> Das Projekt selbst nennt Tests auf nur einem Exemplar pro Modell. Das ist ein konkreter Funktionsnachweis, aber kein breiter Zuverlässigkeitstest. Für den Dot 3 gibt es zusätzlich einen Anwenderbericht mit anfänglichen Audio- und WLAN-Problemen; siehe Kapitel 9. Aufwand: <b>2–4 von 5</b>, vor allem abhängig vom Hardwarezugang. [Q1, Q9]",
+   "id": "b008"
+  },
+  {
+   "t": "h2",
+   "text": "1.3 EchoLocal",
+   "id": "b009"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aufgabe:</b> Amazons Dienste durch einen lokalen Sprach-, Medien- und Displaydienst auf dem bestehenden Fire-OS-Unterbau ersetzen. <b>Geräte:</b> Dot 2, Show 5 Gen. 1 und 2 sowie Show 8 Gen. 1 und 2.",
+   "id": "b010"
+  },
+  {
+   "t": "p",
+   "text": "<b>Nutzen:</b> Home-Assistant-Anbindung, Aktivierungswörter, Sprachausgabe, Musik und auf Shows eine eigene Oberfläche. Zusätzliche Funktionen lassen sich über die optionale HACS-Integration ergänzen. <b>Voraussetzung:</b> passender Root-Zugang, unterstütztes Fire OS und eingerichtete Assist-Verarbeitung.",
+   "id": "b011"
+  },
+  {
+   "t": "p",
+   "text": "<b>Grenzen und Community:</b> Die Projektliste bestätigt die genannten Geräte, nicht jede denkbare Hardwarevariante. Die optionale Integration ist eine weitere zu wartende Komponente. Oberflächen-, Kamera- und Medienfunktionen sind einzeln zu prüfen. Aufwand: <b>2–4 von 5</b>. [Q2]",
+   "id": "b012"
+  },
+  {
+   "t": "h2",
+   "text": "1.4 EchoMuse und emOS",
+   "id": "b013"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aufgabe:</b> Dot 2 mit einer eigenen Geräteverwaltung und einem Controller im Heimnetz als Sprachsatelliten betreiben. <b>emOS</b> ist der Linux-Unterbau des Projekts; der ältere Weg läuft auf gerootetem Fire OS 5.",
+   "id": "b014"
+  },
+  {
+   "t": "p",
+   "text": "<b>Nutzen:</b> zentrale Einrichtung und Verwaltung mehrerer Dots, Sprache, Medien und konfigurierbare Aktivierungswörter. <b>Voraussetzung:</b> dauerhaft laufender Controller als Add-on beziehungsweise Container und Home Assistant mit Assist.",
+   "id": "b015"
+  },
+  {
+   "t": "p",
+   "text": "<b>Grenzen und Community:</b> Reguläres Ziel ist weiterhin ausschließlich der Dot 2. Arbeiten an anderen Echo-Modellen sind keine Freigabe für deren Alltagsbetrieb. Der Controller bleibt ein zusätzlicher Dienst. Lokale Aktivierungsworterkennung und Audioübertragung zum Controller sind getrennte Betriebsarten. Aufwand: <b>2–3 von 5</b>. [Q3]",
+   "id": "b016"
+  },
+  {
+   "t": "h2",
+   "text": "1.5 TECHO5, TECHO5 Dot und TECHO5 Spot",
+   "id": "b017"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aufgabe:</b> unterstützte Echos mit einem Linux-System betreiben. Die Familie umfasst Bildschirmgeräte, Dot 2, Echo 2 und den ersten Spot; dafür existieren gerätespezifische Varianten. <b>Nutzen:</b> Sprachsatellit, Medien und je nach Gerät Display, Uhr, Wetter und weitere lokale Funktionen.",
+   "id": "b018"
+  },
+  {
+   "t": "p",
+   "text": "<b>Voraussetzungen:</b> geeigneter Unlock, passende Installationskette und bei mehreren Show-/Spot-Modellen ein ausdrücklich unterstützter LineageOS-Unterbau als Ausgangspunkt. Show 8 Gen. 2 verwendet einen eigenen Weg.",
+   "id": "b019"
+  },
+  {
+   "t": "p",
+   "text": "<b>Grenzen und Community:</b> Die Projekte veröffentlichen konkrete Tests, teilweise nur an wenigen Geräten. Die Mikrofonverarbeitung erreicht nicht automatisch das Niveau der ursprünglichen Alexa-Software. Für Sprache während lauter Musik beschreibt der TECHO5-Autor Einschränkungen. Aufwand: <b>3–4 von 5</b>. [Q4–Q7]",
+   "id": "b020"
+  },
+  {
+   "t": "h2",
+   "text": "1.6 LibreEcho",
+   "id": "b021"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aufgabe:</b> eigenständiges Linux-System für Echo 2 und Dot 2 mit Verwaltung im Browser. <b>Nutzen:</b> offener Betrieb, Sprach- und Medienfunktionen sowie ein eigener Updatepfad.",
+   "id": "b022"
+  },
+  {
+   "t": "p",
+   "text": "<b>Voraussetzungen:</b> Linux-Rechner für den dokumentierten Installationsweg, gerätespezifisches Unlock-Archiv und eine zuverlässige USB-Verbindung. Der Echo 2 kann über Bodenpads mit Pogo-Adapter oder angelöteten Leitungen angeschlossen werden; beim Dot 2 genügt der vorhandene Datenanschluss.",
+   "id": "b023"
+  },
+  {
+   "t": "p",
+   "text": "<b>Grenzen und Community:</b> Die Projektbeschreibung weist ausdrücklich auf die geringere Testerfahrung beim jüngeren Dot-Port hin. Beim Wechsel zwischen größeren Versionslinien kann eine Neuinstallation mit Verlust der Einrichtung nötig sein. Die zum jeweiligen Release dokumentierte Sprach-Anbindung ist vorab zu prüfen. Aufwand: <b>2–3 von 5</b>. [Q8]",
+   "id": "b024"
+  },
+  {
+   "t": "h2",
+   "text": "1.7 LineageOS, Root-Werkzeuge und Fire-TV-Software",
+   "id": "b025"
+  },
+  {
+   "t": "p",
+   "text": "<b>LineageOS</b> ist ein alternatives Android-System. Es ermöglicht auf passenden Geräten Android-Anwendungen, ist aber allein noch kein vollständiger lokaler Sprachassistent. Display, Kamera, Bluetooth und Audio hängen vom gerätespezifischen Build ab. Die Echo-Builds in Q17 sind Community-Veröffentlichungen; der Repositoryname ist keine Amazon-Freigabe.",
+   "id": "b026"
+  },
+  {
+   "t": "p",
+   "text": "<b>amonet, kamakiri, saiyaku und FireFU</b> öffnen gerätespezifische Zugänge. <b>TWRP</b> dient als Wiederherstellungsumgebung, <b>Magisk</b> zur Verwaltung von Root-Funktionen. Diese Werkzeuge ersetzen weder Spracherkennung noch Sprachausgabe. Ein Exploit für einen ähnlichen Chip ist keine allgemeine Freigabe für alle Geräte mit diesem Chip. [Q18–Q24]",
+   "id": "b027"
+  },
+  {
+   "t": "p",
+   "text": "<b>GhostLock</b> ermöglicht auf ausdrücklich gelisteten Fire-OS-Builds temporären Root-Zugriff, unter anderem bei Fire Max 11 und Fire TV Stick 4K Max Gen. 2. Root endet dort mit dem Neustart. Das ist kein automatischer Bootloader-Unlock. [Q25]",
+   "id": "b028"
+  },
+  {
+   "t": "p",
+   "text": "<b>Kodi beziehungsweise CoreELEC</b> betreffen vor allem Medienwiedergabe. Ein Medienbetrieb auf einem Cube belegt keinen vollständigen Zugriff auf dessen Mikrofonarray. Ebenso steuert die Home-Assistant-ADB-Integration geeignete Fire TVs, ohne daraus einen Assist-Sprachsatelliten zu machen. [Q16, Q26]",
+   "id": "b029"
+  },
+  {
+   "t": "h1",
+   "text": "2. Warum umbauen? Nutzen, Nachteile und erreichbare Ziele",
+   "id": "b030"
+  },
+  {
+   "t": "h2",
+   "text": "2.1 Was sinnvoll erreichbar ist",
+   "id": "b031"
+  },
+  {
+   "t": "p",
+   "text": "Ein Umbau kann vorhandene Mikrofone, Lautsprecher und Displays weiter nutzbar machen. Home Assistant verbindet Sprachbefehle mit herstellerübergreifenden Geräten und Automationen. Sprachdienst, Stimme und gegebenenfalls Gesprächsmodell lassen sich getrennt auswählen. Bei vollständig lokaler Verarbeitung können einfache Befehle auch ohne Internet funktionieren, solange Heimnetz und Server verfügbar sind.",
+   "id": "b032"
+  },
+  {
+   "t": "p",
+   "text": "Typische Ziele sind Lichtsteuerung, Ansagen, Wetter, Timer, Medienwiedergabe und ein Smart-Home-Display. Freie Wissensfragen können zusätzlich an ein Sprachmodell gehen. Einfache Schaltbefehle direkt in Home Assistant auszuführen ist häufig sinnvoller, als jeden Befehl über einen komplexen Agenten zu führen.",
+   "id": "b033"
+  },
+  {
+   "t": "h2",
+   "text": "2.2 Welche Nachteile entstehen",
+   "id": "b034"
+  },
+  {
+   "t": "p",
+   "text": "Die Verantwortung für Installation, Updates, Backups und Fehlersuche geht auf den Betreiber über. Ein falsches Image oder eine instabile Flashverbindung kann das Gerät unbenutzbar machen. Originale Klangabstimmung, Fernfelderkennung oder Komfortfunktionen können eingeschränkt sein. Ein zusätzlicher Server verursacht Stromverbrauch und Wartungsaufwand.",
+   "id": "b035"
+  },
+  {
+   "t": "p",
+   "text": "Alexa-Skills, Amazon-Einkäufe, Amazon-Multiroom und die ursprünglichen Anrufdienste werden nicht automatisch übernommen. Einige Ports bieten eigene Gegensprech- oder Multiroom-Funktionen; deren Kompatibilität ist getrennt zu bewerten. „Lokal“ gilt nur für den tatsächlich eingerichteten Datenweg: Cloud-STT überträgt Audio, Cloud-TTS Antworttext und ein Cloud-Agent den jeweiligen Anfragekontext.",
+   "id": "b036"
+  },
+  {
+   "t": "h2",
+   "text": "2.3 Drei sinnvolle Betriebsmodelle",
+   "id": "b037"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Betriebsmodell</b>",
+     "<b>Vorteil</b>",
+     "<b>Nachteil und benötigter Hintergrund</b>"
+    ],
+    [
+     "Vollständig lokal",
+     "Hohe Kontrolle über Daten und Internetunabhängigkeit",
+     "Lokale STT-, TTS- und gegebenenfalls Modell-Rechenleistung nötig"
+    ],
+    [
+     "Lokal gesteuert, Cloud-Stimme",
+     "Lokale Haussteuerung mit frei gewählter Cloud-Sprachausgabe, etwa Katja",
+     "Text verlässt das Heimnetz; Internet und Kontingent nötig"
+    ],
+    [
+     "Cloud-STT und Cloud-TTS",
+     "Geringere lokale Rechenlast",
+     "Laufende Abhängigkeit von Anbieter, Verbindung und Tarif"
+    ]
+   ],
+   "id": "b038"
+  },
+  {
+   "t": "p",
+   "text": "Ein Umbau ist besonders dann sinnvoll, wenn das genaue Gerät bereits unterstützt wird und die gewünschten Funktionen nachweislich vorhanden sind. Bei einem reinen Entwicklungsgerät steht dagegen die technische Erprobung im Vordergrund.",
+   "id": "b039"
+  },
+  {
+   "t": "h1",
+   "text": "3. Was im Hintergrund benötigt wird",
+   "id": "b040"
+  },
+  {
+   "t": "h2",
+   "text": "3.1 Server, Netzwerk und Dienste",
+   "id": "b041"
+  },
+  {
+   "t": "p",
+   "text": "Grundlage ist ein dauerhaft erreichbarer Rechner für Home Assistant und die gewählte Sprachverarbeitung. Das kann je nach Last ein vorhandener Server, ein Einplatinenrechner oder ein Mini-PC sein. Ein getrenntes Gerät pro Raum ist dafür nicht nötig. EchoMuse benötigt zusätzlich seinen Controller; andere Ports haben eigene Anforderungen.",
+   "id": "b042"
+  },
+  {
+   "t": "p",
+   "text": "Für einfache lokale Hausbefehle kommt Speech-to-Phrase infrage. Für freie Sprache bietet Whisper mehr Spielraum, verlangt aber mehr Rechenleistung. Ein lokales großes Sprachmodell ist eine weitere, gesondert zu dimensionierende Last. Eine pauschale RAM- oder GPU-Zusage wäre ohne Modell, Parallelität und Antwortzeitziel nicht belastbar. [Q11]",
+   "id": "b043"
+  },
+  {
+   "t": "p",
+   "text": "Sinnvoll sind ein stabiler WLAN-Empfang an den Satelliten, eine möglichst zuverlässige Serververbindung und funktionierende lokale Geräteerkennung. Getrennte Netzsegmente können zusätzliche Freigaben benötigen. Ausfälle von WLAN, Home Assistant, Internet und Strom haben unterschiedliche Auswirkungen und sollten einzeln geprüft werden.",
+   "id": "b044"
+  },
+  {
+   "t": "h2",
+   "text": "3.2 Installation und laufender Betrieb sind verschiedene Aufgaben",
+   "id": "b045"
+  },
+  {
+   "t": "p",
+   "text": "Für den Erstumbau werden je nach Projekt Linux, Windows oder macOS, ein Datenkabel und Werkzeuge wie Python, adb und fastboot benötigt. Manche Anleitungen setzen ausdrücklich Linux voraus. Virtuelle Maschinen können bei wechselnden USB-Gerätemodi Probleme verursachen.",
+   "id": "b046"
+  },
+  {
+   "t": "p",
+   "text": "Im Alltag kann der Installationsrechner entfallen. Server und gegebenenfalls Controller bleiben eingeschaltet. Bei einem nur vorübergehenden, rechnergestützten Root-Zugang kann dagegen nach jedem Neustart erneut ein Rechner nötig sein. Diese Abhängigkeit gehört in die Gerätebewertung.",
+   "id": "b047"
+  },
+  {
+   "t": "h2",
+   "text": "3.3 Agenten und weitere Dienste",
+   "id": "b048"
+  },
+  {
+   "t": "p",
+   "text": "Ein Agent wie ein separat betriebenes „Hermes Agent“-System ist optional. Root installiert ihn nicht auf dem Echo. Eine konkrete Verbindung zu Home Assistant, Berechtigungen und Verhalten bei Fehlern müssten separat eingerichtet und getestet werden. Das ältere Hermes-MQTT-Protokoll und ein Produkt mit „Hermes“ im Namen sind nicht automatisch identisch.",
+   "id": "b049"
+  },
+  {
+   "t": "p",
+   "text": "Für Musik kommen Medienserver, Music Assistant und gegebenenfalls Anbieterabonnements hinzu. Sprachsuche, Playlistzugriff, Audioausgabe und erneute Anmeldung sind voneinander unabhängige Funktionen. Ein funktionierender Bluetooth-Lautsprecher beweist keine funktionierende sprachgesteuerte Musiksuche.",
+   "id": "b050"
+  },
+  {
+   "t": "h1",
+   "text": "4. Sprachausgabe: Katja, ElevenLabs und lokale Alternativen",
+   "id": "b051"
+  },
+  {
+   "t": "h2",
+   "text": "4.1 Katja richtig einordnen",
+   "id": "b052"
+  },
+  {
+   "t": "p",
+   "text": "Microsoft dokumentiert die deutsche weibliche Stimme <b>de-DE-KatjaNeural</b>. Sie ist eine TTS-Stimme: Ein Antworttext wird in hörbare Sprache umgewandelt. Katja ersetzt damit die hörbare Ausgabe eines eingerichteten Assistenten; sie übernimmt weder Alexa-Skills noch dessen Spracherkennung. [Q12]",
+   "id": "b053"
+  },
+  {
+   "t": "p",
+   "text": "Ein dokumentierter Zugang ist Microsoft Speech über eine Azure-Speech-Ressource. Home Assistant beschreibt dafür seine Microsoft-TTS-Integration mit API-Schlüssel, Sprache und Stimmtyp. Die konkrete Einbindung in die gewählte Assist-Pipeline ist vor dem Gerätekauf mit einer Testausgabe zu prüfen. [Q13]",
+   "id": "b054"
+  },
+  {
+   "t": "p",
+   "text": "Der Name der Stimme legt den Zugangsweg nicht fest. Die verwendete Integration und der tatsächliche Sprachanbieter sollten getrennt dokumentiert werden. Insbesondere ist „Katja“ nicht gleichbedeutend mit einer frei herunterladbaren lokalen Stimme oder einem dauerhaft kostenlosen Dienst.",
+   "id": "b055"
+  },
+  {
+   "t": "h2",
+   "text": "4.2 Vergleich der Möglichkeiten",
+   "id": "b056"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Möglichkeit</b>",
+     "<b>Stärken und Einsatz</b>",
+     "<b>Voraussetzungen und Grenzen</b>"
+    ],
+    [
+     "Microsoft Katja",
+     "Konkrete deutsche Stimme; für einheitliche Ausgabe in mehreren Räumen",
+     "Geeigneter Microsoft-Zugang, Integration und Kontingent; üblicherweise Cloud-TTS [Q12, Q13]"
+    ],
+    [
+     "ElevenLabs",
+     "Alternative Stimmen und eigene Stimmen je nach Angebot; HA-Integration vorhanden",
+     "Konto und API-Schlüssel; Kontingent beziehungsweise Tarif; Audioqualität mit deutschen Alltagssätzen vergleichen [Q14]"
+    ],
+    [
+     "Piper",
+     "Lokale Sprachsynthese; sinnvoll für Internetunabhängigkeit",
+     "Lokaler Dienst und passendes deutsches Stimmenmodell; Ausdruck und Aussprache unterscheiden sich je Modell [Q11]"
+    ],
+    [
+     "Home Assistant Cloud",
+     "Integrierter Weg für STT und TTS mit wenig eigener Infrastruktur",
+     "Abonnement und Internet; aktuell angebotene Stimme in der Oberfläche prüfen [Q11]"
+    ],
+    [
+     "Cartesia",
+     "Weiterer Cloud-TTS-Anbieter als Vergleichsoption",
+     "Zusätzliche Community-Integration beziehungsweise eigene API-Anbindung; nicht mit „Katja“ verwechseln [Q15]"
+    ]
+   ],
+   "id": "b057"
+  },
+  {
+   "t": "h2",
+   "text": "4.3 Was bei Sprache und Audio wichtig ist",
+   "id": "b058"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aussprache:</b> Ortsnamen, Gerätenamen, Zahlen, Uhrzeiten und Abkürzungen mit denselben Testsätzen vergleichen. Eine gut klingende Demonstration sagt wenig darüber aus, wie „Arbeitszimmer“, eine Wetterwarnung oder ein fremdsprachiger Musiktitel gesprochen wird.",
+   "id": "b059"
+  },
+  {
+   "t": "p",
+   "text": "<b>Antwortbeginn:</b> Entscheidend ist die Zeit vom Ende der Frage bis zum ersten hörbaren Ton. STT, Befehlsverarbeitung, TTS, Netzlaufzeit und Audiopuffer tragen gemeinsam dazu bei. Streaming hilft nur, wenn die ganze Wiedergabekette es unterstützt.",
+   "id": "b060"
+  },
+  {
+   "t": "p",
+   "text": "<b>Erkennung bei Musik:</b> AEC bedeutet Echounterdrückung; sie soll den eigenen Lautsprecher aus der Mikrofonaufnahme herausrechnen. Beamforming kombiniert Mikrofone räumlich. VAD erkennt Sprachaktivität. Ein anderes TTS-Angebot repariert keine fehlerhafte Mikrofonverarbeitung.",
+   "id": "b061"
+  },
+  {
+   "t": "p",
+   "text": "<b>Aktivierungswort und Unterbrechen:</b> Ein eigener Name benötigt ein geeignetes Erkennungsmodell und Tests mit verschiedenen Stimmen. Die gewünschte TTS-Stimme legt das Aktivierungswort nicht fest. Auch das Unterbrechen einer laufenden Antwort muss der Satellit unterstützen.",
+   "id": "b062"
+  },
+  {
+   "t": "p",
+   "text": "<b>Ausfallverhalten:</b> Eine lokale Ersatzstimme kann bei Cloudausfall sinnvoll sein. Der Wechsel erfolgt jedoch nur, wenn die verwendete Integration oder Automation einen solchen Rückfall tatsächlich umsetzt.",
+   "id": "b063"
+  },
+  {
+   "t": "h1",
+   "text": "5. Hardware, Pogo-Pins, Kabel und Löten",
+   "id": "b064"
+  },
+  {
+   "t": "h2",
+   "text": "5.1 Was welches Teil bewirkt",
+   "id": "b065"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Teil oder Werkzeug</b>",
+     "<b>Zweck</b>",
+     "<b>Was dadurch nicht entsteht</b>"
+    ],
+    [
+     "Datenfähiges USB-Kabel",
+     "Verbindung zum Installationsrechner; bei manchen Geräten zugleich Stromversorgung",
+     "Ein reines Ladekabel überträgt keine Installationsdaten"
+    ],
+    [
+     "Pogo-Pins mit Halter",
+     "Federkontakte an zugänglichen Testpads, beispielsweise beim Echo 2",
+     "Kein Root ohne passenden Softwareweg; lose Nadeln sind keine stabile Halterung"
+    ],
+    [
+     "Jumperkabel und Adapter",
+     "Elektrische Verbindung zwischen Kontaktierung und Anschluss",
+     "Keine automatisch passende mechanische Verbindung zur Pogo-Nadel"
+    ],
+    [
+     "Lötkolben, feine Leitungen, Flussmittel",
+     "Feste Verbindung an internen Pads, falls die Anleitung dies erfordert",
+     "Kein Ersatz für korrekte Pinbelegung und Spannungsprüfung"
+    ],
+    [
+     "Multimeter",
+     "Durchgang, Masse und mögliche Kurzschlüsse kontrollieren",
+     "Kabelfarben oder sichtbare Form werden dadurch nicht automatisch korrekt"
+    ],
+    [
+     "USB-UART-Adapter",
+     "Serielle Diagnosekonsole bei passenden Geräten",
+     "Kein Ersatz für eine USB-Datenverbindung; Pegel muss zum Gerät passen"
+    ],
+    [
+     "Öffnungswerkzeug und Vergrößerung",
+     "Zugang zu Platine und kleinen Pads",
+     "Kein Schutz vor abgerissenen Pads durch Zug an Leitungen"
+    ]
+   ],
+   "id": "b066"
+  },
+  {
+   "t": "h2",
+   "text": "5.2 Pogo-Pins und Jumper-Pins sind mechanisch verschieden",
+   "id": "b067"
+  },
+  {
+   "t": "p",
+   "text": "Ein konkretes Anbieterbeispiel für P50-B1-Pogo-Pins nennt 0,68 mm Schaftdurchmesser, 0,48 mm Kontaktdurchmesser und 16 mm Gesamtlänge. Diese Angaben sind keine universelle Norm für alle Angebote. Für einen Halter sind das konkrete Datenblatt und eine Messung der gelieferten Pins maßgeblich. [Q32]",
+   "id": "b068"
+  },
+  {
+   "t": "p",
+   "text": "Als Rechenbeispiel dient ein quadratischer Jumper-Stift mit 0,64 × 0,64 mm Querschnitt; das tatsächliche Maß ist am verwendeten Steckverbinder zu prüfen. Seine Diagonale beträgt rund 0,91 mm. Das übliche Raster von 2,54 mm bezeichnet den Abstand der Stiftmitten. Daher passt ein solcher Vierkant nicht automatisch in eine runde 0,68-mm-Aufnahme. Buchsen, Hülsen oder eine passende feste Verbindung sind gesondert nötig.",
+   "id": "b069"
+  },
+  {
+   "t": "p",
+   "text": "Pogo-Kontakte können Löten am Gerät vermeiden, wenn passende Pads zugänglich sind. Dafür müssen Druck, Ausrichtung und Zugentlastung zuverlässig sein. Eine gelötete Verbindung kann mechanisch stabiler sein, erfordert aber Erfahrung und kann Pads beschädigen. Der sinnvolle Weg hängt vom konkreten Gerät ab.",
+   "id": "b070"
+  },
+  {
+   "t": "h2",
+   "text": "5.3 Vor dem Schreiben in den Gerätespeicher",
+   "id": "b071"
+  },
+  {
+   "t": "p",
+   "text": "Modell und Pinbelegung werden aus der genauen Geräteanleitung übernommen. Stromversorgung und USB-Spannung dürfen nicht nach Vermutung verbunden werden. Bei Geräten mit getrenntem Netzteil wird dessen Rolle ausdrücklich beibehalten; ein USB-UART-Adapter gehört nicht an USB-Datenpads.",
+   "id": "b072"
+  },
+  {
+   "t": "p",
+   "text": "Zuerst ist eine dauerhaft stabile Erkennung am Rechner sinnvoll. Wiederholte Abmeldungen sprechen für ein Kontakt-, Kabel- oder Versorgungsproblem. Ein kurz sichtbarer MediaTek-Eintrag beweist weder Root noch eine zuverlässige Flashverbindung. Anschließend gehören geräteeigene Backups, passende Images und der dokumentierte Wiederherstellungsweg zusammen abgelegt.",
+   "id": "b073"
+  },
+  {
+   "t": "h1",
+   "text": "6. Dokumentiert kompatible Echo-Geräte",
+   "id": "b074"
+  },
+  {
+   "t": "h2",
+   "text": "6.1 Bewertungsmaßstab",
+   "id": "b075"
+  },
+  {
+   "t": "p",
+   "text": "Die Bewertung hat zwei getrennte Achsen: den Zugang zum Gerät und die Nutzbarkeit als lokaler Sprachassistent. Root allein bestätigt keine funktionierenden Mikrofone, keine Echounterdrückung und keine Home-Assistant-Anbindung.",
+   "id": "b076"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Status Sprachbetrieb</b>",
+     "<b>Bedeutung</b>",
+     "<b>Geltungsbereich</b>"
+    ],
+    [
+     "A – dokumentiert nutzbar",
+     "Ein gerätespezifischer Installationsweg und Sprachsatelliten-Funktionen sind veröffentlicht",
+     "Gilt nur für die benannte Hardware- und Softwarekombination; keine Garantie für jedes Exemplar"
+    ],
+    [
+     "B – experimentell oder eingeschränkt",
+     "Ein Port existiert, aber Varianten oder wesentliche Funktionen sind noch offen",
+     "Eignung hängt vom konkreten Gerät und den benötigten Funktionen ab"
+    ],
+    [
+     "C – funktioniert Stand heute nicht als vollständiger lokaler Sprachassistent",
+     "In den geprüften Projekten fehlt eine belegte Gesamtlösung",
+     "Betrifft den lokalen Sprachbetrieb, nicht die ursprüngliche Alexa-Funktion und nicht zwingend die Rootbarkeit"
+    ]
+   ],
+   "id": "b077"
+  },
+  {
+   "t": "p",
+   "text": "<b>Zugang zum Gerät:</b> „Unlock“ bezeichnet einen dokumentierten Weg zum Start veränderter Software. „Temporär“ gilt nur für die laufende Sitzung beziehungsweise bis zum Neustart. „Historisch“ setzt alte Firmware oder bestimmte Hardware voraus. „Nicht belegt“ bedeutet, dass kein ausreichender Nachweis vorliegt.",
+   "id": "b078"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Aufwand</b>",
+     "<b>Typischer Umfang</b>",
+     "<b>Einordnung</b>"
+    ],
+    [
+     "1 von 5",
+     "Einrichtung vorhandener Funktionen",
+     "Kein Geräteumbau"
+    ],
+    [
+     "2 von 5",
+     "Dokumentierter USB-Umbau",
+     "Passende Dateien, Werkzeuge und sorgfältiges Befolgen der Geräteanleitung"
+    ],
+    [
+     "3 von 5",
+     "Mehrstufige Installation oder Adapter",
+     "Zusätzliche Vorbereitung und Fehlersuche einplanen"
+    ],
+    [
+     "4 von 5",
+     "Interne Kontaktierung oder starke Variantenabhängigkeit",
+     "Erfahrung mit Elektronik beziehungsweise gerätespezifischen Installationswegen sinnvoll"
+    ],
+    [
+     "5 von 5",
+     "Entwicklung und Forschung",
+     "Kein planbarer erfolgreicher Umbau zugesagt"
+    ]
+   ],
+   "id": "b079"
+  },
+  {
+   "t": "p",
+   "text": "Der Aufwand ist eine redaktionelle Orientierung, keine gemessene Arbeitszeit. In Kapitel 6 bezieht er sich auf den Sprachumbau; bei den zusätzlichen Geräten in Kapitel 7 wird der Root-/Unlock-Aufwand gesondert angegeben.",
+   "id": "b080"
+  },
+  {
+   "t": "h2",
+   "text": "6.2 Ähnliche Gehäuse, unterschiedliche Hardware",
+   "id": "b081"
+  },
+  {
+   "t": "p",
+   "text": "<b>Modelljahr ist nicht Fertigungsjahr.</b> Die Jahresangaben beschreiben die Einführung des Modells oder den in der Projektquelle genannten Zeitraum einer Hardwareversion. Ein Gerät kann später produziert oder gekauft worden sein. Für die Auswahl von Firmware und Anleitung sind Modellnummer und Gerätekennung wichtiger als Kaufdatum, Farbe oder Gehäuseform.",
+   "id": "b082"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Gerät und Modelljahr /</b> <b>Hardwareversion</b>",
+     "<b>Modellnummer und Codename</b>",
+     "<b>Entscheidender Unterschied</b>"
+    ],
+    [
+     "Echo Dot 3 – ursprüngliche Version, 2018",
+     "<b>D9N29T</b> · donut",
+     "Von hassmic unterstützt; interner USB-Zugang und passende Firmware erforderlich"
+    ],
+    [
+     "Echo Dot 3 – Refresh, 2019–2020",
+     "<b>C78MP8</b> · crumpet",
+     "Sieht dem ursprünglichen Dot 3 sehr ähnlich; der donut-Unlock ist nicht kompatibel"
+    ],
+    [
+     "Echo Dot 3 mit Uhr – 2019",
+     "<b>36EBT3</b> · doebrite",
+     "Eigene Hardwarevariante mit Anzeige; keine Übertragung der D9N29T-Freigabe"
+    ],
+    [
+     "Echo Show 5 Gen. 1 – 2019",
+     "<b>H23K37</b> · checkers",
+     "Eigener Geräteport und eigener Software-Unterbau"
+    ],
+    [
+     "Echo Show 5 Gen. 2 – 2021",
+     "<b>C76N8S</b> · cronos",
+     "Ähnliches Gehäuse, aber anderer Port; checkers-Dateien sind kein Ersatz"
+    ],
+    [
+     "Echo Show 8 Gen. 1 – 2019",
+     "<b>C7H6N3</b> · crown",
+     "Unterstützter Weg für diese Generation"
+    ],
+    [
+     "Echo Show 8 Gen. 2 – 2021",
+     "<b>A8H3N2</b> · athena",
+     "Optisch ähnlich, eigene Installationskette und zusätzliche Panelvarianten"
+    ]
+   ],
+   "id": "b083"
+  },
+  {
+   "t": "p",
+   "text": "Zuordnung und Softwaregrenzen: Geräteübersichten von hassmic und TECHO5. Der Dot-3-Refresh wird im hassmic-Projekt mit 2019–2020 eingeordnet; daraus lässt sich keine exakte Fertigungsgrenze für jedes Exemplar ableiten. [Q1, Q31]",
+   "id": "b084"
+  },
+  {
+   "t": "p",
+   "text": "<b>Identifikation vor dem Kauf:</b> Sinnvoll sind ein lesbares Foto des Typenschilds am Gerät und ein Foto des Softwarestands. Die Bezeichnung „Echo Dot 3“ in einer Anzeige genügt nicht. Die Modellnummer des Netzteils ist nicht die Modellnummer des Echo. Auch nach passender Modellzuordnung können interne Varianten eine Rolle spielen, beispielsweise das Displaypanel beim Show 8 Gen. 2.",
+   "id": "b085"
+  },
+  {
+   "t": "h2",
+   "text": "6.3 Lautsprecher mit veröffentlichtem Sprachsatelliten-Weg",
+   "id": "b086"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Gerät und Kennung</b>",
+     "<b>Root und passende Software</b>",
+     "<b>Ergebnis, Aufwand und Grenze</b>"
+    ],
+    [
+     "Echo Dot 2, 2016; RS03QR; biscuit",
+     "Unlock; hassmic, EchoLocal, EchoMuse/emOS, TECHO5 Dot, LibreEcho",
+     "A; Sprachsatellit und Medien je Port; 2–3/5. Datenfähiger Micro-USB-Anschluss, kleiner Lautsprecher. Fire-OS- und Donor-Anleitungen nicht vermischen. [Q1–Q3, Q5, Q8]"
+    ],
+    [
+     "Echo 2, 2017; XC56PY; radar",
+     "Unlock; hassmic, TECHO5 Dot, LibreEcho",
+     "A; Sprach- und Mediengerät; 3/5 mit passendem Adapter, 4/5 bei interner Lötarbeit. Pogo-Zugang ist für den LibreEcho-Weg dokumentiert. [Q1, Q5, Q8]"
+    ],
+    [
+     "Echo Dot 3, ursprüngliche Version 2018; D9N29T; donut",
+     "Gerätespezifischer Unlock; hassmic",
+     "A; Sprachsatellit mit ursprünglicher Audioverarbeitung; 4/5. Interne Pads und genaue Firmwarebindung; nicht auf Refresh- oder Uhrvariante übertragbar. [Q1, Q9]"
+    ]
+   ],
+   "id": "b087"
+  },
+  {
+   "t": "p",
+   "text": "Für einen möglichst einfachen Hardwarezugang ist der Dot 2 ein sinnvoller Ausgangspunkt. Für den Echo 2 ist die mechanische Kontaktierung der wesentliche zusätzliche Schritt. Beim Dot 3 ist die genaue Modellidentifikation besonders wichtig. Diese Reihenfolge bewertet die Einstiegshürde und ist kein allgemeiner Klangvergleich.",
+   "id": "b088"
+  },
+  {
+   "t": "h2",
+   "text": "6.4 Bildschirmgeräte mit veröffentlichtem Sprachsatelliten-Weg",
+   "id": "b089"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Gerät und Kennung</b>",
+     "<b>Root und passende Software</b>",
+     "<b>Ergebnis, Aufwand und Grenze</b>"
+    ],
+    [
+     "Show 5 Gen. 1, 2019; H23K37; checkers",
+     "Unlock; EchoLocal oder TECHO5; LineageOS als eigener Android-Weg",
+     "A; Sprache und kleines Display; 3/5. Richtigen gerätespezifischen Unterbau wählen. [Q2, Q4, Q17]"
+    ],
+    [
+     "Show 5 Gen. 2, 2021; C76N8S; cronos",
+     "Unlock; EchoLocal oder TECHO5",
+     "A; Sprache und Display; 3/5. TECHO5 nennt weiterhin LineageOS v0.4 als Ausgangspunkt und schließt v0.5 aus. [Q2, Q4]"
+    ],
+    [
+     "Show 8 Gen. 1, 2019; C7H6N3; crown",
+     "Unlock; EchoLocal oder TECHO5; gerätespezifisches LineageOS",
+     "A; größeres Dashboard und Sprache; 3/5. Donor- und Releasekompatibilität vor Installation prüfen. [Q2, Q4, Q17]"
+    ],
+    [
+     "Spot Gen. 1, 2017; VN94DQ; rook",
+     "Unlock; LineageOS und TECHO5 Spot",
+     "A mit schmaler Testbasis; Sprache, rundes Display und Uhr; 3/5. Kleines Display; die Projektbeschreibung dokumentiert zunächst ein Testgerät. [Q6]"
+    ]
+   ],
+   "id": "b090"
+  },
+  {
+   "t": "p",
+   "text": "Ein veröffentlichter Port ist bei allen Geräten von einem ausreichend langen Alltagstest zu unterscheiden. Vor allem Sprachverständlichkeit bei Musik, Mute, Timer nach Neustart und Verhalten ohne Server entscheiden über die praktische Eignung.",
+   "id": "b091"
+  },
+  {
+   "t": "h1",
+   "text": "7. Experimentelle Geräte und weitere rootbare Amazon-Geräte",
+   "id": "b092"
+  },
+  {
+   "t": "h2",
+   "text": "7.1 Echo-Geräte mit offenen Punkten",
+   "id": "b093"
+  },
+  {
+   "t": "p",
+   "text": "<b>Show 8 Gen. 2 – Modelljahr 2021, A8H3N2 / athena:</b> EchoLocal führt ihn als unterstützt. Für TECHO5 ist ein eigener 64-Bit-Linux-Weg dokumentiert. Wegen der Varianten bleibt die redaktionelle Einstufung <b>B</b>, Aufwand <b>4/5</b>. Die Anleitung nennt Fire OS PS7574.1.7080N als Unlock-Ausgangsstand. Laut Installationsanleitung sind sowohl ILI9881C mit BOE-Glas als auch JD9365 mit KD/HSD-Glas getestet. Andere Panels sind damit nicht automatisch praktisch bestätigt; Mikrofon-Beamforming ist deaktiviert und die Luxwerte des Lichtsensors sind noch nicht kalibriert. [Q2, Q7]",
+   "id": "b094"
+  },
+  {
+   "t": "p",
+   "text": "<b>Echo 1 – Modelljahr 2014/2015, SK705DI:</b> Historische Root-Verfahren für bestimmte frühe Hardware existieren. Ein vergleichbar gepflegter vollständiger Assist-Satellit ist hier nicht belegt: <b>C für den Sprachbetrieb</b>, <b>5/5</b> für Entwicklungsarbeit. Alter Root-Zugang und aktuelle Alltagstauglichkeit sind getrennte Aussagen. [Q27]",
+   "id": "b095"
+  },
+  {
+   "t": "p",
+   "text": "<b>Dot 3 Refresh – Hardwareversion 2019–2020, C78MP8 / crumpet – und Dot 3 mit Uhr – Modelljahr 2019, 36EBT3 / doebrite:</b> Beide sind vom unterstützten Dot 3 D9N29T / donut zu unterscheiden. Der donut-Installationsweg ist für diese Varianten nicht freigegeben. Kategorie <b>C</b> für den hier beschriebenen Sprachbetrieb; eine künftige Portierung bleibt offen. [Q1]",
+   "id": "b096"
+  },
+  {
+   "t": "p",
+   "text": "<b>Echo Input – Modelljahr 2018 / cupcake:</b> In den geprüften Sprachsatelliten-Projekten ist kein vollständiger Geräteport belegt. Kategorie <b>C</b>. Technische Ähnlichkeit zu anderen Echos ersetzt keinen gerätespezifischen Nachweis. [Q1–Q8]",
+   "id": "b097"
+  },
+  {
+   "t": "h2",
+   "text": "7.2 Fire TV: Root bedeutet hier zunächst Systemzugriff",
+   "id": "b098"
+  },
+  {
+   "t": "p",
+   "text": "Die folgenden Geräte werden aufgenommen, weil Root oder Unlock dokumentiert ist. <b>Ein vollständiger lokaler Sprachsatellit ist für diese Fire-TV-Einträge in den hier geprüften Projekten nicht belegt (C).</b> Als Mediengerät oder steuerbares Home-Assistant-Gerät können sie trotzdem sinnvoll sein. Das Mikrofon einer Fernbedienung ist nicht automatisch als dauerhaftes Raummikrofon nutzbar. [Q16]",
+   "id": "b099"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Gerät</b>",
+     "<b>Dokumentierter Zugang</b>",
+     "<b>Aufwand für Root/Unlock und wesentliche</b> <b>Grenze</b>"
+    ],
+    [
+     "Fire TV Gen. 1, 2014; bueller",
+     "Historischer Unlock",
+     "3–4/5; alte Firmwaregrenze, keine Pauschalfreigabe. [Q18]"
+    ],
+    [
+     "Fire TV Gen. 2, 2015; sloane",
+     "amonet-sloane",
+     "3–4/5; gerätespezifischer Medien-/Systemumbau. [Q19]"
+    ],
+    [
+     "Fire TV Stick Gen. 2, 2016; tank",
+     "amonet-Port",
+     "4/5; spätere Hardware kann den nötigen BootROM-Modus sperren. [Q18]"
+    ],
+    [
+     "Fire TV Stick 4K Gen. 1, 2018; mantis",
+     "amonet-Port, alternative Wege je Stand",
+     "4/5; Hardware und Firmware entscheiden über den verfügbaren Einstieg. [Q18]"
+    ],
+    [
+     "Fire TV Stick Gen. 3 und Stick Lite, 2020; sheldon/p",
+     "amonet-Port",
+     "3–5/5; der bekannte Einstieg wurde mit Fire OS 7.2.7.3 geschlossen; Hardwarewege sind gesondert zu bewerten. [Q18]"
+    ],
+    [
+     "Fire TV Stick 4K Gen. 2, 2023; 4K Plus, 2025",
+     "Unlock in Entwicklerübersicht, gemeinsamer karat-TWRP-Baum",
+     "3–4/5; genaue Modell-/Buildzuordnung erforderlich. Kein allgemeines Installationsrezept aus einem Gerätebaum ableiten. [Q18, Q24]"
+    ],
+    [
+     "Fire TV Stick 4K Max Gen. 2, 2023; karat",
+     "Unlock-Referenz; zusätzlich GhostLock für gelistete Builds",
+     "3–4/5; GhostLock allein ist temporärer Root. Die Freigabe eines Max-Builds gilt nicht automatisch für alle karat-Varianten. [Q24, Q25]"
+    ]
+   ],
+   "id": "b100"
+  },
+  {
+   "t": "h2",
+   "text": "7.3 Fire TV Cube und Pendant",
+   "id": "b101"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Gerät</b>",
+     "<b>Zugang und Firmwaregrenze</b>",
+     "<b>Was damit belegt ist und was offen bleibt</b>"
+    ],
+    [
+     "Fire TV Cube Gen. 1, 2018, und Fire TV Pendant, 2017",
+     "FireFU; historischer Weg, laut Entwicklerübersicht nicht über Fire OS 6.2.5.8 hinaus",
+     "Root/Unlock; 4–5/5 mit speziellem HDMI-/DFU-Zugang. Kein belegter vollständiger Assist-Port. [Q18, Q20]"
+    ],
+    [
+     "Fire TV Cube Gen. 2, 2019; raven",
+     "Mehrere unterschiedliche Wege: alter DFU-basierter temporärer raven-root-Zugang und spätere Unlock-Referenz",
+     "Alter Repositoryweg verlangt Fire OS vor 7.2.7.3; Entwicklerübersicht nennt für einen anderen Unlock PS7292 als Grenze. Diese Grenzen gehören zu verschiedenen Methoden. 3–5/5; Sprachport nicht belegt. [Q18, Q21]"
+    ],
+    [
+     "Fire TV Cube Gen. 3, 2022; gazelle",
+     "Neuer Unlock-Thread bekannt; vollständiger Primärtext bei dieser Recherche nicht abrufbar",
+     "<b>B für die Quellenprüfung des Root-Wegs</b>, C für vollständigen Sprachbetrieb. Exakte aktuelle Firmwarefreigabe und Aufwand bleiben bis zur Prüfung der Originalanleitung offen. [Q22]"
+    ]
+   ],
+   "id": "b102"
+  },
+  {
+   "t": "p",
+   "text": "Die Cube-3-Einordnung ist ausdrücklich keine Behauptung, das Gerät sei nicht rootbar. Für eine belastbare Kauf- oder Installationsfreigabe reicht ein Hinweis auf einen neuen Thread jedoch nicht. Bei den Cubes sollte außerdem separat belegt sein, ob Mikrofone, Echounterdrückung und Audioausgabe außerhalb der ursprünglichen Alexa-Software zusammen funktionieren.",
+   "id": "b103"
+  },
+  {
+   "t": "h2",
+   "text": "7.4 Fire-Tablets: zusätzliche Nutzung als Display oder Android-Gerät",
+   "id": "b104"
+  },
+  {
+   "t": "p",
+   "text": "Rootbare Tablets gehören zur erweiterten Bestandsaufnahme. Ihr sinnvoller Nutzen kann ein Dashboard oder eine alternative Android-Oberfläche sein. Ein aktueller Browser, eine passende App und ein dauerhaft funktionierender Mikrofonzugriff sind getrennte Voraussetzungen. Ein Tablet-Dashboard kann auch ohne Root möglich sein.",
+   "id": "b105"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Modell</b> <b>beziehungsweise</b> <b>Familie</b>",
+     "<b>Zugang laut Quellen</b>",
+     "<b>Praktische Einordnung</b>"
+    ],
+    [
+     "Fire HD 6 / HD 7 (2014); HD 8 / HD 10 (2015)",
+     "Gerätebezogene amonet-Ports",
+     "Historische Unlock-Kandidaten; 3–4/5. Aktuelle App- und Browserfähigkeit getrennt prüfen. [Q18]"
+    ],
+    [
+     "Fire 7 (2015 / ford; 2017 / austin)",
+     "amonet, jeweils richtige Variante",
+     "3–4/5. Ein alter gemeinsamer Quellbaum ist nicht automatisch ein vollständiger Port für beide Varianten. [Q23]"
+    ],
+    [
+     "Fire HD 8 (2016 / giza; 2017 / douglas); HD 10 (2017 / suez)",
+     "Gerätebezogene amonet-Ports",
+     "3–4/5. Wiederverwendung als Display prüfen; kein hier bestätigter fertiger Echo-Sprachport. [Q18]"
+    ],
+    [
+     "Fire HD 8 (2018 / karnak / KFKAWI)",
+     "Ursprüngliches amonet-Ziel",
+     "3–4/5. Unlock ist dokumentiert; konkreten Installationsstand abgleichen. [Q28]"
+    ],
+    [
+     "Fire 7 (2019 / mustang)",
+     "Hardwarebasierter Unlock in postmarketOS-Dokumentation verlinkt",
+     "4/5. Hardware-Revision vorab prüfen; nicht als universell freigegeben behandeln. [Q29]"
+    ],
+    [
+     "Fire HD 10 (2019)",
+     "Temporärer, rechnerabhängiger Zugang für frühe Exemplare",
+     "4–5/5. Spätere Hardware kann den Einstieg verhindern. [Q18]"
+    ],
+    [
+     "Fire HDX der dritten Generation, 2013: 7 und 8,9 Zoll",
+     "Historischer Qualcomm-Unlock",
+     "3–4/5. Exakte Generation prüfen; keine Übertragung auf jedes spätere HDX. [Q18]"
+    ],
+    [
+     "Fire Max 11, 2023; sunstone",
+     "GhostLock für ausdrücklich gelistete Fire-OS-8-Builds",
+     "3/5 für temporären Root, nicht für einen fertigen Sprachumbau. Kein dauerhafter Unlock allein durch diesen Nachweis. [Q25]"
+    ]
+   ],
+   "id": "b106"
+  },
+  {
+   "t": "p",
+   "text": "Für diese Tablet-Einträge ist der vollständige Sprachsatellitenbetrieb im Sinne dieses Leitfadens <b>nicht nachgewiesen</b>. Das schließt einen separat erprobten App-basierten Assist-Zugang nicht aus. Neuere Generationen, Kids-Ausführungen und ähnlich benannte Modelle erhalten keine automatische Freigabe.",
+   "id": "b107"
+  },
+  {
+   "t": "h2",
+   "text": "7.5 Kindle und weitere Geräteklassen",
+   "id": "b108"
+  },
+  {
+   "t": "p",
+   "text": "Kindle-E-Reader haben eigene Jailbreak-Verfahren. KindleModding ordnet den passenden Weg anhand von Modell und Firmware zu; WinterBreak ist nur einer davon. Ein Jailbreak ermöglicht zusätzliche Software, ersetzt aber keine fehlende Mikrofon- und Lautsprecherhardware. Für diese Geräte ist eher eine Lese- oder Statusanzeige als ein vollständiger Raum-Sprachassistent sinnvoll. [Q30]",
+   "id": "b109"
+  },
+  {
+   "t": "p",
+   "text": "Die Übersicht beansprucht keine lückenlose Liste aller jemals entsperrten Amazon-Produkte oder jedes Kindle-Untermodells. Erfasst sind Echo-Familien sowie Amazon-Geräte mit nachvollziehbaren Root-/Unlock-Hinweisen. Weitere Modelle werden erst nach Zuordnung einer gerätespezifischen Quelle als rootbar geführt. So werden historische Einzelberichte, temporärer Root und vollständige Betriebssystemports nicht gleichgesetzt.",
+   "id": "b110"
+  },
+  {
+   "t": "h1",
+   "text": "8. Funktioniert Stand heute nicht",
+   "id": "b111"
+  },
+  {
+   "t": "h2",
+   "text": "8.1 Echo-Geräte ohne belegten vollständigen Sprachport",
+   "id": "b112"
+  },
+  {
+   "t": "p",
+   "text": "<b>Stand: 22. Oktober 2026.</b> Für die folgenden Einträge ist in den hier geprüften Softwarelisten kein vollständiger lokaler Sprachsatelliten-Weg belegt. Maßgeblich sind die veröffentlichten Ziellisten der untersuchten Softwareprojekte. Die Aussage ist keine unabhängige Negativprüfung jedes weltweit existierenden Projekts. [Q1–Q8]",
+   "id": "b113"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Geräte</b>",
+     "<b>Heutige Grenze</b>",
+     "<b>Was für eine andere Einstufung fehlen</b> <b>würde</b>"
+    ],
+    [
+     "Echo Gen. 3 (2019) / pascal; Gen. 4 (2020) / laser",
+     "Kein hier belegter Gesamtport",
+     "Passender Unlock und getestete Audiotreiber"
+    ],
+    [
+     "Dot Gen. 1 (2016)",
+     "Kein vollständiger Port in den geprüften Projekten",
+     "Wiederholbare Installation und vollständiger Sprachpfad"
+    ],
+    [
+     "Dot 3 Refresh (2019–2020), C78MP8; Dot 3 mit Uhr (2019), 36EBT3",
+     "Andere Hardware als Dot 3 D9N29T (2018)",
+     "Eigener Unlock und passender Audioport; siehe Vergleich in Kapitel 6.2"
+    ],
+    [
+     "Dot Gen. 4 und Uhrvariante (2020); Dot Gen. 5 und Uhrvariante (2022)",
+     "Keine Freigabe in den geprüften Ziellisten",
+     "Eigener Geräteport; bei Uhrversionen zusätzlich Anzeige"
+    ],
+    [
+     "Dot Max (2025); Echo Pop (2023)",
+     "Kein hier bestätigter Gesamtweg",
+     "Nachweis für die genaue Gerätegeneration"
+    ],
+    [
+     "Echo Plus Gen. 1 (2017) und Gen. 2 (2018)",
+     "Kein vollständiger Sprach-/Hub-Port belegt",
+     "Audio und gegebenenfalls Zigbee getrennt erschließen"
+    ],
+    [
+     "Echo Studio 2019/2022 sowie Studio 2025",
+     "Kein bestätigter Gesamtport",
+     "Mehrkanalaudio und Klangabstimmung zusätzlich zum Bootzugang"
+    ],
+    [
+     "Echo Show Gen. 1 (2017) und Gen. 2 (2018); Show 5 Gen. 3 (2023)",
+     "Außerhalb der bestätigten Show-Ports",
+     "Gerätespezifische Display-, Audio- und Installationskette"
+    ],
+    [
+     "Show 8 Gen. 3 (2023) und Gen. 4 (2025); Show 10 Gen. 3 (2021); Show 11 (2025)",
+     "Kein Gesamtport in den geprüften Listen",
+     "Zusätzlich passende Treiber; beim Show 10 auch Motorsteuerung"
+    ],
+    [
+     "Show 15 Gen. 1 (2021) und Gen. 2 (2024); Show 21 (2024)",
+     "Keine belegte vollständige lokale Umrüstung",
+     "Eigener Port; Show-5-/Show-8-Images nicht übertragbar"
+    ],
+    [
+     "Spot Gen. 2 (2024); Echo Input (2018); Echo Flex (2019); Echo Hub (2024)",
+     "Kein hier bestätigter vollständiger Sprachsatellit",
+     "Eigener Geräte- und Audioport"
+    ]
+   ],
+   "id": "b114"
+  },
+  {
+   "t": "h2",
+   "text": "8.2 Geräte mit grundsätzlich anderer Aufgabe",
+   "id": "b115"
+  },
+  {
+   "t": "p",
+   "text": "Echo Link und Link Amp sind Audiobausteine, Echo Sub ist ein Subwoofer. Ein möglicher Systemzugriff macht daraus keinen vollständigen Fernfeld-Sprachlautsprecher. Echo Auto, Buds und Frames sind Zubehör mit eigenen Betriebsbedingungen und kein durch die geprüften Echo-Ports erschlossener stationärer Satellit. <b>Kategorie C für den hier beschriebenen Zweck:</b> Keines dieser Modelle ist in den geprüften Ziellisten als vollständiger stationärer Sprachsatellit ausgewiesen. [Q1–Q8]",
+   "id": "b116"
+  },
+  {
+   "t": "p",
+   "text": "Bei Fire TV und Tablets bedeutet C ebenfalls „kein belegter vollständiger Sprachumbau“. Die in Kapitel 7 dokumentierte Rootbarkeit bleibt davon unberührt. Für nicht gelistete Geräte ist der Root-Status <b>ungeprüft</b>, nicht automatisch „unmöglich“.",
+   "id": "b117"
+  },
+  {
+   "t": "h2",
+   "text": "8.3 Was in Zukunft möglich werden könnte",
+   "id": "b118"
+  },
+  {
+   "t": "p",
+   "text": "Ein belegter Bootzugang, öffentliche Kernelquellen und aktive Portierungsarbeit sind hilfreiche Voraussetzungen. Erst ein funktionierender Audiopfad, eine wiederholbare Installation und Tests auf mehr als einer Hardwarevariante rechtfertigen eine bessere Einstufung. Ähnliche Chips allein erlauben keine Termin- oder Erfolgsprognose. Bei Geräten ohne Port ist der Aufwand als <b>5/5 – Forschung</b> zu verstehen, nicht als besonders lange normale Installation.",
+   "id": "b119"
+  },
+  {
+   "t": "h1",
+   "text": "9. Community, bekannte Probleme und Quellenbewertung",
+   "id": "b120"
+  },
+  {
+   "t": "h2",
+   "text": "9.1 Konkrete Beobachtungen statt pauschaler Zustimmung",
+   "id": "b121"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "<b>Quelle und Kontext</b>",
+     "<b>Berichteter Stand</b>",
+     "<b>Bedeutung für die Bewertung</b>"
+    ],
+    [
+     "HA-Forum zu hassmic, Beiträge vom 23. September 2026",
+     "Nutzer meldet fehlende Ausgabe und später Probleme mit WLAN/Wake Word; Entwickler meldet einen Fix für globales Mute",
+     "Konkrete Fehlersuche ist sichtbar. Das alte Problem darf nicht ohne Prüfung als weiterhin offen bezeichnet werden. [Q9]"
+    ],
+    [
+     "TECHO5 Dot, abgerufene Projektbeschreibung",
+     "Alltagseinsatz auf drei Dots; Echo 2 auf einem Exemplar getestet",
+     "Nachvollziehbare, aber kleine Testbasis. [Q5]"
+    ],
+    [
+     "TECHO5, Abschnitt zur Hörleistung",
+     "Autor beschreibt Grenzen der Erkennung während Musik",
+     "Audioqualität bleibt ein wesentlicher Praxistest; keine Gleichwertigkeitsgarantie zur ursprünglichen Verarbeitung. [Q4]"
+    ],
+    [
+     "LibreEcho, abgerufene Projektbeschreibung",
+     "Dot-Port hat weniger Felderfahrung als Echo 2",
+     "Beide stehen auf der Supportliste, aber mit unterschiedlicher Testerfahrung. [Q8]"
+    ],
+    [
+     "TECHO5 athena, Installationsanleitung",
+     "Zwei Paneltypen getestet; Beamforming aus; Lichtmessung unkalibriert",
+     "Funktionierende Kernhardware und verbleibende Einschränkungen werden getrennt ausgewiesen. [Q7]"
+    ]
+   ],
+   "id": "b122"
+  },
+  {
+   "t": "p",
+   "text": "Eine Projekt-README ist eine Aussage des Projekts. Ein Forumstest ist ein Bericht über ein konkretes Exemplar. Mehrere Berichte mit benanntem Gerät und Softwarestand sind aussagekräftiger als Sterne, Likes oder mehrfach kopierte Ankündigungen. Eine allgemeine Abstimmung „der Community“ wurde hier nicht durchgeführt.",
+   "id": "b123"
+  },
+  {
+   "t": "h2",
+   "text": "9.2 Kleine Probleme, große Probleme und Blocker",
+   "id": "b124"
+  },
+  {
+   "t": "p",
+   "text": "<b>Kleine Einschränkung:</b> Beispielsweise unkalibrierte Helligkeitswerte, wenn Sprache und Display ansonsten zuverlässig arbeiten. Die Bedeutung hängt vom geplanten Einsatz ab.",
+   "id": "b125"
+  },
+  {
+   "t": "p",
+   "text": "<b>Große Einschränkung:</b> Wiederkehrender Audioverlust, unzuverlässige Erkennung bei Musik, fehlende Wiederverbindung oder ein zusätzlicher Rechner nach jedem Neustart. Solche Punkte beeinflussen den Alltag deutlich.",
+   "id": "b126"
+  },
+  {
+   "t": "p",
+   "text": "<b>Blocker:</b> Falsche Hardwarevariante, nicht unterstützte Firmware, fehlender nutzbarer Mikrofonpfad oder keine stabile Verbindung für die Installation. Dann ist der gewählte Weg nicht freigegeben. Mehr Installationsversuche ersetzen keine passende Geräteunterstützung.",
+   "id": "b127"
+  },
+  {
+   "t": "h1",
+   "text": "10. Kosten, Rechenleistung und Aufwand berechnen",
+   "id": "b128"
+  },
+  {
+   "t": "h2",
+   "text": "10.1 Einmalige und laufende Kosten",
+   "id": "b129"
+  },
+  {
+   "t": "p",
+   "text": "Die einmaligen Kosten bestehen aus Gerät, passendem Netzteil, Kabeln, gegebenenfalls Pogo-Adapter oder Lötzubehör und zusätzlicher Serverhardware. Vorhandene Werkzeuge und ein bereits laufender Server können den Zusatzaufwand reduzieren. Gebrauchtpreise sind zustandsabhängig; deshalb werden hier keine unbelegten Tagespreise angesetzt.",
+   "id": "b130"
+  },
+  {
+   "t": "p",
+   "text": "Laufend entstehen Stromkosten, mögliche Cloudkontingente, Medienabonnements und Wartungszeit. Mehr Geräte erhöhen nicht automatisch jede Cloudrechnung gleichermaßen: Entscheidend sind tatsächliche Anfragen, erzeugte Audiomenge und die Abrechnungseinheit des Dienstes.",
+   "id": "b131"
+  },
+  {
+   "t": "h2",
+   "text": "10.2 Rechenbeispiel für Sprache und Strom",
+   "id": "b132"
+  },
+  {
+   "t": "p",
+   "text": "<b>TTS-Textmenge pro Monat = Anfragen pro Tag × durchschnittliche Antwortzeichen × Tage.</b> Beispiel: 50 Antworten × 180 Zeichen × 30 Tage = <b>270.000 Zeichen</b>. Der Betrag ergibt sich erst aus Modell, Tarif, Freimenge und Abrechnungsregeln. Manche Anbieter rechnen anders ab; Zeichen dürfen nicht ungeprüft mit Credits gleichgesetzt werden.",
+   "id": "b133"
+  },
+  {
+   "t": "p",
+   "text": "<b>STT-Audiomenge pro Monat = Anfragen pro Tag × Aufnahmesekunden × Tage ÷ 60.</b> Bei 50 Anfragen mit je 6 Sekunden über 30 Tage entstehen <b>150 Minuten</b>. Fehlaktivierungen und Wiederholungen kommen hinzu.",
+   "id": "b134"
+  },
+  {
+   "t": "p",
+   "text": "<b>Strom pro Jahr = zusätzliche mittlere Leistung in Watt × 8.760 ÷ 1.000.</b> Ein angenommenes Zusatzsystem mit 10 W benötigt <b>87,6 kWh/Jahr</b>. Bei einem frei angenommenen Rechenpreis von 0,35 €/kWh wären das <b>30,66 €/Jahr</b>. Das sind Beispielwerte, keine Messung eines Echo- oder Servermodells.",
+   "id": "b135"
+  },
+  {
+   "t": "p",
+   "text": "Bei LLM-Nutzung kommen Eingabe- und Ausgabetokens beziehungsweise lokale Modell-Rechenzeit hinzu. Wiederholt abgespielte Standardansagen können unter passenden Bedingungen zwischengespeichert werden; die tatsächliche Ersparnis hängt von der Integration ab.",
+   "id": "b136"
+  },
+  {
+   "t": "h2",
+   "text": "10.3 Rechenleistung und Antwortzeit sinnvoll prüfen",
+   "id": "b137"
+  },
+  {
+   "t": "p",
+   "text": "Sinnvoll ist zunächst ein Raum mit der vorgesehenen STT-/TTS-Kombination. Gemessen werden normale Antworten und langsame Ausreißer sowie CPU, RAM und gegebenenfalls GPU-Speicher. Danach folgen gleichzeitige Anfragen mehrerer Räume.",
+   "id": "b138"
+  },
+  {
+   "t": "p",
+   "text": "Die Gesamtwartezeit setzt sich aus Sprachende-Erkennung, STT, Befehlsverarbeitung, TTS-Beginn und Wiedergabepuffer zusammen. Ein schneller TTS-Dienst kann eine langsame lokale Transkription nicht ausgleichen. Eine feste Sekundenangabe für alle Geräte wäre daher irreführend.",
+   "id": "b139"
+  },
+  {
+   "t": "h1",
+   "text": "11. Kaufprüfung, Installation und Alltagstest",
+   "id": "b140"
+  },
+  {
+   "t": "h2",
+   "text": "11.1 Vor einer Kaufentscheidung",
+   "id": "b141"
+  },
+  {
+   "t": "bullets",
+   "items": [
+    "Vollständige Modellnummer, Generation und gegebenenfalls Codename abgleichen; ein Foto des Typenschilds ist sinnvoll.",
+    "Firmwarestand und, soweit bekannt, Hardware- oder Panelvariante dokumentieren.",
+    "Für genau dieses Modell einen vollständigen Weg bis zur gewünschten Funktion auswählen.",
+    "Mikrofone, Lautsprecher, Mute, Tasten, WLAN und gegebenenfalls Display und Touch im Originalzustand prüfen.",
+    "Benötigten Adapter, Originalnetzteil und Wiederherstellungsweg in die Gesamtkosten einrechnen.",
+    "Historischen Root, temporären Root und dokumentierten Sprachsatelliten nicht als gleichwertig bewerten."
+   ],
+   "id": "b142"
+  },
+  {
+   "t": "h2",
+   "text": "11.2 Vor der Installation",
+   "id": "b143"
+  },
+  {
+   "t": "bullets",
+   "items": [
+    "Anleitung, Softwareversion und Downloads gemeinsam festhalten; Images verschiedener Geräte nicht vermischen.",
+    "Keine vorsorglichen Updates oder Downgrades durchführen. Ein Update kann einen Einstieg schließen; ein Downgrade kann gesperrt oder ungeeignet sein.",
+    "Geräteeigene Daten und erforderliche Partitionen nach der jeweiligen Anleitung sichern und Kopien prüfen.",
+    "USB-Kontakte, Versorgung und Zugentlastung stabil herstellen.",
+    "Root- und Unlock-Skripte als schreibende Eingriffe behandeln, auch wenn sie zunächst nur Erkennungsschritte anzeigen."
+   ],
+   "id": "b144"
+  },
+  {
+   "t": "h2",
+   "text": "11.3 Wann der Umbau praktisch gelungen ist",
+   "id": "b145"
+  },
+  {
+   "t": "bullets",
+   "items": [
+    "Leise und normale Sprache aus mehreren Positionen wird erkannt.",
+    "Aktivierungswort und Unterbrechen funktionieren auch bei Musik in der vorgesehenen Lautstärke.",
+    "Bei mehreren Geräten antwortet möglichst nur der passende Satellit.",
+    "Mute und dessen Anzeige bleiben nach einem Neustart korrekt.",
+    "Licht, Wetter, Timer und gegebenenfalls Musik führen zum erwarteten Ergebnis.",
+    "Timer und Wecker werden nach Neustart sowie bei WLAN-, Server- und Internetausfall getrennt geprüft.",
+    "Die ausgewählte Stimme spricht Zahlen, Uhrzeiten und Gerätenamen verständlich aus.",
+    "Mehrtägiger Betrieb gelingt ohne regelmäßige manuelle Neustarts.",
+    "Update und Wiederherstellung sind für genau die eingesetzte Version dokumentiert."
+   ],
+   "id": "b146"
+  },
+  {
+   "t": "p",
+   "text": "Als Ergebnis zählt die gewünschte Funktion im Alltag. Ein erfolgreicher Root-Prompt ist ein Zwischenschritt, eine hörbare Testantwort ebenfalls.",
+   "id": "b147"
+  },
+  {
+   "t": "h1",
+   "text": "12. Quellen und Aktualisierung",
+   "id": "b148"
+  },
+  {
+   "t": "h2",
+   "text": "12.1 Grundlage und Prüfgrenzen",
+   "id": "b149"
+  },
+  {
+   "t": "p",
+   "text": "Die Bewertung stützt sich auf öffentlich zugängliche Projektbeschreibungen, gerätespezifische Anleitungen, Herstellerdokumentation und konkrete Anwenderberichte. Sie beschreibt den dokumentierten Stand; eigene Hardwaretests sind nicht Bestandteil dieser Übersicht.",
+   "id": "b150"
+  },
+  {
+   "t": "p",
+   "text": "Die nachstehenden Projektseiten wurden am <b>22. Oktober 2026</b> recherchiert. GitHub-Hauptzweige und dynamische Anleitungen können sich ändern; diese Ausgabe ist keine Sammlung unveränderlicher Release-Snapshots. Bei Root-Firmwaregrenzen gilt stets die konkrete aktuelle Geräteanleitung. Ein nicht abrufbarer Primärtext wird ausdrücklich gekennzeichnet.",
+   "id": "b151"
+  },
+  {
+   "t": "h2",
+   "text": "12.2 Projekte, Sprache und Hardwarezugang",
+   "id": "b152"
+  },
+  {
+   "t": "bullets",
+   "items": [
+    "<b>Q1:</b> echo-dot-assist / hassmic – Geräte und Funktionen",
+    "<b>Q2:</b> EchoLocal – Geräte und Funktionen",
+    "<b>Q3:</b> EchoMuse – unterstützte Hardware, Controller und emOS",
+    "<b>Q4:</b> TECHO5 – Funktionen, Hörleistung und Installationsvoraussetzungen",
+    "<b>Q5:</b> TECHO5 Dot – Dot 2, Echo 2 und Testumfang",
+    "<b>Q6:</b> TECHO5 Spot – Port und Status",
+    "<b>Q7:</b> TECHO5 athena – Varianten und Installationsgrenzen",
+    "<b>Q8:</b> LibreEcho – unterstützte Geräte und Installation",
+    "<b>Q9:</b> HA-Community – Dot-3-Projekt und Anwenderberichte",
+    "<b>Q10:</b> Home Assistant – Aufbau der Sprachverarbeitung",
+    "<b>Q11:</b> Home Assistant – vollständig lokaler Sprachassistent",
+    "<b>Q12:</b> Microsoft – dokumentierte TTS-Stimmen einschließlich Katja",
+    "<b>Q13:</b> Home Assistant – Microsoft TTS",
+    "<b>Q14:</b> Home Assistant – ElevenLabs",
+    "<b>Q15:</b> Cartesia-TTS – zusätzliche Community-Integration",
+    "<b>Q16:</b> Home Assistant – Android Debug Bridge / Fire TV",
+    "<b>Q17:</b> Community-Releases für Amazon-Geräte, darunter LineageOS",
+    "<b>Q18:</b> Amazon-Unlock-Übersicht, mitverfasst von Entwickler R0rt1z2",
+    "<b>Q19:</b> amonet-sloane – Fire TV Gen. 2",
+    "<b>Q20:</b> Exploitee.rs – ursprüngliche FireFU-Veröffentlichung",
+    "<b>Q21:</b> raven-root – ursprünglicher temporärer Cube-2-Zugang",
+    "<b>Q22:</b> Cube-3-Unlock-Thread – erneute Primärprüfung erforderlich. Der Abruf scheiterte; deshalb keine endgültige Firmwarefreigabe in dieser Ausgabe.",
+    "<b>Q23:</b> amonet – Fire 7 ford und Abgrenzung austin",
+    "<b>Q24:</b> karat – TWRP-Gerätebaum und Modellzuordnung",
+    "<b>Q25:</b> GhostLock – explizite Buildlisten und temporärer Root",
+    "<b>Q26:</b> CoreELEC für Cube 2 – gerätespezifischer Projektthread. Nur als Medienprojekt-Hinweis verwendet, nicht als Beleg eines Sprachports.",
+    "<b>Q27:</b> echoroot – historischer Echo-1-Weg",
+    "<b>Q28:</b> xyzz/amonet – Fire HD 8 von 2018",
+    "<b>Q29:</b> postmarketOS – Fire 7 von 2019 / mustang",
+    "<b>Q30:</b> KindleModding – Modell- und Firmwarezuordnung beim Jailbreak",
+    "<b>Q31:</b> TECHO5 – Identifikation der Echo-Modelle",
+    "<b>Q32:</b> P50-B1 – Anbieterangaben zu Durchmessern und Länge"
+   ],
+   "id": "b153"
+  },
+  {
+   "t": "h2",
+   "text": "12.3 Bei einer nächsten Aktualisierung",
+   "id": "b154"
+  },
+  {
+   "t": "p",
+   "text": "Geändert werden jeweils Datum, betroffener Geräteport, Firmware- beziehungsweise Hardwaregrenze, bekannte offene Fehler und neue Praxisberichte. Neue Root-Meldungen verbessern zunächst nur den Root-Status. Die Einstufung als Sprachassistent ändert sich erst mit einem passenden Funktionsnachweis. Für Cube 3 bleibt die direkte Prüfung des verlinkten Unlock-Threads ein ausdrücklich offener Recherchepunkt.",
+   "id": "b155"
+  }
+ ]
+}
