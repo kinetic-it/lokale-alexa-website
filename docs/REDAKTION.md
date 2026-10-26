@@ -84,3 +84,16 @@ Beim Teilen erscheinen `og-de.png` und `og-en.png` (1200 × 630). `robots.txt`, 
 - **Muttersprachliche Durchsicht** der englischen Seite und der englischen PDF.
 - **Prüfung auf echten Geräten:** Safari (iPhone), Firefox, Android-Chrome. Geprüft ist bisher nur Chromium, mit axe-core (keine Verstöße) und ohne Überlauf bei 320 bis 1440 px.
 
+## Befunde und Erkenntnisse
+
+Abschnitt `#befunde` kommt aus `data/findings.json` (je Eintrag Deutsch und Englisch, neueste zuerst). Neuer Eintrag: Objekt oben einfügen, `python3 tools/sections/build_sections.py`, `python3 tools/check_i18n.py`, PR. Typen: `finding` (Erkenntnis), `problem` (mit Zustand `open` oder `resolved`), `correction` (Korrektur einer früheren öffentlichen Aussage).
+
+**Veröffentlichungsregel (Owner-Freigabe 26.10.2026):**
+
+- **Sofort veröffentlichen:** fehlgeschlagene Tests, falsche frühere öffentliche Aussagen (als Korrektur), Grenzen von Geräten und Software, Erkenntnisse, die Leser vor einem Fehler bewahren.
+- **Erst nach der Behebung:** offene Sicherheitsdetails, zum Beispiel unsaubere Freigaben. Öffentlich steht dann nur die Lehre daraus, ohne Gerätenamen und ohne Angriffsweg.
+- **Nie:** Namen, Hosts, IPs, Zugangsdaten, Geräte oder Gewohnheiten aus dem Haushalt.
+- Ein Problem bleibt `open`, bis die Ursache belegt behoben ist. Beim Schließen den Eintrag auf `resolved` setzen und den Text anpassen; nichts still löschen.
+
+Die zugehörige Auslöser-Regel (nach jedem Test oder Befund über die Veröffentlichung entscheiden) steht im privaten Repository `lokale_alexa`.
+

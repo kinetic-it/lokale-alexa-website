@@ -42,6 +42,22 @@ else:
     ids={m['id'] for m in d['milestones']}
     if ids!=set(e.get('milestones',{})): errors.append(f'status.json en.milestones passt nicht zu den IDs {sorted(ids)}')
 
+# Befunde: beide Sprachen, gültige Typen und Zustände, neueste zuerst
+try:
+    fe=json.load(open('data/findings.json',encoding='utf-8'))['entries']
+    ids=[x['id'] for x in fe]
+    if len(set(ids))!=len(ids): errors.append('findings.json: doppelte IDs')
+    if [x['date'] for x in fe]!=sorted([x['date'] for x in fe],reverse=True): errors.append('findings.json: nicht neueste zuerst')
+    for x in fe:
+        if x['type'] not in ('finding','problem','correction'): errors.append(f"findings.json {x['id']}: Typ ungültig")
+        if x.get('state') not in (None,'open','resolved'): errors.append(f"findings.json {x['id']}: Zustand ungültig")
+        if x['type']=='problem' and not x.get('state'): errors.append(f"findings.json {x['id']}: Problem ohne Zustand")
+        for l in ('de','en'):
+            if not x.get(l,{}).get('title') or not x.get(l,{}).get('text'): errors.append(f"findings.json {x['id']}: {l} unvollständig")
+        if re.search(r'[äöüÄÖÜß]',x['en']['title']+x['en']['text']): errors.append(f"findings.json {x['id']}: Umlaute im Englischen")
+except FileNotFoundError:
+    errors.append('data/findings.json fehlt')
+
 # Generierte Seitenteile (SOUL-Beispiel, Nachbauen, Verlauf) müssen zu ihren Quellen passen
 import subprocess
 for gen in ('tools/soul/build_soul.py','tools/sections/build_sections.py'):

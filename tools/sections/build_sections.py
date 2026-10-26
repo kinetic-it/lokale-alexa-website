@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Erzeugt zweisprachige Seitenteile aus einer Quelle:
   - Abschnitt "Nachbauen" (<section id="nachbauen">) aus tools/sections/steps.json
+  - Abschnitt "Befunde und Erkenntnisse" aus data/findings.json
   - statischer Fallback des Projektstands aus data/status.json: Kopfkarte (Titel, Datum, Meilensteine,
     letzter Test), Listen "berichtet / offen / Probleme" und Verlauf. Das JavaScript liest dieselben Daten live.
 Aufruf im Repo-Wurzelverzeichnis:
@@ -12,6 +13,7 @@ import html, json, re, sys
 E = html.escape
 STEPS = json.load(open('tools/sections/steps.json', encoding='utf-8'))
 STATUS = json.load(open('data/status.json', encoding='utf-8'))
+FINDINGS = json.load(open('data/findings.json', encoding='utf-8'))
 ISSUE = 'https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md'
 MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -58,6 +60,35 @@ def ms(lang):
     return '\n'.join('          <li><i class="mk %s"></i><span>%s</span><span class="st">%s</span></li>' % (m['state'], E(names[m['id']]), E(L[m['state']]))
                      for m in STATUS['milestones'])
 
+FIND = {
+    'de': {'eyebrow': 'Ehrlich festgehalten', 'h2': 'Befunde und Erkenntnisse',
+           'intro': 'Hier stehen Dinge, die schiefgegangen sind oder die wir gelernt haben, neueste zuerst. Offene Sicherheitsdetails nennen wir erst, wenn sie behoben sind; öffentlich steht dann die Lehre daraus.',
+           'type': {'finding': 'Erkenntnis', 'problem': 'Problem', 'correction': 'Korrektur'}, 'state': {'open': 'offen', 'resolved': 'geklärt'}},
+    'en': {'eyebrow': 'Recorded honestly', 'h2': 'Findings and lessons',
+           'intro': 'This is where we record what went wrong or what we learned, newest first. We name open security details only once they are fixed; what we learned is published then.',
+           'type': {'finding': 'Finding', 'problem': 'Problem', 'correction': 'Correction'}, 'state': {'open': 'open', 'resolved': 'resolved'}},
+}
+
+def findings(lang):
+    f = FIND[lang]
+    items = []
+    for e in FINDINGS['entries']:
+        t = e[lang]
+        state = '<span class="fstate %s">%s</span>' % (e['state'], E(f['state'][e['state']])) if e.get('state') else ''
+        items.append('      <li class="find %s" id="%s"><div class="fhead"><span class="ftype">%s</span>%s<time datetime="%s">%s</time></div><h3>%s</h3><p>%s</p></li>'
+                     % (e['type'], e['id'], E(f['type'][e['type']]), state, e['date'], fmt(e['date'], lang), E(t['title']), E(t['text'])))
+    return '\n'.join([
+        '<section id="befunde">',
+        '  <div class="wrap">',
+        '    <div class="eyebrow">%s</div>' % E(f['eyebrow']),
+        '    <h2>%s</h2>' % E(f['h2']),
+        '    <p class="intro">%s</p>' % E(f['intro']),
+        '    <ol class="finds">',
+        *items,
+        '    </ol>',
+        '  </div>',
+        '</section>'])
+
 def lst(key):
     def f(lang):
         return '\n'.join('          <li>%s</li>' % E(t) for t in texts(lang)[key])
@@ -74,7 +105,7 @@ def binds(s, lang):
         s = re.sub(r'(data-bind="%s">)[^<]*(</)' % k, lambda m: m.group(1) + E(v) + m.group(2), s)
     return s
 
-PARTS = {'nachbauen': steps, 'history': history, 'ms': ms, 'confirmed': lst('confirmed'), 'open': lst('not_yet_verified'), 'issues': lst('known_issues')}
+PARTS = {'nachbauen': steps, 'findings': findings, 'history': history, 'ms': ms, 'confirmed': lst('confirmed'), 'open': lst('not_yet_verified'), 'issues': lst('known_issues')}
 
 def apply(s, lang):
     for key, fn in PARTS.items():
