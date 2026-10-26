@@ -3,1993 +3,2486 @@
     "date": "22 October 2026",
     "language": "en",
     "title": "Amazon devices as open voice and smart home devices",
-    "translation_status": "pending"
+    "subtitle": "Software, root compatibility, voices and hardware requirements",
+    "translation_date": "26 October 2026",
+    "translation_note": "English edition, translated from the German original",
+    "translation_status": "machine-assisted translation, not reviewed by a native speaker"
   },
+  "elements": [
+    {
+      "id": "p01.b002",
+      "type": "title",
+      "text": "Amazon devices as open voice and smart home devices"
+    },
+    {
+      "id": "p01.b003",
+      "type": "subtitle",
+      "text": "Software, root compatibility, voices and hardware effort"
+    },
+    {
+      "id": "p01.b004",
+      "type": "paragraph",
+      "text": "Editorial and research status: 22. October 2026"
+    },
+    {
+      "id": "p01.b005",
+      "type": "paragraph",
+      "text": "An independent overview of software, device variants and requirements for the reuse of Amazon devices. Echo, Fire TV, Fire TV Cube and Fire tablets are treated; Kindle e-readers are classified in addition."
+    },
+    {
+      "id": "p01.b006",
+      "type": "paragraph",
+      "text": "The information describes publicly documented possibilities. No devices were flashed and no own hardware or long-term tests were carried out. „Documented usable always applies to the appropriate model, the appropriate hardware variant and the described software status. A guarantee for each used purchased copy cannot be derived from this."
+    },
+    {
+      "id": "p04.b003",
+      "type": "h1",
+      "text": "1. Software overview: What is there and what does it do?"
+    },
+    {
+      "id": "p04.b004",
+      "type": "h2",
+      "text": "1.1 The building blocks of a language assistant"
+    },
+    {
+      "id": "p04.b005",
+      "type": "paragraph",
+      "text": "A voice assistant consists of several interchangeable parts. The software on the Echo picks up sound and plays responses. The actual processing can take place on a server in the home network or at a cloud provider."
+    },
+    {
+      "id": "t01",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t01.r00.c0",
+            "text": "Building block"
+          },
+          {
+            "id": "t01.r00.c1",
+            "text": "Task"
+          },
+          {
+            "id": "t01.r00.c2",
+            "text": "Examples and delimitation"
+          }
+        ],
+        [
+          {
+            "id": "t01.r01.c0",
+            "text": "Device operating system and audio driver"
+          },
+          {
+            "id": "t01.r01.c1",
+            "text": "Operating microphones, loudspeakers, buttons and display"
+          },
+          {
+            "id": "t01.r01.c2",
+            "text": "Fire OS with modifications, emOS, TECHO5, LibreEcho; another kernel alone is not sufficient"
+          }
+        ],
+        [
+          {
+            "id": "t01.r02.c0",
+            "text": "Voice satellite"
+          },
+          {
+            "id": "t01.r02.c1",
+            "text": "Exchange audio and device status with the control center"
+          },
+          {
+            "id": "t01.r02.c2",
+            "text": "hassmic, EchoLocal, EchoMuse; a satellite is the microphone and speaker in the room"
+          }
+        ],
+        [
+          {
+            "id": "t01.r03.c0",
+            "text": "Activation word"
+          },
+          {
+            "id": "t01.r03.c1",
+            "text": "Recognize start of request"
+          },
+          {
+            "id": "t01.r03.c2",
+            "text": "Amazon Wake Word Engine, microWakeWord, openWakeWord; support depends on the port"
+          }
+        ],
+        [
+          {
+            "id": "t01.r04.c0",
+            "text": "STT: language to text"
+          },
+          {
+            "id": "t01.r04.c1",
+            "text": "Written Orders"
+          },
+          {
+            "id": "t01.r04.c2",
+            "text": "Whisper, Speech-to-Phrase or Cloud-STT"
+          }
+        ],
+        [
+          {
+            "id": "t01.r05.c0",
+            "text": "Command processing"
+          },
+          {
+            "id": "t01.r05.c1",
+            "text": "Determine action or response"
+          },
+          {
+            "id": "t01.r05.c2",
+            "text": "Home Assistant Assist; optionally a language model or agent"
+          }
+        ],
+        [
+          {
+            "id": "t01.r06.c0",
+            "text": "TTS: Text on language"
+          },
+          {
+            "id": "t01.r06.c1",
+            "text": "Make the answer audible"
+          },
+          {
+            "id": "t01.r06.c2",
+            "text": "Katja via Microsoft Speech, Piper, ElevenLabs, Home Assistant Cloud"
+          }
+        ],
+        [
+          {
+            "id": "t01.r07.c0",
+            "text": "Media administration"
+          },
+          {
+            "id": "t01.r07.c1",
+            "text": "Connecting music sources and playback"
+          },
+          {
+            "id": "t01.r07.c2",
+            "text": "Music Assistant; accounts, providers and players must fit together"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p04.b019",
+      "type": "paragraph",
+      "text": "The technical order is: microphone → activation word → STT → Assist or agent → TTS → speaker. The voice does not determine the root access or how well the device understands a spoken command. [Q10, Q11]"
+    },
+    {
+      "id": "p04.b020",
+      "type": "h2",
+      "text": "1.2 echo-dot-assist / hassmic"
+    },
+    {
+      "id": "p04.b021",
+      "type": "lead",
+      "text": "Task: Use Echo devices as home Assistant voice satellites while retaining parts of the original microphone processing. The connection is optionally via the ESPHome API or Wyoming; the range of functions varies depending on the mode."
+    },
+    {
+      "id": "p04.b022",
+      "type": "lead",
+      "text": "Devices: Echo Dot 2, Echo 2 and the original Echo Dot 3 from 2018. The exact model number is crucial. Use: voice, media playback and, depending on the mode, other device functions. Prerequisite: device-specific unlock and exactly matching firmware."
+    },
+    {
+      "id": "p04.b023",
+      "type": "lead",
+      "text": "Boundaries and community: The project itself mentions tests on only one specimen per model. This is a concrete proof of function, but not a broad reliability test. For the Dot 3, there is also a user report with initial audio and WLAN problems; see chapter 9. Effort: 2–4 out of 5, mainly depending on the hardware access. [Q1, Q9]"
+    },
+    {
+      "id": "p05.b003",
+      "type": "h2",
+      "text": "1.3 EchoLocal"
+    },
+    {
+      "id": "p05.b004",
+      "type": "lead",
+      "text": "Task: Replace Amazon’s services with a local voice, media and display service on the existing Fire OS substructure. Devices: Dot 2, Show 5 Gen. 1 and 2 as well as Show 8 Gen. 1 and 2."
+    },
+    {
+      "id": "p05.b005",
+      "type": "lead",
+      "text": "Benefits: Home-Assistant connection, activation words, voice output, music and on shows its own interface. Additional functions can be added via the optional HACS integration. Prerequisite: suitable root access, supported Fire OS and established Assist processing."
+    },
+    {
+      "id": "p05.b006",
+      "type": "lead",
+      "text": "Boundaries and community: The project list confirms the mentioned devices, not every conceivable hardware variant. Optional integration is another component to maintain. Surface, camera and media functions shall be tested individually. Effort: 2–4 of 5 . [Q2]"
+    },
+    {
+      "id": "p05.b007",
+      "type": "h2",
+      "text": "1.4 EchoMuse and emOS"
+    },
+    {
+      "id": "p05.b008",
+      "type": "lead",
+      "text": "Task: Operate Dot 2 with its own device management and a controller in the home network as a voice satellite. emOS is the Linux substructure of the project; the older path runs on rooted Fire OS 5."
+    },
+    {
+      "id": "p05.b009",
+      "type": "lead",
+      "text": "Utility: Centrally set up and manage multiple dots, language, media, and configurable activation words. Prerequisite: permanently running controller as add-on or container and Home Assistant with Assist."
+    },
+    {
+      "id": "p05.b010",
+      "type": "lead",
+      "text": "Boundaries and community: Regular goal is still exclusively the Dot 2. Working on other Echo models is not a release for their everyday operation. The controller remains an additional service. Local activation word recognition and audio transmission to the controller are separate modes of operation. Effort: 2–3 of 5 . [Q3]"
+    },
+    {
+      "id": "p05.b011",
+      "type": "h2",
+      "text": "1.5 TECHO5, TECHO5 Dot and TECHO5 Spot"
+    },
+    {
+      "id": "p05.b012",
+      "type": "lead",
+      "text": "Task: Operate supported echoes with a Linux system. The family includes screen devices, Dot 2, Echo 2 and the first spot; there are device-specific variants. Benefits: voice satellite, media and, depending on the device, display, clock, weather and other local functions."
+    },
+    {
+      "id": "p05.b013",
+      "type": "lead",
+      "text": "Prerequisites: suitable unlock, suitable installation chain and an explicitly supported LineageOS substructure as a starting point for several show/spot models. Show 8 Gen. 2 uses its own path."
+    },
+    {
+      "id": "p05.b014",
+      "type": "lead",
+      "text": "Boundaries and community: The projects publish concrete tests, sometimes only on a few devices. Microphone processing does not automatically reach the level of the original Alexa software. For speech during loud music, the TECHO5 author describes restrictions. Effort: 3–4 of 5 . [Q4–Q7]"
+    },
+    {
+      "id": "p05.b015",
+      "type": "h2",
+      "text": "1.6 LibreEcho"
+    },
+    {
+      "id": "p05.b016",
+      "type": "lead",
+      "text": "Task: stand-alone Linux system for Echo 2 and Dot 2 with administration in the browser. Benefits: open operation, voice and media functions as well as an own update path."
+    },
+    {
+      "id": "p05.b017",
+      "type": "lead",
+      "text": "Requirements: Linux computer for the documented installation path, device-specific unlock archive and a reliable USB connection. The Echo 2 can be connected via ground pads with pogo adapters or soldered lines; with the Dot 2, the existing data connection is sufficient."
+    },
+    {
+      "id": "p05.b018",
+      "type": "lead",
+      "text": "Boundaries and community: The project description explicitly points to the lower test experience with the younger dot port. When switching between larger version lines, a new installation with loss of setup may be necessary. The language connection documented for the respective release must be checked in advance. Effort: 2–3 of 5 . [Q8]"
+    },
+    {
+      "id": "p06.b003",
+      "type": "h2",
+      "text": "1.7 LineageOS, root tools and fire TV software"
+    },
+    {
+      "id": "p06.b004",
+      "type": "lead",
+      "text": "LineageOS is an alternative Android system. It enables Android applications on suitable devices, but is not a complete local voice assistant alone. Display, camera, Bluetooth and audio depend on the device-specific build. The Echo builds in Q17 are community releases; the repository name is not an Amazon release."
+    },
+    {
+      "id": "p06.b005",
+      "type": "lead",
+      "text": "amonet, kamakiri, saiyaku and FireFU open device-specific accesses. TWRP serves as a recovery environment, Magisk for managing root functions. These tools do not replace speech recognition or speech output. An exploit for a similar chip is not a general release for all devices with that chip. [Q18–Q24]"
+    },
+    {
+      "id": "p06.b006",
+      "type": "lead",
+      "text": "GhostLock enables temporary root access on explicitly listed Fire OS builds, including Fire Max 11 and Fire TV Stick 4K Max Gen. 2. Root ends there with the restart. This is not an automatic bootloader unlock. [Q25]"
+    },
+    {
+      "id": "p06.b007",
+      "type": "lead",
+      "text": "Kodi and CoreELEC mainly affect media playback. Media operation on a cube does not occupy complete access to its microphone array. Similarly, the Home-Assistant-ADB integration controls suitable Fire TVs without turning them into a Assist voice satellite. [Q16, Q26]"
+    },
+    {
+      "id": "p06.b008",
+      "type": "h1",
+      "text": "2. Why rebuild? Benefits, disadvantages and achievable goals"
+    },
+    {
+      "id": "p06.b009",
+      "type": "h2",
+      "text": "2.1 What is meaningfully achievable"
+    },
+    {
+      "id": "p06.b010",
+      "type": "paragraph",
+      "text": "A conversion can make existing microphones, loudspeakers and displays further usable. Home Assistant combines voice commands with cross-manufacturer devices and automations. Language service, voice and, if applicable, conversation model can be selected separately. With fully localized processing, simple commands can work without the Internet as long as home network and servers are available."
+    },
+    {
+      "id": "p06.b011",
+      "type": "paragraph",
+      "text": "Typical targets are lighting control, announcements, weather, timers, media playback and a smart home display. Free knowledge questions can additionally go to a language model. Executing simple switching commands directly in Home Assistant often makes more sense than running each command over a complex agent."
+    },
+    {
+      "id": "p06.b012",
+      "type": "h2",
+      "text": "2.2 What are the disadvantages"
+    },
+    {
+      "id": "p06.b013",
+      "type": "paragraph",
+      "text": "The responsibility for installation, updates, backups and troubleshooting goes to the operator. A false image or an unstable flash connection can make the device unusable. Original sound tuning, far-field detection or comfort functions may be limited. An additional server causes power consumption and maintenance effort."
+    },
+    {
+      "id": "p06.b014",
+      "type": "paragraph",
+      "text": "Alexa skills, Amazon purchases, Amazon Multiroom and the original call services are not automatically adopted. Some ports offer their own intercom or multiroom functions; their compatibility must be assessed separately. „Local only applies to the data path actually set up: Cloud-STT transmits audio, Cloud-TTS response text and a cloud agent the respective request context."
+    },
+    {
+      "id": "p07.b003",
+      "type": "h2",
+      "text": "2.3 Three meaningful operating models"
+    },
+    {
+      "id": "t02",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t02.r00.c0",
+            "text": "Operational model"
+          },
+          {
+            "id": "t02.r00.c1",
+            "text": "Advantage"
+          },
+          {
+            "id": "t02.r00.c2",
+            "text": "Disadvantage and required background"
+          }
+        ],
+        [
+          {
+            "id": "t02.r01.c0",
+            "text": "Fully local"
+          },
+          {
+            "id": "t02.r01.c1",
+            "text": "High control over data and Internet independence"
+          },
+          {
+            "id": "t02.r01.c2",
+            "text": "Local STT, TTS and model computing power required"
+          }
+        ],
+        [
+          {
+            "id": "t02.r02.c0",
+            "text": "Locally controlled, cloud voice"
+          },
+          {
+            "id": "t02.r02.c1",
+            "text": "Local home control with freely selected cloud voice output, such as Katja"
+          },
+          {
+            "id": "t02.r02.c2",
+            "text": "Text leaves home network; Internet and quota required"
+          }
+        ],
+        [
+          {
+            "id": "t02.r03.c0",
+            "text": "Cloud-STT and Cloud-TTS"
+          },
+          {
+            "id": "t02.r03.c1",
+            "text": "Lower local computing load"
+          },
+          {
+            "id": "t02.r03.c2",
+            "text": "Ongoing dependence on supplier, connection and tariff"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p07.b011",
+      "type": "paragraph",
+      "text": "A conversion is particularly useful if the exact device is already supported and the desired functions are demonstrably available. In the case of a pure development device, on the other hand, the focus is on technical testing."
+    },
+    {
+      "id": "p07.b012",
+      "type": "h1",
+      "text": "3. What is needed in the background"
+    },
+    {
+      "id": "p07.b013",
+      "type": "h2",
+      "text": "3.1 Server, network and services"
+    },
+    {
+      "id": "p07.b014",
+      "type": "paragraph",
+      "text": "The basis is a permanently accessible computer for Home Assistant and the selected language processing. Depending on the load, this can be an existing server, a single-board computer or a mini-PC. A separate device per room is not necessary for this. EchoMuse also needs its controller; other ports have their own requirements."
+    },
+    {
+      "id": "p07.b015",
+      "type": "paragraph",
+      "text": "For simple local house commands, speech-to-phrase comes into question. For free speech, Whisper offers more scope, but requires more processing power. A local large language model is another load to be dimensioned separately. A blanket RAM or GPU commitment would not be robust without model, parallelism and response time target. [Q11]"
+    },
+    {
+      "id": "p07.b016",
+      "type": "paragraph",
+      "text": "Stable WLAN reception to the satellite, the most reliable server connection possible and functioning local device recognition are useful. Separate network segments may require additional clearances. Failures of WLAN, Home Assistant, Internet and electricity have different effects and should be assessed individually."
+    },
+    {
+      "id": "p07.b017",
+      "type": "h2",
+      "text": "3.2 Installation and ongoing operation are different tasks"
+    },
+    {
+      "id": "p07.b018",
+      "type": "paragraph",
+      "text": "Depending on the project, Linux, Windows or macOS, a data cable and tools such as Python, adb and fastboot are required for the initial conversion. Some instructions explicitly require Linux. Virtual machines can cause problems with changing USB device modes."
+    },
+    {
+      "id": "p07.b019",
+      "type": "paragraph",
+      "text": "In everyday life, the installation computer can be omitted. Servers and controllers remain on. In the case of only temporary, computer-assisted root access, on the other hand, a computer may be necessary again after each restart. This dependence belongs in the device evaluation."
+    },
+    {
+      "id": "p07.b020",
+      "type": "h2",
+      "text": "3.3 Agents and other services"
+    },
+    {
+      "id": "p07.b021",
+      "type": "paragraph",
+      "text": "An agent such as a separately operated Hermes Agent system is optional. Root does not install it on the Echo. A specific connection to Home Assistant, permissions and error behavior would have to be set up and tested separately. The older Hermes MQTT protocol and a product with “Hermes” in the name are not automatically identical."
+    },
+    {
+      "id": "p08.b003",
+      "type": "paragraph",
+      "text": "For music, media servers, Music Assistant and, if necessary, provider subscriptions are added. Voice search, playlist access, audio output and re-registration are independent functions. A working Bluetooth speaker does not prove a working voice-controlled music search."
+    },
+    {
+      "id": "p08.b004",
+      "type": "h1",
+      "text": "4. Voice output: Katja, ElevenLabs and local alternatives"
+    },
+    {
+      "id": "p08.b005",
+      "type": "h2",
+      "text": "4.1 Rank Katja correctly"
+    },
+    {
+      "id": "p08.b006",
+      "type": "lead",
+      "text": "Microsoft documents the German female voice de-DE-KatjaNeural. It is a TTS voice: an answer text is converted into audible language. Katja thus replaces the audible output of an established Assist; it does not take over Alexa skills or speech recognition. [Q12]"
+    },
+    {
+      "id": "p08.b007",
+      "type": "paragraph",
+      "text": "A documented access is Microsoft Speech via an Azure Speech resource. Home Assistant describes its Microsoft TTS integration with API key, voice and voice type. The specific integration into the selected Assist pipeline must be checked with a test output before purchasing the device. [Q13]"
+    },
+    {
+      "id": "p08.b008",
+      "type": "paragraph",
+      "text": "The name of the voice does not determine the path of access. The integration used and the actual language provider should be documented separately. In particular, “Katja” is not synonymous with a free downloadable local voice or a permanently free service."
+    },
+    {
+      "id": "p08.b009",
+      "type": "h2",
+      "text": "4.2 Comparison of possibilities"
+    },
+    {
+      "id": "t03",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t03.r00.c0",
+            "text": "Option"
+          },
+          {
+            "id": "t03.r00.c1",
+            "text": "Strengths and use"
+          },
+          {
+            "id": "t03.r00.c2",
+            "text": "Conditions and limits"
+          }
+        ],
+        [
+          {
+            "id": "t03.r01.c0",
+            "text": "Microsoft Katja"
+          },
+          {
+            "id": "t03.r01.c1",
+            "text": "Concrete German voice; for uniform edition in several rooms"
+          },
+          {
+            "id": "t03.r01.c2",
+            "text": "Appropriate Microsoft access, integration and quota; usually cloud TTS [Q12, Q13]"
+          }
+        ],
+        [
+          {
+            "id": "t03.r02.c0",
+            "text": "ElevenLabs"
+          },
+          {
+            "id": "t03.r02.c1",
+            "text": "Alternative voices and own voices depending on offer; HA integration available"
+          },
+          {
+            "id": "t03.r02.c2",
+            "text": "Account and API key; quota or tariff; compare audio quality with German everyday rates [Q14]"
+          }
+        ],
+        [
+          {
+            "id": "t03.r03.c0",
+            "text": "Piper"
+          },
+          {
+            "id": "t03.r03.c1",
+            "text": "Local language synthesis; useful for Internet independence"
+          },
+          {
+            "id": "t03.r03.c2",
+            "text": "Local service and appropriate German voice model; expression and pronunciation differ per model [Q11]"
+          }
+        ],
+        [
+          {
+            "id": "t03.r04.c0",
+            "text": "Home Assistant Cloud"
+          },
+          {
+            "id": "t03.r04.c1",
+            "text": "Integrated path for STT and TTS with little own infrastructure"
+          },
+          {
+            "id": "t03.r04.c2",
+            "text": "Subscription and Internet; check the currently offered voice in the interface [Q11]"
+          }
+        ],
+        [
+          {
+            "id": "t03.r05.c0",
+            "text": "Cartesia"
+          },
+          {
+            "id": "t03.r05.c1",
+            "text": "Another cloud TTS provider as a comparison option"
+          },
+          {
+            "id": "t03.r05.c2",
+            "text": "Additional community integration or own API connection; do not confuse with “Katja” [Q15]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p08.b021",
+      "type": "h2",
+      "text": "4.3 What is important for voice and audio"
+    },
+    {
+      "id": "p08.b022",
+      "type": "lead",
+      "text": "Pronunciation: Compare place names, device names, numbers, times and abbreviations with the same test sets. A good-sounding demonstration says little about how “workroom”, a weather warning or a foreign-language music title is spoken."
+    },
+    {
+      "id": "p09.b003",
+      "type": "lead",
+      "text": "Start of answer: The time from the end of the question to the first audible tone is decisive. STT, command processing, TTS, network runtime and audio buffer contribute together. Streaming only helps if the entire playback chain supports it."
+    },
+    {
+      "id": "p09.b004",
+      "type": "lead",
+      "text": "Detection in music: AEC means echo suppression; it is to calculate the own speaker from the microphone recording. Beamforming combines microphones spatially. VAD recognizes speech activity. Another TTS offer does not repair faulty microphone processing."
+    },
+    {
+      "id": "p09.b005",
+      "type": "lead",
+      "text": "Activation word and interrupt: Your own name requires a suitable recognition model and tests with different voices. The desired TTS voice does not set the activation word. The satellite must also support the interruption of an ongoing response."
+    },
+    {
+      "id": "p09.b006",
+      "type": "lead",
+      "text": "Failure behavior: A local replacement voice can be useful in the event of cloud failure. However, the change only takes place if the integration or automation used actually implements such a fallback."
+    },
+    {
+      "id": "p09.b007",
+      "type": "h1",
+      "text": "5. Hardware, pogo pins, cables and soldering"
+    },
+    {
+      "id": "p09.b008",
+      "type": "h2",
+      "text": "5.1 What Which Part Does"
+    },
+    {
+      "id": "t04",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t04.r00.c0",
+            "text": "Part or tool"
+          },
+          {
+            "id": "t04.r00.c1",
+            "text": "Purpose"
+          },
+          {
+            "id": "t04.r00.c2",
+            "text": "What it does not create"
+          }
+        ],
+        [
+          {
+            "id": "t04.r01.c0",
+            "text": "Data-capable USB cable"
+          },
+          {
+            "id": "t04.r01.c1",
+            "text": "Connection to installation computer; power supply for some devices"
+          },
+          {
+            "id": "t04.r01.c2",
+            "text": "A pure charging cable does not transmit installation data"
+          }
+        ],
+        [
+          {
+            "id": "t04.r02.c0",
+            "text": "Pogo pins with holder"
+          },
+          {
+            "id": "t04.r02.c1",
+            "text": "Spring contacts on accessible test pads, for example on the Echo 2"
+          },
+          {
+            "id": "t04.r02.c2",
+            "text": "No root without suitable software; loose needles are not a stable holder"
+          }
+        ],
+        [
+          {
+            "id": "t04.r03.c0",
+            "text": "Jumper cable and adapter"
+          },
+          {
+            "id": "t04.r03.c1",
+            "text": "Electrical connection between contacting and connection"
+          },
+          {
+            "id": "t04.r03.c2",
+            "text": "No automatically matching mechanical connection to the pogo needle"
+          }
+        ],
+        [
+          {
+            "id": "t04.r04.c0",
+            "text": "Soldering irons, fine lines, fluxes"
+          },
+          {
+            "id": "t04.r04.c1",
+            "text": "Fixed connection to internal pads, if the instructions so require"
+          },
+          {
+            "id": "t04.r04.c2",
+            "text": "No substitute for correct pin assignment and voltage testing"
+          }
+        ],
+        [
+          {
+            "id": "t04.r05.c0",
+            "text": "Multimeters"
+          },
+          {
+            "id": "t04.r05.c1",
+            "text": "Control passage, ground and possible short circuits"
+          },
+          {
+            "id": "t04.r05.c2",
+            "text": "Cable colors or visible shape are not automatically correct"
+          }
+        ],
+        [
+          {
+            "id": "t04.r06.c0",
+            "text": "USB-UART adapter"
+          },
+          {
+            "id": "t04.r06.c1",
+            "text": "Serial diagnostic console for suitable devices"
+          },
+          {
+            "id": "t04.r06.c2",
+            "text": "No replacement for a USB data connection; level must fit the device"
+          }
+        ],
+        [
+          {
+            "id": "t04.r07.c0",
+            "text": "Opening tool and enlargement"
+          },
+          {
+            "id": "t04.r07.c1",
+            "text": "Access to board and small pads"
+          },
+          {
+            "id": "t04.r07.c2",
+            "text": "No protection against demolished pads by train on lines"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p09.b025",
+      "type": "h2",
+      "text": "5.2 Pogo pins and jumper pins are mechanically different"
+    },
+    {
+      "id": "p09.b026",
+      "type": "paragraph",
+      "text": "A specific supplier example for P50-B1-Pogo pins mentions 0.68 mm shaft diameter, 0.48 mm contact diameter and 16 mm total length. This information is not a universal standard for all offers. For a holder, the specific data sheet and a measurement of the delivered pins are decisive. [Q32]"
+    },
+    {
+      "id": "p10.b003",
+      "type": "paragraph",
+      "text": "A square jumper pin of 0,64 × 0,64 mm cross-section shall be used as an example for calculation; the actual dimension shall be checked on the connector used. Its diagonal is about 0.91 mm. The usual grid of 2.54 mm denotes the distance between the pin centers. Therefore, such a square does not automatically fit into a round 0.68 mm receptacle. Sockets, sleeves or a suitable fixed connection are required separately."
+    },
+    {
+      "id": "p10.b004",
+      "type": "paragraph",
+      "text": "Pogo contacts can avoid soldering on the device if matching pads are accessible. For this purpose, pressure, alignment and strain relief must be reliable. A soldered connection can be mechanically more stable, but requires experience and can damage pads. The sensible way depends on the specific device."
+    },
+    {
+      "id": "p10.b005",
+      "type": "h2",
+      "text": "5.3 Before writing to the device memory"
+    },
+    {
+      "id": "p10.b006",
+      "type": "paragraph",
+      "text": "Model and pin assignment are taken from the exact device manual. Power supply and USB voltage shall not be connected as expected. For devices with a separate power supply, its role is explicitly maintained; a USB-UART adapter does not belong to USB data pads."
+    },
+    {
+      "id": "p10.b007",
+      "type": "paragraph",
+      "text": "First of all, a permanently stable recognition on the computer makes sense. Repeated unsubscriptions indicate a contact, cable or supply problem. A short visible MediaTek entry proves neither root nor a reliable flash connection. Subsequently, device-owned backups, matching images and the documented recovery path are stored together."
+    },
+    {
+      "id": "p10.b008",
+      "type": "h1",
+      "text": "6. Documented compatible Echo devices"
+    },
+    {
+      "id": "p10.b009",
+      "type": "h2",
+      "text": "6.1 Measurement measure"
+    },
+    {
+      "id": "p10.b010",
+      "type": "paragraph",
+      "text": "The assessment has two separate axes: access to the device and usability as a local voice assistant. Root alone confirms no working microphones, no echo suppression and no home Assistant connection."
+    },
+    {
+      "id": "t05",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t05.r00.c0",
+            "text": "Language status"
+          },
+          {
+            "id": "t05.r00.c1",
+            "text": "Significance"
+          },
+          {
+            "id": "t05.r00.c2",
+            "text": "Scope of application"
+          }
+        ],
+        [
+          {
+            "id": "t05.r01.c0",
+            "text": "A – documented usable"
+          },
+          {
+            "id": "t05.r01.c1",
+            "text": "A device-specific installation path and voice satellite functions have been published"
+          },
+          {
+            "id": "t05.r01.c2",
+            "text": "Applies only to the named hardware and software combination; no guarantee for each copy"
+          }
+        ],
+        [
+          {
+            "id": "t05.r02.c0",
+            "text": "B – experimental or restricted"
+          },
+          {
+            "id": "t05.r02.c1",
+            "text": "A port exists, but variants or essential functions are still open"
+          },
+          {
+            "id": "t05.r02.c2",
+            "text": "Suitability depends on the specific device and the required functions"
+          }
+        ],
+        [
+          {
+            "id": "t05.r03.c0",
+            "text": "C – does not work as a complete local language assistant today"
+          },
+          {
+            "id": "t05.r03.c1",
+            "text": "The audited projects lack a proven overall solution"
+          },
+          {
+            "id": "t05.r03.c2",
+            "text": "Concerns the local language operation, not the original Alexa function and not necessarily the rootability"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p10.b020",
+      "type": "lead",
+      "text": "Access to the device: “Unlock” means a documented way to start modified software. “Temporary” applies only to the current session or until restart. “Historically” requires old firmware or certain hardware. “Not proven” means that there is no sufficient proof."
+    },
+    {
+      "id": "t06",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t06.r00.c0",
+            "text": "Expenditure"
+          },
+          {
+            "id": "t06.r00.c1",
+            "text": "Typical scope"
+          },
+          {
+            "id": "t06.r00.c2",
+            "text": "Classification"
+          }
+        ],
+        [
+          {
+            "id": "t06.r01.c0",
+            "text": "1 of 5"
+          },
+          {
+            "id": "t06.r01.c1",
+            "text": "Establishment of existing functions"
+          },
+          {
+            "id": "t06.r01.c2",
+            "text": "No equipment conversion"
+          }
+        ],
+        [
+          {
+            "id": "t06.r02.c0",
+            "text": "2 of 5"
+          },
+          {
+            "id": "t06.r02.c1",
+            "text": "Documented USB conversion"
+          },
+          {
+            "id": "t06.r02.c2",
+            "text": "Appropriate files, tools and careful follow-up to device instructions"
+          }
+        ],
+        [
+          {
+            "id": "t06.r03.c0",
+            "text": "3 of 5"
+          },
+          {
+            "id": "t06.r03.c1",
+            "text": "Multi-stage installation or adapter"
+          },
+          {
+            "id": "t06.r03.c2",
+            "text": "Schedule additional preparation and troubleshooting"
+          }
+        ],
+        [
+          {
+            "id": "t06.r04.c0",
+            "text": "4 out of 5"
+          },
+          {
+            "id": "t06.r04.c1",
+            "text": "Internal contacting or strong variant dependence"
+          },
+          {
+            "id": "t06.r04.c2",
+            "text": "Experience with electronics or device-specific installation paths makes sense"
+          }
+        ],
+        [
+          {
+            "id": "t06.r05.c0",
+            "text": "5 of 5"
+          },
+          {
+            "id": "t06.r05.c1",
+            "text": "Development and research"
+          },
+          {
+            "id": "t06.r05.c2",
+            "text": "No successful restructuring promised"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p11.b012",
+      "type": "paragraph",
+      "text": "The effort is an editorial orientation, not a measured working time. In Chapter 6, it refers to voice conversion; for the additional devices in Chapter 7, the root/unlock effort is specified separately."
+    },
+    {
+      "id": "p11.b013",
+      "type": "h2",
+      "text": "6.2 Similar housing, different hardware"
+    },
+    {
+      "id": "p11.b014",
+      "type": "lead",
+      "text": "The model year is not the year of manufacture. The years describe the introduction of the model or the period of a hardware version mentioned in the project source. A device may have been produced or purchased later. For the selection of firmware and instructions, model number and device identifier are more important than purchase date, color or case shape."
+    },
+    {
+      "id": "t07",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t07.r00.c0",
+            "text": "Device and model year / hardware version"
+          },
+          {
+            "id": "t07.r00.c1",
+            "text": "Model number and codename"
+          },
+          {
+            "id": "t07.r00.c2",
+            "text": "Crucial difference"
+          }
+        ],
+        [
+          {
+            "id": "t07.r01.c0",
+            "text": "Echo Dot 3 – original version, 2018"
+          },
+          {
+            "id": "t07.r01.c1",
+            "text": "D9N29T · donut"
+          },
+          {
+            "id": "t07.r01.c2",
+            "text": "Supported by hassmic; internal USB access and appropriate firmware required"
+          }
+        ],
+        [
+          {
+            "id": "t07.r02.c0",
+            "text": "Echo Dot 3 – Refresh, 2019–2020"
+          },
+          {
+            "id": "t07.r02.c1",
+            "text": "C78MP8 · crumpet"
+          },
+          {
+            "id": "t07.r02.c2",
+            "text": "Looks very similar to the original Dot 3; the donut unlock is not compatible"
+          }
+        ],
+        [
+          {
+            "id": "t07.r03.c0",
+            "text": "Echo Dot 3 with clock – 2019"
+          },
+          {
+            "id": "t07.r03.c1",
+            "text": "36EBT3 · doebrite"
+          },
+          {
+            "id": "t07.r03.c2",
+            "text": "Own hardware variant with display; no transmission of the D9N29T release"
+          }
+        ],
+        [
+          {
+            "id": "t07.r04.c0",
+            "text": "Echo Show 5 Gen. 1 – 2019"
+          },
+          {
+            "id": "t07.r04.c1",
+            "text": "H23K37 · checkers"
+          },
+          {
+            "id": "t07.r04.c2",
+            "text": "Own device port and own software substructure"
+          }
+        ],
+        [
+          {
+            "id": "t07.r05.c0",
+            "text": "Echo Show 5 Gen. 2 – 2021"
+          },
+          {
+            "id": "t07.r05.c1",
+            "text": "C76N8S · cronos"
+          },
+          {
+            "id": "t07.r05.c2",
+            "text": "Similar housing but different port; checkers files are not a replacement"
+          }
+        ],
+        [
+          {
+            "id": "t07.r06.c0",
+            "text": "Echo Show 8 Gen. 1 – 2019"
+          },
+          {
+            "id": "t07.r06.c1",
+            "text": "C7H6N3 · crown"
+          },
+          {
+            "id": "t07.r06.c2",
+            "text": "Supported path for this generation"
+          }
+        ],
+        [
+          {
+            "id": "t07.r07.c0",
+            "text": "Echo Show 8 Gen. 2 – 2021"
+          },
+          {
+            "id": "t07.r07.c1",
+            "text": "A8H3N2 · athena"
+          },
+          {
+            "id": "t07.r07.c2",
+            "text": "Visually similar, own installation chain and additional panel variants"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p12.b003",
+      "type": "paragraph",
+      "text": "Assignment and software boundaries: device overviews of hassmic and TECHO5. The dot-3 refresh is classified in the hassmic project from 2019 to 2020; no exact production limit can be derived for each unit. [Q1, Q31]"
+    },
+    {
+      "id": "p12.b004",
+      "type": "lead",
+      "text": "Identification before purchase: A readable photo of the nameplate on the device and a photo of the software stand are useful. The designation “Echo Dot 3” in an advertisement is not sufficient. The model number of the power supply is not the model number of the Echo. Even after appropriate model allocation, internal variants can play a role, for example the display panel in the Show 8 Gen. 2."
+    },
+    {
+      "id": "p12.b005",
+      "type": "h2",
+      "text": "6.3 Speakers with published voice satellite path"
+    },
+    {
+      "id": "t08",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t08.r00.c0",
+            "text": "Device and identifier"
+          },
+          {
+            "id": "t08.r00.c1",
+            "text": "Root and suitable software"
+          },
+          {
+            "id": "t08.r00.c2",
+            "text": "Result, effort and limit"
+          }
+        ],
+        [
+          {
+            "id": "t08.r01.c0",
+            "text": "Echo Dot 2, 2016; RS03QR; biscuit"
+          },
+          {
+            "id": "t08.r01.c1",
+            "text": "Unlock; hassmic, EchoLocal, EchoMuse/emOS, TECHO5 Dot, LibreEcho"
+          },
+          {
+            "id": "t08.r01.c2",
+            "text": "A; voice satellite and media per port; 2–3/5. Data-enabled micro USB port, small speakers. Do not mix fire OS and donor instructions. [Q1–Q3, Q5, Q8]"
+          }
+        ],
+        [
+          {
+            "id": "t08.r02.c0",
+            "text": "Echo 2, 2017; XC56PY; radar"
+          },
+          {
+            "id": "t08.r02.c1",
+            "text": "Unlock; hassmic, TECHO5 Dot, LibreEcho"
+          },
+          {
+            "id": "t08.r02.c2",
+            "text": "A; voice and media device; 3/5 with matching adapter, 4/5 with internal soldering work. Pogo access is documented for the LibreEcho path. [Q1, Q5, Q8]"
+          }
+        ],
+        [
+          {
+            "id": "t08.r03.c0",
+            "text": "Echo Dot 3, original version 2018; D9N29T; donut"
+          },
+          {
+            "id": "t08.r03.c1",
+            "text": "Device specific unlock; hassmic"
+          },
+          {
+            "id": "t08.r03.c2",
+            "text": "A; voice satellite with original audio processing; 4/5. Internal pads and exact firmware binding; not transferable to refresh or watch variant. [Q1, Q9]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p12.b015",
+      "type": "paragraph",
+      "text": "For the simplest possible hardware access, the Dot 2 is a useful starting point. For the Echo 2, mechanical contacting is the essential additional step. For the Dot 3, the exact model identification is particularly important. This order evaluates the entry hurdle and is not a general sound comparison."
+    },
+    {
+      "id": "p12.b016",
+      "type": "h2",
+      "text": "6.4 Screen devices with published voice satellite path"
+    },
+    {
+      "id": "t09",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t09.r00.c0",
+            "text": "Device and identifier"
+          },
+          {
+            "id": "t09.r00.c1",
+            "text": "Root and suitable software"
+          },
+          {
+            "id": "t09.r00.c2",
+            "text": "Result, effort and limit"
+          }
+        ],
+        [
+          {
+            "id": "t09.r01.c0",
+            "text": "Show 5 Gen. 1, 2019; H23K37; checkers"
+          },
+          {
+            "id": "t09.r01.c1",
+            "text": "Unlock; EchoLocal or TECHO5; LineageOS as your own Android way"
+          },
+          {
+            "id": "t09.r01.c2",
+            "text": "A; voice and small display; 3/5. Select the correct device-specific substructure. [Q2, Q4, Q17]"
+          }
+        ],
+        [
+          {
+            "id": "t09.r02.c0",
+            "text": "Show 5 Gen. 2, 2021; C76N8S; cronos"
+          },
+          {
+            "id": "t09.r02.c1",
+            "text": "Unlock; EchoLocal or TECHO5"
+          },
+          {
+            "id": "t09.r02.c2",
+            "text": "A; Voice and Display; 3/5. TECHO5 also mentions LineageOS v0.4 as starting point and excludes v0.5. [Q2, Q4]"
+          }
+        ],
+        [
+          {
+            "id": "t09.r03.c0",
+            "text": "Show 8 Gen. 1, 2019; C7H6N3; crown"
+          },
+          {
+            "id": "t09.r03.c1",
+            "text": "Unlock; EchoLocal or TECHO5; apparatus-specific LineageOS"
+          },
+          {
+            "id": "t09.r03.c2",
+            "text": "A; larger dashboard and language; 3/5. Check donor and release compatibility before installation. [Q2, Q4, Q17]"
+          }
+        ],
+        [
+          {
+            "id": "t09.r04.c0",
+            "text": "Spot Gen. 1, 2017; VN94DQ; rook"
+          },
+          {
+            "id": "t09.r04.c1",
+            "text": "Unlock; LineageOS and TECHO5 Spot"
+          },
+          {
+            "id": "t09.r04.c2",
+            "text": "A with narrow test base; voice, round display and clock; 3/5. Small display; the project description first documents a test device. [Q6]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p13.b003",
+      "type": "paragraph",
+      "text": "A published port can be distinguished from a sufficiently long everyday test for all devices. Especially speech comprehensibility in music, mute, timer after restart and behavior without server decide on the practical suitability."
+    },
+    {
+      "id": "p13.b004",
+      "type": "h1",
+      "text": "7. Experimental devices and other rootable Amazon devices"
+    },
+    {
+      "id": "p13.b005",
+      "type": "h2",
+      "text": "7.1 Echo devices with open points"
+    },
+    {
+      "id": "p13.b006",
+      "type": "lead",
+      "text": "Show 8 Gen. 2 – Model year 2021, A8H3N2 / athena: EchoLocal leads him as supported. For TECHO5, a separate 64-bit Linux path is documented. Because of the variants, the editorial classification B , Effort 4/5 remains. The manual mentions Fire OS PS7574.1.7080N as an unlock output. According to the installation manual, both ILI9881C with BOE glass and JD9365 with KD/HSD glass are tested. Other panels are not automatically virtually confirmed; microphone beamforming is deactivated and the lux values of the light sensor are not yet calibrated. [Q2, Q7]"
+    },
+    {
+      "id": "p13.b007",
+      "type": "lead",
+      "text": "Echo 1 – Model year 2014/2015, SK705DI: historical root methods exist for certain early hardware. A comparably maintained complete Assist satellite is not occupied here: C for language operation, 5/5 for development work. Old root access and current everyday usability are separate statements. [Q27]"
+    },
+    {
+      "id": "p13.b008",
+      "type": "lead",
+      "text": "Dot 3 Refresh – Hardware version 2019–2020, C78MP8 / crumpet – and Dot 3 with clock – Model year 2019, 36EBT3 / doebrite: Both are to be distinguished from the supported Dot 3 D9N29T / donut. The donut installation path is not released for these variants. Category C for the language operation described here; a future port remains open. [Q1]"
+    },
+    {
+      "id": "p13.b009",
+      "type": "lead",
+      "text": "Echo Input – Model Year 2018 / cupcake: No complete device port is occupied in the tested voice satellite projects. Category C. Technical similarity to other echoes does not replace device-specific detection. [Q1–Q8]"
+    },
+    {
+      "id": "p13.b010",
+      "type": "h2",
+      "text": "7.2 Fire TV: Root means system access first"
+    },
+    {
+      "id": "p13.b011",
+      "type": "lead",
+      "text": "The following devices are recorded because root or unlock is documented. A complete local voice satellite is not occupied for these Fire TV entries in the projects examined here (C). As a media device or controllable home Assistant device, they can still be useful. The microphone of a remote control is not automatically usable as a permanent room microphone. [Q16]"
+    },
+    {
+      "id": "t10",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t10.r00.c0",
+            "text": "Device"
+          },
+          {
+            "id": "t10.r00.c1",
+            "text": "Documented access"
+          },
+          {
+            "id": "t10.r00.c2",
+            "text": "Effort for root/unlock and essential limit"
+          }
+        ],
+        [
+          {
+            "id": "t10.r01.c0",
+            "text": "Fire TV Gen. 1, 2014; bueller"
+          },
+          {
+            "id": "t10.r01.c1",
+            "text": "Historical Unlock"
+          },
+          {
+            "id": "t10.r01.c2",
+            "text": "3–4/5; old firmware limit, no blanket release. [Q18]"
+          }
+        ],
+        [
+          {
+            "id": "t10.r02.c0",
+            "text": "Fire TV Gen. 2, 2015; sloane"
+          },
+          {
+            "id": "t10.r02.c1",
+            "text": "Amonet-Sloane"
+          },
+          {
+            "id": "t10.r02.c2",
+            "text": "3–4/5; device-specific media/system conversion. [Q19]"
+          }
+        ],
+        [
+          {
+            "id": "t10.r03.c0",
+            "text": "Fire TV Stick Gen. 2, 2016; tank"
+          },
+          {
+            "id": "t10.r03.c1",
+            "text": "amonet-Port"
+          },
+          {
+            "id": "t10.r03.c2",
+            "text": "4/5; later hardware can lock the necessary BootROM mode. [Q18]"
+          }
+        ],
+        [
+          {
+            "id": "t10.r04.c0",
+            "text": "Fire TV Stick 4K Gen. 1, 2018; mantis"
+          },
+          {
+            "id": "t10.r04.c1",
+            "text": "amonet-Port, alternative routes per stand"
+          },
+          {
+            "id": "t10.r04.c2",
+            "text": "4/5; Hardware and firmware decide on the available entry. [Q18]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "t11",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t11.r00.c0",
+            "text": "Device"
+          },
+          {
+            "id": "t11.r00.c1",
+            "text": "Documented access"
+          },
+          {
+            "id": "t11.r00.c2",
+            "text": "Effort for root/unlock and essential limit"
+          }
+        ],
+        [
+          {
+            "id": "t11.r01.c0",
+            "text": "Fire TV Stick Gen. 3 and Stick Lite, 2020; sheldon/p"
+          },
+          {
+            "id": "t11.r01.c1",
+            "text": "amonet-Port"
+          },
+          {
+            "id": "t11.r01.c2",
+            "text": "3–5/5; the known entry was closed with Fire OS 7.2.7.3; hardware paths are to be assessed separately. [Q18]"
+          }
+        ],
+        [
+          {
+            "id": "t11.r02.c0",
+            "text": "Fire TV Stick 4K Gen. 2, 2023; 4K Plus, 2025"
+          },
+          {
+            "id": "t11.r02.c1",
+            "text": "Unlock in developer overview, common karat TWRP tree"
+          },
+          {
+            "id": "t11.r02.c2",
+            "text": "3–4/5; exact model/build assignment required. Derive no general installation recipe from a device tree. [Q18, Q24]"
+          }
+        ],
+        [
+          {
+            "id": "t11.r03.c0",
+            "text": "Fire TV Stick 4K Max Gen. 2, 2023; karat"
+          },
+          {
+            "id": "t11.r03.c1",
+            "text": "Unlock reference; additionally GhostLock for listed builds"
+          },
+          {
+            "id": "t11.r03.c2",
+            "text": "3–4/5; GhostLock alone is temporary root. The release of a Max build does not automatically apply to all karat variants. [Q24, Q25]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p14.b012",
+      "type": "h2",
+      "text": "7.3 Fire TV Cube and its counterpart"
+    },
+    {
+      "id": "t12",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t12.r00.c0",
+            "text": "Device"
+          },
+          {
+            "id": "t12.r00.c1",
+            "text": "Access and firmware limit"
+          },
+          {
+            "id": "t12.r00.c2",
+            "text": "What is revealed and what remains open"
+          }
+        ],
+        [
+          {
+            "id": "t12.r01.c0",
+            "text": "Fire TV Cube Gen. 1, 2018, and Fire TV Pendant, 2017"
+          },
+          {
+            "id": "t12.r01.c1",
+            "text": "FireFU; historical path, according to the developer overview, not beyond Fire OS 6.2.5.8"
+          },
+          {
+            "id": "t12.r01.c2",
+            "text": "Root/Unlock; 4–5/5 with special HDMI/DFU access. No occupied full Assist port. [Q18, Q20]"
+          }
+        ],
+        [
+          {
+            "id": "t12.r02.c0",
+            "text": "Fire TV Cube Gen. 2, 2019; raven"
+          },
+          {
+            "id": "t12.r02.c1",
+            "text": "Several different ways: old DFU-based temporary raven-root access and later unlock reference"
+          },
+          {
+            "id": "t12.r02.c2",
+            "text": "Old repository path requires Fire OS before 7.2.7.3; developer overview cites unlock PS7292 as limit for another. These limits belong to different methods. 3–5/5; voice port not occupied. [Q18, Q21]"
+          }
+        ],
+        [
+          {
+            "id": "t12.r03.c0",
+            "text": "Fire TV Cube Gen. 3, 2022; gazelle"
+          },
+          {
+            "id": "t12.r03.c1",
+            "text": "New unlock thread known; complete primary text not available in this research"
+          },
+          {
+            "id": "t12.r03.c2",
+            "text": "B for the source verification of the root path, C for complete voice operation. Exact current firmware release and effort remain open until the original instructions are checked. [Q22]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p14.b023",
+      "type": "paragraph",
+      "text": "The Cube-3 classification is expressly not a claim that the device is not rootable. For a reliable purchase or installation release, however, a reference to a new thread is not enough. The Cubes should also separately determine whether microphones, echo suppression and audio output work together outside of the original Alexa software."
+    },
+    {
+      "id": "p14.b024",
+      "type": "h2",
+      "text": "7.4 Fire tablets: additional use as a display or Android device"
+    },
+    {
+      "id": "p14.b025",
+      "type": "paragraph",
+      "text": "Rootable tablets are part of the expanded inventory. Your usefulness can be a dashboard or an alternative Android interface. A current browser, a suitable app and a permanently functioning microphone access are separate requirements. A tablet dashboard may also be possible without root."
+    },
+    {
+      "id": "t13",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t13.r00.c0",
+            "text": "Model or family"
+          },
+          {
+            "id": "t13.r00.c1",
+            "text": "Access according to sources"
+          },
+          {
+            "id": "t13.r00.c2",
+            "text": "Practical classification"
+          }
+        ],
+        [
+          {
+            "id": "t13.r01.c0",
+            "text": "Fire HD 6 / HD 7 (2014); HD 8 / HD 10 (2015)"
+          },
+          {
+            "id": "t13.r01.c1",
+            "text": "Device-related amonet ports"
+          },
+          {
+            "id": "t13.r01.c2",
+            "text": "Historical unlock candidates; 3–4/5. Check current app and browser capability separately. [Q18]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "t14",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t14.r00.c0",
+            "text": "Model or family"
+          },
+          {
+            "id": "t14.r00.c1",
+            "text": "Access according to sources"
+          },
+          {
+            "id": "t14.r00.c2",
+            "text": "Practical classification"
+          }
+        ],
+        [
+          {
+            "id": "t14.r01.c0",
+            "text": "Fire 7 (2015 / Ford; 2017 / austin)"
+          },
+          {
+            "id": "t14.r01.c1",
+            "text": "amonet, each correct variant"
+          },
+          {
+            "id": "t14.r01.c2",
+            "text": "3–4/5. An old common source tree is not automatically a full port for both variants. [Q23]"
+          }
+        ],
+        [
+          {
+            "id": "t14.r02.c0",
+            "text": "Fire HD 8 (2016 / giza; 2017 / douglas); HD 10 (2017 / suez)"
+          },
+          {
+            "id": "t14.r02.c1",
+            "text": "Device-related amonet ports"
+          },
+          {
+            "id": "t14.r02.c2",
+            "text": "3–4/5. Check reuse as a display; no finished echo voice port confirmed here. [Q18]"
+          }
+        ],
+        [
+          {
+            "id": "t14.r03.c0",
+            "text": "Fire HD 8 (2018 / karnak / KFKAWI)"
+          },
+          {
+            "id": "t14.r03.c1",
+            "text": "Original Amonet target"
+          },
+          {
+            "id": "t14.r03.c2",
+            "text": "3–4/5. Unlock is documented; compare concrete installation status. [Q28]"
+          }
+        ],
+        [
+          {
+            "id": "t14.r04.c0",
+            "text": "Fire 7 (2019 / mustang)"
+          },
+          {
+            "id": "t14.r04.c1",
+            "text": "Hardware-based unlock linked in postmarketOS documentation"
+          },
+          {
+            "id": "t14.r04.c2",
+            "text": "4/5. Check hardware revision in advance; do not treat it as universally released. [Q29]"
+          }
+        ],
+        [
+          {
+            "id": "t14.r05.c0",
+            "text": "Fire HD 10 (2019)"
+          },
+          {
+            "id": "t14.r05.c1",
+            "text": "Temporary, computer-dependent access for early specimens"
+          },
+          {
+            "id": "t14.r05.c2",
+            "text": "4–5/5. Later hardware can prevent entry. [Q18]"
+          }
+        ],
+        [
+          {
+            "id": "t14.r06.c0",
+            "text": "Fire HDX third generation, 2013: 7 and 8.9 inches"
+          },
+          {
+            "id": "t14.r06.c1",
+            "text": "Historic Qualcomm Unlock"
+          },
+          {
+            "id": "t14.r06.c2",
+            "text": "3–4/5. Exact generation check; no transfer to any later HDX. [Q18]"
+          }
+        ],
+        [
+          {
+            "id": "t14.r07.c0",
+            "text": "Fire Max 11, 2023; sunstone"
+          },
+          {
+            "id": "t14.r07.c1",
+            "text": "GhostLock for explicitly listed Fire OS 8 builds"
+          },
+          {
+            "id": "t14.r07.c2",
+            "text": "3/5 for temporary root, not for a finished language remodel. No permanent unlock by this proof alone. [Q25]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p15.b020",
+      "type": "lead",
+      "text": "For these tablet entries, complete voice satellite operation is not proven within the meaning of this guide. This does not exclude a separately tested app-based Assist access. Newer generations, Kids versions and similarly named models do not receive automatic release."
+    },
+    {
+      "id": "p15.b021",
+      "type": "h2",
+      "text": "7.5 Kindle and other device classes"
+    },
+    {
+      "id": "p15.b022",
+      "type": "paragraph",
+      "text": "Kindle e-readers have their own jailbreak procedures. KindleModding maps the appropriate path based on model and firmware; WinterBreak is just one of them. A jailbreak enables additional software, but does not replace missing microphone and speaker hardware. For these devices, a read or status display is more useful than a complete room voice assistant. [Q30]"
+    },
+    {
+      "id": "p15.b023",
+      "type": "paragraph",
+      "text": "The overview does not claim a complete list of all Amazon products ever unlocked or every Kindle submodel. Recorded are Echo families and Amazon devices with traceable root/unlock hints. Further models are only guided as rootable after assignment of a device-specific source. Thus, historical individual reports, temporary root and complete operating system ports are not equated."
+    },
+    {
+      "id": "p16.b003",
+      "type": "h1",
+      "text": "8. Does not work today"
+    },
+    {
+      "id": "p16.b004",
+      "type": "h2",
+      "text": "8.1 Echo devices without occupied full voice port"
+    },
+    {
+      "id": "p16.b005",
+      "type": "lead",
+      "text": "Status: 22. October 2026. For the following entries, no complete local voice satellite path is used in the software lists checked here. Decisive are the published target lists of the investigated software projects. The statement is not an independent negative review of every worldwide existing project. [Q1–Q8]"
+    },
+    {
+      "id": "t15",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t15.r00.c0",
+            "text": "Equipment"
+          },
+          {
+            "id": "t15.r00.c1",
+            "text": "Current border"
+          },
+          {
+            "id": "t15.r00.c2",
+            "text": "What would be missing for another classification"
+          }
+        ],
+        [
+          {
+            "id": "t15.r01.c0",
+            "text": "Echo Gen. 3 (2019) / pascal; Gen. 4 (2020) / laser"
+          },
+          {
+            "id": "t15.r01.c1",
+            "text": "No total port occupied here"
+          },
+          {
+            "id": "t15.r01.c2",
+            "text": "Appropriate unlock and tested audio drivers"
+          }
+        ],
+        [
+          {
+            "id": "t15.r02.c0",
+            "text": "Dot Gen. 1 (2016)"
+          },
+          {
+            "id": "t15.r02.c1",
+            "text": "No complete port in the audited projects"
+          },
+          {
+            "id": "t15.r02.c2",
+            "text": "Repeatable installation and complete voice path"
+          }
+        ],
+        [
+          {
+            "id": "t15.r03.c0",
+            "text": "Dot 3 Refresh (2019–2020), C78MP8; Dot 3 with clock (2019), 36EBT3"
+          },
+          {
+            "id": "t15.r03.c1",
+            "text": "Hardware other than Dot 3 D9N29T (2018)"
+          },
+          {
+            "id": "t15.r03.c2",
+            "text": "Own unlock and suitable audio port; see comparison in chapter 6.2"
+          }
+        ],
+        [
+          {
+            "id": "t15.r04.c0",
+            "text": "Dot Gen. 4 and watch variant (2020); Dot Gen. 5 and watch variant (2022)"
+          },
+          {
+            "id": "t15.r04.c1",
+            "text": "No release in the checked target lists"
+          },
+          {
+            "id": "t15.r04.c2",
+            "text": "Own device port; additional display for clock versions"
+          }
+        ],
+        [
+          {
+            "id": "t15.r05.c0",
+            "text": "Dot Max (2025); Echo Pop (2023)"
+          },
+          {
+            "id": "t15.r05.c1",
+            "text": "No total path confirmed here"
+          },
+          {
+            "id": "t15.r05.c2",
+            "text": "Proof of the exact device generation"
+          }
+        ],
+        [
+          {
+            "id": "t15.r06.c0",
+            "text": "Echo Plus Gen. 1 (2017) and Gen. 2 (2018)"
+          },
+          {
+            "id": "t15.r06.c1",
+            "text": "Not using a full voice/hub port"
+          },
+          {
+            "id": "t15.r06.c2",
+            "text": "Open audio and, if necessary, Zigbee separately"
+          }
+        ],
+        [
+          {
+            "id": "t15.r07.c0",
+            "text": "Echo Studio 2019/2022 and Studio 2025"
+          },
+          {
+            "id": "t15.r07.c1",
+            "text": "No confirmed total port"
+          },
+          {
+            "id": "t15.r07.c2",
+            "text": "Multichannel audio and sound tuning in addition to boat access"
+          }
+        ],
+        [
+          {
+            "id": "t15.r08.c0",
+            "text": "Echo Show Gen. 1 (2017) and Gen. 2 (2018); Show 5 Gen. 3 (2023)"
+          },
+          {
+            "id": "t15.r08.c1",
+            "text": "Outside of confirmed show ports"
+          },
+          {
+            "id": "t15.r08.c2",
+            "text": "Device-specific display, audio and installation chain"
+          }
+        ],
+        [
+          {
+            "id": "t15.r09.c0",
+            "text": "Show 8 Gen. 3 (2023) and Gen. 4 (2025); Show 10 Gen. 3 (2021); Show 11 (2025)"
+          },
+          {
+            "id": "t15.r09.c1",
+            "text": "No total port in the checked lists"
+          },
+          {
+            "id": "t15.r09.c2",
+            "text": "Additionally suitable drivers; at Show 10 also motor control"
+          }
+        ],
+        [
+          {
+            "id": "t15.r10.c0",
+            "text": "Show 15 Gen. 1 (2021) and Gen. 2 (2024); Show 21 (2024)"
+          },
+          {
+            "id": "t15.r10.c1",
+            "text": "No proven complete local conversion"
+          },
+          {
+            "id": "t15.r10.c2",
+            "text": "Own port; Show 5 / Show 8 images not transferable"
+          }
+        ],
+        [
+          {
+            "id": "t15.r11.c0",
+            "text": "Spot Gen. 2 (2024); Echo Input (2018); Echo Flex (2019); Echo Hub (2024)"
+          },
+          {
+            "id": "t15.r11.c1",
+            "text": "No complete voice satellite confirmed here"
+          },
+          {
+            "id": "t15.r11.c2",
+            "text": "Own device and audio port"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p17.b003",
+      "type": "h2",
+      "text": "8.2 Devices with a fundamentally different task"
+    },
+    {
+      "id": "p17.b004",
+      "type": "lead",
+      "text": "Echo Link and Link Amp are audio components, Echo Sub is a subwoofer. Possible system access does not make it a complete far-field voice speaker. Echo Auto, Buds and Frames are accessories with their own operating conditions and not a stationary satellite developed by the tested Echo ports. Category C for the purpose described here: None of these models are shown in the tested target lists as a complete stationary voice satellite. [Q1–Q8]"
+    },
+    {
+      "id": "p17.b005",
+      "type": "lead",
+      "text": "For Fire TV and tablets, C also means “no occupied complete language conversion”. The rootability documented in Chapter 7 remains unaffected. For unlisted devices, the root status is unchecked, not automatically “impossible”."
+    },
+    {
+      "id": "p17.b006",
+      "type": "h2",
+      "text": "8.3 What could become possible in the future"
+    },
+    {
+      "id": "p17.b007",
+      "type": "lead",
+      "text": "A busy boat access, public kernel sources and active porting work are helpful prerequisites. Only a functioning audio path, a repeatable installation and tests on more than one hardware variant justify a better classification. Similar chips alone do not allow for a prediction of date or success. For devices without port, the effort is to be understood as 5/5 research, not as a particularly long normal installation."
+    },
+    {
+      "id": "p17.b008",
+      "type": "h1",
+      "text": "9. Community, known problems and source evaluation"
+    },
+    {
+      "id": "p17.b009",
+      "type": "h2",
+      "text": "9.1 Concrete observations instead of blanket approval"
+    },
+    {
+      "id": "t16",
+      "type": "table",
+      "columns": 3,
+      "rows": [
+        [
+          {
+            "id": "t16.r00.c0",
+            "text": "Source and context"
+          },
+          {
+            "id": "t16.r00.c1",
+            "text": "Reported status"
+          },
+          {
+            "id": "t16.r00.c2",
+            "text": "Importance for evaluation"
+          }
+        ],
+        [
+          {
+            "id": "t16.r01.c0",
+            "text": "HA-Forum on hassmic, contributions of the 23. September 2026"
+          },
+          {
+            "id": "t16.r01.c1",
+            "text": "User reports missing output and later problems with WiFi/Wake Word; developer reports a fix for global mute"
+          },
+          {
+            "id": "t16.r01.c2",
+            "text": "Concrete troubleshooting is visible. The old problem must not be described as still open without examination. [Q9]"
+          }
+        ],
+        [
+          {
+            "id": "t16.r02.c0",
+            "text": "TECHO5 Dot, project description retrieved"
+          },
+          {
+            "id": "t16.r02.c1",
+            "text": "Daily use on three dots; Echo 2 tested on one copy"
+          },
+          {
+            "id": "t16.r02.c2",
+            "text": "Traceable but small test base. [Q5]"
+          }
+        ],
+        [
+          {
+            "id": "t16.r03.c0",
+            "text": "TECHO5, hearing performance section"
+          },
+          {
+            "id": "t16.r03.c1",
+            "text": "Author describes limits of recognition during music"
+          },
+          {
+            "id": "t16.r03.c2",
+            "text": "Audio quality remains an essential practical test; no guarantee of equivalence to the original processing. [Q4]"
+          }
+        ],
+        [
+          {
+            "id": "t16.r04.c0",
+            "text": "LibreEcho, project description retrieved"
+          },
+          {
+            "id": "t16.r04.c1",
+            "text": "Dot port has less field experience than Echo 2"
+          },
+          {
+            "id": "t16.r04.c2",
+            "text": "Both are on the support list, but with different test experience. [Q8]"
+          }
+        ],
+        [
+          {
+            "id": "t16.r05.c0",
+            "text": "TECHO5 athena, installation manual"
+          },
+          {
+            "id": "t16.r05.c1",
+            "text": "Two panel types tested; beamforming off; light measurement uncalibrated"
+          },
+          {
+            "id": "t16.r05.c2",
+            "text": "Functioning core hardware and remaining restrictions are identified separately. [Q7]"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "p17.b026",
+      "type": "paragraph",
+      "text": "A project README is a statement of the project. A forum test is a report on a specific copy. Multiple reports with named device and software status are more meaningful than stars, likes or multiple copied announcements. A general vote “of the community” was not carried out here."
+    },
+    {
+      "id": "p18.b003",
+      "type": "h2",
+      "text": "9.2 Small problems, big problems and blockers"
+    },
+    {
+      "id": "p18.b004",
+      "type": "lead",
+      "text": "Small limitation: For example, uncalibrated brightness values, if speech and display otherwise work reliably. The significance depends on the planned use."
+    },
+    {
+      "id": "p18.b005",
+      "type": "lead",
+      "text": "Big limitation: Recurring audio loss, unreliable recognition in music, lack of reconnection or an additional computer after each restart. Such points clearly influence everyday life."
+    },
+    {
+      "id": "p18.b006",
+      "type": "lead",
+      "text": "Blocker: Wrong hardware variant, unsupported firmware, missing usable microphone path or no stable connection for installation. Then the chosen path is not released. More installation attempts do not replace suitable device support."
+    },
+    {
+      "id": "p18.b007",
+      "type": "h1",
+      "text": "10. Calculate costs, computing power and effort"
+    },
+    {
+      "id": "p18.b008",
+      "type": "h2",
+      "text": "10.1 One-off and ongoing costs"
+    },
+    {
+      "id": "p18.b009",
+      "type": "paragraph",
+      "text": "The one-time costs consist of device, matching power supply, cables, if necessary pogo adapter or soldering accessories and additional server hardware. Existing tools and an already running server can reduce the additional effort. Used prices are conditional; therefore, no unsubstantiated daily prices are used here."
+    },
+    {
+      "id": "p18.b010",
+      "type": "paragraph",
+      "text": "Electricity costs, possible cloud quotas, media subscriptions and maintenance time are constantly incurred. More devices do not automatically increase every cloud bill equally: the decisive factor is actual requests, amount of audio generated and the billing unit of the service."
+    },
+    {
+      "id": "p18.b011",
+      "type": "h2",
+      "text": "10.2 Computational example for voice and electricity"
+    },
+    {
+      "id": "p18.b012",
+      "type": "lead",
+      "text": "TTS text volume per month = requests per day × average response characters × days. Example: 50 replies × 180 characters × 30 days = 270,000 characters. The amount results only from model, tariff, free quantity and billing rules. Some providers charge differently; characters may not be equated with credits unchecked."
+    },
+    {
+      "id": "p18.b013",
+      "type": "lead",
+      "text": "STT audio volume per month = requests per day × recording seconds × days ÷ 60. 50 requests with 6 seconds each over 30 days result in 150 minutes. Misactivations and repetitions are added."
+    },
+    {
+      "id": "p18.b014",
+      "type": "lead",
+      "text": "Electricity per year = additional average power in watts × 8,760 ÷ 1,000. An assumed additional system with 10 W requires 87.6 kWh/year. With a freely assumed calculation price of 0.35 €/kWh, this would be 30.66 €/year. These are example values, not a measurement of an echo or server model."
+    },
+    {
+      "id": "p18.b015",
+      "type": "paragraph",
+      "text": "When using LLM, input and output tokens or local model computing time are added. Repeatedly played standard announcements can be cached under suitable conditions; the actual saving depends on the integration."
+    },
+    {
+      "id": "p18.b016",
+      "type": "h2",
+      "text": "10.3 Check computing power and response time sensibly"
+    },
+    {
+      "id": "p18.b017",
+      "type": "paragraph",
+      "text": "First of all, a room with the intended STT/TTS combination makes sense. Normal responses and slow outliers as well as CPU, RAM and possibly GPU memory are measured. This is followed by simultaneous requests from several rooms."
+    },
+    {
+      "id": "p19.b003",
+      "type": "paragraph",
+      "text": "The total waiting time is composed of voice end recognition, STT, command processing, TTS start and playback buffer. A fast TTS service cannot compensate for slow local transcription. A fixed second indication for all devices would therefore be misleading."
+    },
+    {
+      "id": "p19.b004",
+      "type": "h1",
+      "text": "11. Purchase testing, installation and everyday testing"
+    },
+    {
+      "id": "p19.b005",
+      "type": "h2",
+      "text": "11.1 Before a purchase decision"
+    },
+    {
+      "id": "p19.b006",
+      "type": "paragraph",
+      "text": "• Complete model number, generation and, if applicable, codename; a photo of the"
+    },
+    {
+      "id": "p19.b007",
+      "type": "paragraph",
+      "text": "Nameplates make sense."
+    },
+    {
+      "id": "p19.b008",
+      "type": "paragraph",
+      "text": "• Document firmware status and, as far as known, hardware or panel variant."
+    },
+    {
+      "id": "p19.b009",
+      "type": "paragraph",
+      "text": "• For exactly this model, select a complete path to the desired function."
+    },
+    {
+      "id": "p19.b010",
+      "type": "paragraph",
+      "text": "• Microphones, loudspeakers, mute, buttons, WLAN and possibly display and touch in original condition"
+    },
+    {
+      "id": "p19.b011",
+      "type": "paragraph",
+      "text": "check."
+    },
+    {
+      "id": "p19.b012",
+      "type": "paragraph",
+      "text": "• Include necessary adapters, original power supply and restoration route in the total cost."
+    },
+    {
+      "id": "p19.b013",
+      "type": "paragraph",
+      "text": "• Historical root, temporary root and documented voice satellites do not rank as equivalent."
+    },
+    {
+      "id": "p19.b014",
+      "type": "h2",
+      "text": "11.2 Before installation"
+    },
+    {
+      "id": "p19.b015",
+      "type": "paragraph",
+      "text": "• Record instructions, software version and downloads together; images of different devices not"
+    },
+    {
+      "id": "p19.b016",
+      "type": "paragraph",
+      "text": "mix."
+    },
+    {
+      "id": "p19.b017",
+      "type": "paragraph",
+      "text": "• Do not perform precautionary updates or downgrades. An update can close an entry; an"
+    },
+    {
+      "id": "p19.b018",
+      "type": "paragraph",
+      "text": "Downgrade may be locked or unsuitable."
+    },
+    {
+      "id": "p19.b019",
+      "type": "paragraph",
+      "text": "• Backup device-owned data and necessary partitions according to the respective instructions and check copies."
+    },
+    {
+      "id": "p19.b020",
+      "type": "paragraph",
+      "text": "• Stable USB contacts, supply and train relief."
+    },
+    {
+      "id": "p19.b021",
+      "type": "paragraph",
+      "text": "• Treat root and unlock scripts as writing interventions, even if they are initially only"
+    },
+    {
+      "id": "p19.b022",
+      "type": "paragraph",
+      "text": "Indicating recognition steps."
+    },
+    {
+      "id": "p19.b023",
+      "type": "h2",
+      "text": "11.3 When the renovation practically succeeded"
+    },
+    {
+      "id": "p19.b024",
+      "type": "paragraph",
+      "text": "• Quiet and normal language from several positions is recognized."
+    },
+    {
+      "id": "p19.b025",
+      "type": "paragraph",
+      "text": "• Activation word and interrupt also work for music at the intended volume."
+    },
+    {
+      "id": "p19.b026",
+      "type": "paragraph",
+      "text": "• For several devices, only the appropriate satellite responds if possible."
+    },
+    {
+      "id": "p19.b027",
+      "type": "paragraph",
+      "text": "• Mute and its display remain correct after a restart."
+    },
+    {
+      "id": "p19.b028",
+      "type": "paragraph",
+      "text": "• Light, weather, timer and possibly music lead to the expected result."
+    },
+    {
+      "id": "p19.b029",
+      "type": "paragraph",
+      "text": "• Timer and alarm clock are checked separately after restart as well as in the case of WLAN, server and Internet failure."
+    },
+    {
+      "id": "p19.b030",
+      "type": "paragraph",
+      "text": "• The selected voice pronounces numbers, times and device names in an understandable way."
+    },
+    {
+      "id": "p19.b031",
+      "type": "paragraph",
+      "text": "• Multi-day operation succeeds without regular manual restarts."
+    },
+    {
+      "id": "p19.b032",
+      "type": "paragraph",
+      "text": "• Update and restore are documented for exactly the version used."
+    },
+    {
+      "id": "p19.b033",
+      "type": "paragraph",
+      "text": "The result is the desired function in everyday life. A successful root prompt is an intermediate step, an audible test response as well."
+    },
+    {
+      "id": "p20.b003",
+      "type": "h1",
+      "text": "12. Sources and updates"
+    },
+    {
+      "id": "p20.b004",
+      "type": "h2",
+      "text": "12.1 Basis and test limits"
+    },
+    {
+      "id": "p20.b005",
+      "type": "paragraph",
+      "text": "The evaluation shall be based on publicly available project descriptions, device-specific instructions, manufacturer documentation and concrete user reports. It describes the documented status; own hardware tests are not part of this overview."
+    },
+    {
+      "id": "p20.b006",
+      "type": "lead",
+      "text": "The following project pages were published on 22. Researched October 2026. GitHub main branches and dynamic instructions may change; this output is not a collection of immutable release snapshots. For root firmware limits, the specific current device instructions always apply. A non-retrievable primary text is expressly marked."
+    },
+    {
+      "id": "p20.b007",
+      "type": "h2",
+      "text": "12.2 Projects, Language and Hardware Access"
+    },
+    {
+      "id": "p20.b008",
+      "type": "lead",
+      "text": "• Q1: echo-dot-assist / hassmic – devices and functions",
+      "url": "https://github.com/Gamer92000/echo-dot-assist"
+    },
+    {
+      "id": "p20.b009",
+      "type": "lead",
+      "text": "• Q2: EchoLocal – devices and functions",
+      "url": "https://github.com/ygelfand/echolocal"
+    },
+    {
+      "id": "p20.b010",
+      "type": "lead",
+      "text": "Q3: EchoMuse – supported hardware, controllers and emOS",
+      "url": "https://github.com/wilbowes/EchoMuse"
+    },
+    {
+      "id": "p20.b011",
+      "type": "lead",
+      "text": "• Q4: TECHO5 – functions, hearing performance and installation requirements",
+      "url": "https://github.com/HuskerMinion/techo5"
+    },
+    {
+      "id": "p20.b012",
+      "type": "lead",
+      "text": "• Q5: TECHO5 Dot – Dot 2, Echo 2 and test scope",
+      "url": "https://github.com/HuskerMinion/techo5-dot"
+    },
+    {
+      "id": "p20.b013",
+      "type": "lead",
+      "text": "• Q6: TECHO5 Spot – Port and Status",
+      "url": "https://github.com/HuskerMinion/techo5-spot"
+    },
+    {
+      "id": "p20.b014",
+      "type": "lead",
+      "text": "• Q7: TECHO5 athena – variants and installation limits",
+      "url": "https://github.com/HuskerMinion/techo5/blob/main/docs/install-athena.md"
+    },
+    {
+      "id": "p20.b015",
+      "type": "lead",
+      "text": "• Q8: LibreEcho – supported devices and installation",
+      "url": "https://github.com/aslater3/LibreEcho"
+    },
+    {
+      "id": "p20.b016",
+      "type": "lead",
+      "text": "• Q9: HA-Community – Dot-3 project and user reports",
+      "url": "https://community.home-assistant.io/t/echo-dot-3rd-gen-2018-as-a-fully-local-assist-satellite-keeping-amazons-mic-array-and-wake-word-engine/1025971"
+    },
+    {
+      "id": "p20.b017",
+      "type": "lead",
+      "text": "• Q10: Home Assistant – Establishment of language processing",
+      "url": "https://contributors.home-assistant.io/architecture/platform/voice/"
+    },
+    {
+      "id": "p20.b018",
+      "type": "lead",
+      "text": "• Q11: Home Assistant – fully local language assistant",
+      "url": "https://www.home-assistant.io/voice_control/voice_remote_local_assistant/"
+    },
+    {
+      "id": "p20.b019",
+      "type": "lead",
+      "text": "• Q12: Microsoft – documented TTS voices including Katja",
+      "url": "https://github.com/MicrosoftDocs/azure-ai-docs/blob/main/articles/ai-services/speech-service/includes/language-support/tts.md"
+    },
+    {
+      "id": "p20.b020",
+      "type": "lead",
+      "text": "• Q13: Home Assistant – Microsoft TTS",
+      "url": "https://www.home-assistant.io/integrations/microsoft/"
+    },
+    {
+      "id": "p20.b021",
+      "type": "lead",
+      "text": "• Q14: Home Assistant – ElevenLabs",
+      "url": "https://www.home-assistant.io/integrations/elevenlabs/"
+    },
+    {
+      "id": "p20.b022",
+      "type": "lead",
+      "text": "• Q15: Cartesia-TTS – additional community integration",
+      "url": "https://github.com/patienttruth/Cartesia_TTS"
+    },
+    {
+      "id": "p20.b023",
+      "type": "lead",
+      "text": "• Q16: Home Assistant – Android Debug Bridge / Fire TV",
+      "url": "https://www.home-assistant.io/integrations/androidtv/"
+    },
+    {
+      "id": "p20.b024",
+      "type": "lead",
+      "text": "• Q17: Community releases for Amazon devices, including LineageOS",
+      "url": "https://github.com/amazon-oss/releases"
+    },
+    {
+      "id": "p20.b025",
+      "type": "lead",
+      "text": "• Q18: Amazon unlock overview, co-authored by developer R0rt1z2",
+      "url": "https://github.com/zenfyrdev/bootloader-unlock-wall-of-shame/blob/main/brands/amazon/README.md"
+    },
+    {
+      "id": "p20.b026",
+      "type": "lead",
+      "text": "• Q19: amonet-sloane – Fire TV Gen. 2",
+      "url": "https://github.com/chaosmaster/amonet-sloane"
+    },
+    {
+      "id": "p20.b027",
+      "type": "lead",
+      "text": "• Q20: Exploitee.rs – original FireFU release",
+      "url": "https://bh2017.exploitee.rs/2018/rooting-the-firetv-cube-and-pendant-with-firefu/"
+    },
+    {
+      "id": "p20.b028",
+      "type": "lead",
+      "text": "• Q21: raven-root – original temporary Cube 2 access",
+      "url": "https://github.com/Pro-me3us/raven-root"
+    },
+    {
+      "id": "p20.b029",
+      "type": "lead",
+      "text": "• Q22: Cube-3 unlock thread – re-primary testing required. The call failed; therefore no",
+      "url": "https://xdaforums.com/t/unlock-magisk-twrp-firetv-3nd-gen-cube-gazelle-ps7716.4800530/"
+    },
+    {
+      "id": "p20.b030",
+      "type": "paragraph",
+      "text": "final firmware release in this edition."
+    },
+    {
+      "id": "p20.b031",
+      "type": "lead",
+      "text": "• Q23: amonet – Fire 7 ford and demarcation austin",
+      "url": "https://github.com/chaosmaster/amonet"
+    },
+    {
+      "id": "p20.b032",
+      "type": "lead",
+      "text": "• Q24: karat – TWRP device tree and model allocation",
+      "url": "https://github.com/R0rt1z2/twrp_device_amazon_karat"
+    },
+    {
+      "id": "p20.b033",
+      "type": "lead",
+      "text": "• Q25: GhostLock – explicit buildlists and temporary root",
+      "url": "https://github.com/R0rt1z2/GhostLock"
+    },
+    {
+      "id": "p21.b003",
+      "type": "lead",
+      "text": "• Q26: CoreELEC for Cube 2 – device-specific project thread. Used only as a media project note,",
+      "url": "https://xdaforums.com/t/usb-bootable-os-coreelec-21-2-for-firetv-2nd-gen-cube-raven.4616307/"
+    },
+    {
+      "id": "p21.b004",
+      "type": "paragraph",
+      "text": "Not as evidence of a language port."
+    },
+    {
+      "id": "p21.b005",
+      "type": "lead",
+      "text": "• Q27: echoroot – historical Echo-1 path",
+      "url": "https://andrerh.gitlab.io/echoroot/SETUP.html"
+    },
+    {
+      "id": "p21.b006",
+      "type": "lead",
+      "text": "• Q28: xyzz/amonet – Fire HD 8 from 2018",
+      "url": "https://github.com/xyzz/amonet"
+    },
+    {
+      "id": "p21.b007",
+      "type": "lead",
+      "text": "• Q29: postmarketOS – Fire 7 from 2019 / mustang",
+      "url": "https://wiki.postmarketos.org/wiki/Amazon_Fire_7_2019_%28amazon-mustang%29"
+    },
+    {
+      "id": "p21.b008",
+      "type": "lead",
+      "text": "• Q30: KindleModding – model and firmware mapping during jailbreak",
+      "url": "https://kindlemodding.org/jailbreaking/"
+    },
+    {
+      "id": "p21.b009",
+      "type": "lead",
+      "text": "• Q31: TECHO5 – Identification of the echo models",
+      "url": "https://github.com/HuskerMinion/techo5/blob/main/docs/getting-started.md"
+    },
+    {
+      "id": "p21.b010",
+      "type": "lead",
+      "text": "• Q32: P50-B1 – Provider details on diameters and length",
+      "url": "https://www.vokolo.cz/p50-b1/"
+    },
+    {
+      "id": "p21.b011",
+      "type": "h2",
+      "text": "12.3 At the next update"
+    },
+    {
+      "id": "p21.b012",
+      "type": "paragraph",
+      "text": "In each case, the date, affected device port, firmware or hardware boundary, known open errors and new practical reports are changed. New root messages initially only improve the root status. The classification as a language assistant only changes with a suitable proof of function. For Cube 3, the direct examination of the linked unlock thread remains an explicitly open research point."
+    }
+  ],
   "terms": {
     "Sprachsatellit": "voice satellite",
     "Aktivierungswort": "wake word",
     "Sprachport": "voice port"
-  },
-  "blocks": [
-    {
-      "id": "p01.b001",
-      "spans": []
-    },
-    {
-      "id": "p01.b002",
-      "spans": []
-    },
-    {
-      "id": "p01.b003",
-      "spans": []
-    },
-    {
-      "id": "p01.b004",
-      "spans": []
-    },
-    {
-      "id": "p01.b005",
-      "spans": []
-    },
-    {
-      "id": "p01.b006",
-      "spans": []
-    },
-    {
-      "id": "p02.b001",
-      "spans": []
-    },
-    {
-      "id": "p02.b002",
-      "spans": []
-    },
-    {
-      "id": "p02.b003",
-      "spans": []
-    },
-    {
-      "id": "p02.b004",
-      "spans": []
-    },
-    {
-      "id": "p02.b005",
-      "spans": []
-    },
-    {
-      "id": "p02.b006",
-      "spans": []
-    },
-    {
-      "id": "p02.b007",
-      "spans": []
-    },
-    {
-      "id": "p02.b008",
-      "spans": []
-    },
-    {
-      "id": "p02.b009",
-      "spans": []
-    },
-    {
-      "id": "p02.b010",
-      "spans": []
-    },
-    {
-      "id": "p02.b011",
-      "spans": []
-    },
-    {
-      "id": "p02.b012",
-      "spans": []
-    },
-    {
-      "id": "p02.b013",
-      "spans": []
-    },
-    {
-      "id": "p02.b014",
-      "spans": []
-    },
-    {
-      "id": "p02.b015",
-      "spans": []
-    },
-    {
-      "id": "p02.b016",
-      "spans": []
-    },
-    {
-      "id": "p02.b017",
-      "spans": []
-    },
-    {
-      "id": "p02.b018",
-      "spans": []
-    },
-    {
-      "id": "p02.b019",
-      "spans": []
-    },
-    {
-      "id": "p02.b020",
-      "spans": []
-    },
-    {
-      "id": "p02.b021",
-      "spans": []
-    },
-    {
-      "id": "p02.b022",
-      "spans": []
-    },
-    {
-      "id": "p02.b023",
-      "spans": []
-    },
-    {
-      "id": "p02.b024",
-      "spans": []
-    },
-    {
-      "id": "p02.b025",
-      "spans": []
-    },
-    {
-      "id": "p02.b026",
-      "spans": []
-    },
-    {
-      "id": "p02.b027",
-      "spans": []
-    },
-    {
-      "id": "p02.b028",
-      "spans": []
-    },
-    {
-      "id": "p02.b029",
-      "spans": []
-    },
-    {
-      "id": "p02.b030",
-      "spans": []
-    },
-    {
-      "id": "p02.b031",
-      "spans": []
-    },
-    {
-      "id": "p02.b032",
-      "spans": []
-    },
-    {
-      "id": "p02.b033",
-      "spans": []
-    },
-    {
-      "id": "p02.b034",
-      "spans": []
-    },
-    {
-      "id": "p02.b035",
-      "spans": []
-    },
-    {
-      "id": "p02.b036",
-      "spans": []
-    },
-    {
-      "id": "p02.b037",
-      "spans": []
-    },
-    {
-      "id": "p02.b038",
-      "spans": []
-    },
-    {
-      "id": "p02.b039",
-      "spans": []
-    },
-    {
-      "id": "p02.b040",
-      "spans": []
-    },
-    {
-      "id": "p02.b041",
-      "spans": []
-    },
-    {
-      "id": "p02.b042",
-      "spans": []
-    },
-    {
-      "id": "p02.b043",
-      "spans": []
-    },
-    {
-      "id": "p02.b044",
-      "spans": []
-    },
-    {
-      "id": "p02.b045",
-      "spans": []
-    },
-    {
-      "id": "p02.b046",
-      "spans": []
-    },
-    {
-      "id": "p03.b001",
-      "spans": []
-    },
-    {
-      "id": "p03.b002",
-      "spans": []
-    },
-    {
-      "id": "p03.b003",
-      "spans": []
-    },
-    {
-      "id": "p03.b004",
-      "spans": []
-    },
-    {
-      "id": "p03.b005",
-      "spans": []
-    },
-    {
-      "id": "p03.b006",
-      "spans": []
-    },
-    {
-      "id": "p03.b007",
-      "spans": []
-    },
-    {
-      "id": "p03.b008",
-      "spans": []
-    },
-    {
-      "id": "p03.b009",
-      "spans": []
-    },
-    {
-      "id": "p03.b010",
-      "spans": []
-    },
-    {
-      "id": "p03.b011",
-      "spans": []
-    },
-    {
-      "id": "p03.b012",
-      "spans": []
-    },
-    {
-      "id": "p03.b013",
-      "spans": []
-    },
-    {
-      "id": "p04.b001",
-      "spans": []
-    },
-    {
-      "id": "p04.b002",
-      "spans": []
-    },
-    {
-      "id": "p04.b003",
-      "spans": []
-    },
-    {
-      "id": "p04.b004",
-      "spans": []
-    },
-    {
-      "id": "p04.b005",
-      "spans": []
-    },
-    {
-      "id": "p04.b006",
-      "spans": []
-    },
-    {
-      "id": "p04.b007",
-      "spans": []
-    },
-    {
-      "id": "p04.b008",
-      "spans": []
-    },
-    {
-      "id": "p04.b009",
-      "spans": []
-    },
-    {
-      "id": "p04.b010",
-      "spans": []
-    },
-    {
-      "id": "p04.b011",
-      "spans": []
-    },
-    {
-      "id": "p04.b012",
-      "spans": []
-    },
-    {
-      "id": "p04.b013",
-      "spans": []
-    },
-    {
-      "id": "p04.b014",
-      "spans": []
-    },
-    {
-      "id": "p04.b015",
-      "spans": []
-    },
-    {
-      "id": "p04.b016",
-      "spans": []
-    },
-    {
-      "id": "p04.b017",
-      "spans": []
-    },
-    {
-      "id": "p04.b018",
-      "spans": []
-    },
-    {
-      "id": "p04.b019",
-      "spans": []
-    },
-    {
-      "id": "p04.b020",
-      "spans": []
-    },
-    {
-      "id": "p04.b021",
-      "spans": []
-    },
-    {
-      "id": "p04.b022",
-      "spans": []
-    },
-    {
-      "id": "p04.b023",
-      "spans": []
-    },
-    {
-      "id": "p05.b001",
-      "spans": []
-    },
-    {
-      "id": "p05.b002",
-      "spans": []
-    },
-    {
-      "id": "p05.b003",
-      "spans": []
-    },
-    {
-      "id": "p05.b004",
-      "spans": []
-    },
-    {
-      "id": "p05.b005",
-      "spans": []
-    },
-    {
-      "id": "p05.b006",
-      "spans": []
-    },
-    {
-      "id": "p05.b007",
-      "spans": []
-    },
-    {
-      "id": "p05.b008",
-      "spans": []
-    },
-    {
-      "id": "p05.b009",
-      "spans": []
-    },
-    {
-      "id": "p05.b010",
-      "spans": []
-    },
-    {
-      "id": "p05.b011",
-      "spans": []
-    },
-    {
-      "id": "p05.b012",
-      "spans": []
-    },
-    {
-      "id": "p05.b013",
-      "spans": []
-    },
-    {
-      "id": "p05.b014",
-      "spans": []
-    },
-    {
-      "id": "p05.b015",
-      "spans": []
-    },
-    {
-      "id": "p05.b016",
-      "spans": []
-    },
-    {
-      "id": "p05.b017",
-      "spans": []
-    },
-    {
-      "id": "p05.b018",
-      "spans": []
-    },
-    {
-      "id": "p06.b001",
-      "spans": []
-    },
-    {
-      "id": "p06.b002",
-      "spans": []
-    },
-    {
-      "id": "p06.b003",
-      "spans": []
-    },
-    {
-      "id": "p06.b004",
-      "spans": []
-    },
-    {
-      "id": "p06.b005",
-      "spans": []
-    },
-    {
-      "id": "p06.b006",
-      "spans": []
-    },
-    {
-      "id": "p06.b007",
-      "spans": []
-    },
-    {
-      "id": "p06.b008",
-      "spans": []
-    },
-    {
-      "id": "p06.b009",
-      "spans": []
-    },
-    {
-      "id": "p06.b010",
-      "spans": []
-    },
-    {
-      "id": "p06.b011",
-      "spans": []
-    },
-    {
-      "id": "p06.b012",
-      "spans": []
-    },
-    {
-      "id": "p06.b013",
-      "spans": []
-    },
-    {
-      "id": "p06.b014",
-      "spans": []
-    },
-    {
-      "id": "p07.b001",
-      "spans": []
-    },
-    {
-      "id": "p07.b002",
-      "spans": []
-    },
-    {
-      "id": "p07.b003",
-      "spans": []
-    },
-    {
-      "id": "p07.b004",
-      "spans": []
-    },
-    {
-      "id": "p07.b005",
-      "spans": []
-    },
-    {
-      "id": "p07.b006",
-      "spans": []
-    },
-    {
-      "id": "p07.b007",
-      "spans": []
-    },
-    {
-      "id": "p07.b008",
-      "spans": []
-    },
-    {
-      "id": "p07.b009",
-      "spans": []
-    },
-    {
-      "id": "p07.b010",
-      "spans": []
-    },
-    {
-      "id": "p07.b011",
-      "spans": []
-    },
-    {
-      "id": "p07.b012",
-      "spans": []
-    },
-    {
-      "id": "p07.b013",
-      "spans": []
-    },
-    {
-      "id": "p07.b014",
-      "spans": []
-    },
-    {
-      "id": "p07.b015",
-      "spans": []
-    },
-    {
-      "id": "p07.b016",
-      "spans": []
-    },
-    {
-      "id": "p07.b017",
-      "spans": []
-    },
-    {
-      "id": "p07.b018",
-      "spans": []
-    },
-    {
-      "id": "p07.b019",
-      "spans": []
-    },
-    {
-      "id": "p07.b020",
-      "spans": []
-    },
-    {
-      "id": "p07.b021",
-      "spans": []
-    },
-    {
-      "id": "p08.b001",
-      "spans": []
-    },
-    {
-      "id": "p08.b002",
-      "spans": []
-    },
-    {
-      "id": "p08.b003",
-      "spans": []
-    },
-    {
-      "id": "p08.b004",
-      "spans": []
-    },
-    {
-      "id": "p08.b005",
-      "spans": []
-    },
-    {
-      "id": "p08.b006",
-      "spans": []
-    },
-    {
-      "id": "p08.b007",
-      "spans": []
-    },
-    {
-      "id": "p08.b008",
-      "spans": []
-    },
-    {
-      "id": "p08.b009",
-      "spans": []
-    },
-    {
-      "id": "p08.b010",
-      "spans": []
-    },
-    {
-      "id": "p08.b011",
-      "spans": []
-    },
-    {
-      "id": "p08.b012",
-      "spans": []
-    },
-    {
-      "id": "p08.b013",
-      "spans": []
-    },
-    {
-      "id": "p08.b014",
-      "spans": []
-    },
-    {
-      "id": "p08.b015",
-      "spans": []
-    },
-    {
-      "id": "p08.b016",
-      "spans": []
-    },
-    {
-      "id": "p08.b017",
-      "spans": []
-    },
-    {
-      "id": "p08.b018",
-      "spans": []
-    },
-    {
-      "id": "p08.b019",
-      "spans": []
-    },
-    {
-      "id": "p08.b020",
-      "spans": []
-    },
-    {
-      "id": "p08.b021",
-      "spans": []
-    },
-    {
-      "id": "p08.b022",
-      "spans": []
-    },
-    {
-      "id": "p09.b001",
-      "spans": []
-    },
-    {
-      "id": "p09.b002",
-      "spans": []
-    },
-    {
-      "id": "p09.b003",
-      "spans": []
-    },
-    {
-      "id": "p09.b004",
-      "spans": []
-    },
-    {
-      "id": "p09.b005",
-      "spans": []
-    },
-    {
-      "id": "p09.b006",
-      "spans": []
-    },
-    {
-      "id": "p09.b007",
-      "spans": []
-    },
-    {
-      "id": "p09.b008",
-      "spans": []
-    },
-    {
-      "id": "p09.b009",
-      "spans": []
-    },
-    {
-      "id": "p09.b010",
-      "spans": []
-    },
-    {
-      "id": "p09.b011",
-      "spans": []
-    },
-    {
-      "id": "p09.b012",
-      "spans": []
-    },
-    {
-      "id": "p09.b013",
-      "spans": []
-    },
-    {
-      "id": "p09.b014",
-      "spans": []
-    },
-    {
-      "id": "p09.b015",
-      "spans": []
-    },
-    {
-      "id": "p09.b016",
-      "spans": []
-    },
-    {
-      "id": "p09.b017",
-      "spans": []
-    },
-    {
-      "id": "p09.b018",
-      "spans": []
-    },
-    {
-      "id": "p09.b019",
-      "spans": []
-    },
-    {
-      "id": "p09.b020",
-      "spans": []
-    },
-    {
-      "id": "p09.b021",
-      "spans": []
-    },
-    {
-      "id": "p09.b022",
-      "spans": []
-    },
-    {
-      "id": "p09.b023",
-      "spans": []
-    },
-    {
-      "id": "p09.b024",
-      "spans": []
-    },
-    {
-      "id": "p09.b025",
-      "spans": []
-    },
-    {
-      "id": "p09.b026",
-      "spans": []
-    },
-    {
-      "id": "p10.b001",
-      "spans": []
-    },
-    {
-      "id": "p10.b002",
-      "spans": []
-    },
-    {
-      "id": "p10.b003",
-      "spans": []
-    },
-    {
-      "id": "p10.b004",
-      "spans": []
-    },
-    {
-      "id": "p10.b005",
-      "spans": []
-    },
-    {
-      "id": "p10.b006",
-      "spans": []
-    },
-    {
-      "id": "p10.b007",
-      "spans": []
-    },
-    {
-      "id": "p10.b008",
-      "spans": []
-    },
-    {
-      "id": "p10.b009",
-      "spans": []
-    },
-    {
-      "id": "p10.b010",
-      "spans": []
-    },
-    {
-      "id": "p10.b011",
-      "spans": []
-    },
-    {
-      "id": "p10.b012",
-      "spans": []
-    },
-    {
-      "id": "p10.b013",
-      "spans": []
-    },
-    {
-      "id": "p10.b014",
-      "spans": []
-    },
-    {
-      "id": "p10.b015",
-      "spans": []
-    },
-    {
-      "id": "p10.b016",
-      "spans": []
-    },
-    {
-      "id": "p10.b017",
-      "spans": []
-    },
-    {
-      "id": "p10.b018",
-      "spans": []
-    },
-    {
-      "id": "p10.b019",
-      "spans": []
-    },
-    {
-      "id": "p10.b020",
-      "spans": []
-    },
-    {
-      "id": "p11.b001",
-      "spans": []
-    },
-    {
-      "id": "p11.b002",
-      "spans": []
-    },
-    {
-      "id": "p11.b003",
-      "spans": []
-    },
-    {
-      "id": "p11.b004",
-      "spans": []
-    },
-    {
-      "id": "p11.b005",
-      "spans": []
-    },
-    {
-      "id": "p11.b006",
-      "spans": []
-    },
-    {
-      "id": "p11.b007",
-      "spans": []
-    },
-    {
-      "id": "p11.b008",
-      "spans": []
-    },
-    {
-      "id": "p11.b009",
-      "spans": []
-    },
-    {
-      "id": "p11.b010",
-      "spans": []
-    },
-    {
-      "id": "p11.b011",
-      "spans": []
-    },
-    {
-      "id": "p11.b012",
-      "spans": []
-    },
-    {
-      "id": "p11.b013",
-      "spans": []
-    },
-    {
-      "id": "p11.b014",
-      "spans": []
-    },
-    {
-      "id": "p11.b015",
-      "spans": []
-    },
-    {
-      "id": "p11.b016",
-      "spans": []
-    },
-    {
-      "id": "p11.b017",
-      "spans": []
-    },
-    {
-      "id": "p11.b018",
-      "spans": []
-    },
-    {
-      "id": "p11.b019",
-      "spans": []
-    },
-    {
-      "id": "p11.b020",
-      "spans": []
-    },
-    {
-      "id": "p11.b021",
-      "spans": []
-    },
-    {
-      "id": "p11.b022",
-      "spans": []
-    },
-    {
-      "id": "p11.b023",
-      "spans": []
-    },
-    {
-      "id": "p11.b024",
-      "spans": []
-    },
-    {
-      "id": "p11.b025",
-      "spans": []
-    },
-    {
-      "id": "p11.b026",
-      "spans": []
-    },
-    {
-      "id": "p11.b027",
-      "spans": []
-    },
-    {
-      "id": "p11.b028",
-      "spans": []
-    },
-    {
-      "id": "p11.b029",
-      "spans": []
-    },
-    {
-      "id": "p12.b001",
-      "spans": []
-    },
-    {
-      "id": "p12.b002",
-      "spans": []
-    },
-    {
-      "id": "p12.b003",
-      "spans": []
-    },
-    {
-      "id": "p12.b004",
-      "spans": []
-    },
-    {
-      "id": "p12.b005",
-      "spans": []
-    },
-    {
-      "id": "p12.b006",
-      "spans": []
-    },
-    {
-      "id": "p12.b007",
-      "spans": []
-    },
-    {
-      "id": "p12.b008",
-      "spans": []
-    },
-    {
-      "id": "p12.b009",
-      "spans": []
-    },
-    {
-      "id": "p12.b010",
-      "spans": []
-    },
-    {
-      "id": "p12.b011",
-      "spans": []
-    },
-    {
-      "id": "p12.b012",
-      "spans": []
-    },
-    {
-      "id": "p12.b013",
-      "spans": []
-    },
-    {
-      "id": "p12.b014",
-      "spans": []
-    },
-    {
-      "id": "p12.b015",
-      "spans": []
-    },
-    {
-      "id": "p12.b016",
-      "spans": []
-    },
-    {
-      "id": "p12.b017",
-      "spans": []
-    },
-    {
-      "id": "p12.b018",
-      "spans": []
-    },
-    {
-      "id": "p12.b019",
-      "spans": []
-    },
-    {
-      "id": "p12.b020",
-      "spans": []
-    },
-    {
-      "id": "p12.b021",
-      "spans": []
-    },
-    {
-      "id": "p12.b022",
-      "spans": []
-    },
-    {
-      "id": "p12.b023",
-      "spans": []
-    },
-    {
-      "id": "p12.b024",
-      "spans": []
-    },
-    {
-      "id": "p12.b025",
-      "spans": []
-    },
-    {
-      "id": "p12.b026",
-      "spans": []
-    },
-    {
-      "id": "p12.b027",
-      "spans": []
-    },
-    {
-      "id": "p12.b028",
-      "spans": []
-    },
-    {
-      "id": "p13.b001",
-      "spans": []
-    },
-    {
-      "id": "p13.b002",
-      "spans": []
-    },
-    {
-      "id": "p13.b003",
-      "spans": []
-    },
-    {
-      "id": "p13.b004",
-      "spans": []
-    },
-    {
-      "id": "p13.b005",
-      "spans": []
-    },
-    {
-      "id": "p13.b006",
-      "spans": []
-    },
-    {
-      "id": "p13.b007",
-      "spans": []
-    },
-    {
-      "id": "p13.b008",
-      "spans": []
-    },
-    {
-      "id": "p13.b009",
-      "spans": []
-    },
-    {
-      "id": "p13.b010",
-      "spans": []
-    },
-    {
-      "id": "p13.b011",
-      "spans": []
-    },
-    {
-      "id": "p13.b012",
-      "spans": []
-    },
-    {
-      "id": "p13.b013",
-      "spans": []
-    },
-    {
-      "id": "p13.b014",
-      "spans": []
-    },
-    {
-      "id": "p13.b015",
-      "spans": []
-    },
-    {
-      "id": "p13.b016",
-      "spans": []
-    },
-    {
-      "id": "p13.b017",
-      "spans": []
-    },
-    {
-      "id": "p13.b018",
-      "spans": []
-    },
-    {
-      "id": "p13.b019",
-      "spans": []
-    },
-    {
-      "id": "p13.b020",
-      "spans": []
-    },
-    {
-      "id": "p13.b021",
-      "spans": []
-    },
-    {
-      "id": "p14.b001",
-      "spans": []
-    },
-    {
-      "id": "p14.b002",
-      "spans": []
-    },
-    {
-      "id": "p14.b003",
-      "spans": []
-    },
-    {
-      "id": "p14.b004",
-      "spans": []
-    },
-    {
-      "id": "p14.b005",
-      "spans": []
-    },
-    {
-      "id": "p14.b006",
-      "spans": []
-    },
-    {
-      "id": "p14.b007",
-      "spans": []
-    },
-    {
-      "id": "p14.b008",
-      "spans": []
-    },
-    {
-      "id": "p14.b009",
-      "spans": []
-    },
-    {
-      "id": "p14.b010",
-      "spans": []
-    },
-    {
-      "id": "p14.b011",
-      "spans": []
-    },
-    {
-      "id": "p14.b012",
-      "spans": []
-    },
-    {
-      "id": "p14.b013",
-      "spans": []
-    },
-    {
-      "id": "p14.b014",
-      "spans": []
-    },
-    {
-      "id": "p14.b015",
-      "spans": []
-    },
-    {
-      "id": "p14.b016",
-      "spans": []
-    },
-    {
-      "id": "p14.b017",
-      "spans": []
-    },
-    {
-      "id": "p14.b018",
-      "spans": []
-    },
-    {
-      "id": "p14.b019",
-      "spans": []
-    },
-    {
-      "id": "p14.b020",
-      "spans": []
-    },
-    {
-      "id": "p14.b021",
-      "spans": []
-    },
-    {
-      "id": "p14.b022",
-      "spans": []
-    },
-    {
-      "id": "p14.b023",
-      "spans": []
-    },
-    {
-      "id": "p14.b024",
-      "spans": []
-    },
-    {
-      "id": "p14.b025",
-      "spans": []
-    },
-    {
-      "id": "p14.b026",
-      "spans": []
-    },
-    {
-      "id": "p14.b027",
-      "spans": []
-    },
-    {
-      "id": "p14.b028",
-      "spans": []
-    },
-    {
-      "id": "p14.b029",
-      "spans": []
-    },
-    {
-      "id": "p15.b001",
-      "spans": []
-    },
-    {
-      "id": "p15.b002",
-      "spans": []
-    },
-    {
-      "id": "p15.b003",
-      "spans": []
-    },
-    {
-      "id": "p15.b004",
-      "spans": []
-    },
-    {
-      "id": "p15.b005",
-      "spans": []
-    },
-    {
-      "id": "p15.b006",
-      "spans": []
-    },
-    {
-      "id": "p15.b007",
-      "spans": []
-    },
-    {
-      "id": "p15.b008",
-      "spans": []
-    },
-    {
-      "id": "p15.b009",
-      "spans": []
-    },
-    {
-      "id": "p15.b010",
-      "spans": []
-    },
-    {
-      "id": "p15.b011",
-      "spans": []
-    },
-    {
-      "id": "p15.b012",
-      "spans": []
-    },
-    {
-      "id": "p15.b013",
-      "spans": []
-    },
-    {
-      "id": "p15.b014",
-      "spans": []
-    },
-    {
-      "id": "p15.b015",
-      "spans": []
-    },
-    {
-      "id": "p15.b016",
-      "spans": []
-    },
-    {
-      "id": "p15.b017",
-      "spans": []
-    },
-    {
-      "id": "p15.b018",
-      "spans": []
-    },
-    {
-      "id": "p15.b019",
-      "spans": []
-    },
-    {
-      "id": "p15.b020",
-      "spans": []
-    },
-    {
-      "id": "p15.b021",
-      "spans": []
-    },
-    {
-      "id": "p15.b022",
-      "spans": []
-    },
-    {
-      "id": "p15.b023",
-      "spans": []
-    },
-    {
-      "id": "p16.b001",
-      "spans": []
-    },
-    {
-      "id": "p16.b002",
-      "spans": []
-    },
-    {
-      "id": "p16.b003",
-      "spans": []
-    },
-    {
-      "id": "p16.b004",
-      "spans": []
-    },
-    {
-      "id": "p16.b005",
-      "spans": []
-    },
-    {
-      "id": "p16.b006",
-      "spans": []
-    },
-    {
-      "id": "p16.b007",
-      "spans": []
-    },
-    {
-      "id": "p16.b008",
-      "spans": []
-    },
-    {
-      "id": "p16.b009",
-      "spans": []
-    },
-    {
-      "id": "p16.b010",
-      "spans": []
-    },
-    {
-      "id": "p16.b011",
-      "spans": []
-    },
-    {
-      "id": "p16.b012",
-      "spans": []
-    },
-    {
-      "id": "p16.b013",
-      "spans": []
-    },
-    {
-      "id": "p16.b014",
-      "spans": []
-    },
-    {
-      "id": "p16.b015",
-      "spans": []
-    },
-    {
-      "id": "p16.b016",
-      "spans": []
-    },
-    {
-      "id": "p16.b017",
-      "spans": []
-    },
-    {
-      "id": "p16.b018",
-      "spans": []
-    },
-    {
-      "id": "p16.b019",
-      "spans": []
-    },
-    {
-      "id": "p16.b020",
-      "spans": []
-    },
-    {
-      "id": "p16.b021",
-      "spans": []
-    },
-    {
-      "id": "p16.b022",
-      "spans": []
-    },
-    {
-      "id": "p16.b023",
-      "spans": []
-    },
-    {
-      "id": "p16.b024",
-      "spans": []
-    },
-    {
-      "id": "p16.b025",
-      "spans": []
-    },
-    {
-      "id": "p16.b026",
-      "spans": []
-    },
-    {
-      "id": "p16.b027",
-      "spans": []
-    },
-    {
-      "id": "p16.b028",
-      "spans": []
-    },
-    {
-      "id": "p16.b029",
-      "spans": []
-    },
-    {
-      "id": "p16.b030",
-      "spans": []
-    },
-    {
-      "id": "p16.b031",
-      "spans": []
-    },
-    {
-      "id": "p16.b032",
-      "spans": []
-    },
-    {
-      "id": "p16.b033",
-      "spans": []
-    },
-    {
-      "id": "p16.b034",
-      "spans": []
-    },
-    {
-      "id": "p16.b035",
-      "spans": []
-    },
-    {
-      "id": "p17.b001",
-      "spans": []
-    },
-    {
-      "id": "p17.b002",
-      "spans": []
-    },
-    {
-      "id": "p17.b003",
-      "spans": []
-    },
-    {
-      "id": "p17.b004",
-      "spans": []
-    },
-    {
-      "id": "p17.b005",
-      "spans": []
-    },
-    {
-      "id": "p17.b006",
-      "spans": []
-    },
-    {
-      "id": "p17.b007",
-      "spans": []
-    },
-    {
-      "id": "p17.b008",
-      "spans": []
-    },
-    {
-      "id": "p17.b009",
-      "spans": []
-    },
-    {
-      "id": "p17.b010",
-      "spans": []
-    },
-    {
-      "id": "p17.b011",
-      "spans": []
-    },
-    {
-      "id": "p17.b012",
-      "spans": []
-    },
-    {
-      "id": "p17.b013",
-      "spans": []
-    },
-    {
-      "id": "p17.b014",
-      "spans": []
-    },
-    {
-      "id": "p17.b015",
-      "spans": []
-    },
-    {
-      "id": "p17.b016",
-      "spans": []
-    },
-    {
-      "id": "p17.b017",
-      "spans": []
-    },
-    {
-      "id": "p17.b018",
-      "spans": []
-    },
-    {
-      "id": "p17.b019",
-      "spans": []
-    },
-    {
-      "id": "p17.b020",
-      "spans": []
-    },
-    {
-      "id": "p17.b021",
-      "spans": []
-    },
-    {
-      "id": "p17.b022",
-      "spans": []
-    },
-    {
-      "id": "p17.b023",
-      "spans": []
-    },
-    {
-      "id": "p17.b024",
-      "spans": []
-    },
-    {
-      "id": "p17.b025",
-      "spans": []
-    },
-    {
-      "id": "p17.b026",
-      "spans": []
-    },
-    {
-      "id": "p18.b001",
-      "spans": []
-    },
-    {
-      "id": "p18.b002",
-      "spans": []
-    },
-    {
-      "id": "p18.b003",
-      "spans": []
-    },
-    {
-      "id": "p18.b004",
-      "spans": []
-    },
-    {
-      "id": "p18.b005",
-      "spans": []
-    },
-    {
-      "id": "p18.b006",
-      "spans": []
-    },
-    {
-      "id": "p18.b007",
-      "spans": []
-    },
-    {
-      "id": "p18.b008",
-      "spans": []
-    },
-    {
-      "id": "p18.b009",
-      "spans": []
-    },
-    {
-      "id": "p18.b010",
-      "spans": []
-    },
-    {
-      "id": "p18.b011",
-      "spans": []
-    },
-    {
-      "id": "p18.b012",
-      "spans": []
-    },
-    {
-      "id": "p18.b013",
-      "spans": []
-    },
-    {
-      "id": "p18.b014",
-      "spans": []
-    },
-    {
-      "id": "p18.b015",
-      "spans": []
-    },
-    {
-      "id": "p18.b016",
-      "spans": []
-    },
-    {
-      "id": "p18.b017",
-      "spans": []
-    },
-    {
-      "id": "p19.b001",
-      "spans": []
-    },
-    {
-      "id": "p19.b002",
-      "spans": []
-    },
-    {
-      "id": "p19.b003",
-      "spans": []
-    },
-    {
-      "id": "p19.b004",
-      "spans": []
-    },
-    {
-      "id": "p19.b005",
-      "spans": []
-    },
-    {
-      "id": "p19.b006",
-      "spans": []
-    },
-    {
-      "id": "p19.b007",
-      "spans": []
-    },
-    {
-      "id": "p19.b008",
-      "spans": []
-    },
-    {
-      "id": "p19.b009",
-      "spans": []
-    },
-    {
-      "id": "p19.b010",
-      "spans": []
-    },
-    {
-      "id": "p19.b011",
-      "spans": []
-    },
-    {
-      "id": "p19.b012",
-      "spans": []
-    },
-    {
-      "id": "p19.b013",
-      "spans": []
-    },
-    {
-      "id": "p19.b014",
-      "spans": []
-    },
-    {
-      "id": "p19.b015",
-      "spans": []
-    },
-    {
-      "id": "p19.b016",
-      "spans": []
-    },
-    {
-      "id": "p19.b017",
-      "spans": []
-    },
-    {
-      "id": "p19.b018",
-      "spans": []
-    },
-    {
-      "id": "p19.b019",
-      "spans": []
-    },
-    {
-      "id": "p19.b020",
-      "spans": []
-    },
-    {
-      "id": "p19.b021",
-      "spans": []
-    },
-    {
-      "id": "p19.b022",
-      "spans": []
-    },
-    {
-      "id": "p19.b023",
-      "spans": []
-    },
-    {
-      "id": "p19.b024",
-      "spans": []
-    },
-    {
-      "id": "p19.b025",
-      "spans": []
-    },
-    {
-      "id": "p19.b026",
-      "spans": []
-    },
-    {
-      "id": "p19.b027",
-      "spans": []
-    },
-    {
-      "id": "p19.b028",
-      "spans": []
-    },
-    {
-      "id": "p19.b029",
-      "spans": []
-    },
-    {
-      "id": "p19.b030",
-      "spans": []
-    },
-    {
-      "id": "p19.b031",
-      "spans": []
-    },
-    {
-      "id": "p19.b032",
-      "spans": []
-    },
-    {
-      "id": "p19.b033",
-      "spans": []
-    },
-    {
-      "id": "p20.b001",
-      "spans": []
-    },
-    {
-      "id": "p20.b002",
-      "spans": []
-    },
-    {
-      "id": "p20.b003",
-      "spans": []
-    },
-    {
-      "id": "p20.b004",
-      "spans": []
-    },
-    {
-      "id": "p20.b005",
-      "spans": []
-    },
-    {
-      "id": "p20.b006",
-      "spans": []
-    },
-    {
-      "id": "p20.b007",
-      "spans": []
-    },
-    {
-      "id": "p20.b008",
-      "spans": []
-    },
-    {
-      "id": "p20.b009",
-      "spans": []
-    },
-    {
-      "id": "p20.b010",
-      "spans": []
-    },
-    {
-      "id": "p20.b011",
-      "spans": []
-    },
-    {
-      "id": "p20.b012",
-      "spans": []
-    },
-    {
-      "id": "p20.b013",
-      "spans": []
-    },
-    {
-      "id": "p20.b014",
-      "spans": []
-    },
-    {
-      "id": "p20.b015",
-      "spans": []
-    },
-    {
-      "id": "p20.b016",
-      "spans": []
-    },
-    {
-      "id": "p20.b017",
-      "spans": []
-    },
-    {
-      "id": "p20.b018",
-      "spans": []
-    },
-    {
-      "id": "p20.b019",
-      "spans": []
-    },
-    {
-      "id": "p20.b020",
-      "spans": []
-    },
-    {
-      "id": "p20.b021",
-      "spans": []
-    },
-    {
-      "id": "p20.b022",
-      "spans": []
-    },
-    {
-      "id": "p20.b023",
-      "spans": []
-    },
-    {
-      "id": "p20.b024",
-      "spans": []
-    },
-    {
-      "id": "p20.b025",
-      "spans": []
-    },
-    {
-      "id": "p20.b026",
-      "spans": []
-    },
-    {
-      "id": "p20.b027",
-      "spans": []
-    },
-    {
-      "id": "p20.b028",
-      "spans": []
-    },
-    {
-      "id": "p20.b029",
-      "spans": []
-    },
-    {
-      "id": "p20.b030",
-      "spans": []
-    },
-    {
-      "id": "p20.b031",
-      "spans": []
-    },
-    {
-      "id": "p20.b032",
-      "spans": []
-    },
-    {
-      "id": "p20.b033",
-      "spans": []
-    },
-    {
-      "id": "p21.b001",
-      "spans": []
-    },
-    {
-      "id": "p21.b002",
-      "spans": []
-    },
-    {
-      "id": "p21.b003",
-      "spans": []
-    },
-    {
-      "id": "p21.b004",
-      "spans": []
-    },
-    {
-      "id": "p21.b005",
-      "spans": []
-    },
-    {
-      "id": "p21.b006",
-      "spans": []
-    },
-    {
-      "id": "p21.b007",
-      "spans": []
-    },
-    {
-      "id": "p21.b008",
-      "spans": []
-    },
-    {
-      "id": "p21.b009",
-      "spans": []
-    },
-    {
-      "id": "p21.b010",
-      "spans": []
-    },
-    {
-      "id": "p21.b011",
-      "spans": []
-    },
-    {
-      "id": "p21.b012",
-      "spans": []
-    }
-  ]
+  }
 }

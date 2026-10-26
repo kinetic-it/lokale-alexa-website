@@ -40,6 +40,25 @@ else:
     ids={m['id'] for m in d['milestones']}
     if ids!=set(e.get('milestones',{})): errors.append(f'status.json en.milestones passt nicht zu den IDs {sorted(ids)}')
 
+def guide_ids(language):
+    path=f'tools/leitfaden/content.{language}.json'
+    content=json.load(open(path,encoding='utf-8'))
+    ids=[]
+    for element in content['elements']:
+        ids.append(element['id'])
+        if element['type']=='table':
+            for row in element['rows']:
+                ids.extend(cell['id'] for cell in row)
+    if len(ids)!=len(set(ids)):
+        errors.append(f'{path}: doppelte Textblock-IDs')
+    return set(ids)
+
+de_guide_ids=guide_ids('de')
+en_guide_ids=guide_ids('en')
+if de_guide_ids!=en_guide_ids:
+    errors.append(f'PDF-Quelltexte: fehlende englische IDs {sorted(de_guide_ids-en_guide_ids)}; '
+                  f'überzählige englische IDs {sorted(en_guide_ids-de_guide_ids)}')
+
 if errors:
     print('i18n-Prüfung FEHLGESCHLAGEN'); [print(' -',x) for x in errors]; sys.exit(1)
 print('i18n-Prüfung OK: gleiche IDs, Anker, Tag-Anzahlen und status.json vollständig')

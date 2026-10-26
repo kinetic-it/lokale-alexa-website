@@ -14,4 +14,6 @@ Die Seite zeigt Sprachweg-Schaubild, Gerätefilter, Sicherheitsgrundsätze und d
 
 Die Grundlagen stammen aus „Amazon-Geräte als offene Sprach- und Smart-Home-Geräte“ (Redaktionsstand 22.10.2026). Geräteunterstützung und tatsächliche Projektabnahme werden getrennt dargestellt.
 
+Die zweisprachigen PDF-Quelldateien und der gemeinsame ReportLab-Generator liegen unter `tools/leitfaden/`. Der deutsche Text ist Master; die deutsche Original-PDF wird beim Build nicht überschrieben. Details: `docs/REDAKTION.md`.
+
 Work Item (privat): WI-0181.
