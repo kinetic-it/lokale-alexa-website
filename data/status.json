@@ -4,16 +4,16 @@
   "approved": true,
   "as_of": "2026-10-26",
   "evidence": "Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Teilfunktionen belegt, erster Schaltbefehl fehlgeschlagen",
+  "title": "Echo-2-Pilot · Speaker-Persönlichkeit im Sprachtest bestätigt; Haussteuerung offen",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)",
     "Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt",
-    "Separater Hermes-Speaker beantwortete authentifizierte API-Testanfrage und ist in Home Assistant als Gesprächsagent eingetragen; noch kein Test über den Echo"
+    "Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (Owner-Beobachtung)."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
-    "Echo → HA → Hermes → hörbare Antwort",
+    "Komplexe Wissensfragen, Folgekontext und technische Ende-zu-Ende-Messungen",
     "Timer, Wecker, Erinnerungen, Listen und Medien",
     "Mehrbenutzerrechte, Gastmodus und sensible Antworten",
     "Recovery, vollständiges Rohbackup und Langzeittests"
@@ -47,7 +47,7 @@
     {
       "id": "m5",
       "name": "Hermes-Konversation Ende-zu-Ende",
-      "state": "open"
+      "state": "in_progress"
     },
     {
       "id": "m6",
@@ -65,17 +65,17 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · partial functions confirmed, first switching command failed",
+    "title": "Echo 2 pilot · speaker personality confirmed in voice test; home control unresolved",
     "evidence": "Owner reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
       "echo-dot-assist connected to Home Assistant (owner report)",
       "Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven",
-      "Separate Hermes speaker answered an authenticated API test request and is registered in Home Assistant as a conversation agent; not yet tested through the Echo"
+      "Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (owner observation)."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
-      "Echo → HA → Hermes → audible answer",
+      "Complex knowledge queries, conversational follow-up and technical end-to-end measurements",
       "Timers, alarms, reminders, lists and media",
       "Multi-user permissions, guest mode and sensitive answers",
       "Recovery, full raw backup and long-term tests"
@@ -101,9 +101,10 @@
       "Separate Hermes speaker set up; authenticated API test successful",
       "Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published",
       "English edition of the guide, SOUL.md example and build overview",
-      "First voice test of a switching command on the Echo failed; investigation under way"
+      "First voice test of a switching command on the Echo failed; investigation under way",
+      "Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved."
     ],
-    "last_test": "Voice switching command on the Echo: failed. Answered with AI text instead of switching; cause unknown."
+    "last_test": "Echo voice test: audible self-introduction in the intended speaker personality and natural closing response succeeded (owner observation). Earlier failed device switching is not fixed."
   },
   "history": [
     {
@@ -129,10 +130,14 @@
     {
       "date": "2026-10-26",
       "text": "Erster Sprachtest eines Schaltbefehls am Echo fehlgeschlagen; Ursachenprüfung läuft"
+    },
+    {
+      "date": "2026-10-26",
+      "text": "Gesprächsweg zum separaten Hermes-Speaker korrigiert: Echo beantwortete Selbstvorstellung und Abschlussfrage passend zur vorgesehenen Persönlichkeit (Owner-Sprachtest); Schaltbefehle bleiben offen."
     }
   ],
   "last_test": {
     "date": "2026-10-26",
-    "text": "Schaltbefehl per Sprache am Echo: fehlgeschlagen. Antwort als KI-Text statt Schaltung; Ursache ungeklärt."
+    "text": "Sprachtest am Echo: Selbstvorstellung mit vorgesehener Speaker-Persönlichkeit und natürliche Abschlussantwort hörbar gelungen (Owner-Beobachtung). Der zuvor fehlgeschlagene Schaltbefehl ist nicht behoben."
   }
 }
