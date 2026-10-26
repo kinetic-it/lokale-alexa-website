@@ -14,6 +14,7 @@
 <meta property="og:description" content="Wiederverwendete Echo-Hardware als selbst betriebener Sprachassistent mit Home Assistant. Offener Projektstand, ehrlich getrennt in getestet und geplant.">
 <title>Lokale Alexa | Ein Echo bekommt ein zweites Leben</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f1114'/%3E%3Cpath d='M3 16h6l3-8 4 16 3-8h10' fill='none' stroke='%23d5b77e' stroke-width='2'/%3E%3C/svg%3E">
+<script>document.documentElement.className+=" js"</script>
 <style>
 /* Konzept: Signalweg. Ein Sprachsignal läuft von links nach rechts durch die Seite;
    ruhige Flächen, dünne Linien, Mono-Beschriftungen, ein warmer Akzent. Kein Material-Look (Regel 32). */
@@ -49,6 +50,30 @@ nav.main::-webkit-scrollbar{display:none}
 nav.main a{color:var(--dim);text-decoration:none;font-size:.88rem;padding:19px 10px 17px;border-bottom:2px solid transparent;white-space:nowrap}
 nav.main a:hover{color:var(--fg)}
 nav.main a[aria-current="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+/* Navigation: ab 1180 px feste Seitenleiste, darunter Menü-Knopf (ohne JavaScript: waagerechte Leiste) */
+.menu{display:none;align-items:center;gap:8px;font:600 .74rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:2px;padding:8px 11px;cursor:pointer}
+.menu:hover{border-color:var(--accent);color:var(--accent)}
+.menu i{display:block;width:14px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor;position:relative}
+.menu i::after{content:"";position:absolute;left:0;right:0;top:2px;border-top:2px solid currentColor}
+.head-right{display:flex;align-items:center;gap:10px;flex:none}
+@media (max-width:1179px){
+  .js .menu{display:inline-flex}
+  .js nav.main{display:none}
+  .js nav.main.open{display:flex;flex-direction:column;gap:0;position:fixed;top:61px;left:0;right:0;max-height:calc(100vh - 61px);overflow-y:auto;background:var(--bg2);border-bottom:1px solid var(--line);padding:8px 0 14px;z-index:30}
+  .js nav.main.open a{padding:13px max(20px,env(safe-area-inset-left,0px));border-bottom:0;border-left:2px solid transparent;font-size:.95rem}
+  .js nav.main.open a[aria-current="true"]{border-left-color:var(--accent)}
+}
+@media (min-width:1180px){
+  nav.main{position:fixed;top:61px;left:0;bottom:0;width:200px;flex-direction:column;gap:0;overflow-y:auto;padding:26px 0;background:var(--bg2);border-right:1px solid var(--line);z-index:15}
+  nav.main a{padding:10px 26px;border-bottom:0;border-left:2px solid transparent;font-size:.9rem}
+  nav.main a[aria-current="true"]{border-left-color:var(--accent);background:#171b20}
+  main,footer{margin-left:200px}
+  header.site .wrap.bar{max-width:none;padding-left:26px;padding-right:26px}
+}
+@media (min-width:641px) and (max-width:1179px){
+  .js nav.main.open{left:auto;width:280px;border-left:1px solid var(--line)}
+}
+
 
 .lang{display:flex;gap:2px;font:600 .74rem/1 var(--mono);letter-spacing:.06em;flex:none}
 .lang a{color:var(--dim);text-decoration:none;padding:7px 8px;border:1px solid transparent;border-radius:2px}
@@ -221,10 +246,10 @@ footer p{font-size:.86rem}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="3" fill="#171b20" stroke="#363c43"/><path d="M4 16h6l3-8 4 16 3-8h8" fill="none" stroke="#d5b77e" stroke-width="2"/></svg>
       <span class="t">KINETIC<b>/</b>IT &nbsp;LOKALE ALEXA</span>
     </a>
-    <nav class="main" aria-label="Hauptnavigation">
+    <nav class="main" id="nav" aria-label="Hauptnavigation">
       <a href="#idee">Warum?</a><a href="#technik">Sprachweg</a><a href="#geraete">Geräte</a><a href="#nachbauen">Nachbauen</a><a href="#stand">Stand</a><a href="#sicherheit">Sicherheit</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Leitfaden</a>
     </nav>
-    <div class="lang" role="group" aria-label="Sprache"><a href="./" lang="de" hreflang="de" aria-current="true">DE</a><a href="./en/" lang="en" hreflang="en">EN</a></div>
+    <div class="head-right"><button class="menu" type="button" aria-controls="nav" aria-expanded="false"><i aria-hidden="true"></i>Menü</button><div class="lang" role="group" aria-label="Sprache"><a href="./" lang="de" hreflang="de" aria-current="true">DE</a><a href="./en/" lang="en" hreflang="en">EN</a></div></div>
   </div>
 </header>
 
@@ -598,10 +623,17 @@ Frage nur nach, wenn du sonst falsch antworten würdest. Eine Frage, nicht mehre
     $$('button',chips).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
     var f=b.getAttribute('data-f');rows.forEach(function(r){r.hidden=!(f==='all'||r.getAttribute('data-c')===f)})})}
 
+  /* Menü (schmale Bildschirme) */
+  var nav=$('#nav'),btn=$('.menu');
+  function setMenu(o){if(!nav||!btn)return;nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false')}
+  if(btn&&nav){btn.addEventListener('click',function(){setMenu(!nav.classList.contains('open'))});
+    nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)})}
+
   /* Navigation: aktuellen Abschnitt markieren */
   var links=$$('nav.main a'),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});var a=map[e.target.id];if(a){a.setAttribute('aria-current','true');if(a.scrollIntoView&&window.matchMedia('(max-width:900px)').matches)a.scrollIntoView({inline:'center',block:'nearest'})}}})},{rootMargin:'-45% 0px -50% 0px'});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});var a=map[e.target.id];if(a){a.setAttribute('aria-current','true');}}})},{rootMargin:'-45% 0px -50% 0px'});
     Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s)});
   }
 })();
