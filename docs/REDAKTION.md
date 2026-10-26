@@ -62,3 +62,10 @@ Abschnitt `#soul` (Navigation „Persona“) und die Downloads `downloads/SOUL-b
 - Das Beispiel ist erfunden (Figur „Mika“). Nie die echte Persona (Nexis, Speaker) oder Namen, IPs, Schlüssel aus dem Projekt einfügen.
 - Aussagen zur Datei (Ablage `~/.hermes/SOUL.md`, Identität am Anfang des Systemprompts, leere Datei = Standard-Identität, Einlesen beim Sitzungsstart, Abgrenzung zu AGENTS.md) stammen aus der Hermes-Dokumentation (Abschnitt Personality). Stand 26.10.2026: nur über eine Suchzusammenfassung gelesen, die Originalseite war aus der Arbeitsumgebung nicht abrufbar, und nicht am eigenen Gerät geprüft. Vor einer Aussage wie „so funktioniert es bei uns“ gegen die Originalseite und die echte Installation prüfen.
 
+## Nachbauen, Verlauf, Testberichte
+
+- Abschnitt `#nachbauen` (sechs Schritte) kommt aus `tools/sections/steps.json`, der **Verlauf** im Abschnitt „Stand“ aus `data/status.json` → `history` (mit `en.history`, gleiche Länge). Danach `python3 tools/sections/build_sections.py` (schreibt den statischen Fallback in beide Seiten; das JavaScript liest `history` zusätzlich live aus `status.json`).
+- Verlaufseinträge nur mit öffentlich freigegebenen Fakten, ohne interne Namen, Hosts oder Zahlen aus dem privaten Sicherheitsstatus.
+- Testberichte: Vorlage `.github/ISSUE_TEMPLATE/testbericht.md` (zweisprachig), verlinkt aus „Nachbauen“ und FAQ.
+- `python3 tools/check_i18n.py` prüft alle generierten Teile gegen ihre Quellen.
+

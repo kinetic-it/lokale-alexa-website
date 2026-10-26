@@ -35,15 +35,16 @@ if not e: errors.append('status.json: Objekt "en" fehlt')
 else:
     for k in ('title','evidence'):
         if not e.get(k): errors.append(f'status.json en.{k} fehlt')
-    for k in ('confirmed','not_yet_verified','known_issues'):
+    for k in ('confirmed','not_yet_verified','known_issues','history'):
         if len(e.get(k,[]))!=len(d.get(k,[])): errors.append(f'status.json {k}: de={len(d.get(k,[]))} en={len(e.get(k,[]))}')
     ids={m['id'] for m in d['milestones']}
     if ids!=set(e.get('milestones',{})): errors.append(f'status.json en.milestones passt nicht zu den IDs {sorted(ids)}')
 
-# SOUL-Beispiel: Seiten und Downloads müssen zu tools/soul/content.json passen
+# Generierte Seitenteile (SOUL-Beispiel, Nachbauen, Verlauf) müssen zu ihren Quellen passen
 import subprocess
-r=subprocess.run([sys.executable,'tools/soul/build_soul.py','--check'],capture_output=True,text=True)
-if r.returncode!=0: errors.append(r.stdout.strip() or 'soul: Prüfung fehlgeschlagen')
+for gen in ('tools/soul/build_soul.py','tools/sections/build_sections.py'):
+    r=subprocess.run([sys.executable,gen,'--check'],capture_output=True,text=True)
+    if r.returncode!=0: errors.append(r.stdout.strip() or gen+': Prüfung fehlgeschlagen')
 
 # PDF-Quelle: deutsche und englische Fassung müssen Block für Block zusammenpassen
 try:

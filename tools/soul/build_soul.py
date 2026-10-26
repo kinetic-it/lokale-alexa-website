@@ -28,7 +28,7 @@ def section(lang):
     cards = ['      <div class="card"><span class="label">%s</span><h3>%s</h3><p>%s</p></div>' % (E(a), E(b), E(c)) for a, b, c in p['cards']]
     return '\n'.join([
         START,
-        '<section id="soul" class="alt">',
+        '<section id="soul">',
         '  <div class="wrap">',
         '    <div class="eyebrow">%s</div>' % E(p['eyebrow']),
         '    <h2>%s</h2>' % E(p['h2']),
