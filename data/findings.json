@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
+  "entries": [
+    {
+      "id": "f4", "date": "2026-10-26", "type": "problem", "state": "open",
+      "de": {"title": "Erster Sprachtest: Schaltbefehl nicht ausgeführt", "text": "Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Die Ursache ist ungeklärt. Als Nächstes wird der aufgezeichnete Lauf in der Debug-Ansicht von Home Assistant gelesen; bis dahin ändern wir nichts auf Verdacht."},
+      "en": {"title": "First voice test: switching command not executed", "text": "The Echo answered audibly, but with an AI text. The device was not switched. The cause is unknown. Next, the recorded run is read in the Home Assistant debug view; until then we change nothing on a hunch."}
+    },
+    {
+      "id": "f3", "date": "2026-10-26", "type": "correction", "state": "resolved",
+      "de": {"title": "Englische PDF: Fehler in der ersten Fassung", "text": "Die erste englische Fassung des Leitfadens hatte Übersetzungsfehler und ließ die 32 Quellen-Links des Originals weg. Beides ist behoben; die Fassung wird jetzt aus derselben Quelle wie das Deutsche gebaut."},
+      "en": {"title": "English PDF: errors in the first edition", "text": "The first English edition of the guide had translation errors and left out the 32 source links of the original. Both are fixed; the edition is now built from the same source as the German one."}
+    },
+    {
+      "id": "f2", "date": "2026-10-25", "type": "finding",
+      "de": {"title": "Ein Listeneintrag ist kein Beweis", "text": "Dass ein Gerät für Sprache freigegeben ist oder harmlos heißt, sagt nichts über seine tatsächliche Wirkung. Jede Freigabe wird einzeln getestet, bevor sie als sicher gilt."},
+      "en": {"title": "A list entry is not proof", "text": "That a device is exposed to voice or has a harmless name says nothing about what it actually does. Every exposure is tested individually before it counts as safe."}
+    },
+    {
+      "id": "f1", "date": "2026-10-23", "type": "finding",
+      "de": {"title": "Aktivierungswort lieber am Gerät erkennen", "text": "Die Erkennung auf dem Server war im Dauerbetrieb instabil, der Echo reagierte nach Minuten nicht mehr. Das lokale Aktivierungswort am Gerät erkannte im Kurztest 10 von 10. Ein Dauerbetrieb ist damit noch nicht belegt."},
+      "en": {"title": "Detect the wake word on the device", "text": "Server-side detection was unstable in continuous operation; the Echo stopped responding after a few minutes. The local wake word on the device was detected 10 of 10 times in a short test. Continuous operation is not yet proven."}
+    }
+  ]
+}

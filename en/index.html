@@ -196,6 +196,22 @@ h3.sub{margin-top:44px}
 .board .issues li::before{border-color:var(--risk)}
 .board .card.wide{grid-column:1/-1}
 
+/* Befunde */
+.finds{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px}
+.find{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--faint);border-radius:3px;padding:18px 22px;min-width:0}
+.find.problem{border-left-color:var(--risk)}
+.find.correction{border-left-color:var(--accent)}
+.find.finding{border-left-color:var(--ok)}
+.find h3{margin:8px 0 6px}
+.find p{margin:0;font-size:.95rem;max-width:80ch}
+.fhead{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font:600 .7rem/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.ftype{color:var(--accent)}
+.find.problem .ftype{color:var(--risk)}
+.find.finding .ftype{color:var(--ok)}
+.fhead time{margin-left:auto;color:var(--faint);letter-spacing:.06em}
+.fstate{border:1px solid var(--line);border-radius:2px;padding:3px 6px;color:var(--dim)}
+.fstate.open{border-color:#725454;color:#c79e9e}
+.fstate.resolved{border-color:#4f6b5e;color:var(--ok)}
 /* Nachbauen */
 .steps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .step{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px;min-width:0}
@@ -258,7 +274,7 @@ footer p{font-size:.86rem}
       <span class="t">KINETIC<b>/</b>IT &nbsp;LOCAL ALEXA</span>
     </a>
     <nav class="main" id="nav" aria-label="Main navigation">
-      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#nachbauen">Build</a><a href="#stand">Status</a><a href="#sicherheit">Security</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
+      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#nachbauen">Build</a><a href="#stand">Status</a><a href="#befunde">Findings</a><a href="#sicherheit">Security</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
     </nav>
     <div class="head-right"><button class="menu" type="button" aria-controls="nav" aria-expanded="false"><i aria-hidden="true"></i>Menu</button><div class="lang" role="group" aria-label="Language"><a href="../" lang="de" hreflang="de">DE</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div></div>
   </div>
@@ -513,6 +529,22 @@ footer p{font-size:.86rem}
     <p class="small" style="margin-top:20px">Automatic publication is not automatic functional testing. The status is adopted after expert approval; the page then updates via GitHub Pages.</p>
   </div>
 </section>
+
+<!-- findings:start -->
+<section id="befunde">
+  <div class="wrap">
+    <div class="eyebrow">Recorded honestly</div>
+    <h2>Findings and lessons</h2>
+    <p class="intro">This is where we record what went wrong or what we learned, newest first. We name open security details only once they are fixed; what we learned is published then.</p>
+    <ol class="finds">
+      <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">open</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>First voice test: switching command not executed</h3><p>The Echo answered audibly, but with an AI text. The device was not switched. The cause is unknown. Next, the recorded run is read in the Home Assistant debug view; until then we change nothing on a hunch.</p></li>
+      <li class="find correction" id="f3"><div class="fhead"><span class="ftype">Correction</span><span class="fstate resolved">resolved</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>English PDF: errors in the first edition</h3><p>The first English edition of the guide had translation errors and left out the 32 source links of the original. Both are fixed; the edition is now built from the same source as the German one.</p></li>
+      <li class="find finding" id="f2"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-25">25 Oct 2026</time></div><h3>A list entry is not proof</h3><p>That a device is exposed to voice or has a harmless name says nothing about what it actually does. Every exposure is tested individually before it counts as safe.</p></li>
+      <li class="find finding" id="f1"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-23">23 Oct 2026</time></div><h3>Detect the wake word on the device</h3><p>Server-side detection was unstable in continuous operation; the Echo stopped responding after a few minutes. The local wake word on the device was detected 10 of 10 times in a short test. Continuous operation is not yet proven.</p></li>
+    </ol>
+  </div>
+</section>
+<!-- findings:end -->
 
 <section id="sicherheit">
   <div class="wrap">

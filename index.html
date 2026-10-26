@@ -196,6 +196,22 @@ h3.sub{margin-top:44px}
 .board .issues li::before{border-color:var(--risk)}
 .board .card.wide{grid-column:1/-1}
 
+/* Befunde */
+.finds{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px}
+.find{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--faint);border-radius:3px;padding:18px 22px;min-width:0}
+.find.problem{border-left-color:var(--risk)}
+.find.correction{border-left-color:var(--accent)}
+.find.finding{border-left-color:var(--ok)}
+.find h3{margin:8px 0 6px}
+.find p{margin:0;font-size:.95rem;max-width:80ch}
+.fhead{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font:600 .7rem/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.ftype{color:var(--accent)}
+.find.problem .ftype{color:var(--risk)}
+.find.finding .ftype{color:var(--ok)}
+.fhead time{margin-left:auto;color:var(--faint);letter-spacing:.06em}
+.fstate{border:1px solid var(--line);border-radius:2px;padding:3px 6px;color:var(--dim)}
+.fstate.open{border-color:#725454;color:#c79e9e}
+.fstate.resolved{border-color:#4f6b5e;color:var(--ok)}
 /* Nachbauen */
 .steps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .step{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px;min-width:0}
@@ -258,7 +274,7 @@ footer p{font-size:.86rem}
       <span class="t">KINETIC<b>/</b>IT &nbsp;LOKALE ALEXA</span>
     </a>
     <nav class="main" id="nav" aria-label="Hauptnavigation">
-      <a href="#idee">Warum?</a><a href="#technik">Sprachweg</a><a href="#geraete">Geräte</a><a href="#nachbauen">Nachbauen</a><a href="#stand">Stand</a><a href="#sicherheit">Sicherheit</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Leitfaden</a>
+      <a href="#idee">Warum?</a><a href="#technik">Sprachweg</a><a href="#geraete">Geräte</a><a href="#nachbauen">Nachbauen</a><a href="#stand">Stand</a><a href="#befunde">Befunde</a><a href="#sicherheit">Sicherheit</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Leitfaden</a>
     </nav>
     <div class="head-right"><button class="menu" type="button" aria-controls="nav" aria-expanded="false"><i aria-hidden="true"></i>Menü</button><div class="lang" role="group" aria-label="Sprache"><a href="./" lang="de" hreflang="de" aria-current="true">DE</a><a href="./en/" lang="en" hreflang="en">EN</a></div></div>
   </div>
@@ -513,6 +529,22 @@ footer p{font-size:.86rem}
     <p class="small" style="margin-top:20px">Automatische Veröffentlichung ist keine automatische Funktionsprüfung. Der Status wird nach fachlicher Freigabe übernommen; die Seite aktualisiert sich dann über GitHub Pages.</p>
   </div>
 </section>
+
+<!-- findings:start -->
+<section id="befunde">
+  <div class="wrap">
+    <div class="eyebrow">Ehrlich festgehalten</div>
+    <h2>Befunde und Erkenntnisse</h2>
+    <p class="intro">Hier stehen Dinge, die schiefgegangen sind oder die wir gelernt haben, neueste zuerst. Offene Sicherheitsdetails nennen wir erst, wenn sie behoben sind; öffentlich steht dann die Lehre daraus.</p>
+    <ol class="finds">
+      <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">offen</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Erster Sprachtest: Schaltbefehl nicht ausgeführt</h3><p>Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Die Ursache ist ungeklärt. Als Nächstes wird der aufgezeichnete Lauf in der Debug-Ansicht von Home Assistant gelesen; bis dahin ändern wir nichts auf Verdacht.</p></li>
+      <li class="find correction" id="f3"><div class="fhead"><span class="ftype">Korrektur</span><span class="fstate resolved">geklärt</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Englische PDF: Fehler in der ersten Fassung</h3><p>Die erste englische Fassung des Leitfadens hatte Übersetzungsfehler und ließ die 32 Quellen-Links des Originals weg. Beides ist behoben; die Fassung wird jetzt aus derselben Quelle wie das Deutsche gebaut.</p></li>
+      <li class="find finding" id="f2"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-25">25.10.2026</time></div><h3>Ein Listeneintrag ist kein Beweis</h3><p>Dass ein Gerät für Sprache freigegeben ist oder harmlos heißt, sagt nichts über seine tatsächliche Wirkung. Jede Freigabe wird einzeln getestet, bevor sie als sicher gilt.</p></li>
+      <li class="find finding" id="f1"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-23">23.10.2026</time></div><h3>Aktivierungswort lieber am Gerät erkennen</h3><p>Die Erkennung auf dem Server war im Dauerbetrieb instabil, der Echo reagierte nach Minuten nicht mehr. Das lokale Aktivierungswort am Gerät erkannte im Kurztest 10 von 10. Ein Dauerbetrieb ist damit noch nicht belegt.</p></li>
+    </ol>
+  </div>
+</section>
+<!-- findings:end -->
 
 <section id="sicherheit">
   <div class="wrap">
