@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Erzeugt zweisprachige Seitenteile aus einer Quelle:
   - Abschnitt "Nachbauen" (<section id="nachbauen">) aus tools/sections/steps.json
-  - Verlauf im Abschnitt "Stand" (statischer Fallback) aus data/status.json -> history
+  - statischer Fallback des Projektstands aus data/status.json: Kopfkarte (Titel, Datum, Meilensteine,
+    letzter Test), Listen "berichtet / offen / Probleme" und Verlauf. Das JavaScript liest dieselben Daten live.
 Aufruf im Repo-Wurzelverzeichnis:
   python3 tools/sections/build_sections.py          # schreibt index.html und en/index.html
   python3 tools/sections/build_sections.py --check  # Exit 1, wenn die Seiten nicht zur Quelle passen
 """
-import html, json, sys
+import html, json, re, sys
 
 E = html.escape
 STEPS = json.load(open('tools/sections/steps.json', encoding='utf-8'))
@@ -25,7 +26,7 @@ def steps(lang):
         items.append('      <li class="step"><span class="label">%s %d</span><h3>%s</h3><p>%s</p><p class="ref">%s</p></li>'
                      % (E(p['step']), n, E(h), E(txt), E(ref)))
     return '\n'.join([
-        '<section id="nachbauen" class="alt">',
+        '<section id="nachbauen">',
         '  <div class="wrap">',
         '    <div class="eyebrow">%s</div>' % E(p['eyebrow']),
         '    <h2>%s</h2>' % E(p['h2']),
@@ -43,14 +44,44 @@ def history(lang):
     return '\n'.join('          <li><time datetime="%s">%s</time><span>%s</span></li>' % (x['date'], fmt(x['date'], lang), E(t))
                      for x, t in zip(h, texts))
 
-PARTS = {'nachbauen': steps, 'history': history}
+LABELS = {
+    'de': {'owner_reported': 'Owner-Bericht', 'in_progress': 'in Arbeit', 'open': 'offen', 'failed': 'Test fehlgeschlagen', 'asof': 'Stand: ', 'last': 'Letzter Test'},
+    'en': {'owner_reported': 'Owner report', 'in_progress': 'in progress', 'open': 'open', 'failed': 'test failed', 'asof': 'As of ', 'last': 'Latest test'},
+}
+
+def texts(lang):
+    return STATUS['en'] if lang == 'en' else STATUS
+
+def ms(lang):
+    L, T = LABELS[lang], texts(lang)
+    names = STATUS['en']['milestones'] if lang == 'en' else {m['id']: m['name'] for m in STATUS['milestones']}
+    return '\n'.join('          <li><i class="mk %s"></i><span>%s</span><span class="st">%s</span></li>' % (m['state'], E(names[m['id']]), E(L[m['state']]))
+                     for m in STATUS['milestones'])
+
+def lst(key):
+    def f(lang):
+        return '\n'.join('          <li>%s</li>' % E(t) for t in texts(lang)[key])
+    return f
+
+def binds(s, lang):
+    L, T = LABELS[lang], texts(lang)
+    ev = T['evidence']
+    vals = {'title': T['title'], 'asof': fmt(STATUS['as_of'], lang), 'evidence': ev,
+            'meta': L['asof'] + fmt(STATUS['as_of'], lang) + ' \u00b7 ' + ev,
+            'lasttest': STATUS['en']['last_test'] if lang == 'en' else STATUS['last_test']['text'],
+            'lastdate': L['last'] + ' \u00b7 ' + fmt(STATUS['last_test']['date'], lang)}
+    for k, v in vals.items():
+        s = re.sub(r'(data-bind="%s">)[^<]*(</)' % k, lambda m: m.group(1) + E(v) + m.group(2), s)
+    return s
+
+PARTS = {'nachbauen': steps, 'history': history, 'ms': ms, 'confirmed': lst('confirmed'), 'open': lst('not_yet_verified'), 'issues': lst('known_issues')}
 
 def apply(s, lang):
     for key, fn in PARTS.items():
         a, b = '<!-- %s:start -->' % key, '<!-- %s:end -->' % key
         i, j = s.index(a) + len(a), s.index(b)
         s = s[:i] + '\n' + fn(lang) + '\n' + s[j:]
-    return s
+    return binds(s, lang)
 
 def main():
     check = '--check' in sys.argv

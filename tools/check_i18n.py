@@ -33,6 +33,8 @@ if re.search(r'[äöüÄÖÜß]',' '.join(en.text)): errors.append('en/index.htm
 d=json.load(open('data/status.json',encoding='utf-8')); e=d.get('en')
 if not e: errors.append('status.json: Objekt "en" fehlt')
 else:
+    if not d.get('last_test') or not e.get('last_test'): errors.append('status.json: last_test (de) oder en.last_test fehlt')
+    if d.get('as_of') is None or len(d.get('history',[]))!=len(e.get('history',[])): errors.append('status.json: as_of oder history fehlt/ungleich')
     for k in ('title','evidence'):
         if not e.get(k): errors.append(f'status.json en.{k} fehlt')
     for k in ('confirmed','not_yet_verified','known_issues','history'):

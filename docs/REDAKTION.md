@@ -69,3 +69,18 @@ Abschnitt `#soul` (Navigation „Persona“) und die Downloads `downloads/SOUL-b
 - Testberichte: Vorlage `.github/ISSUE_TEMPLATE/testbericht.md` (zweisprachig), verlinkt aus „Nachbauen“ und FAQ.
 - `python3 tools/check_i18n.py` prüft alle generierten Teile gegen ihre Quellen.
 
+## Stand der Seite aus einer Quelle
+
+`data/status.json` ist die einzige Quelle für den Projektstand. `python3 tools/sections/build_sections.py` schreibt daraus den statischen Fallback in beide Seiten (Kopfkarte mit Meilensteinen und letztem Test, Listen „berichtet / offen / Probleme“, Verlauf, Titel, Datum). Das JavaScript liest dieselben Daten live. Meilenstein-Zustände: `owner_reported`, `in_progress`, `open`, `failed`. Neue Felder immer mit englischem Gegenstück unter `en` (`last_test`, `history`, …). Wird der Stand älter als 14 Tage, markiert die Seite das selbst.
+
+Abschnittsflächen wechseln per CSS (`main>section:nth-of-type(even)`), keine Klassen von Hand setzen.
+
+Beim Teilen erscheinen `og-de.png` und `og-en.png` (1200 × 630). `robots.txt`, `sitemap.xml` und `404.html` liegen im Wurzelverzeichnis. Eine GitHub Action (`.github/workflows/check.yml`) führt `check_i18n.py` bei jedem Pull Request aus.
+
+## Offen beim Owner (nicht von mir lösbar)
+
+- **Impressum / Kontakt:** Die Seite hat keines. Ob eines nötig ist, hängt von der rechtlichen Einordnung ab (privates, nicht kommerzielles Projekt oder nicht); das entscheidet der Owner. Keine Angaben erfinden.
+- **Echtes Foto** des Pilotgeräts (ohne Seriennummer und ohne Umgebung, die etwas verrät) für „Geräte“ oder den Seitenkopf.
+- **Muttersprachliche Durchsicht** der englischen Seite und der englischen PDF.
+- **Prüfung auf echten Geräten:** Safari (iPhone), Firefox, Android-Chrome. Geprüft ist bisher nur Chromium, mit axe-core (keine Verstöße) und ohne Überlauf bei 320 bis 1440 px.
+
