@@ -15,3 +15,7 @@ Die Seite zeigt Sprachweg-Schaubild, Gerätefilter, Sicherheitsgrundsätze und d
 Die Grundlagen stammen aus „Amazon-Geräte als offene Sprach- und Smart-Home-Geräte“ (Redaktionsstand 22.10.2026). Geräteunterstützung und tatsächliche Projektabnahme werden getrennt dargestellt.
 
 Work Item (privat): WI-0181.
+
+## PDF-Leitfaden
+
+Deutsches Original und englische Fassung: `downloads/`. Die englische PDF wird aus `tools/leitfaden/` gebaut; Pflegeprozess in `docs/PDF-LEITFADEN.md`.

@@ -1,0 +1,1336 @@
+{
+ "meta": {
+  "lang": "en",
+  "pdf_title": "Amazon devices as open voice and smart home devices – as of 22 October 2026",
+  "pdf_subject": "Software, root compatibility, voices and hardware effort",
+  "cover_title": [
+   "Amazon devices as open voice",
+   "and smart home devices"
+  ],
+  "cover_subtitle": "Software, root compatibility, voices and hardware effort",
+  "cover_status": "Editorial and research status: 22 October 2026",
+  "cover_paragraphs": [
+   "An independent overview of software, device variants and requirements for continuing to use Amazon devices. It covers Echo, Fire TV, Fire TV Cube and Fire tablets; Kindle e-readers are classified in addition.",
+   "The information describes publicly documented possibilities. No devices were flashed and no hardware or long-term tests of our own were carried out. “Documented usable” always applies to the matching model, the matching hardware variant and the software version described. A guarantee for every used, second-hand unit cannot be derived from it."
+  ],
+  "cover_note": [
+   "<b>English edition, translated from the German original</b>",
+   "Translation date: 26 October 2026. Machine-assisted translation, not reviewed by a native speaker. The German edition is the authoritative version."
+  ],
+  "header": "AMAZON DEVICES · SOFTWARE AND COMPATIBILITY",
+  "footer": "As of: 22 October 2026",
+  "toc_title": "Contents"
+ },
+ "blocks": [
+  {
+   "id": "b000",
+   "t": "h1",
+   "text": "1. Software overview: What is there and what does it do?"
+  },
+  {
+   "id": "b001",
+   "t": "h2",
+   "text": "1.1 The building blocks of a voice assistant"
+  },
+  {
+   "id": "b002",
+   "t": "p",
+   "text": "A voice assistant consists of several interchangeable parts. The software on the Echo captures audio and plays back replies. The actual processing can run on a server in the home network or with a cloud provider."
+  },
+  {
+   "id": "b003",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Building block</b>",
+     "<b>Task</b>",
+     "<b>Examples and limits</b>"
+    ],
+    [
+     "Device operating system and audio drivers",
+     "Run the microphones, speakers, buttons and display",
+     "Fire OS with modifications, emOS, TECHO5, LibreEcho; a different kernel alone is not enough"
+    ],
+    [
+     "Voice satellite",
+     "Exchange audio and device state with the hub",
+     "hassmic, EchoLocal, EchoMuse; a satellite is the microphone and speaker in the room"
+    ],
+    [
+     "Wake word",
+     "Detect the start of a request",
+     "Amazon wake word engine, microWakeWord, openWakeWord; support depends on the port"
+    ],
+    [
+     "STT: speech to text",
+     "Transcribe the spoken command",
+     "Whisper, Speech-to-Phrase or cloud STT"
+    ],
+    [
+     "Command processing",
+     "Decide on an action or a reply",
+     "Home Assistant Assist; optionally a language model or agent"
+    ],
+    [
+     "TTS: text to speech",
+     "Make the reply audible",
+     "Katja via Microsoft Speech, Piper, ElevenLabs, Home Assistant Cloud"
+    ],
+    [
+     "Media management",
+     "Connect music sources and playback",
+     "Music Assistant; accounts, providers and players have to fit together"
+    ]
+   ]
+  },
+  {
+   "id": "b004",
+   "t": "p",
+   "text": "The technical order is: microphone → wake word → STT → Assist or agent → TTS → speaker. The choice of voice decides neither the root access nor how well the device understands a spoken command. [Q10, Q11]"
+  },
+  {
+   "id": "b005",
+   "t": "h2",
+   "text": "1.2 echo-dot-assist / hassmic"
+  },
+  {
+   "id": "b006",
+   "t": "p",
+   "text": "<b>Task:</b> Use Echo devices as Home Assistant voice satellites while keeping parts of the original microphone processing. The connection uses either the ESPHome API or Wyoming; the range of functions differs by mode."
+  },
+  {
+   "id": "b007",
+   "t": "p",
+   "text": "<b>Devices:</b> Echo Dot 2, Echo 2 and the original Echo Dot 3 from 2018. The exact model number is decisive. <b>Benefits:</b> voice, media playback and, depending on the mode, further device functions. <b>Prerequisite:</b> a device-specific unlock and exactly matching firmware."
+  },
+  {
+   "id": "b008",
+   "t": "p",
+   "text": "<b>Limits and community:</b> The project itself reports tests on only one unit per model. That is concrete proof that it works, but not a broad reliability test. For the Dot 3 there is also a user report of initial audio and Wi-Fi problems; see chapter 9. Effort: <b>2–4 out of 5</b>, mainly depending on hardware access. [Q1, Q9]"
+  },
+  {
+   "id": "b009",
+   "t": "h2",
+   "text": "1.3 EchoLocal"
+  },
+  {
+   "id": "b010",
+   "t": "p",
+   "text": "<b>Task:</b> Replace Amazon’s services with a local voice, media and display service on the existing Fire OS base. <b>Devices:</b> Dot 2, Show 5 Gen. 1 and 2, and Show 8 Gen. 1 and 2."
+  },
+  {
+   "id": "b011",
+   "t": "p",
+   "text": "<b>Benefits:</b> Home Assistant integration, wake words, voice output, music and, on Shows, a dedicated interface. Additional functions can be added through the optional HACS integration. <b>Prerequisite:</b> matching root access, a supported Fire OS and a working Assist setup."
+  },
+  {
+   "id": "b012",
+   "t": "p",
+   "text": "<b>Limits and community:</b> The project list confirms the devices named, not every conceivable hardware variant. The optional integration is one more component to maintain. Interface, camera and media functions have to be checked individually. Effort: <b>2–4 out of 5</b>. [Q2]"
+  },
+  {
+   "id": "b013",
+   "t": "h2",
+   "text": "1.4 EchoMuse and emOS"
+  },
+  {
+   "id": "b014",
+   "t": "p",
+   "text": "<b>Task:</b> Run the Dot 2 as a voice satellite with its own device management and a controller in the home network. <b>emOS</b> is the project’s Linux base; the older route runs on rooted Fire OS 5."
+  },
+  {
+   "id": "b015",
+   "t": "p",
+   "text": "<b>Benefits:</b> central setup and management of several Dots, voice, media and configurable wake words. <b>Prerequisite:</b> a controller that runs permanently as an add-on or container, and Home Assistant with Assist."
+  },
+  {
+   "id": "b016",
+   "t": "p",
+   "text": "<b>Limits and community:</b> The regular target is still the Dot 2 only. Work on other Echo models is not an approval for using them day to day. The controller remains an additional service. Local wake word detection and audio transfer to the controller are separate operating modes. Effort: <b>2–3 out of 5</b>. [Q3]"
+  },
+  {
+   "id": "b017",
+   "t": "h2",
+   "text": "1.5 TECHO5, TECHO5 Dot and TECHO5 Spot"
+  },
+  {
+   "id": "b018",
+   "t": "p",
+   "text": "<b>Task:</b> run supported Echos on a Linux system. The family covers screen devices, the Dot 2, the Echo 2 and the first Spot; there are device-specific variants for them. <b>Benefits:</b> voice satellite, media and, depending on the device, display, clock, weather and further local functions."
+  },
+  {
+   "id": "b019",
+   "t": "p",
+   "text": "<b>Prerequisites:</b> a suitable unlock, the matching installation chain and, for several Show/Spot models, an explicitly supported LineageOS base as the starting point. The Show 8 Gen. 2 uses its own route."
+  },
+  {
+   "id": "b020",
+   "t": "p",
+   "text": "<b>Limits and community:</b> The projects publish concrete tests, in part on only a few devices. Microphone processing does not automatically reach the level of the original Alexa software. For speech during loud music, the TECHO5 author describes limitations. Effort: <b>3–4 out of 5</b>. [Q4–Q7]"
+  },
+  {
+   "id": "b021",
+   "t": "h2",
+   "text": "1.6 LibreEcho"
+  },
+  {
+   "id": "b022",
+   "t": "p",
+   "text": "<b>Task:</b> a stand-alone Linux system for the Echo 2 and Dot 2 with management in the browser. <b>Benefits:</b> open operation, voice and media functions, and its own update path."
+  },
+  {
+   "id": "b023",
+   "t": "p",
+   "text": "<b>Prerequisites:</b> a Linux computer for the documented installation route, a device-specific unlock archive and a reliable USB connection. The Echo 2 can be connected via the bottom pads with a pogo adapter or with soldered wires; on the Dot 2 the existing data port is enough."
+  },
+  {
+   "id": "b024",
+   "t": "p",
+   "text": "<b>Limits and community:</b> The project description expressly points to the more limited test experience with the newer Dot port. Switching between major version lines may require a reinstall and the loss of the setup. The voice integration documented for each release should be checked in advance. Effort: <b>2–3 out of 5</b>. [Q8]"
+  },
+  {
+   "id": "b025",
+   "t": "h2",
+   "text": "1.7 LineageOS, root tools and Fire TV software"
+  },
+  {
+   "id": "b026",
+   "t": "p",
+   "text": "<b>LineageOS</b> is an alternative Android system. On suitable devices it makes Android apps possible, but on its own it is not yet a complete local voice assistant. Display, camera, Bluetooth and audio depend on the device-specific build. The Echo builds in Q17 are community releases; the repository name is not an approval by Amazon."
+  },
+  {
+   "id": "b027",
+   "t": "p",
+   "text": "<b>amonet, kamakiri, saiyaku and FireFU</b> open up device-specific access. <b>TWRP</b> serves as a recovery environment and <b>Magisk</b> manages root functions. These tools replace neither speech recognition nor voice output. An exploit for a similar chip is not a general approval for all devices with that chip. [Q18–Q24]"
+  },
+  {
+   "id": "b028",
+   "t": "p",
+   "text": "<b>GhostLock</b> gives temporary root access on explicitly listed Fire OS builds, including the Fire Max 11 and the Fire TV Stick 4K Max Gen. 2. There, root ends with the reboot. This is not an automatic bootloader unlock. [Q25]"
+  },
+  {
+   "id": "b029",
+   "t": "p",
+   "text": "<b>Kodi and CoreELEC</b> mainly concern media playback. Media operation on a Cube does not prove full access to its microphone array. Likewise, the Home Assistant ADB integration controls suitable Fire TVs without turning them into an Assist voice satellite. [Q16, Q26]"
+  },
+  {
+   "id": "b030",
+   "t": "h1",
+   "text": "2. Why convert? Benefits, drawbacks and achievable goals"
+  },
+  {
+   "id": "b031",
+   "t": "h2",
+   "text": "2.1 What is reasonably achievable"
+  },
+  {
+   "id": "b032",
+   "t": "p",
+   "text": "A conversion can keep existing microphones, speakers and displays usable. Home Assistant links voice commands with devices and automations from different manufacturers. The speech service, the voice and, where applicable, the conversation model can be chosen separately. With fully local processing, simple commands can work even without internet, as long as the home network and the server are available."
+  },
+  {
+   "id": "b033",
+   "t": "p",
+   "text": "Typical goals are light control, announcements, weather, timers, media playback and a smart home display. Open knowledge questions can additionally go to a language model. Running simple switching commands directly in Home Assistant is often more sensible than routing every command through a complex agent."
+  },
+  {
+   "id": "b034",
+   "t": "h2",
+   "text": "2.2 What the drawbacks are"
+  },
+  {
+   "id": "b035",
+   "t": "p",
+   "text": "Responsibility for installation, updates, backups and troubleshooting passes to the operator. A wrong image or an unstable flashing connection can render the device unusable. The original sound tuning, far-field detection or convenience functions may be limited. An additional server uses power and requires maintenance."
+  },
+  {
+   "id": "b036",
+   "t": "p",
+   "text": "Alexa skills, Amazon purchases, Amazon multiroom and the original calling services are not carried over automatically. Some ports offer their own intercom or multiroom functions; their compatibility has to be assessed separately. “Local” applies only to the data path that is actually set up: cloud STT transmits audio, cloud TTS transmits the reply text, and a cloud agent transmits the respective request context."
+  },
+  {
+   "id": "b037",
+   "t": "h2",
+   "text": "2.3 Three reasonable operating models"
+  },
+  {
+   "id": "b038",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Operating model</b>",
+     "<b>Advantage</b>",
+     "<b>Drawback and required background</b>"
+    ],
+    [
+     "Fully local",
+     "High control over data and independence from the internet",
+     "Local compute for STT, TTS and, if applicable, the model is required"
+    ],
+    [
+     "Locally controlled, cloud voice",
+     "Local home control with a freely chosen cloud voice, such as Katja",
+     "Text leaves the home network; internet access and a usage quota are required"
+    ],
+    [
+     "Cloud STT and cloud TTS",
+     "Lower local compute load",
+     "Ongoing dependence on the provider, the connection and the plan"
+    ]
+   ]
+  },
+  {
+   "id": "b039",
+   "t": "p",
+   "text": "A conversion makes the most sense when the exact device is already supported and the desired functions are demonstrably available. For a pure development device, by contrast, the focus is on technical experimentation."
+  },
+  {
+   "id": "b040",
+   "t": "h1",
+   "text": "3. What is needed in the background"
+  },
+  {
+   "id": "b041",
+   "t": "h2",
+   "text": "3.1 Server, network and services"
+  },
+  {
+   "id": "b042",
+   "t": "p",
+   "text": "The basis is a permanently reachable computer for Home Assistant and the chosen speech processing. Depending on the load, this can be an existing server, a single-board computer or a mini PC. A separate device per room is not needed for this. EchoMuse additionally needs its controller; other ports have their own requirements."
+  },
+  {
+   "id": "b043",
+   "t": "p",
+   "text": "Speech-to-Phrase is an option for simple local household commands. For free speech, Whisper offers more room but needs more computing power. A local large language model is a further load that has to be sized separately. A blanket RAM or GPU recommendation would not be reliable without a specific model, concurrency and a target response time. [Q11]"
+  },
+  {
+   "id": "b044",
+   "t": "p",
+   "text": "Useful are stable Wi-Fi reception at the satellites, a server connection that is as reliable as possible and working local device discovery. Separate network segments may need additional rules to allow traffic. Failures of Wi-Fi, Home Assistant, the internet and power have different effects and should each be tested on their own."
+  },
+  {
+   "id": "b045",
+   "t": "h2",
+   "text": "3.2 Installation and ongoing operation are different tasks"
+  },
+  {
+   "id": "b046",
+   "t": "p",
+   "text": "For the initial conversion, depending on the project, Linux, Windows or macOS, a data cable and tools such as Python, adb and fastboot are needed. Some guides expressly require Linux. Virtual machines can cause problems when the USB device mode changes."
+  },
+  {
+   "id": "b047",
+   "t": "p",
+   "text": "In everyday use the installation computer can be dispensed with. The server and, where applicable, the controller stay switched on. With only temporary, computer-assisted root access, however, a computer may be needed again after every reboot. This dependency belongs in the device assessment."
+  },
+  {
+   "id": "b048",
+   "t": "h2",
+   "text": "3.3 Agents and other services"
+  },
+  {
+   "id": "b049",
+   "t": "p",
+   "text": "An agent, such as a separately operated “Hermes Agent” system, is optional. Root does not install it on the Echo. A concrete connection to Home Assistant, its permissions and its behavior on errors would have to be set up and tested separately. The older Hermes MQTT protocol and a product with “Hermes” in its name are not automatically the same thing."
+  },
+  {
+   "id": "b050",
+   "t": "p",
+   "text": "For music, media servers, Music Assistant and, where applicable, provider subscriptions come into play. Voice search, playlist access, audio output and re-login are independent functions. A working Bluetooth speaker does not prove working voice-controlled music search."
+  },
+  {
+   "id": "b051",
+   "t": "h1",
+   "text": "4. Voice output: Katja, ElevenLabs and local alternatives"
+  },
+  {
+   "id": "b052",
+   "t": "h2",
+   "text": "4.1 Putting Katja in context"
+  },
+  {
+   "id": "b053",
+   "t": "p",
+   "text": "Microsoft documents the German female voice <b>de-DE-KatjaNeural</b>. It is a TTS voice: a reply text is converted into audible speech. Katja therefore replaces the audible output of a configured assistant; it takes over neither Alexa skills nor Alexa’s speech recognition. [Q12]"
+  },
+  {
+   "id": "b054",
+   "t": "p",
+   "text": "One documented way to use it is Microsoft Speech via an Azure Speech resource. For this, Home Assistant describes its Microsoft TTS integration with an API key, language and voice type. How exactly it plugs into the chosen Assist pipeline should be checked with a test output before buying a device. [Q13]"
+  },
+  {
+   "id": "b055",
+   "t": "p",
+   "text": "The name of a voice does not determine how it is accessed. The integration used and the actual speech provider should be documented separately. In particular, “Katja” is not the same as a freely downloadable local voice or a permanently free service."
+  },
+  {
+   "id": "b056",
+   "t": "h2",
+   "text": "4.2 Comparing the options"
+  },
+  {
+   "id": "b057",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Option</b>",
+     "<b>Strengths and use</b>",
+     "<b>Requirements and limits</b>"
+    ],
+    [
+     "Microsoft Katja",
+     "A specific German voice; for uniform output across several rooms",
+     "A suitable Microsoft account, integration and quota; usually cloud TTS [Q12, Q13]"
+    ],
+    [
+     "ElevenLabs",
+     "Alternative voices and custom voices, depending on the plan; HA integration available",
+     "Account and API key; quota or plan; compare audio quality with everyday German sentences [Q14]"
+    ],
+    [
+     "Piper",
+     "Local speech synthesis; sensible for independence from the internet",
+     "A local service and a suitable German voice model; expressiveness and pronunciation differ between models [Q11]"
+    ],
+    [
+     "Home Assistant Cloud",
+     "Integrated route for STT and TTS with little infrastructure of your own",
+     "Subscription and internet; check the currently offered voice in the interface [Q11]"
+    ],
+    [
+     "Cartesia",
+     "Another cloud TTS provider as a comparison option",
+     "Additional community integration or your own API connection; do not confuse with “Katja” [Q15]"
+    ]
+   ]
+  },
+  {
+   "id": "b058",
+   "t": "h2",
+   "text": "4.3 What matters for speech and audio"
+  },
+  {
+   "id": "b059",
+   "t": "p",
+   "text": "<b>Pronunciation:</b> compare place names, device names, numbers, times and abbreviations using the same test sentences. A good-sounding demo says little about how “Arbeitszimmer” (study), a weather warning or a foreign-language song title is spoken."
+  },
+  {
+   "id": "b060",
+   "t": "p",
+   "text": "<b>Time to first response:</b> what counts is the time from the end of the question to the first audible sound. STT, command processing, TTS, network latency and audio buffers all contribute. Streaming only helps if the whole playback chain supports it."
+  },
+  {
+   "id": "b061",
+   "t": "p",
+   "text": "<b>Detection during music:</b> AEC means acoustic echo cancellation; it is meant to subtract the device’s own speaker from the microphone recording. Beamforming combines microphones spatially. VAD detects speech activity. A different TTS offering does not repair faulty microphone processing."
+  },
+  {
+   "id": "b062",
+   "t": "p",
+   "text": "<b>Wake word and interruption:</b> a custom name needs a suitable detection model and tests with different voices. The desired TTS voice does not determine the wake word. The satellite must also support interrupting a reply that is in progress."
+  },
+  {
+   "id": "b063",
+   "t": "p",
+   "text": "<b>Failure behavior:</b> a local fallback voice can make sense when the cloud is down. However, the switch only happens if the integration or automation in use actually implements such a fallback."
+  },
+  {
+   "id": "b064",
+   "t": "h1",
+   "text": "5. Hardware, pogo pins, cables and soldering"
+  },
+  {
+   "id": "b065",
+   "t": "h2",
+   "text": "5.1 What each part does"
+  },
+  {
+   "id": "b066",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Part or tool</b>",
+     "<b>Purpose</b>",
+     "<b>What it does not give you</b>"
+    ],
+    [
+     "Data-capable USB cable",
+     "Connection to the installation computer; on some devices also supplies power",
+     "A charge-only cable does not carry installation data"
+    ],
+    [
+     "Pogo pins with holder",
+     "Spring contacts on accessible test pads, for example on the Echo 2",
+     "No root without a suitable software route; loose pins are not a stable mount"
+    ],
+    [
+     "Jumper wires and adapters",
+     "Electrical connection between the contact point and the connector",
+     "No automatically matching mechanical connection to the pogo pin"
+    ],
+    [
+     "Soldering iron, fine wires, flux",
+     "Fixed connection at internal pads, if the guide requires it",
+     "No substitute for the correct pin assignment and a voltage check"
+    ],
+    [
+     "Multimeter",
+     "Check continuity, ground and possible short circuits",
+     "Does not make cable colors or visible shape automatically correct"
+    ],
+    [
+     "USB-UART adapter",
+     "Serial diagnostic console on suitable devices",
+     "No substitute for a USB data connection; the voltage level must match the device"
+    ],
+    [
+     "Opening tool and magnification",
+     "Access to the circuit board and small pads",
+     "No protection against torn-off pads from pulling on wires"
+    ]
+   ]
+  },
+  {
+   "id": "b067",
+   "t": "h2",
+   "text": "5.2 Pogo pins and jumper pins are mechanically different"
+  },
+  {
+   "id": "b068",
+   "t": "p",
+   "text": "One concrete supplier example for P50-B1 pogo pins gives a shaft diameter of 0.68 mm, a contact diameter of 0.48 mm and a total length of 16 mm. These figures are not a universal standard for all products. For a holder, the specific datasheet and a measurement of the pins actually delivered are what count. [Q32]"
+  },
+  {
+   "id": "b069",
+   "t": "p",
+   "text": "As a worked example, take a square jumper pin with a 0.64 × 0.64 mm cross-section; the actual dimension has to be checked on the connector in use. Its diagonal is about 0.91 mm. The usual 2.54 mm pitch is the distance between pin centers. A square pin like this therefore does not automatically fit into a round 0.68 mm receptacle. Sockets, sleeves or a suitable fixed connection are needed separately."
+  },
+  {
+   "id": "b070",
+   "t": "p",
+   "text": "Pogo contacts can avoid soldering on the device if suitable pads are accessible. For that, pressure, alignment and strain relief have to be reliable. A soldered connection can be mechanically more stable, but it takes experience and can damage pads. The sensible route depends on the specific device."
+  },
+  {
+   "id": "b071",
+   "t": "h2",
+   "text": "5.3 Before writing to device storage"
+  },
+  {
+   "id": "b072",
+   "t": "p",
+   "text": "Take the model and pin assignment from the exact device guide. Do not connect power supply and USB voltage on a guess. On devices with a separate power supply, its role is expressly kept; a USB-UART adapter does not belong on USB data pads."
+  },
+  {
+   "id": "b073",
+   "t": "p",
+   "text": "First, a permanently stable detection on the computer makes sense. Repeated disconnects point to a contact, cable or power problem. A briefly visible MediaTek entry proves neither root nor a reliable flashing connection. Only then should the device’s own backups, the matching images and the documented recovery route be stored together."
+  },
+  {
+   "id": "b074",
+   "t": "h1",
+   "text": "6. Documented compatible Echo devices"
+  },
+  {
+   "id": "b075",
+   "t": "h2",
+   "text": "6.1 Assessment scale"
+  },
+  {
+   "id": "b076",
+   "t": "p",
+   "text": "The assessment has two separate axes: access to the device and usability as a local voice assistant. Root alone does not confirm working microphones, echo cancellation or a Home Assistant integration."
+  },
+  {
+   "id": "b077",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Voice-use status</b>",
+     "<b>Meaning</b>",
+     "<b>Scope</b>"
+    ],
+    [
+     "A – documented usable",
+     "A device-specific installation route and voice satellite functions have been published",
+     "Applies only to the named hardware and software combination; no guarantee for every individual unit"
+    ],
+    [
+     "B – experimental or limited",
+     "A port exists, but variants or essential functions are still open",
+     "Suitability depends on the specific device and the functions needed"
+    ],
+    [
+     "C – does not work today as a complete local voice assistant",
+     "The projects examined lack a documented end-to-end solution",
+     "Concerns local voice operation, not the original Alexa function and not necessarily rootability"
+    ]
+   ]
+  },
+  {
+   "id": "b078",
+   "t": "p",
+   "text": "<b>Access to the device:</b> “Unlock” means a documented way to start modified software. “Temporary” applies only to the current session or until reboot. “Historical” requires old firmware or particular hardware. “Not documented” means there is not enough evidence."
+  },
+  {
+   "id": "b079",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Effort</b>",
+     "<b>Typical scope</b>",
+     "<b>Classification</b>"
+    ],
+    [
+     "1 out of 5",
+     "Setting up functions that already exist",
+     "No device conversion"
+    ],
+    [
+     "2 out of 5",
+     "Documented USB conversion",
+     "Suitable files and tools, and careful following of the device guide"
+    ],
+    [
+     "3 out of 5",
+     "Multi-stage installation or adapter",
+     "Plan for extra preparation and troubleshooting"
+    ],
+    [
+     "4 out of 5",
+     "Internal contacting or strong dependence on the variant",
+     "Experience with electronics or device-specific installation routes is advisable"
+    ],
+    [
+     "5 out of 5",
+     "Development and research",
+     "No plannable, successful conversion is promised"
+    ]
+   ]
+  },
+  {
+   "id": "b080",
+   "t": "p",
+   "text": "The effort rating is an editorial guide, not a measured working time. In chapter 6 it refers to the voice conversion; for the additional devices in chapter 7, the root/unlock effort is stated separately."
+  },
+  {
+   "id": "b081",
+   "t": "h2",
+   "text": "6.2 Similar housings, different hardware"
+  },
+  {
+   "id": "b082",
+   "t": "p",
+   "text": "<b>Model year is not manufacturing year.</b> The years describe the introduction of the model, or the period of a hardware version named in the project source. A device may have been produced or bought later. When choosing firmware and a guide, the model number and device identifier matter more than purchase date, color or housing shape."
+  },
+  {
+   "id": "b083",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Device and model year /</b> <b>hardware version</b>",
+     "<b>Model number and codename</b>",
+     "<b>Decisive difference</b>"
+    ],
+    [
+     "Echo Dot 3 – original version, 2018",
+     "<b>D9N29T</b> · donut",
+     "Supported by hassmic; internal USB access and matching firmware required"
+    ],
+    [
+     "Echo Dot 3 – refresh, 2019–2020",
+     "<b>C78MP8</b> · crumpet",
+     "Looks very similar to the original Dot 3; the donut unlock is not compatible"
+    ],
+    [
+     "Echo Dot 3 with clock – 2019",
+     "<b>36EBT3</b> · doebrite",
+     "Its own hardware variant with a display; the D9N29T approval does not carry over"
+    ],
+    [
+     "Echo Show 5 Gen. 1 – 2019",
+     "<b>H23K37</b> · checkers",
+     "Its own device port and its own software base"
+    ],
+    [
+     "Echo Show 5 Gen. 2 – 2021",
+     "<b>C76N8S</b> · cronos",
+     "Similar housing but a different port; the checkers files are not a substitute"
+    ],
+    [
+     "Echo Show 8 Gen. 1 – 2019",
+     "<b>C7H6N3</b> · crown",
+     "Supported route for this generation"
+    ],
+    [
+     "Echo Show 8 Gen. 2 – 2021",
+     "<b>A8H3N2</b> · athena",
+     "Looks similar, but has its own installation chain and additional panel variants"
+    ]
+   ]
+  },
+  {
+   "id": "b084",
+   "t": "p",
+   "text": "Mapping and software limits: device overviews from hassmic and TECHO5. The Dot 3 refresh is classified in the hassmic project as 2019–2020; no exact manufacturing cut-off for every individual unit can be derived from this. [Q1, Q31]"
+  },
+  {
+   "id": "b085",
+   "t": "p",
+   "text": "<b>Identification before buying:</b> a legible photo of the label on the device and a photo of the software version are useful. The designation “Echo Dot 3” in an ad is not enough. The model number of the power supply is not the model number of the Echo. Even after matching the model, internal variants can matter, for example the display panel on the Show 8 Gen. 2."
+  },
+  {
+   "id": "b086",
+   "t": "h2",
+   "text": "6.3 Speakers with a published voice satellite route"
+  },
+  {
+   "id": "b087",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Device and identifier</b>",
+     "<b>Root and matching software</b>",
+     "<b>Result, effort and limit</b>"
+    ],
+    [
+     "Echo Dot 2, 2016; RS03QR; biscuit",
+     "Unlock; hassmic, EchoLocal, EchoMuse/emOS, TECHO5 Dot, LibreEcho",
+     "A; voice satellite and media depending on the port; 2–3/5. Data-capable micro-USB port, small speaker. Do not mix Fire OS and donor guides. [Q1–Q3, Q5, Q8]"
+    ],
+    [
+     "Echo 2, 2017; XC56PY; radar",
+     "Unlock; hassmic, TECHO5 Dot, LibreEcho",
+     "A; voice and media device; 3/5 with a suitable adapter, 4/5 with internal soldering. Pogo access is documented for the LibreEcho route. [Q1, Q5, Q8]"
+    ],
+    [
+     "Echo Dot 3, original version 2018; D9N29T; donut",
+     "Device-specific unlock; hassmic",
+     "A; voice satellite with the original audio processing; 4/5. Internal pads and exact firmware binding; not transferable to the refresh or clock variants. [Q1, Q9]"
+    ]
+   ]
+  },
+  {
+   "id": "b088",
+   "t": "p",
+   "text": "For the simplest possible hardware access, the Dot 2 is a sensible starting point. For the Echo 2, the mechanical contacting is the main additional step. For the Dot 3, exact model identification is especially important. This order rates the entry barrier and is not a general sound comparison."
+  },
+  {
+   "id": "b089",
+   "t": "h2",
+   "text": "6.4 Screen devices with a published voice satellite route"
+  },
+  {
+   "id": "b090",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Device and identifier</b>",
+     "<b>Root and matching software</b>",
+     "<b>Result, effort and limit</b>"
+    ],
+    [
+     "Show 5 Gen. 1, 2019; H23K37; checkers",
+     "Unlock; EchoLocal or TECHO5; LineageOS as a separate Android route",
+     "A; voice and small display; 3/5. Choose the correct device-specific base. [Q2, Q4, Q17]"
+    ],
+    [
+     "Show 5 Gen. 2, 2021; C76N8S; cronos",
+     "Unlock; EchoLocal or TECHO5",
+     "A; voice and display; 3/5. TECHO5 still names LineageOS v0.4 as the starting point and rules out v0.5. [Q2, Q4]"
+    ],
+    [
+     "Show 8 Gen. 1, 2019; C7H6N3; crown",
+     "Unlock; EchoLocal or TECHO5; device-specific LineageOS",
+     "A; larger dashboard and voice; 3/5. Check donor and release compatibility before installing. [Q2, Q4, Q17]"
+    ],
+    [
+     "Spot Gen. 1, 2017; VN94DQ; rook",
+     "Unlock; LineageOS and TECHO5 Spot",
+     "A with a narrow test base; voice, round display and clock; 3/5. Small display; the project description initially documents a single test device. [Q6]"
+    ]
+   ]
+  },
+  {
+   "id": "b091",
+   "t": "p",
+   "text": "For all devices, a published port has to be distinguished from a sufficiently long everyday test. Above all, speech intelligibility during music, mute, timers after a reboot and behavior without the server decide practical suitability."
+  },
+  {
+   "id": "b092",
+   "t": "h1",
+   "text": "7. Experimental devices and other rootable Amazon devices"
+  },
+  {
+   "id": "b093",
+   "t": "h2",
+   "text": "7.1 Echo devices with open points"
+  },
+  {
+   "id": "b094",
+   "t": "p",
+   "text": "<b>Show 8 Gen. 2 – model year 2021, A8H3N2 / athena:</b> EchoLocal lists it as supported. For TECHO5, a separate 64-bit Linux route is documented. Because of the variants, the editorial rating remains <b>B</b>, effort <b>4/5</b>. The guide names Fire OS PS7574.1.7080N as the starting version for the unlock. According to the installation guide, both ILI9881C with BOE glass and JD9365 with KD/HSD glass have been tested. Other panels are therefore not automatically confirmed in practice; microphone beamforming is disabled and the lux values of the light sensor are not yet calibrated. [Q2, Q7]"
+  },
+  {
+   "id": "b095",
+   "t": "p",
+   "text": "<b>Echo 1 – model year 2014/2015, SK705DI:</b> Historical root methods exist for certain early hardware. A comparably maintained, complete Assist satellite is not documented here: <b>C for voice use</b>, <b>5/5</b> for development work. Old root access and current everyday usability are separate statements. [Q27]"
+  },
+  {
+   "id": "b096",
+   "t": "p",
+   "text": "<b>Dot 3 refresh – hardware version 2019–2020, C78MP8 / crumpet – and Dot 3 with clock – model year 2019, 36EBT3 / doebrite:</b> Both have to be distinguished from the supported Dot 3 D9N29T / donut. The donut installation route is not approved for these variants. Category <b>C</b> for the voice use described here; a future port remains open. [Q1]"
+  },
+  {
+   "id": "b097",
+   "t": "p",
+   "text": "<b>Echo Input – model year 2018 / cupcake:</b> In the voice satellite projects examined, no complete device port is documented. Category <b>C</b>. Technical similarity to other Echos does not replace device-specific evidence. [Q1–Q8]"
+  },
+  {
+   "id": "b098",
+   "t": "h2",
+   "text": "7.2 Fire TV: root first of all means system access"
+  },
+  {
+   "id": "b099",
+   "t": "p",
+   "text": "The following devices are included because root or unlock is documented. <b>A complete local voice satellite is not documented for these Fire TV entries in the projects examined here (C).</b> They can still make sense as media devices or as controllable Home Assistant devices. The microphone in a remote control cannot automatically be used as a permanent room microphone. [Q16]"
+  },
+  {
+   "id": "b100",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Device</b>",
+     "<b>Documented access</b>",
+     "<b>Effort for root/unlock and main</b> <b>limit</b>"
+    ],
+    [
+     "Fire TV Gen. 1, 2014; bueller",
+     "Historical unlock",
+     "3–4/5; old firmware limit, no blanket approval. [Q18]"
+    ],
+    [
+     "Fire TV Gen. 2, 2015; sloane",
+     "amonet-sloane",
+     "3–4/5; device-specific media/system conversion. [Q19]"
+    ],
+    [
+     "Fire TV Stick Gen. 2, 2016; tank",
+     "amonet port",
+     "4/5; later hardware may block the required BootROM mode. [Q18]"
+    ],
+    [
+     "Fire TV Stick 4K Gen. 1, 2018; mantis",
+     "amonet port, alternative routes depending on version",
+     "4/5; hardware and firmware decide which entry is available. [Q18]"
+    ],
+    [
+     "Fire TV Stick Gen. 3 and Stick Lite, 2020; sheldon/p",
+     "amonet port",
+     "3–5/5; the known entry was closed with Fire OS 7.2.7.3; hardware routes have to be assessed separately. [Q18]"
+    ],
+    [
+     "Fire TV Stick 4K Gen. 2, 2023; 4K Plus, 2025",
+     "Unlock in the developer overview, shared karat TWRP tree",
+     "3–4/5; exact model/build mapping required. Do not derive a general installation recipe from a device tree. [Q18, Q24]"
+    ],
+    [
+     "Fire TV Stick 4K Max Gen. 2, 2023; karat",
+     "Unlock reference; additionally GhostLock for listed builds",
+     "3–4/5; GhostLock alone is temporary root. The approval of one Max build does not automatically apply to all karat variants. [Q24, Q25]"
+    ]
+   ]
+  },
+  {
+   "id": "b101",
+   "t": "h2",
+   "text": "7.3 Fire TV Cube and Pendant"
+  },
+  {
+   "id": "b102",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Device</b>",
+     "<b>Access and firmware limit</b>",
+     "<b>What is documented and what remains open</b>"
+    ],
+    [
+     "Fire TV Cube Gen. 1, 2018, and Fire TV Pendant, 2017",
+     "FireFU; historical route, according to the developer overview not beyond Fire OS 6.2.5.8",
+     "Root/unlock; 4–5/5 with special HDMI/DFU access. No documented complete Assist port. [Q18, Q20]"
+    ],
+    [
+     "Fire TV Cube Gen. 2, 2019; raven",
+     "Several different routes: the old DFU-based temporary raven-root access and a later unlock reference",
+     "The old repository route requires Fire OS before 7.2.7.3; the developer overview names PS7292 as the limit for a different unlock. These limits belong to different methods. 3–5/5; voice port not documented. [Q18, Q21]"
+    ],
+    [
+     "Fire TV Cube Gen. 3, 2022; gazelle",
+     "A new unlock thread is known; the full primary text could not be retrieved during this research",
+     "<b>B for the source check of the root route</b>, C for full voice operation. The exact current firmware approval and effort remain open until the original guide has been checked. [Q22]"
+    ]
+   ]
+  },
+  {
+   "id": "b103",
+   "t": "p",
+   "text": "The Cube 3 classification is expressly not a claim that the device cannot be rooted. For a reliable purchase or installation approval, however, a pointer to a new thread is not enough. For the Cubes it should also be separately documented whether microphones, echo cancellation and audio output work together outside the original Alexa software."
+  },
+  {
+   "id": "b104",
+   "t": "h2",
+   "text": "7.4 Fire tablets: additional use as a display or Android device"
+  },
+  {
+   "id": "b105",
+   "t": "p",
+   "text": "Rootable tablets belong to the extended survey. Their sensible use may be a dashboard or an alternative Android interface. A current browser, a suitable app and permanently working microphone access are separate prerequisites. A tablet dashboard may also be possible without root."
+  },
+  {
+   "id": "b106",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Model or</b> <b>family</b>",
+     "<b>Access according to sources</b>",
+     "<b>Practical assessment</b>"
+    ],
+    [
+     "Fire HD 6 / HD 7 (2014); HD 8 / HD 10 (2015)",
+     "Device-specific amonet ports",
+     "Historical unlock candidates; 3–4/5. Check current app and browser capability separately. [Q18]"
+    ],
+    [
+     "Fire 7 (2015 / ford; 2017 / austin)",
+     "amonet, each with the right variant",
+     "3–4/5. An old shared source tree is not automatically a complete port for both variants. [Q23]"
+    ],
+    [
+     "Fire HD 8 (2016 / giza; 2017 / douglas); HD 10 (2017 / suez)",
+     "Device-specific amonet ports",
+     "3–4/5. Check reuse as a display; no finished Echo voice port confirmed here. [Q18]"
+    ],
+    [
+     "Fire HD 8 (2018 / karnak / KFKAWI)",
+     "Original amonet target",
+     "3–4/5. Unlock is documented; compare the concrete installation state. [Q28]"
+    ],
+    [
+     "Fire 7 (2019 / mustang)",
+     "Hardware-based unlock linked in the postmarketOS documentation",
+     "4/5. Check the hardware revision beforehand; do not treat it as universally approved. [Q29]"
+    ],
+    [
+     "Fire HD 10 (2019)",
+     "Temporary, computer-dependent access for early units",
+     "4–5/5. Later hardware may prevent the entry. [Q18]"
+    ],
+    [
+     "Fire HDX third generation, 2013: 7 and 8.9 inch",
+     "Historical Qualcomm unlock",
+     "3–4/5. Check the exact generation; no transfer to every later HDX. [Q18]"
+    ],
+    [
+     "Fire Max 11, 2023; sunstone",
+     "GhostLock for explicitly listed Fire OS 8 builds",
+     "3/5 for temporary root, not for a finished voice conversion. No permanent unlock from this evidence alone. [Q25]"
+    ]
+   ]
+  },
+  {
+   "id": "b107",
+   "t": "p",
+   "text": "For these tablet entries, full voice satellite operation in the sense of this guide is <b>not proven</b>. That does not rule out a separately tested app-based Assist access. Newer generations, Kids editions and similarly named models receive no automatic approval."
+  },
+  {
+   "id": "b108",
+   "t": "h2",
+   "text": "7.5 Kindle and other device classes"
+  },
+  {
+   "id": "b109",
+   "t": "p",
+   "text": "Kindle e-readers have their own jailbreak procedures. KindleModding maps the right route by model and firmware; WinterBreak is only one of them. A jailbreak allows additional software but does not replace missing microphone and speaker hardware. For these devices, a reading or status display makes more sense than a complete room voice assistant. [Q30]"
+  },
+  {
+   "id": "b110",
+   "t": "p",
+   "text": "This overview does not claim to be a complete list of every Amazon product ever unlocked or every Kindle sub-model. It covers the Echo families and Amazon devices with traceable root/unlock references. Further models are only listed as rootable once a device-specific source has been assigned. This keeps historical individual reports, temporary root and complete operating system ports from being treated as equivalent."
+  },
+  {
+   "id": "b111",
+   "t": "h1",
+   "text": "8. Does not work today"
+  },
+  {
+   "id": "b112",
+   "t": "h2",
+   "text": "8.1 Echo devices without a documented complete voice port"
+  },
+  {
+   "id": "b113",
+   "t": "p",
+   "text": "<b>As of 22 October 2026.</b> For the following entries, no complete local voice satellite route is documented in the software lists examined here. The published target lists of the software projects examined are what counts. The statement is not an independent negative test of every project that exists worldwide. [Q1–Q8]"
+  },
+  {
+   "id": "b114",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Devices</b>",
+     "<b>Limit today</b>",
+     "<b>What would be missing for a different</b> <b>rating</b>"
+    ],
+    [
+     "Echo Gen. 3 (2019) / pascal; Gen. 4 (2020) / laser",
+     "No complete port documented here",
+     "A suitable unlock and tested audio drivers"
+    ],
+    [
+     "Dot Gen. 1 (2016)",
+     "No complete port in the projects examined",
+     "A repeatable installation and a complete voice path"
+    ],
+    [
+     "Dot 3 refresh (2019–2020), C78MP8; Dot 3 with clock (2019), 36EBT3",
+     "Different hardware from the Dot 3 D9N29T (2018)",
+     "Its own unlock and a matching audio port; see the comparison in chapter 6.2"
+    ],
+    [
+     "Dot Gen. 4 and clock variant (2020); Dot Gen. 5 and clock variant (2022)",
+     "No approval in the target lists examined",
+     "Its own device port; for clock versions, additionally the display"
+    ],
+    [
+     "Dot Max (2025); Echo Pop (2023)",
+     "No complete route confirmed here",
+     "Evidence for the exact device generation"
+    ],
+    [
+     "Echo Plus Gen. 1 (2017) and Gen. 2 (2018)",
+     "No complete voice/hub port documented",
+     "Audio and, where applicable, Zigbee have to be worked out separately"
+    ],
+    [
+     "Echo Studio 2019/2022 and Studio 2025",
+     "No confirmed complete port",
+     "Multichannel audio and sound tuning in addition to boot access"
+    ],
+    [
+     "Echo Show Gen. 1 (2017) and Gen. 2 (2018); Show 5 Gen. 3 (2023)",
+     "Outside the confirmed Show ports",
+     "A device-specific display, audio and installation chain"
+    ],
+    [
+     "Show 8 Gen. 3 (2023) and Gen. 4 (2025); Show 10 Gen. 3 (2021); Show 11 (2025)",
+     "No complete port in the lists examined",
+     "Matching drivers in addition; for the Show 10 also motor control"
+    ],
+    [
+     "Show 15 Gen. 1 (2021) and Gen. 2 (2024); Show 21 (2024)",
+     "No documented complete local conversion",
+     "Its own port; Show 5/Show 8 images are not transferable"
+    ],
+    [
+     "Spot Gen. 2 (2024); Echo Input (2018); Echo Flex (2019); Echo Hub (2024)",
+     "No complete voice satellite confirmed here",
+     "Its own device and audio port"
+    ]
+   ]
+  },
+  {
+   "id": "b115",
+   "t": "h2",
+   "text": "8.2 Devices with a fundamentally different purpose"
+  },
+  {
+   "id": "b116",
+   "t": "p",
+   "text": "Echo Link and Link Amp are audio components; Echo Sub is a subwoofer. Possible system access does not turn them into a complete far-field voice speaker. Echo Auto, Buds and Frames are accessories with their own operating conditions and not stationary satellites made available by the Echo ports examined. <b>Category C for the purpose described here:</b> none of these models is listed in the target lists examined as a complete stationary voice satellite. [Q1–Q8]"
+  },
+  {
+   "id": "b117",
+   "t": "p",
+   "text": "For Fire TV and tablets, C likewise means “no documented complete voice conversion”. The rootability documented in chapter 7 is unaffected. For devices that are not listed, the root status is <b>unchecked</b>, not automatically “impossible”."
+  },
+  {
+   "id": "b118",
+   "t": "h2",
+   "text": "8.3 What could become possible in the future"
+  },
+  {
+   "id": "b119",
+   "t": "p",
+   "text": "A documented boot access, public kernel sources and active porting work are helpful prerequisites. Only a working audio path, a repeatable installation and tests on more than one hardware variant justify a better rating. Similar chips alone allow no forecast of timing or success. For devices without a port, the effort is to be understood as <b>5/5 – research</b>, not as an especially long normal installation."
+  },
+  {
+   "id": "b120",
+   "t": "h1",
+   "text": "9. Community, known problems and source assessment"
+  },
+  {
+   "id": "b121",
+   "t": "h2",
+   "text": "9.1 Concrete observations instead of blanket approval"
+  },
+  {
+   "id": "b122",
+   "t": "table",
+   "rows": [
+    [
+     "<b>Source and context</b>",
+     "<b>Reported state</b>",
+     "<b>Significance for the assessment</b>"
+    ],
+    [
+     "HA forum on hassmic, posts of 23 September 2026",
+     "A user reports missing output and later Wi-Fi/wake word problems; the developer reports a fix for global mute",
+     "Concrete troubleshooting is visible. The old problem must not be called still open without checking. [Q9]"
+    ],
+    [
+     "TECHO5 Dot, project description as retrieved",
+     "Everyday use on three Dots; Echo 2 tested on one unit",
+     "A traceable but small test base. [Q5]"
+    ],
+    [
+     "TECHO5, section on listening performance",
+     "The author describes limits of detection during music",
+     "Audio quality remains an essential practical test; no guarantee of parity with the original processing. [Q4]"
+    ],
+    [
+     "LibreEcho, project description as retrieved",
+     "The Dot port has less field experience than the Echo 2",
+     "Both are on the support list, but with different levels of test experience. [Q8]"
+    ],
+    [
+     "TECHO5 athena, installation guide",
+     "Two panel types tested; beamforming off; light measurement uncalibrated",
+     "Working core hardware and remaining limitations are listed separately. [Q7]"
+    ]
+   ]
+  },
+  {
+   "id": "b123",
+   "t": "p",
+   "text": "A project README is a statement by the project. A forum test is a report on one specific unit. Several reports naming the device and software version are more meaningful than stars, likes or repeatedly copied announcements. No general vote “of the community” was carried out here."
+  },
+  {
+   "id": "b124",
+   "t": "h2",
+   "text": "9.2 Small problems, big problems and blockers"
+  },
+  {
+   "id": "b125",
+   "t": "p",
+   "text": "<b>Minor limitation:</b> for example uncalibrated brightness values when voice and display otherwise work reliably. The significance depends on the planned use."
+  },
+  {
+   "id": "b126",
+   "t": "p",
+   "text": "<b>Major limitation:</b> recurring audio loss, unreliable detection during music, failure to reconnect, or an extra computer after every reboot. Such points noticeably affect everyday use."
+  },
+  {
+   "id": "b127",
+   "t": "p",
+   "text": "<b>Blocker:</b> a wrong hardware variant, unsupported firmware, no usable microphone path, or no stable connection for the installation. In that case the chosen route is not approved. More installation attempts do not replace suitable device support."
+  },
+  {
+   "id": "b128",
+   "t": "h1",
+   "text": "10. Calculating costs, computing power and effort"
+  },
+  {
+   "id": "b129",
+   "t": "h2",
+   "text": "10.1 One-off and ongoing costs"
+  },
+  {
+   "id": "b130",
+   "t": "p",
+   "text": "One-off costs consist of the device, a suitable power supply, cables, a pogo adapter or soldering supplies where needed, and additional server hardware. Tools you already have and a server that is already running can reduce the extra effort. Used prices depend on condition; therefore no unsupported day prices are used here."
+  },
+  {
+   "id": "b131",
+   "t": "p",
+   "text": "Ongoing costs are electricity, possible cloud quotas, media subscriptions and maintenance time. More devices do not automatically raise every cloud bill equally: what matters are the actual requests, the amount of audio generated and the billing unit of the service."
+  },
+  {
+   "id": "b132",
+   "t": "h2",
+   "text": "10.2 Worked example for voice and electricity"
+  },
+  {
+   "id": "b133",
+   "t": "p",
+   "text": "<b>Monthly TTS text volume = requests per day × average reply characters × days.</b> Example: 50 replies × 180 characters × 30 days = <b>270,000 characters</b>. The cost only results from the model, plan, free allowance and billing rules. Some providers bill differently; characters must not be equated with credits without checking."
+  },
+  {
+   "id": "b134",
+   "t": "p",
+   "text": "<b>Monthly STT audio volume = requests per day × recording seconds × days ÷ 60.</b> With 50 requests of 6 seconds each over 30 days, this gives <b>150 minutes</b>. False activations and repeats come on top."
+  },
+  {
+   "id": "b135",
+   "t": "p",
+   "text": "<b>Electricity per year = additional average power in watts × 8,760 ÷ 1,000.</b> An assumed additional system of 10 W needs <b>87.6 kWh/year</b>. At a freely assumed price of €0.35/kWh, that would be <b>€30.66/year</b>. These are example values, not a measurement of any Echo or server model."
+  },
+  {
+   "id": "b136",
+   "t": "p",
+   "text": "With LLM use, input and output tokens or local model compute time come on top. Standard announcements that are played repeatedly can be cached under suitable conditions; the actual saving depends on the integration."
+  },
+  {
+   "id": "b137",
+   "t": "h2",
+   "text": "10.3 Checking computing power and response time sensibly"
+  },
+  {
+   "id": "b138",
+   "t": "p",
+   "text": "It makes sense to start with one room using the intended STT/TTS combination. Measure normal replies and slow outliers as well as CPU, RAM and, where applicable, GPU memory. Concurrent requests from several rooms follow after that."
+  },
+  {
+   "id": "b139",
+   "t": "p",
+   "text": "The total wait time is made up of end-of-speech detection, STT, command processing, the start of TTS and the playback buffer. A fast TTS service cannot make up for slow local transcription. A fixed number of seconds for all devices would therefore be misleading."
+  },
+  {
+   "id": "b140",
+   "t": "h1",
+   "text": "11. Pre-purchase check, installation and everyday test"
+  },
+  {
+   "id": "b141",
+   "t": "h2",
+   "text": "11.1 Before a purchase decision"
+  },
+  {
+   "id": "b142",
+   "t": "bullets",
+   "items": [
+    "Verify the full model number, generation and, where applicable, codename; a photo of the label is useful.",
+    "Document the firmware version and, as far as known, the hardware or panel variant.",
+    "Choose a complete route to the desired function for exactly this model.",
+    "Check microphones, speakers, mute, buttons, Wi-Fi and, where applicable, display and touch in the original state.",
+    "Include the required adapter, original power supply and recovery route in the total cost.",
+    "Do not treat historical root, temporary root and a documented voice satellite as equivalent."
+   ]
+  },
+  {
+   "id": "b143",
+   "t": "h2",
+   "text": "11.2 Before installation"
+  },
+  {
+   "id": "b144",
+   "t": "bullets",
+   "items": [
+    "Record the guide, software version and downloads together; do not mix images for different devices.",
+    "Do not perform precautionary updates or downgrades. An update can close an entry point; a downgrade can be blocked or unsuitable.",
+    "Back up the device’s own data and required partitions according to the respective guide and verify the copies.",
+    "Make USB contacts, power and strain relief stable.",
+    "Treat root and unlock scripts as write operations, even if they initially only display detection steps."
+   ]
+  },
+  {
+   "id": "b145",
+   "t": "h2",
+   "text": "11.3 When the conversion has practically succeeded"
+  },
+  {
+   "id": "b146",
+   "t": "bullets",
+   "items": [
+    "Quiet and normal speech from several positions is recognized.",
+    "Wake word and interruption also work during music at the intended volume.",
+    "With several devices, ideally only the matching satellite responds.",
+    "Mute and its indicator remain correct after a reboot.",
+    "Light, weather, timers and, where applicable, music produce the expected result.",
+    "Timers and alarms are checked separately after a reboot and during Wi-Fi, server and internet outages.",
+    "The chosen voice pronounces numbers, times and device names intelligibly.",
+    "Multi-day operation works without regular manual reboots.",
+    "Update and recovery are documented for exactly the version in use."
+   ]
+  },
+  {
+   "id": "b147",
+   "t": "p",
+   "text": "What counts is the desired function in everyday use. A successful root prompt is an intermediate step, and so is an audible test reply."
+  },
+  {
+   "id": "b148",
+   "t": "h1",
+   "text": "12. Sources and updates"
+  },
+  {
+   "id": "b149",
+   "t": "h2",
+   "text": "12.1 Basis and limits of the check"
+  },
+  {
+   "id": "b150",
+   "t": "p",
+   "text": "The assessment is based on publicly available project descriptions, device-specific guides, manufacturer documentation and concrete user reports. It describes the documented state; own hardware tests are not part of this overview."
+  },
+  {
+   "id": "b151",
+   "t": "p",
+   "text": "The project pages below were researched on <b>22 October 2026</b>. GitHub main branches and dynamic guides can change; this edition is not a collection of immutable release snapshots. For root firmware limits, the current device guide always applies. A primary text that could not be retrieved is expressly marked."
+  },
+  {
+   "id": "b152",
+   "t": "h2",
+   "text": "12.2 Projects, voice and hardware access"
+  },
+  {
+   "id": "b153",
+   "t": "bullets",
+   "items": [
+    "<b>Q1:</b> echo-dot-assist / hassmic – devices and functions",
+    "<b>Q2:</b> EchoLocal – devices and functions",
+    "<b>Q3:</b> EchoMuse – supported hardware, controller and emOS",
+    "<b>Q4:</b> TECHO5 – functions, listening performance and installation prerequisites",
+    "<b>Q5:</b> TECHO5 Dot – Dot 2, Echo 2 and scope of testing",
+    "<b>Q6:</b> TECHO5 Spot – port and status",
+    "<b>Q7:</b> TECHO5 athena – variants and installation limits",
+    "<b>Q8:</b> LibreEcho – supported devices and installation",
+    "<b>Q9:</b> HA community – Dot 3 project and user reports",
+    "<b>Q10:</b> Home Assistant – structure of voice processing",
+    "<b>Q11:</b> Home Assistant – fully local voice assistant",
+    "<b>Q12:</b> Microsoft – documented TTS voices including Katja",
+    "<b>Q13:</b> Home Assistant – Microsoft TTS",
+    "<b>Q14:</b> Home Assistant – ElevenLabs",
+    "<b>Q15:</b> Cartesia TTS – additional community integration",
+    "<b>Q16:</b> Home Assistant – Android Debug Bridge / Fire TV",
+    "<b>Q17:</b> Community releases for Amazon devices, including LineageOS",
+    "<b>Q18:</b> Amazon unlock overview, co-authored by developer R0rt1z2",
+    "<b>Q19:</b> amonet-sloane – Fire TV Gen. 2",
+    "<b>Q20:</b> Exploitee.rs – original FireFU release",
+    "<b>Q21:</b> raven-root – original temporary Cube 2 access",
+    "<b>Q22:</b> Cube 3 unlock thread – primary source needs to be checked again. Retrieval failed; therefore no final firmware approval in this edition.",
+    "<b>Q23:</b> amonet – Fire 7 ford and distinction from austin",
+    "<b>Q24:</b> karat – TWRP device tree and model mapping",
+    "<b>Q25:</b> GhostLock – explicit build lists and temporary root",
+    "<b>Q26:</b> CoreELEC for Cube 2 – device-specific project thread. Used only as a media project reference, not as evidence of a voice port.",
+    "<b>Q27:</b> echoroot – historical Echo 1 route",
+    "<b>Q28:</b> xyzz/amonet – Fire HD 8 from 2018",
+    "<b>Q29:</b> postmarketOS – Fire 7 from 2019 / mustang",
+    "<b>Q30:</b> KindleModding – model and firmware mapping for the jailbreak",
+    "<b>Q31:</b> TECHO5 – identification of the Echo models",
+    "<b>Q32:</b> P50-B1 – supplier data on diameters and length"
+   ]
+  },
+  {
+   "id": "b154",
+   "t": "h2",
+   "text": "12.3 At the next update"
+  },
+  {
+   "id": "b155",
+   "t": "p",
+   "text": "With each update, the date, the affected device port, the firmware or hardware limit, known open bugs and new field reports are revised. New root reports initially only improve the root status. The rating as a voice assistant changes only with suitable proof of function. For the Cube 3, a direct check of the linked unlock thread remains an expressly open research item."
+  }
+ ]
+}
