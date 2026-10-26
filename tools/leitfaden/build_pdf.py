@@ -220,8 +220,10 @@ def story(content, anchors):
         elif t == 'p':
             s.append(Para(esc(b['text']), ST[t]))
         elif t == 'bullets':
-            for it in b['items']:
-                s.append(Para('• ' + esc(it), ST['bullet']))
+            urls = b.get('urls') or [None] * len(b['items'])
+            for it, url in zip(b['items'], urls):
+                txt = esc(it) if not url else '<a href="%s">%s</a>' % (esc(url), esc(it))
+                s.append(Para('• ' + txt, ST['bullet']))
         elif t == 'table':
             s.append(table_flow(b['rows']))
             s.append(Spacer(1, 12))
