@@ -160,6 +160,16 @@ h3.sub{margin-top:44px}
 .board .issues li::before{border-color:var(--risk)}
 .board .card.wide{grid-column:1/-1}
 
+/* SOUL-Beispiel */
+.soul{margin-top:28px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.shead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;padding:10px 18px;background:#14181c;font:600 .7rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.srow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;padding:18px;border-top:1px solid var(--line2)}
+.sfile{margin:0;padding:12px 14px;background:#0f1114;border:1px solid var(--line2);border-radius:2px;font:.84rem/1.6 var(--mono);color:var(--fg);white-space:pre-wrap;overflow-wrap:anywhere}
+.sfile code{background:none;border:0;padding:0;font:inherit;color:inherit}
+.swhy p{margin:0;font-size:.93rem;color:var(--dim);max-width:none}
+.swhy .label{margin-bottom:8px}
+@media (max-width:760px){.shead{display:none}.srow{grid-template-columns:1fr;gap:12px}}
+
 /* FAQ */
 details{border-top:1px solid var(--line2)}
 details:last-of-type{border-bottom:1px solid var(--line2)}
@@ -196,7 +206,7 @@ footer p{font-size:.86rem}
       <span class="t">KINETIC<b>/</b>IT &nbsp;LOCAL ALEXA</span>
     </a>
     <nav class="main" aria-label="Main navigation">
-      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#stand">Status</a><a href="#sicherheit">Security</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
+      <a href="#idee">Why?</a><a href="#technik">Voice path</a><a href="#geraete">Devices</a><a href="#stand">Status</a><a href="#sicherheit">Security</a><a href="#soul">Persona</a><a href="#faq">FAQ</a><a href="#leitfaden">Guide</a>
     </nav>
     <div class="lang" role="group" aria-label="Language"><a href="../" lang="de" hreflang="de">DE</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div>
   </div>
@@ -432,7 +442,43 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="faq" class="alt">
+<!-- soul:start -->
+<section id="soul" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Example</div>
+    <h2>How a voice assistant gets its character</h2>
+    <p class="intro">Hermes reads a text file called SOUL.md. It decides how the assistant sounds and what it leaves alone. Below is an invented example for a voice assistant: the file on the left, and on the right why each part is written the way it is.</p>
+    <div class="soul">
+      <div class="shead"><span>File</span><span>Why like this?</span></div>
+      <div class="srow"><pre class="sfile"><code># Mika – voice assistant for kitchen and living room
+
+You are Mika, the voice of a self-hosted home assistant. You speak English.</code></pre><div class="swhy"><span class="label">Role and language</span><p>The opening decides who is speaking. According to the Hermes documentation, this file is the agent&#x27;s identity and comes first in the system prompt. Keep the opening short and unambiguous.</p></div></div>
+      <div class="srow"><pre class="sfile"><code>## Tone
+Friendly, calm, matter-of-fact. Keep it informal.</code></pre><div class="swhy"><span class="label">Tone</span><p>Describes an attitude instead of many rules: how a person should sound. Also fix the form of address, so it does not switch by accident.</p></div></div>
+      <div class="srow"><pre class="sfile"><code>Answer in three short sentences at most.</code></pre><div class="swhy"><span class="label">Length</span><p>Listening is slower than reading, and long answers are tiring through a speaker. A fixed upper limit is easier to test than “keep it brief”.</p></div></div>
+      <div class="srow"><pre class="sfile"><code>Write numbers and times the way people say them: “half past seven”, not “7:30”.</code></pre><div class="swhy"><span class="label">Pronunciation</span><p>Text-to-speech reads out what is written. Numbers, times and abbreviations are the most common stumbling blocks (see the guide, section 4.3).</p></div></div>
+      <div class="srow"><pre class="sfile"><code>No lists, no asterisks, no emojis, no links. Everything is read out loud.</code></pre><div class="swhy"><span class="label">No formatting</span><p>Formatting is meant for eyes. Depending on the speech output, characters may be read out or swallowed. Better: whole sentences.</p></div></div>
+      <div class="srow"><pre class="sfile"><code>## Limits
+You do not control devices. Home Assistant handles house commands before the question reaches you.
+If someone asks you to switch something in the house, say so kindly and suggest saying the command again directly.
+You have no access to calendars, messages or passwords, and you do not ask for them.</code></pre><div class="swhy"><span class="label">Limits</span><p>This mirrors the project principle: Hermes receives questions and returns text. Important: this text is a request to the language model, not a lock. The real protection comes from the allow list in Home Assistant and from missing credentials.</p></div></div>
+      <div class="srow"><pre class="sfile"><code>If you do not know something, say so. Do not guess.</code></pre><div class="swhy"><span class="label">Honesty</span><p>A voice always sounds confident, even when the content is wrong. The file therefore has to explicitly allow “I don’t know”.</p></div></div>
+      <div class="srow"><pre class="sfile"><code>## Follow-up questions
+Only ask if you would otherwise answer wrongly. One question, not several.</code></pre><div class="swhy"><span class="label">Follow-up questions</span><p>Every follow-up costs a second round of speech. Hardly anyone can remember several questions at once while listening.</p></div></div>
+    </div>
+    <p style="margin-top:22px"><a class="button" href="../downloads/SOUL-example.md" download>Download the example file (.md)</a></p>
+    <div class="grid two">
+      <div class="card"><span class="label">Location</span><h3>Where does the file live?</h3><p>According to the Hermes documentation, by default at ~/.hermes/SOUL.md, or in the respective Hermes directory for a separate instance. If the file is empty, Hermes falls back to a built-in default identity. It is read when a session starts: restart after changing it.</p></div>
+      <div class="card"><span class="label">Scope</span><h3>SOUL.md or AGENTS.md?</h3><p>SOUL.md: identity, tone, style. AGENTS.md: project rules, commands, paths. If it sounds like character, it belongs in SOUL.md. If it is a work instruction, it belongs in AGENTS.md.</p></div>
+      <div class="card"><span class="label">Never</span><h3>What does not belong in it</h3><p>Passwords, keys, IP addresses, names of household members. The file goes to a language model as text, possibly to an external provider. And no security rule that relies on this file alone.</p></div>
+      <div class="card"><span class="label">Testing</span><h3>How to test changes</h3><p>Ask five fixed test questions before and after the change, change only one line per attempt, write down the result. Only the test shows whether a sentence works, not its wording.</p></div>
+    </div>
+    <div class="callout"><p>Invented example (the character “Mika” does not exist), not this project’s real persona. Statements about the file come from the Hermes documentation and have not yet been checked on our own device. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/personality">Hermes documentation: Personality</a></p></div>
+  </div>
+</section>
+<!-- soul:end -->
+
+<section id="faq">
   <div class="wrap">
     <div class="eyebrow">Frequently asked questions</div>
     <h2>FAQ</h2>
@@ -450,7 +496,7 @@ footer p{font-size:.86rem}
   </div>
 </section>
 
-<section id="leitfaden">
+<section id="leitfaden" class="alt">
   <div class="wrap">
     <div class="eyebrow">Background</div>
     <h2>The complete device guide</h2>

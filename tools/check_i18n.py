@@ -40,6 +40,11 @@ else:
     ids={m['id'] for m in d['milestones']}
     if ids!=set(e.get('milestones',{})): errors.append(f'status.json en.milestones passt nicht zu den IDs {sorted(ids)}')
 
+# SOUL-Beispiel: Seiten und Downloads müssen zu tools/soul/content.json passen
+import subprocess
+r=subprocess.run([sys.executable,'tools/soul/build_soul.py','--check'],capture_output=True,text=True)
+if r.returncode!=0: errors.append(r.stdout.strip() or 'soul: Prüfung fehlgeschlagen')
+
 # PDF-Quelle: deutsche und englische Fassung müssen Block für Block zusammenpassen
 try:
     ld=json.load(open('tools/leitfaden/content.de.json',encoding='utf-8')); le=json.load(open('tools/leitfaden/content.en.json',encoding='utf-8'))
