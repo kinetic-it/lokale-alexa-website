@@ -3,6 +3,19 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f6",
+      "date": "2026-10-26",
+      "type": "finding",
+      "de": {
+        "title": "Neue KI-Schnittstelle ersetzt keine überprüfte Haussteuerung",
+        "text": "Home Assistant 2026.10 macht die Einrichtung seines MCP-Servers einfacher. Das eröffnet zusätzliche Möglichkeiten für KI-Apps, repariert jedoch nicht automatisch fehlgeschlagene Sprachbefehle und verschickt selbst keine proaktiven Statusmeldungen. Für konkrete Zustandsprüfungen bleiben gewöhnliche Home-Assistant-Automationen der verlässlichere Ausgangspunkt. Unser Pilot hat diese Erweiterung noch nicht als neue Funktion abgenommen."
+      },
+      "en": {
+        "title": "A simpler AI connection does not replace verified home control",
+        "text": "Home Assistant 2026.10 makes its MCP server easier to set up. This gives AI apps additional integration options, but it does not automatically fix failed voice commands or send proactive status updates. Ordinary Home Assistant automations remain a more reliable starting point for predictable state checks. This feature has not been accepted as part of our pilot."
+      }
+    },
+    {
       "id": "f5",
       "date": "2026-10-26",
       "type": "problem",
