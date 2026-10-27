@@ -4,13 +4,13 @@
   "approved": true,
   "as_of": "2026-10-27",
   "evidence": "Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Lokaler Schaltbefehl teilweise erfolgreich; Zuordnung von Gerätenamen offen",
+  "title": "Echo-2-Pilot · Schaltbefehl nach Alias-Korrektur im Einzeltest erfolgreich",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)",
     "Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt",
     "Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (Owner-Beobachtung).",
-    "Lokaler Schaltbefehl an einer freigegebenen Steckdose: als Text erkannt und ohne KI-Assistent ausgeführt (0,05 s Verarbeitung); mit dem kurzen, hinterlegten Gerätenamen auch per Sprache (Owner-Bericht, ohne Debug-Trace). Keine Gesamtabnahme."
+    "Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (Owner-Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
@@ -59,7 +59,6 @@
     }
   ],
   "known_issues": [
-    "Schaltbefehl mit zusammengeschriebener Gerätebezeichnung (27.10.): Die Spracherkennung war korrekt, Home Assistant ordnete den Befehl aber nicht lokal zu und gab ihn an den KI-Assistenten weiter; keine Schaltung. Wahrscheinlichste Erklärung ist eine Abweichung beim Abgleich mit Gerätenamen und Aliasen, bewiesen ist sie noch nicht",
     "Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt",
     "Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden",
     "Die Prüfung der Sprachfreigaben ist nicht abgeschlossen; Schaltbefehle werden bis dahin nur an einem einzelnen, bereits freigegebenen Gerät getestet"
@@ -68,14 +67,14 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · local switching command partly successful; device name matching unresolved",
+    "title": "Echo 2 pilot · switching command succeeds in a limited test after alias correction",
     "evidence": "Owner reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
       "echo-dot-assist connected to Home Assistant (owner report)",
       "Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven",
       "Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (owner observation).",
-      "Local switching command for an exposed smart plug: recognised as text and executed without the AI assistant (0.05 s processing); with the short stored device name also by voice (owner report, no debug trace). No overall acceptance."
+      "An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (owner observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
@@ -87,7 +86,6 @@
       "Idea: a separate Hermes assistant for admin tasks helps maintain device aliases (read existing aliases, spot spelling variants, duplicates and conflicts, suggest aliases). Changes only after approval by the owner; no automatic exposure of further devices to voice. Concept, not implemented."
     ],
     "known_issues": [
-      "Switching command with a compound device name (27 Oct): speech recognition was correct, but Home Assistant did not match the command locally and passed it to the AI assistant; nothing was switched. The most likely explanation is a mismatch with device names and aliases; this is not yet proven",
       "The streaming wake word path was unstable; the local wake word is therefore preferred",
       "An open question was not understood in an earlier test, via a conversation agent that has since been replaced",
       "The review of voice exposures is not complete; until then switching commands are only tested on a single device that is already exposed"
@@ -109,9 +107,10 @@
       "English edition of the guide, SOUL.md example and build overview",
       "First voice test of a switching command on the Echo failed; investigation under way",
       "Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.",
-      "Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven."
+      "Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven.",
+      "A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open."
     ],
-    "last_test": "Switching command for an exposed smart plug: matched and switched locally as text, successful by voice with the short device name (owner report). With a compound device name it was transcribed correctly but passed to the AI assistant; nothing was switched."
+    "last_test": "After adding a matching alias, switching an already exposed smart plug on and off through the Echo worked with a harmless test load. The debug trace for switching off was processed locally without forwarding to the AI assistant. A limited test, not full security or long-term acceptance."
   },
   "history": [
     {
@@ -145,10 +144,14 @@
     {
       "date": "2026-10-27",
       "text": "Schaltbefehl eingegrenzt: lokal per Text und mit kurzem Gerätenamen per Sprache erfolgreich; zusammengeschriebene Gerätebezeichnung wird korrekt erkannt, aber nicht lokal zugeordnet. Ursache nicht abschließend bewiesen."
+    },
+    {
+      "date": "2026-10-27",
+      "text": "Ein zuvor fehlgeschlagener Sprachbefehl funktionierte nach Ergänzung eines passenden Gerätealias: Ein/Aus über Echo mit ungefährlicher Testlast, lokaler Ausschalt-Debuglauf bestätigt. Einzeltest bestanden; Negativ- und Dauertests offen."
     }
   ],
   "last_test": {
     "date": "2026-10-27",
-    "text": "Schaltbefehl für eine freigegebene Steckdose: als Text lokal erkannt und geschaltet, per Sprache mit kurzem Gerätenamen erfolgreich (Owner-Bericht). Mit zusammengeschriebener Gerätebezeichnung korrekt transkribiert, aber an den KI-Assistenten weitergegeben; keine Schaltung."
+    "text": "Nach ergänztem Alias wurden Ein- und Ausschalten einer bereits freigegebenen Steckdose über den Echo mit ungefährlicher Testlast beobachtet. Der Ausschalt-Debuglauf verarbeitete den Befehl lokal ohne KI-Weiterleitung. Ein Einzeltest, keine vollständige Sicherheits- oder Dauerbetriebsabnahme."
   }
 }
