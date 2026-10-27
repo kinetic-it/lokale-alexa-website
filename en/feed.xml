@@ -8,6 +8,13 @@
   <updated>2026-10-27T00:00:00Z</updated>
   <author><name>kinetic-it</name></author>
   <entry>
+    <title>A previously failing voice command worked after a matching device alias was added: on/o...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-27-2</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <summary>A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open.</summary>
+  </entry>
+  <entry>
     <title>Switching command narrowed down: works locally as text and by voice with the short devi...</title>
     <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-27-1</id>
     <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
