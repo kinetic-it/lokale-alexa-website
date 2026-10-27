@@ -58,9 +58,9 @@ try:
 except FileNotFoundError:
     errors.append('data/findings.json fehlt')
 
-# Generierte Seitenteile (SOUL-Beispiel, Nachbauen, Verlauf) müssen zu ihren Quellen passen
+# Generierte Seitenteile (SOUL-Beispiel, Nachbauen, Verlauf, Feed) müssen zu ihren Quellen passen
 import subprocess
-for gen in ('tools/soul/build_soul.py','tools/sections/build_sections.py'):
+for gen in ('tools/soul/build_soul.py','tools/sections/build_sections.py','tools/feed/build_feed.py'):
     r=subprocess.run([sys.executable,gen,'--check'],capture_output=True,text=True)
     if r.returncode!=0: errors.append(r.stdout.strip() or gen+': Prüfung fehlgeschlagen')
 

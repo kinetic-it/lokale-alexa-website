@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Local Alexa: project history</title>
+  <subtitle>New entries in the public project history. Reported is not tested is not accepted.</subtitle>
+  <id>https://kinetic-it.github.io/lokale-alexa-website/en/feed.xml</id>
+  <link rel="self" type="application/atom+xml" href="https://kinetic-it.github.io/lokale-alexa-website/en/feed.xml"/>
+  <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/"/>
+  <updated>2026-10-27T00:00:00Z</updated>
+  <author><name>kinetic-it</name></author>
+  <entry>
+    <title>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-26-3</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.</summary>
+  </entry>
+  <entry>
+    <title>First voice test of a switching command on the Echo failed; investigation under way</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-26-2</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>First voice test of a switching command on the Echo failed; investigation under way</summary>
+  </entry>
+  <entry>
+    <title>English edition of the guide, SOUL.md example and build overview</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-26-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>English edition of the guide, SOUL.md example and build overview</summary>
+  </entry>
+  <entry>
+    <title>Hermes speaker registered in Home Assistant as a conversation agent; review of voice ex...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-25-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-25T00:00:00Z</updated>
+    <summary>Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published</summary>
+  </entry>
+  <entry>
+    <title>Separate Hermes speaker set up; authenticated API test successful</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-24-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-24T00:00:00Z</updated>
+    <summary>Separate Hermes speaker set up; authenticated API test successful</summary>
+  </entry>
+  <entry>
+    <title>Local wake word “Okay Nabu” on the Echo 2: 10 of 10 in a short test; server-side route...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-23-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-23T00:00:00Z</updated>
+    <summary>Local wake word “Okay Nabu” on the Echo 2: 10 of 10 in a short test; server-side route dropped because it was unstable</summary>
+  </entry>
+  <entry>
+    <title>Research guide on Amazon devices completed (21 pages)</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-22-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-22T00:00:00Z</updated>
+    <summary>Research guide on Amazon devices completed (21 pages)</summary>
+  </entry>
+</feed>
