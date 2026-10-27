@@ -3,16 +3,30 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f8",
+      "date": "2026-10-27",
+      "type": "correction",
+      "state": "resolved",
+      "de": {
+        "title": "Nachtrag: Der zuvor offene Schaltfehler wurde im Einzeltest behoben",
+        "text": "Unsere vorherige Statusmeldung beschrieb den fehlgeschlagenen Befehl als weiterhin offen. Nach einem zusätzlichen Gerätealias funktionierten Ein- und Ausschalten mit einer ungefährlichen Testlast über den Echo. Der Debuglauf des Ausschaltens zeigte die lokale Befehlsverarbeitung. Der öffentliche Teststatus ist deshalb korrigiert; Sicherheits-Negativtests und längerer Betrieb sind weiterhin nicht abgenommen."
+      },
+      "en": {
+        "title": "Update: the previously open switching failure was fixed in a limited test",
+        "text": "Our previous status described the failed command as still unresolved. After an additional device alias was added, switching on and off through the Echo worked with a harmless test load. The switch-off debug run showed local command processing. We have corrected the public test status; security negative tests and long-term operation have not yet been accepted."
+      }
+    },
+    {
       "id": "f7",
       "date": "2026-10-27",
       "type": "finding",
       "de": {
         "title": "Richtig verstanden heißt nicht richtig zugeordnet",
-        "text": "Ein Sprachassistent kann einen Befehl korrekt transkribieren und trotzdem an der Zuordnung zum richtigen Gerät scheitern. In unserem Test schaltete Home Assistant eine freigegebene Steckdose lokal, wenn der Befehl als Text kam (0,05 s Verarbeitung) oder per Sprache der kurze, hinterlegte Gerätename fiel. Mit einer zusammengeschriebenen Gerätebezeichnung erkannte die Spracherkennung den Satz korrekt, Home Assistant ordnete ihn aber keinem Gerät zu und gab ihn an den KI-Assistenten weiter. Der erklärte etwas, schaltete aber nichts. Lehre: natürliche Gerätenamen und passende Aliase pflegen und jeden Lauf in der Debug-Ansicht nachvollziehen. Der KI-Assistent bekommt dafür bewusst keine Verwaltungsrechte in Home Assistant; die Lösung gehört in die normale Sprachverarbeitung."
+        "text": "Ein Sprachassistent kann einen Befehl korrekt transkribieren und trotzdem an der Zuordnung zum richtigen Gerät scheitern. In unserem Test schaltete Home Assistant eine freigegebene Steckdose lokal, wenn der Befehl als Text kam (0,05 s Verarbeitung) oder per Sprache der kurze, hinterlegte Gerätename fiel. Mit einer zusammengeschriebenen Gerätebezeichnung erkannte die Spracherkennung den Satz korrekt, Home Assistant ordnete ihn aber keinem Gerät zu und gab ihn an den KI-Assistenten weiter. Der erklärte etwas, schaltete aber nichts. Lehre: natürliche Gerätenamen und passende Aliase pflegen und jeden Lauf in der Debug-Ansicht nachvollziehen. Der KI-Assistent bekommt dafür bewusst keine Verwaltungsrechte in Home Assistant; die Lösung gehört in die normale Sprachverarbeitung. Nach Ergänzung eines passenden Alias gelangen im Nachtest Ein- und Ausschalten über den Echo; der Ausschalt-Debuglauf zeigte lokale Verarbeitung. Das bestätigt den konkreten Korrekturweg, nicht die allgemeine Zuverlässigkeit aller Befehle."
       },
       "en": {
         "title": "Correctly heard is not correctly matched",
-        "text": "A voice assistant can transcribe a command correctly and still fail to match it to the right device. In our test, Home Assistant switched an exposed smart plug locally when the command came as text (0.05 s processing) or when the short stored device name was spoken. With a compound device name, speech recognition got the sentence right, but Home Assistant did not match it to any device and passed it to the AI assistant, which explained something but switched nothing. Lesson: maintain natural device names and fitting aliases, and trace every run in the debug view. The AI assistant deliberately gets no admin rights in Home Assistant for this; the fix belongs in the normal voice processing."
+        "text": "A voice assistant can transcribe a command correctly and still fail to match it to the right device. In our test, Home Assistant switched an exposed smart plug locally when the command came as text (0.05 s processing) or when the short stored device name was spoken. With a compound device name, speech recognition got the sentence right, but Home Assistant did not match it to any device and passed it to the AI assistant, which explained something but switched nothing. Lesson: maintain natural device names and fitting aliases, and trace every run in the debug view. The AI assistant deliberately gets no admin rights in Home Assistant for this; the fix belongs in the normal voice processing. After a matching alias was added, the Echo switched on and off in a follow-up test; the switch-off debug run showed local processing. This confirms the fix for this particular command, not reliability for every command."
       }
     },
     {
@@ -46,14 +60,14 @@
       "id": "f4",
       "date": "2026-10-26",
       "type": "problem",
-      "state": "open",
+      "state": "resolved",
       "de": {
-        "title": "Erster Sprachtest: Schaltbefehl nicht ausgeführt",
-        "text": "Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Am 27.10. eingegrenzt (siehe „Richtig verstanden heißt nicht richtig zugeordnet“): Die Spracherkennung war korrekt, die zusammengeschriebene Gerätebezeichnung wurde aber nicht lokal zugeordnet. Die genaue Ursache ist noch nicht bewiesen. Der Befund bleibt offen; wir ändern nichts auf Verdacht."
+        "title": "Erster Sprachtest fehlgeschlagen – passender Alias behebt den Einzeltest",
+        "text": "Zuerst wurde ein Sprachbefehl korrekt erkannt, aber nicht lokal zugeordnet; der Echo antwortete mit einem KI-Text, ohne zu schalten. Nach Ergänzung eines passenden Gerätealias funktionierten Ein und Aus mit einer ungefährlichen Testlast. Der Ausschalt-Debuglauf bestätigte lokale Verarbeitung ohne KI-Weiterleitung. Der konkrete Fehlerfall ist behoben; der genaue interne Parserablauf wurde nicht vollständig untersucht und Negativ- sowie Langzeittests bleiben offen."
       },
       "en": {
-        "title": "First voice test: switching command not executed",
-        "text": "The Echo answered audibly, but with an AI text. The device was not switched. Narrowed down on 27 Oct (see “Correctly heard is not correctly matched”): speech recognition was correct, but the compound device name was not matched locally. The exact cause is not yet proven. The finding stays open; we change nothing on a hunch."
+        "title": "Initial voice test failed – matching alias resolves the limited case",
+        "text": "At first, a voice command was transcribed correctly but not matched locally; the Echo replied with an AI text without switching the device. After a matching device alias was added, switching on and off worked with a harmless test load. The switch-off debug run confirmed local processing without involving the AI assistant. This particular failure is resolved; the exact internal parsing path has not been fully examined, and negative and long-term tests remain open."
       }
     },
     {
