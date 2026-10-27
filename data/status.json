@@ -2,7 +2,7 @@
   "schema_version": 1,
   "visibility": "public",
   "approved": true,
-  "as_of": "2026-10-26",
+  "as_of": "2026-10-27",
   "evidence": "Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme",
   "title": "Echo-2-Pilot · Speaker-Persönlichkeit im Sprachtest bestätigt; Haussteuerung offen",
   "confirmed": [
@@ -16,7 +16,8 @@
     "Komplexe Wissensfragen, Folgekontext und technische Ende-zu-Ende-Messungen",
     "Timer, Wecker, Erinnerungen, Listen und Medien",
     "Mehrbenutzerrechte, Gastmodus und sensible Antworten",
-    "Recovery, vollständiges Rohbackup und Langzeittests"
+    "Recovery, vollständiges Rohbackup und Langzeittests",
+    "Zukunftskonzept „Follow-me Conversation“: Gespräch beim Raumwechsel zwischen mehreren Echos übertragen, bei eindeutiger Sprecherzuordnung automatisch, sonst mit Rückfrage; erst laufenden Satz beenden. Nicht implementiert oder getestet."
   ],
   "milestones": [
     {
@@ -78,7 +79,8 @@
       "Complex knowledge queries, conversational follow-up and technical end-to-end measurements",
       "Timers, alarms, reminders, lists and media",
       "Multi-user permissions, guest mode and sensitive answers",
-      "Recovery, full raw backup and long-term tests"
+      "Recovery, full raw backup and long-term tests",
+      "Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested."
     ],
     "known_issues": [
       "First voice test of a switching command (26 Oct): the device was not switched; the Echo answered with an AI text instead. The cause is unknown and is being investigated in the Home Assistant debug view",
