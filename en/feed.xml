@@ -8,6 +8,13 @@
   <updated>2026-10-27T00:00:00Z</updated>
   <author><name>kinetic-it</name></author>
   <entry>
+    <title>Switching command narrowed down: works locally as text and by voice with the short devi...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-27-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <summary>Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven.</summary>
+  </entry>
+  <entry>
     <title>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself...</title>
     <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-26-3</id>
     <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>

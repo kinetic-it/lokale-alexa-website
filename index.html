@@ -298,19 +298,19 @@ footer p{font-size:.86rem}
     <aside class="statuscard" aria-label="Projektstand in Kurzform">
       <div class="head"><span>Projektstand</span><span data-bind="asof">27.10.2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo-2-Pilot · Speaker-Persönlichkeit im Sprachtest bestätigt; Haussteuerung offen</h2>
+        <h2 data-bind="title">Echo-2-Pilot · Lokaler Schaltbefehl teilweise erfolgreich; Zuordnung von Gerätenamen offen</h2>
         <p class="m" data-bind="evidence">Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
         <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo-2-Bootzugang</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk owner_reported"></i><span>Home-Assistant-Anbindung</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk owner_reported"></i><span>Lokales Wakeword Kurztest</span><span class="st">Owner-Bericht</span></li>
           <li><i class="mk in_progress"></i><span>Freigaben und Berechtigungen prüfen</span><span class="st">in Arbeit</span></li>
-          <li><i class="mk failed"></i><span>Hausbefehle Ende-zu-Ende</span><span class="st">Test fehlgeschlagen</span></li>
+          <li><i class="mk in_progress"></i><span>Hausbefehle Ende-zu-Ende</span><span class="st">in Arbeit</span></li>
           <li><i class="mk in_progress"></i><span>Hermes-Konversation Ende-zu-Ende</span><span class="st">in Arbeit</span></li>
           <li><i class="mk open"></i><span>Alltagsfunktionen und Dauerbetrieb</span><span class="st">offen</span></li>
 <!-- ms:end -->
         </ul>
-        <p class="last"><strong data-bind="lastdate">Letzter Test · 26.10.2026</strong><span data-bind="lasttest">Sprachtest am Echo: Selbstvorstellung mit vorgesehener Speaker-Persönlichkeit und natürliche Abschlussantwort hörbar gelungen (Owner-Beobachtung). Der zuvor fehlgeschlagene Schaltbefehl ist nicht behoben.</span></p>
+        <p class="last"><strong data-bind="lastdate">Letzter Test · 27.10.2026</strong><span data-bind="lasttest">Schaltbefehl für eine freigegebene Steckdose: als Text lokal erkannt und geschaltet, per Sprache mit kurzem Gerätenamen erfolgreich (Owner-Bericht). Mit zusammengeschriebener Gerätebezeichnung korrekt transkribiert, aber an den KI-Assistenten weitergegeben; keine Schaltung.</span></p>
       </div>
     </aside>
   </div>
@@ -455,7 +455,7 @@ footer p{font-size:.86rem}
         <tr data-c="port"><td>Echo Show 5 Gen. 2</td><td>C76N8S / cronos</td><td><span class="tag">Veröffentlichter Sprachport</span></td></tr>
         <tr data-c="port"><td>Echo Show 8 Gen. 1</td><td>C7H6N3 / crown</td><td><span class="tag">Veröffentlichter Sprachport</span></td></tr>
         <tr data-c="port"><td>Echo Spot original (2017)</td><td>VN94DQ / rook</td><td><span class="tag">Veröffentlichter Sprachport</span></td></tr>
-        <tr data-c="exp"><td>Echo Show 8 Gen. 2</td><td>A8H3N2 / athena</td><td><span class="tag warn">Experimenteller Weg</span></td></tr>
+        <tr data-c="exp"><td>Echo Show 8 Gen. 2</td><td>A8H3N2 / athena</td><td><span class="tag warn">Experimenteller Weg</span> · laut Projekten inzwischen unterstützt</td></tr>
         <tr data-c="root"><td>Echo 1</td><td>SK705DI</td><td><span class="tag warn">Historischer Root-Nachweis</span></td></tr>
         <tr data-c="none"><td>Echo Dot 3 Refresh</td><td>C78MP8 / crumpet</td><td><span class="tag no">Kein belegter Gesamtport</span></td></tr>
         <tr data-c="none"><td>Echo Dot 3 mit Uhr</td><td>36EBT3 / doebrite</td><td><span class="tag no">Kein belegter Gesamtport</span></td></tr>
@@ -505,6 +505,7 @@ footer p{font-size:.86rem}
           <li>echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)</li>
           <li>Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt</li>
           <li>Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (Owner-Beobachtung).</li>
+          <li>Lokaler Schaltbefehl an einer freigegebenen Steckdose: als Text erkannt und ohne KI-Assistent ausgeführt (0,05 s Verarbeitung); mit dem kurzen, hinterlegten Gerätenamen auch per Sprache (Owner-Bericht, ohne Debug-Trace). Keine Gesamtabnahme.</li>
 <!-- confirmed:end -->
         </ul>
       </div>
@@ -516,15 +517,16 @@ footer p{font-size:.86rem}
           <li>Mehrbenutzerrechte, Gastmodus und sensible Antworten</li>
           <li>Recovery, vollständiges Rohbackup und Langzeittests</li>
           <li>Zukunftskonzept „Follow-me Conversation“: Gespräch beim Raumwechsel zwischen mehreren Echos übertragen, bei eindeutiger Sprecherzuordnung automatisch, sonst mit Rückfrage; erst laufenden Satz beenden. Nicht implementiert oder getestet.</li>
+          <li>Idee: Ein separater Hermes-Assistent für Verwaltungsaufgaben hilft bei der Pflege von Gerätealiasen (vorhandene Aliase lesen, Schreibweisen, Dubletten und Widersprüche erkennen, Vorschläge machen). Änderungen nur nach Freigabe durch den Owner, keine automatische Freigabe weiterer Geräte für Sprache. Konzept, nicht umgesetzt.</li>
 <!-- open:end -->
         </ul>
       </div>
       <div class="card issues wide"><span class="label">Bekannte Probleme</span>
         <ul id="l-issues"><!-- issues:start -->
-          <li>Erster Sprachtest eines Schaltbefehls (26.10.): Das Gerät wurde nicht geschaltet, der Echo antwortete stattdessen mit einem KI-Text. Die Ursache ist ungeklärt und wird in der Debug-Ansicht von Home Assistant untersucht</li>
+          <li>Schaltbefehl mit zusammengeschriebener Gerätebezeichnung (27.10.): Die Spracherkennung war korrekt, Home Assistant ordnete den Befehl aber nicht lokal zu und gab ihn an den KI-Assistenten weiter; keine Schaltung. Wahrscheinlichste Erklärung ist eine Abweichung beim Abgleich mit Gerätenamen und Aliasen, bewiesen ist sie noch nicht</li>
           <li>Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt</li>
           <li>Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden</li>
-          <li>Berechtigungen für Sprachbefehle werden vor dem ersten Haushaltsbefehl-Test geprüft</li>
+          <li>Die Prüfung der Sprachfreigaben ist nicht abgeschlossen; Schaltbefehle werden bis dahin nur an einem einzelnen, bereits freigegebenen Gerät getestet</li>
 <!-- issues:end -->
         </ul>
       </div>
@@ -537,6 +539,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-26">26.10.2026</time><span>Englische Fassung des Leitfadens, SOUL.md-Beispiel und Übersicht zum Nachbauen</span></li>
           <li><time datetime="2026-10-26">26.10.2026</time><span>Erster Sprachtest eines Schaltbefehls am Echo fehlgeschlagen; Ursachenprüfung läuft</span></li>
           <li><time datetime="2026-10-26">26.10.2026</time><span>Gesprächsweg zum separaten Hermes-Speaker korrigiert: Echo beantwortete Selbstvorstellung und Abschlussfrage passend zur vorgesehenen Persönlichkeit (Owner-Sprachtest); Schaltbefehle bleiben offen.</span></li>
+          <li><time datetime="2026-10-27">27.10.2026</time><span>Schaltbefehl eingegrenzt: lokal per Text und mit kurzem Gerätenamen per Sprache erfolgreich; zusammengeschriebene Gerätebezeichnung wird korrekt erkannt, aber nicht lokal zugeordnet. Ursache nicht abschließend bewiesen.</span></li>
 <!-- history:end --></ol>
         <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Verlauf als Feed abonnieren (Atom)</a></p>
       </div>
@@ -552,9 +555,10 @@ footer p{font-size:.86rem}
     <h2>Befunde und Erkenntnisse</h2>
     <p class="intro">Hier stehen Dinge, die schiefgegangen sind oder die wir gelernt haben, neueste zuerst. Offene Sicherheitsdetails nennen wir erst, wenn sie behoben sind; öffentlich steht dann die Lehre daraus.</p>
     <ol class="finds">
+      <li class="find finding" id="f7"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-27">27.10.2026</time></div><h3>Richtig verstanden heißt nicht richtig zugeordnet</h3><p>Ein Sprachassistent kann einen Befehl korrekt transkribieren und trotzdem an der Zuordnung zum richtigen Gerät scheitern. In unserem Test schaltete Home Assistant eine freigegebene Steckdose lokal, wenn der Befehl als Text kam (0,05 s Verarbeitung) oder per Sprache der kurze, hinterlegte Gerätename fiel. Mit einer zusammengeschriebenen Gerätebezeichnung erkannte die Spracherkennung den Satz korrekt, Home Assistant ordnete ihn aber keinem Gerät zu und gab ihn an den KI-Assistenten weiter. Der erklärte etwas, schaltete aber nichts. Lehre: natürliche Gerätenamen und passende Aliase pflegen und jeden Lauf in der Debug-Ansicht nachvollziehen. Der KI-Assistent bekommt dafür bewusst keine Verwaltungsrechte in Home Assistant; die Lösung gehört in die normale Sprachverarbeitung.</p></li>
       <li class="find finding" id="f6"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Neue KI-Schnittstelle ersetzt keine überprüfte Haussteuerung</h3><p>Home Assistant 2026.10 macht die Einrichtung seines MCP-Servers einfacher. Das eröffnet zusätzliche Möglichkeiten für KI-Apps, repariert jedoch nicht automatisch fehlgeschlagene Sprachbefehle und verschickt selbst keine proaktiven Statusmeldungen. Für konkrete Zustandsprüfungen bleiben gewöhnliche Home-Assistant-Automationen der verlässlichere Ausgangspunkt. Unser Pilot hat diese Erweiterung noch nicht als neue Funktion abgenommen.</p></li>
       <li class="find problem" id="f5"><div class="fhead"><span class="ftype">Problem</span><span class="fstate resolved">geklärt</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Gesprächsweg umging zunächst die Speaker-Persönlichkeit</h3><p>Obwohl der separate Sprachassistent erreichbar war, antwortete die Sprachanbindung zunächst über einen direkten Modellweg statt über seine konfigurierte Persönlichkeit. Ursache war eine unvollständige Verknüpfung zwischen Gesprächsanbindung und Speaker-Dienst. Nach gezielter Korrektur gelang die Selbstvorstellung mit passender Persönlichkeit und eine natürliche Abschlussantwort am Echo im Sprachtest. Das belegt noch keine Haussteuerung oder Langzeitstabilität.</p></li>
-      <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">offen</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Erster Sprachtest: Schaltbefehl nicht ausgeführt</h3><p>Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Die Ursache ist ungeklärt. Als Nächstes wird der aufgezeichnete Lauf in der Debug-Ansicht von Home Assistant gelesen; bis dahin ändern wir nichts auf Verdacht.</p></li>
+      <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">offen</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Erster Sprachtest: Schaltbefehl nicht ausgeführt</h3><p>Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Am 27.10. eingegrenzt (siehe „Richtig verstanden heißt nicht richtig zugeordnet“): Die Spracherkennung war korrekt, die zusammengeschriebene Gerätebezeichnung wurde aber nicht lokal zugeordnet. Die genaue Ursache ist noch nicht bewiesen. Der Befund bleibt offen; wir ändern nichts auf Verdacht.</p></li>
       <li class="find correction" id="f3"><div class="fhead"><span class="ftype">Korrektur</span><span class="fstate resolved">geklärt</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Englische PDF: Fehler in der ersten Fassung</h3><p>Die erste englische Fassung des Leitfadens hatte Übersetzungsfehler und ließ die 32 Quellen-Links des Originals weg. Beides ist behoben; die Fassung wird jetzt aus derselben Quelle wie das Deutsche gebaut.</p></li>
       <li class="find finding" id="f2"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-25">25.10.2026</time></div><h3>Ein Listeneintrag ist kein Beweis</h3><p>Dass ein Gerät für Sprache freigegeben ist oder harmlos heißt, sagt nichts über seine tatsächliche Wirkung. Jede Freigabe wird einzeln getestet, bevor sie als sicher gilt.</p></li>
       <li class="find finding" id="f1"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-23">23.10.2026</time></div><h3>Aktivierungswort lieber am Gerät erkennen</h3><p>Die Erkennung auf dem Server war im Dauerbetrieb instabil, der Echo reagierte nach Minuten nicht mehr. Das lokale Aktivierungswort am Gerät erkannte im Kurztest 10 von 10. Ein Dauerbetrieb ist damit noch nicht belegt.</p></li>

@@ -8,6 +8,13 @@
   <updated>2026-10-27T00:00:00Z</updated>
   <author><name>kinetic-it</name></author>
   <entry>
+    <title>Schaltbefehl eingegrenzt: lokal per Text und mit kurzem Gerätenamen per Sprache erfolgr...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/de/2026-10-27-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/#stand"/>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <summary>Schaltbefehl eingegrenzt: lokal per Text und mit kurzem Gerätenamen per Sprache erfolgreich; zusammengeschriebene Gerätebezeichnung wird korrekt erkannt, aber nicht lokal zugeordnet. Ursache nicht abschließend bewiesen.</summary>
+  </entry>
+  <entry>
     <title>Gesprächsweg zum separaten Hermes-Speaker korrigiert: Echo beantwortete Selbstvorstellu...</title>
     <id>tag:kinetic-it.github.io,2026:lokale-alexa/de/2026-10-26-3</id>
     <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/#stand"/>

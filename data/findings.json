@@ -3,6 +3,19 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f7",
+      "date": "2026-10-27",
+      "type": "finding",
+      "de": {
+        "title": "Richtig verstanden heißt nicht richtig zugeordnet",
+        "text": "Ein Sprachassistent kann einen Befehl korrekt transkribieren und trotzdem an der Zuordnung zum richtigen Gerät scheitern. In unserem Test schaltete Home Assistant eine freigegebene Steckdose lokal, wenn der Befehl als Text kam (0,05 s Verarbeitung) oder per Sprache der kurze, hinterlegte Gerätename fiel. Mit einer zusammengeschriebenen Gerätebezeichnung erkannte die Spracherkennung den Satz korrekt, Home Assistant ordnete ihn aber keinem Gerät zu und gab ihn an den KI-Assistenten weiter. Der erklärte etwas, schaltete aber nichts. Lehre: natürliche Gerätenamen und passende Aliase pflegen und jeden Lauf in der Debug-Ansicht nachvollziehen. Der KI-Assistent bekommt dafür bewusst keine Verwaltungsrechte in Home Assistant; die Lösung gehört in die normale Sprachverarbeitung."
+      },
+      "en": {
+        "title": "Correctly heard is not correctly matched",
+        "text": "A voice assistant can transcribe a command correctly and still fail to match it to the right device. In our test, Home Assistant switched an exposed smart plug locally when the command came as text (0.05 s processing) or when the short stored device name was spoken. With a compound device name, speech recognition got the sentence right, but Home Assistant did not match it to any device and passed it to the AI assistant, which explained something but switched nothing. Lesson: maintain natural device names and fitting aliases, and trace every run in the debug view. The AI assistant deliberately gets no admin rights in Home Assistant for this; the fix belongs in the normal voice processing."
+      }
+    },
+    {
       "id": "f6",
       "date": "2026-10-26",
       "type": "finding",
@@ -36,11 +49,11 @@
       "state": "open",
       "de": {
         "title": "Erster Sprachtest: Schaltbefehl nicht ausgeführt",
-        "text": "Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Die Ursache ist ungeklärt. Als Nächstes wird der aufgezeichnete Lauf in der Debug-Ansicht von Home Assistant gelesen; bis dahin ändern wir nichts auf Verdacht."
+        "text": "Der Echo antwortete hörbar, aber mit einem KI-Text. Das Gerät wurde nicht geschaltet. Am 27.10. eingegrenzt (siehe „Richtig verstanden heißt nicht richtig zugeordnet“): Die Spracherkennung war korrekt, die zusammengeschriebene Gerätebezeichnung wurde aber nicht lokal zugeordnet. Die genaue Ursache ist noch nicht bewiesen. Der Befund bleibt offen; wir ändern nichts auf Verdacht."
       },
       "en": {
         "title": "First voice test: switching command not executed",
-        "text": "The Echo answered audibly, but with an AI text. The device was not switched. The cause is unknown. Next, the recorded run is read in the Home Assistant debug view; until then we change nothing on a hunch."
+        "text": "The Echo answered audibly, but with an AI text. The device was not switched. Narrowed down on 27 Oct (see “Correctly heard is not correctly matched”): speech recognition was correct, but the compound device name was not matched locally. The exact cause is not yet proven. The finding stays open; we change nothing on a hunch."
       }
     },
     {
