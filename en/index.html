@@ -177,6 +177,7 @@ th{font:600 .7rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;c
 td{color:var(--dim)}
 td:first-child{color:var(--fg);font-weight:600}
 tbody tr:hover td{background:#1a1f25}
+@media (max-width:640px){table.stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}table.stack tr{display:block;padding:10px 0;border-bottom:1px solid var(--line2)}table.stack tr:last-child{border-bottom:0}table.stack td{display:block;border:0;padding:4px 14px}table.stack td[data-l]::before{content:attr(data-l);display:block;font:600 .66rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);opacity:.8}}
 .tag{display:inline-block;font:500 .72rem/1 var(--mono);border:1px solid #4f6b5e;color:var(--ok);padding:4px 7px;border-radius:2px;white-space:nowrap}
 .tag.warn{color:var(--accent);border-color:#736648}
 .tag.no{color:#c79e9e;border-color:#725454}
@@ -263,6 +264,10 @@ footer p{font-size:.86rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+<link rel="alternate" type="application/atom+xml" title="Local Alexa: project history" href="feed.xml">
+<!-- jsonld:start -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Local Alexa: an Echo gets a second life", "inLanguage": "en", "url": "https://kinetic-it.github.io/lokale-alexa-website/en/", "image": "https://kinetic-it.github.io/lokale-alexa-website/og-en.png", "datePublished": "2026-10-25", "dateModified": "2026-10-27", "author": {"@type": "Organization", "name": "kinetic-it", "url": "https://github.com/kinetic-it"}}</script>
+<!-- jsonld:end -->
 </head>
 <body>
 <a class="skip" href="#idee">Skip to content</a>
@@ -413,17 +418,17 @@ footer p{font-size:.86rem}
     </div>
 
     <h3 class="sub">What software is there?</h3>
-    <div class="tablewrap" tabindex="0" role="region" aria-label="Table: software options for Echo devices"><table>
-      <thead><tr><th>Project</th><th>Purpose</th><th>Assessment</th></tr></thead>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Table: software options for Echo devices"><table class="stack">
+      <thead><tr><th>Project</th><th>Devices according to the project</th><th>What it does</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist / hassmic</a></td><td>Echo as a Home Assistant voice satellite via ESPHome/Wyoming</td><td>Path of the Echo 2 pilot</td></tr>
-        <tr><td>EchoLocal</td><td>Local voice/media/display service based on Fire OS</td><td>Alternative community port</td></tr>
-        <tr><td>EchoMuse / emOS</td><td>Dot 2 solution with a controller and its own Linux base</td><td>Mainly Dot 2</td></tr>
-        <tr><td>TECHO5 family</td><td>Linux ports for certain Echo, Dot, Show and Spot devices</td><td>Check each model separately</td></tr>
-        <tr><td>LibreEcho</td><td>Open Linux for Echo 2 and Dot 2</td><td>Own installation and update path</td></tr>
+        <tr><td><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist / hassmic</a></td><td data-l="Devices according to the project">Echo Dot 2, Echo 2, original Echo Dot 3. Not: Dot 3 refresh, Dot 3 with clock</td><td data-l="What it does">Replaces Alexa with a small program; connects via the ESPHome API, alternatively Wyoming</td><td data-l="Notes">Keeps Amazon's microphone processing and wake word engine. According to the project written with AI, unaudited, tested on one unit per model. Path of our Echo 2 pilot</td></tr>
+        <tr><td><a href="https://github.com/ygelfand/echolocal">EchoLocal</a></td><td data-l="Devices according to the project">Echo Dot 2, Echo Show 5 Gen. 1 and 2, Echo Show 8 Gen. 1 and 2</td><td data-l="What it does">Voice satellite, media player, display and Bluetooth proxy based on Fire OS; ESPHome API</td><td data-l="Notes">Wake word on the device; installed via USB and TWRP</td></tr>
+        <tr><td><a href="https://github.com/wilbowes/EchoMuse">EchoMuse / emOS</a></td><td data-l="Devices according to the project">Echo Dot 2; further models in progress according to the project</td><td data-l="What it does">ESPHome voice satellite with a controller as a Home Assistant add-on or Docker; emOS replaces Fire OS with its own small Linux</td><td data-l="Notes">Wake word on the device by default. Known: no WPA3 under emOS on Fire OS 6</td></tr>
+        <tr><td><a href="https://github.com/HuskerMinion/techo5">TECHO5</a></td><td data-l="Devices according to the project">Echo Show 5 Gen. 1 and 2, Show 8 Gen. 1 and 2, Spot, Dot 2; Echo 2 and original Dot 3 on one unit each according to the project</td><td data-l="What it does">Alpine Linux instead of Fire OS, one service for everything; ESPHome API</td><td data-l="Notes">Wake word on the device, Amazon's voice chip is not used. According to the author a hobby project, not a product</td></tr>
+        <tr><td><a href="https://github.com/aslater3/LibreEcho">LibreEcho</a></td><td data-l="Devices according to the project">Echo 2, Echo Dot 2</td><td data-l="What it does">Own Linux with kernel 6.1, signed updates, web interface; ESPHome API</td><td data-l="Notes">Echo 2 needs USB access via pogo pins or solder pads (see adapters below). Dot support is newer and less tested</td></tr>
       </tbody>
     </table></div>
-    <p class="small" style="margin-top:12px">Software overview summarised from the guide dated 22 Oct 2026; third-party project descriptions are not our own tests.</p>
+    <p class="small" style="margin-top:12px">Details from the project descriptions (README), read on 27 Oct 2026. Third-party project statements are not our own tests. The device classification below comes from the guide dated 22 Oct 2026; some projects now list further models, for example the Echo Show 8 Gen. 2.</p>
   </div>
 </section>
 
@@ -533,6 +538,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>First voice test of a switching command on the Echo failed; investigation under way</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.</span></li>
 <!-- history:end --></ol>
+        <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Subscribe to the history feed (Atom)</a></p>
       </div>
     </div>
     <p class="small" style="margin-top:20px">Automatic publication is not automatic functional testing. The status is adopted after expert approval; the page then updates via GitHub Pages.</p>

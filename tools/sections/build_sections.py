@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Erzeugt zweisprachige Seitenteile aus einer Quelle:
+  - JSON-LD im Kopf (dateModified aus status.json -> as_of)
   - Abschnitt "Nachbauen" (<section id="nachbauen">) aus tools/sections/steps.json
   - Abschnitt "Befunde und Erkenntnisse" aus data/findings.json
   - statischer Fallback des Projektstands aus data/status.json: Kopfkarte (Titel, Datum, Meilensteine,
@@ -105,7 +106,17 @@ def binds(s, lang):
         s = re.sub(r'(data-bind="%s">)[^<]*(</)' % k, lambda m: m.group(1) + E(v) + m.group(2), s)
     return s
 
-PARTS = {'nachbauen': steps, 'findings': findings, 'history': history, 'ms': ms, 'confirmed': lst('confirmed'), 'open': lst('not_yet_verified'), 'issues': lst('known_issues')}
+def jsonld(lang):
+    base = 'https://kinetic-it.github.io/lokale-alexa-website/'
+    d = {'@context': 'https://schema.org', '@type': 'TechArticle',
+         'headline': 'Lokale Alexa: Ein Echo bekommt ein zweites Leben' if lang == 'de' else 'Local Alexa: an Echo gets a second life',
+         'inLanguage': lang, 'url': base + ('en/' if lang == 'en' else ''),
+         'image': base + 'og-%s.png' % lang,
+         'datePublished': '2026-10-25', 'dateModified': STATUS['as_of'],
+         'author': {'@type': 'Organization', 'name': 'kinetic-it', 'url': 'https://github.com/kinetic-it'}}
+    return '<script type="application/ld+json">%s</script>' % json.dumps(d, ensure_ascii=False)
+
+PARTS = {'jsonld': jsonld, 'nachbauen': steps, 'findings': findings, 'history': history, 'ms': ms, 'confirmed': lst('confirmed'), 'open': lst('not_yet_verified'), 'issues': lst('known_issues')}
 
 def apply(s, lang):
     for key, fn in PARTS.items():
