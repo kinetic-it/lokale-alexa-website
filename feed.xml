@@ -8,6 +8,13 @@
   <updated>2026-10-27T00:00:00Z</updated>
   <author><name>kinetic-it</name></author>
   <entry>
+    <title>Ein zuvor fehlgeschlagener Sprachbefehl funktionierte nach Ergänzung eines passenden Ge...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/de/2026-10-27-2</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/#stand"/>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <summary>Ein zuvor fehlgeschlagener Sprachbefehl funktionierte nach Ergänzung eines passenden Gerätealias: Ein/Aus über Echo mit ungefährlicher Testlast, lokaler Ausschalt-Debuglauf bestätigt. Einzeltest bestanden; Negativ- und Dauertests offen.</summary>
+  </entry>
+  <entry>
     <title>Schaltbefehl eingegrenzt: lokal per Text und mit kurzem Gerätenamen per Sprache erfolgr...</title>
     <id>tag:kinetic-it.github.io,2026:lokale-alexa/de/2026-10-27-1</id>
     <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/#stand"/>
