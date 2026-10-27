@@ -298,19 +298,19 @@ footer p{font-size:.86rem}
     <aside class="statuscard" aria-label="Project status at a glance">
       <div class="head"><span>Project status</span><span data-bind="asof">27 Oct 2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo 2 pilot · speaker personality confirmed in voice test; home control unresolved</h2>
+        <h2 data-bind="title">Echo 2 pilot · local switching command partly successful; device name matching unresolved</h2>
         <p class="m" data-bind="evidence">Owner reports and private project records; no independent live acceptance</p>
         <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Owner report</span></li>
           <li><i class="mk owner_reported"></i><span>Home Assistant integration</span><span class="st">Owner report</span></li>
           <li><i class="mk owner_reported"></i><span>Local wake word short test</span><span class="st">Owner report</span></li>
           <li><i class="mk in_progress"></i><span>Review permissions and exposures</span><span class="st">in progress</span></li>
-          <li><i class="mk failed"></i><span>Home commands end to end</span><span class="st">test failed</span></li>
+          <li><i class="mk in_progress"></i><span>Home commands end to end</span><span class="st">in progress</span></li>
           <li><i class="mk in_progress"></i><span>Hermes conversation end to end</span><span class="st">in progress</span></li>
           <li><i class="mk open"></i><span>Everyday functions and continuous operation</span><span class="st">open</span></li>
 <!-- ms:end -->
         </ul>
-        <p class="last"><strong data-bind="lastdate">Latest test · 26 Oct 2026</strong><span data-bind="lasttest">Echo voice test: audible self-introduction in the intended speaker personality and natural closing response succeeded (owner observation). Earlier failed device switching is not fixed.</span></p>
+        <p class="last"><strong data-bind="lastdate">Latest test · 27 Oct 2026</strong><span data-bind="lasttest">Switching command for an exposed smart plug: matched and switched locally as text, successful by voice with the short device name (owner report). With a compound device name it was transcribed correctly but passed to the AI assistant; nothing was switched.</span></p>
       </div>
     </aside>
   </div>
@@ -455,7 +455,7 @@ footer p{font-size:.86rem}
         <tr data-c="port"><td>Echo Show 5 Gen. 2</td><td>C76N8S / cronos</td><td><span class="tag">Published voice port</span></td></tr>
         <tr data-c="port"><td>Echo Show 8 Gen. 1</td><td>C7H6N3 / crown</td><td><span class="tag">Published voice port</span></td></tr>
         <tr data-c="port"><td>Echo Spot original (2017)</td><td>VN94DQ / rook</td><td><span class="tag">Published voice port</span></td></tr>
-        <tr data-c="exp"><td>Echo Show 8 Gen. 2</td><td>A8H3N2 / athena</td><td><span class="tag warn">Experimental path</span></td></tr>
+        <tr data-c="exp"><td>Echo Show 8 Gen. 2</td><td>A8H3N2 / athena</td><td><span class="tag warn">Experimental path</span> · now supported according to projects</td></tr>
         <tr data-c="root"><td>Echo 1</td><td>SK705DI</td><td><span class="tag warn">Historical root proof</span></td></tr>
         <tr data-c="none"><td>Echo Dot 3 Refresh</td><td>C78MP8 / crumpet</td><td><span class="tag no">No proven full port</span></td></tr>
         <tr data-c="none"><td>Echo Dot 3 with clock</td><td>36EBT3 / doebrite</td><td><span class="tag no">No proven full port</span></td></tr>
@@ -505,6 +505,7 @@ footer p{font-size:.86rem}
           <li>echo-dot-assist connected to Home Assistant (owner report)</li>
           <li>Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven</li>
           <li>Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (owner observation).</li>
+          <li>Local switching command for an exposed smart plug: recognised as text and executed without the AI assistant (0.05 s processing); with the short stored device name also by voice (owner report, no debug trace). No overall acceptance.</li>
 <!-- confirmed:end -->
         </ul>
       </div>
@@ -516,15 +517,16 @@ footer p{font-size:.86rem}
           <li>Multi-user permissions, guest mode and sensitive answers</li>
           <li>Recovery, full raw backup and long-term tests</li>
           <li>Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested.</li>
+          <li>Idea: a separate Hermes assistant for admin tasks helps maintain device aliases (read existing aliases, spot spelling variants, duplicates and conflicts, suggest aliases). Changes only after approval by the owner; no automatic exposure of further devices to voice. Concept, not implemented.</li>
 <!-- open:end -->
         </ul>
       </div>
       <div class="card issues wide"><span class="label">Known issues</span>
         <ul id="l-issues"><!-- issues:start -->
-          <li>First voice test of a switching command (26 Oct): the device was not switched; the Echo answered with an AI text instead. The cause is unknown and is being investigated in the Home Assistant debug view</li>
+          <li>Switching command with a compound device name (27 Oct): speech recognition was correct, but Home Assistant did not match the command locally and passed it to the AI assistant; nothing was switched. The most likely explanation is a mismatch with device names and aliases; this is not yet proven</li>
           <li>The streaming wake word path was unstable; the local wake word is therefore preferred</li>
           <li>An open question was not understood in an earlier test, via a conversation agent that has since been replaced</li>
-          <li>Permissions for voice commands are reviewed before the first home-command test</li>
+          <li>The review of voice exposures is not complete; until then switching commands are only tested on a single device that is already exposed</li>
 <!-- issues:end -->
         </ul>
       </div>
@@ -537,6 +539,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>English edition of the guide, SOUL.md example and build overview</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>First voice test of a switching command on the Echo failed; investigation under way</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.</span></li>
+          <li><time datetime="2026-10-27">27 Oct 2026</time><span>Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven.</span></li>
 <!-- history:end --></ol>
         <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Subscribe to the history feed (Atom)</a></p>
       </div>
@@ -552,9 +555,10 @@ footer p{font-size:.86rem}
     <h2>Findings and lessons</h2>
     <p class="intro">This is where we record what went wrong or what we learned, newest first. We name open security details only once they are fixed; what we learned is published then.</p>
     <ol class="finds">
+      <li class="find finding" id="f7"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-27">27 Oct 2026</time></div><h3>Correctly heard is not correctly matched</h3><p>A voice assistant can transcribe a command correctly and still fail to match it to the right device. In our test, Home Assistant switched an exposed smart plug locally when the command came as text (0.05 s processing) or when the short stored device name was spoken. With a compound device name, speech recognition got the sentence right, but Home Assistant did not match it to any device and passed it to the AI assistant, which explained something but switched nothing. Lesson: maintain natural device names and fitting aliases, and trace every run in the debug view. The AI assistant deliberately gets no admin rights in Home Assistant for this; the fix belongs in the normal voice processing.</p></li>
       <li class="find finding" id="f6"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>A simpler AI connection does not replace verified home control</h3><p>Home Assistant 2026.10 makes its MCP server easier to set up. This gives AI apps additional integration options, but it does not automatically fix failed voice commands or send proactive status updates. Ordinary Home Assistant automations remain a more reliable starting point for predictable state checks. This feature has not been accepted as part of our pilot.</p></li>
       <li class="find problem" id="f5"><div class="fhead"><span class="ftype">Problem</span><span class="fstate resolved">resolved</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>Conversation route initially bypassed the speaker personality</h3><p>Although the separate voice assistant was reachable, the voice integration initially replied via a direct model path instead of its configured personality. The conversation integration was not fully linked to the speaker service. After a targeted correction, the Echo spoke its introduction in the intended personality and gave a natural closing response in a voice test. This does not yet prove home control or long-term stability.</p></li>
-      <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">open</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>First voice test: switching command not executed</h3><p>The Echo answered audibly, but with an AI text. The device was not switched. The cause is unknown. Next, the recorded run is read in the Home Assistant debug view; until then we change nothing on a hunch.</p></li>
+      <li class="find problem" id="f4"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">open</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>First voice test: switching command not executed</h3><p>The Echo answered audibly, but with an AI text. The device was not switched. Narrowed down on 27 Oct (see “Correctly heard is not correctly matched”): speech recognition was correct, but the compound device name was not matched locally. The exact cause is not yet proven. The finding stays open; we change nothing on a hunch.</p></li>
       <li class="find correction" id="f3"><div class="fhead"><span class="ftype">Correction</span><span class="fstate resolved">resolved</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>English PDF: errors in the first edition</h3><p>The first English edition of the guide had translation errors and left out the 32 source links of the original. Both are fixed; the edition is now built from the same source as the German one.</p></li>
       <li class="find finding" id="f2"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-25">25 Oct 2026</time></div><h3>A list entry is not proof</h3><p>That a device is exposed to voice or has a harmless name says nothing about what it actually does. Every exposure is tested individually before it counts as safe.</p></li>
       <li class="find finding" id="f1"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-23">23 Oct 2026</time></div><h3>Detect the wake word on the device</h3><p>Server-side detection was unstable in continuous operation; the Echo stopped responding after a few minutes. The local wake word on the device was detected 10 of 10 times in a short test. Continuous operation is not yet proven.</p></li>
