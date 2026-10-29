@@ -71,7 +71,7 @@ Dies ist ein deutlich sichtbarer Warnhinweis, aber keine Aussage, dass jede gese
 
 - [LibreEcho – Echo-2-Installationsweg](https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md)
 - [LibreEcho – Echo Gen2 Pogo-Plug V5 (3D-Druck-Archiv)](https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip)
-- [echo-dot-assist – Upstream-Projekt](https://github.com/jacob-pro/echo-dot-assist)
+- [echo-dot-assist – Upstream-Projekt](https://github.com/Gamer92000/echo-dot-assist)
 - [Öffentlicher Amazon-Geräte-Leitfaden als PDF](../downloads/Amazon-Geraete-Leitfaden-2026-10-22-neutral.pdf)
 
 **Nächste Aktion für die Website-KI:** Den aktuellen Repo- und Belegstand prüfen und die **erste** noch ungeklärte Frage zum tatsächlich verwendeten 3D-Druckhalter stellen. Bis dahin kann die Struktur vorbereitet, aber nicht als Erfahrungsbericht veröffentlicht werden.
