@@ -38,6 +38,7 @@ def steps(lang):
         *items,
         '    </ol>',
         '    <div class="callout"><p>%s <a href="%s">%s</a></p></div>' % (E(p['callout']), ISSUE, E(p['callout_link'])),
+        '    <div class="callout"><p>%s <a href="#umbau">%s</a></p></div>' % (E(p['umbau_text']), E(p['umbau_link'])),
         '  </div>',
         '</section>'])
 

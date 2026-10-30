@@ -91,6 +91,18 @@ Beim Teilen erscheinen `og-de.png` und `og-en.png` (1200 × 630). `robots.txt`, 
 - **Muttersprachliche Durchsicht** der englischen Seite und der englischen PDF.
 - **Prüfung auf echten Geräten:** Safari (iPhone), Firefox, Android-Chrome. Geprüft ist bisher nur Chromium, mit axe-core (keine Verstöße) und ohne Überlauf bei 320 bis 1440 px.
 
+## Erfahrungsbericht „So haben wir unseren Echo 2 umgebaut“
+
+Abschnitt `#umbau` (Navigation „Umbau“ / „Our build“) entsteht aus **einer** Quelle: `tools/umbau/content.json` (Deutsch und Englisch je Etappe, gleiche Struktur). Ändern, dann `python3 tools/umbau/build_umbau.py`, dann `python3 tools/check_i18n.py`. Den Abschnitt zwischen `<!-- umbau:start -->` und `<!-- umbau:end -->` nie von Hand ändern.
+
+- Jede Etappe hat feste Felder: Voraussetzungen, was wir gemacht haben, mögliche Schwierigkeiten, persönlicher Aufwand, Nachweis des Erfolgs, Quellen. Jede Etappe trägt Kennzeichen: Getestet (Owner-Beobachtung), Berichtet, In Entwicklung, Geplant, Angabe eines Fremdprojekts, Nicht belegt.
+- **Aufwandsbewertung (1 bis 5) und Zeiten stammen vom Owner** (Interview 30.10.2026) und nie von einer KI. Fehlt eine Angabe, steht „nicht bewertet“. Nichts schätzen oder auffüllen.
+- Keine Befehle, Schritte oder Versionsnummern ohne Beleg. Was ein Fremdprojekt vorgibt, steht als Fremdangabe da; für die einzelnen Schritte auf die Originalanleitung verlinken statt sie abzuschreiben. Keine eigene Pad-Belegung veröffentlichen, solange sie nicht durchgemessen ist.
+- Die Warnung „OHNE GEWÄHR – AUF EIGENE GEFAHR“ (englisch „NO WARRANTY – AT YOUR OWN RISK“) steht groß vor der Anleitung und als Kurzhinweis vor Etappen mit Hardware-, Unlock- oder Flash-Eingriff (`"warn": true`). Sie ist ein deutlicher Hinweis und keine rechtliche Pauschalfreistellung.
+- Fremde 3D-Dateien und Software nur verlinken, nicht in dieses Repository kopieren (Lizenzen nicht geprüft).
+- **Fotos** liegen in `images/`, nur mit ausdrücklicher Freigabe des Owners. Vor dem Ablegen: Metadaten entfernen (EXIF, GPS, Aufnahmedatum), Seriennummern, Aufkleber, MAC-Adressen und private Umgebung wegschneiden, auf höchstens 700 px Breite verkleinern. Jedes Bild braucht einen Alternativtext in beiden Sprachen.
+- Zahlen zum Kinetic Voice Router stammen aus Owner-Beobachtungen. Eine Version gilt erst als installiert oder abgenommen, wenn der Owner das gemeldet hat. Der Quellcode des Routers ist nicht öffentlich und wird nicht verlinkt.
+
 ## Befunde und Erkenntnisse
 
 Abschnitt `#befunde` kommt aus `data/findings.json` (je Eintrag Deutsch und Englisch, neueste zuerst). Neuer Eintrag: Objekt oben einfügen, `python3 tools/sections/build_sections.py`, `python3 tools/check_i18n.py`, PR. Typen: `finding` (Erkenntnis), `problem` (mit Zustand `open` oder `resolved`), `correction` (Korrektur einer früheren öffentlichen Aussage).

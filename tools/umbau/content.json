@@ -1,0 +1,618 @@
+{
+  "de": {
+    "eyebrow": "Erfahrungsbericht",
+    "h2": "So haben wir unseren Echo 2 umgebaut",
+    "intro": "Das ist der Weg, den wir mit genau einem Gerät gegangen sind: Amazon Echo 2 (2017), Modell XC56PY, Codename radar. Es ist ein Erfahrungsbericht und keine Bauanleitung. Er ersetzt nicht die Originalanleitungen der Projekte, die bei jedem Schritt verlinkt sind. „Wir“ ist der Projekt-Owner. Was nur ein anderes Projekt behauptet, steht als Fremdangabe da und ist von uns nicht nachgeprüft.",
+    "warn_title": "OHNE GEWÄHR – AUF EIGENE GEFAHR",
+    "warn_p": [
+      "Elektrische Fehlkontakte, Eingriffe in den Bootloader und geänderte Firmware können dein Gerät **dauerhaft beschädigen** („Brick“), Daten und Funktionen zerstören und Garantie- oder Supportansprüche beenden.",
+      "Das Entsperren des Bootloaders ändert die Boot-Kette des Geräts dauerhaft. Für unser Gerät haben wir **kein geprüftes vollständiges Backup** und keinen getesteten Rückweg.",
+      "Dieser Bericht gilt nur für die genannte Kombination aus Gerät und Software. Bei anderen Modellen, Revisionen oder Versionen kann dasselbe Vorgehen scheitern. Wir geben keine Garantie und übernehmen keine Verantwortung für Schäden. Dieser Hinweis ersetzt weder die Originalanleitungen noch eine rechtliche Beratung und ist keine rechtliche Pauschalfreistellung."
+    ],
+    "warn_third_title": "Sicherheitsregeln aus der LibreEcho-Anleitung (Fremdangabe, von uns nicht geprüft)",
+    "warn_third": [
+      "Vor dem Anschließen, Bewegen oder Entfernen der Kontakte das Netzteil abziehen. Eine bestromte Platine nie antasten.",
+      "Keine Pads oder Bauteile kurzschließen.",
+      "Keinen UART-Adapter an die USB-Pads anschließen.",
+      "Den Installer nie starten, wenn das gemeldete Produkt nicht zum Zielgerät passt."
+    ],
+    "warn_mini": "Dieser Schritt kann das Gerät dauerhaft beschädigen. Lies zuerst den Hinweis oben und die Originalanleitung.",
+    "legend_title": "So liest du den Bericht",
+    "legend_ev_intro": "Jeder Schritt trägt Kennzeichen, woher eine Aussage stammt:",
+    "ev": {
+      "t": "Getestet (Owner-Beobachtung)",
+      "r": "Berichtet",
+      "d": "In Entwicklung",
+      "p": "Geplant",
+      "f": "Angabe eines Fremdprojekts",
+      "n": "Nicht belegt"
+    },
+    "legend_scale": "Aufwand: Die Skala reicht von 1 (sehr leicht) bis 5 (sehr schwer). Die Bewertung stammt vom Owner, der Grunderfahrung mitbringt. Es ist keine KI-Schätzung und keine Aussage darüber, wie schwer es für dich wird.",
+    "toc_title": "Die zehn Etappen",
+    "step_word": "Schritt",
+    "labels": {
+      "pre": "Voraussetzungen",
+      "did": "Was wir gemacht haben",
+      "diff": "Mögliche Schwierigkeiten",
+      "eff": "Persönlicher Aufwand",
+      "proof": "Nachweis des Erfolgs",
+      "src": "Weiterführende Quellen"
+    },
+    "effort_word": "von 5",
+    "effort_to": "bis",
+    "effort_label": "Aufwand",
+    "table_head": ["Funktion", "Stand", "Art"],
+    "fig_credit": "Fotos: Projekt-Owner. 3D-Dateien und Software anderer Projekte verlinken wir nur, wir stellen sie nicht bereit.",
+    "closing": "Du hast einen ähnlichen Weg probiert? Ein Testbericht mit Modellnummer und Softwarestand hilft anderen:",
+    "closing_link": "Testbericht anlegen",
+    "steps": [
+      {
+        "id": "u1",
+        "title": "Das richtige Echo-Modell erkennen",
+        "tags": ["t", "f"],
+        "fields": [
+          {"k": "pre", "b": ["Das Gerät und ein Computer."]},
+          {"k": "did", "b": ["Das Modell steht auf dem Typenschild am Gerät, nicht auf dem Netzteil. Unser Gerät ist ein Echo 2 (2017), Modell XC56PY, Codename radar. Bestätigt wurde das später im Fastboot-Modus: `fastboot getvar product` meldete `RADAR` (Schritt 4)."]},
+          {"k": "diff", "b": ["Ähnliche Gehäuse enthalten andere Hardware. Dot 3 original, Dot 3 Refresh und Dot 3 mit Uhr sind verschiedene Geräte, und ein Echo Plus ist kein Echo 2. Alles in diesem Bericht gilt nur für den Echo 2 (radar). Die Übersicht der Modelle steht im Abschnitt [Geräte](#geraete)."]},
+          {"k": "eff", "b": ["Nicht bewertet."]},
+          {"k": "proof", "b": ["Die Fastboot-Meldung `RADAR` (Schritt 4)."]},
+          {"k": "src", "b": [{"links": [["LibreEcho: Installationsanleitung, unterstützte Geräte", "https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md"]]}]}
+        ]
+      },
+      {
+        "id": "u2",
+        "title": "Benötigte Hardware und Werkzeuge",
+        "tags": ["r", "f"],
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "Ein Computer, auf dem `fastboot` läuft.",
+            "Das Original-Netzteil des Echo. Laut LibreEcho und echo-dot-assist wird es für den Fastboot-Start gebraucht (Fremdangabe)."
+          ]}]},
+          {"k": "did", "b": [
+            "Das haben wir benutzt (Owner-Bericht):",
+            {"ul": [
+              "einen gedruckt gekauften Pogo-Halter, das LibreEcho-Modell „Echo Gen2 Pogo-Plug V5“, nicht selbst gedruckt",
+              "Pogo-Pins vom Typ P50-B1, 16 mm lang, 0,68 mm Durchmesser (10er-Pack, im Halter stecken drei)",
+              "Jumperkabel-Pins und Steckverbinder statt Löten",
+              "ein etwas dickeres USB-Kabel von einer Powerbank",
+              "einen 0,8-mm-Bohrer zum Nachbohren der Löcher",
+              "Sekundenkleber"
+            ]},
+            "Wir haben komplett ohne Löten gearbeitet. Vorkenntnisse: Der Owner bringt Grunderfahrung mit. Was genau das umfasst, haben wir nicht festgehalten."
+          ]},
+          {"k": "diff", "b": [
+            "Ein brauchbares USB-Kabel zu finden war mühsam: Bei den meisten Kabeln, die wir probiert haben, fehlte eine Ader.",
+            "Fremdangabe (echo-dot-assist): Am Computer ist ein USB-A-Stecker vorgesehen, oder ein USB-C-Kabel mit 5,1-kΩ-Widerstand am CC-Pin."
+          ]},
+          {"k": "eff", "b": ["Nicht einzeln bewertet. Bewertung und Zeit für das gesamte Basteln stehen in Schritt 3."]},
+          {"k": "proof", "b": ["Die Fastboot-Verbindung (Schritt 4)."]},
+          {"k": "src", "b": [{"links": [
+            ["LibreEcho: Installationsanleitung, Abschnitt Equipment", "https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md"],
+            ["echo-dot-assist: Seite für den Echo 2 (radar)", "https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u3",
+        "title": "Pogo-Pins, Halter und Kontaktadapter",
+        "tags": ["t", "r", "f"],
+        "warn": true,
+        "figs": [
+          {"src": "halter-gedruckt.jpg", "w": 410, "h": 560, "alt": "Vier kleine weiße 3D-gedruckte Teile auf einer Handfläche: drei flache Halter mit kleinen Bohrungen und ein Teil mit Rillen.", "cap": "Die gedruckt bezogenen Teile."},
+          {"src": "halter-bestueckt.jpg", "w": 700, "h": 1556, "alt": "Ein weißer gedruckter Halter, aus dem unten drei dünne Pogo-Pins ragen. Auf den Pin-Enden oben stecken drei schwarze Jumperkabel-Steckverbinder mit roten, gelben und orangen Kabeln.", "cap": "Bestückter Halter: drei Pogo-Pins mit aufgesteckten Steckverbindern."},
+          {"src": "halter-echo-boden.jpg", "w": 700, "h": 1060, "alt": "Der Halter steckt im Bodenschacht des Echo 2. Darauf sitzen die drei schwarzen Steckverbinder mit den farbigen Kabeln.", "cap": "Der Halter im Bodenschacht des Echo 2."}
+        ],
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "Die Teile aus Schritt 2.",
+            "Ein Echo 2 (radar). Laut LibreEcho muss für den Halter nur die äußere Abdeckung am Boden entfernt werden (Fremdangabe). Wie wir das gemacht haben, haben wir nicht festgehalten."
+          ]}]},
+          {"k": "did", "b": [
+            {"ol": [
+              "Den Halter besorgt: das LibreEcho-Modell „Echo Gen2 Pogo-Plug V5“, bei uns gedruckt gekauft. Laut den Angaben zum Halter ist er etwa 10 × 7,6 × 7 mm groß, für eine 0,4-mm-Düse gedacht und für P50-B1-Pins mit 0,68 mm Durchmesser ausgelegt. Er muss in Originalgröße ohne Skalierung gedruckt werden, und die kleinen Bohrungen müssen komplett durchgängig bleiben (Fremdangabe).",
+              "Die Bohrungen waren bei uns zu eng. Wir haben sie mit einem 0,8-mm-Bohrer nachgebohrt, weil wir keinen kleineren hatten.",
+              "Drei Pogo-Pins in den Halter gesetzt und mit Sekundenkleber fixiert (siehe Fotos).",
+              "Die Pin-Enden mit Jumperkabel-Steckverbindern verbunden. Die Verbindung zum USB-Kabel haben wir mit Jumperkabel-Pins und Steckverbindern hergestellt, ohne zu löten.",
+              "Den Halter in den Bodenschacht des Echo gesteckt. Er saß so stramm, dass er von selbst hielt."
+            ]},
+            "Welcher Stift an welches Pad gehört, steht in der LibreEcho-Anleitung. Wir geben hier bewusst keine eigene Belegung an: Wir haben die einzelnen Pads nicht durchgemessen."
+          ]},
+          {"k": "diff", "b": [{"ul": [
+            "Die Steckverbinder waren fummelig.",
+            "Die Bohrungen passten nicht auf Anhieb und mussten nachgebohrt werden.",
+            "Der Aufbau ist ein Provisorium. Für Fastboot, Unlock und TWRP hat er gereicht. Ein mehrminütiger Dauertransfer, etwa ein Rohbackup von rund 3,9 GB, ist damit nicht nachgewiesen."
+          ]}]},
+          {"k": "eff", "b": [
+            {"effort": 2, "text": "für „Halter vorbereiten, Pins einsetzen und USB-Kontakt herstellen“ (Owner)."},
+            "Zeit: etwa 30 Minuten für das gesamte Basteln (USB-Kabel, Pogo-Pins und so weiter). Danach war Fastboot sichtbar."
+          ]},
+          {"k": "proof", "b": ["Die Fotos zeigen den Aufbau. Den Kontakt belegt die Fastboot-Meldung `RADAR` (Schritt 4). Die einzelnen Pads wurden nicht elektrisch durchgemessen."]},
+          {"k": "src", "b": [{"links": [
+            ["LibreEcho: Pogo-Halter V5 (Beschreibung)", "https://github.com/aslater3/LibreEcho/blob/main/tools/README.md#echo-gen-2-pogo-pin-carrier-v5"],
+            ["LibreEcho: Druckdateien V5 (ZIP, Original)", "https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip"],
+            ["LibreEcho: Zerlege-Anleitung Echo Gen 2 (Alternative mit Löten)", "https://github.com/aslater3/LibreEcho/tree/main/docs/disassembly/echo-gen-2"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u4",
+        "title": "USB-Verbindung und Fastboot",
+        "tags": ["t", "f"],
+        "fields": [
+          {"k": "pre", "b": [{"ul": ["Der Aufbau aus Schritt 3.", "Das Original-Netzteil des Echo."]}]},
+          {"k": "did", "b": [{"ol": [
+            "Laut LibreEcho-Anleitung (Fremdangabe): Netzteil abziehen, Kontakte anlegen, die Action-Taste halten und dabei das Netzteil einstecken. Bei einem schon entsperrten Gerät gilt stattdessen die Taste Lautstärke minus.",
+            "Nur lesend prüfen: `fastboot devices` und `fastboot getvar product`. Bei uns meldete der Echo `RADAR`.",
+            "Wir haben die Abfrage mehrfach wiederholt. Sie lief ohne Aussetzer, bis wir sie von Hand beendet haben.",
+            "Der Bootloader-Stand unseres Geräts (`lk_build_desc: 63cb91b-20221007_073612`) steht auf der Freigabeliste von LibreEcho. Prüfe deinen Stand selbst. Das ist keine Freigabe für beliebige Dateien."
+          ]}]},
+          {"k": "diff", "b": ["Bei uns gab es keine über Schritt 3 hinausgehenden Schwierigkeiten. Während Fastboot aktiv ist, ist Alexa nicht aktiv."]},
+          {"k": "eff", "b": ["Erster Versuch erfolgreich (Owner). Aufwand und Zeit gemeinsam mit Schritt 3: 2 von 5, etwa 30 Minuten."]},
+          {"k": "proof", "b": ["Die Ausgabe von `fastboot getvar product`: `RADAR` (Owner-Terminalausgabe)."]},
+          {"k": "src", "b": [{"links": [["LibreEcho: Installationsanleitung, Abschnitt „Connect the device“", "https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md"]]}]}
+        ]
+      },
+      {
+        "id": "u5",
+        "title": "Bootloader-Unlock und TWRP",
+        "tags": ["t", "f"],
+        "warn": true,
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "Die Fastboot-Verbindung aus Schritt 4.",
+            "Das Unlock-Paket für radar. LibreEcho nennt `amonet-radar-v1.0.0.zip` und verteilt es nicht selbst. Du musst die Datei selbst beschaffen (Fremdangabe).",
+            "Ein Bootloader-Stand, der zum Paket passt."
+          ]}]},
+          {"k": "did", "b": [{"ol": [
+            "Die Prüfsumme der Paketdatei kontrolliert: SHA-256 `ecdb07bc05a508532e5ffed77121592d492b1a91572839e0f17545421f398f1a`.",
+            "Vor dem Start prüfte der Owner Produkt (`RADAR`), Bootloader-Build und das vom Skript gewählte Image und bestätigte die Abfrage des Skripts mit `YES`.",
+            "Das Skript meldete „Exploit most likely successful!“. Wir haben uns nicht darauf verlassen, sondern den Zustand getrennt geprüft: Die Recovery TWRP 3.7.0_9-0 war erreichbar, und `fastboot getvar unlock_status` meldete `true` (vorher `false`).",
+            "Danach startete der Echo normal, und Alexa funktionierte (Owner-Beobachtung)."
+          ]}]},
+          {"k": "diff", "b": [{"ul": [
+            "Das Entsperren ist eine dauerhafte Änderung an der Boot-Kette.",
+            "Zugriff auf TWRP ist nicht dasselbe wie Root im laufenden Fire OS.",
+            "Bei uns fehlt ein geprüftes Rohbackup (rund 3,9 GB eMMC plus zwei kleine Boot-Bereiche). Das ist ein Risiko und kein Vorbild."
+          ]}]},
+          {"k": "eff", "b": [
+            {"effort": 1, "text": "„für mich, weil ich Grunderfahrung habe“ (Owner)."},
+            "Zeit: Unlock, TWRP und die Installation der Software (Schritt 6) zusammen etwa 20 Minuten."
+          ]},
+          {"k": "proof", "b": ["`unlock_status: true` und TWRP-Version 3.7.0_9-0 (Owner-Terminalausgaben, unter anderem `adb shell getprop ro.twrp.version`)."]},
+          {"k": "src", "b": [{"links": [
+            ["LibreEcho: Hinweise zum Unlock-Paket für den Echo 2", "https://github.com/aslater3/LibreEcho/blob/main/tools/README.md"],
+            ["echo-dot-assist: Seite für den Echo 2, Abschnitt „Unlock“", "https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u6",
+        "title": "Software installieren: echo-dot-assist",
+        "tags": ["r", "f"],
+        "warn": true,
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "Ein entsperrter Echo 2 mit TWRP (Schritt 5).",
+            "Laut Projekt: die dort genannte, exakt festgelegte Firmware (Fire OS NS6572 für radar) und die weiteren Dateien (Unlock-Paket, Root-Paket) mit den dort genannten Prüfsummen. Das Gerät soll bis dahin offline bleiben (Fremdangabe)."
+          ]}]},
+          {"k": "did", "b": [
+            "Warum diese Software? Laut Projekt behält echo-dot-assist die Mikrofonverarbeitung und die Wakeword-Engine von Amazon, ersetzt Alexa durch ein kleines Programm und bindet den Echo per ESPHome an Home Assistant an. Fire OS bleibt als Unterbau. LibreEcho dagegen ersetzt Amazons Software ganz. Beide Wege soll man nicht mischen (Fremdangabe).",
+            "Wir haben echo-dot-assist installiert, Build `2026.10.21.213542`, mit Fire OS NS6572 als Unterbau (Owner-Bericht).",
+            "Die einzelnen Schritte (Firmware, Löschen, Flashen, Root-Paket) haben wir hier bewusst nicht abgeschrieben. Sie stehen auf der Radar-Seite des Projekts und können sich ändern."
+          ]},
+          {"k": "diff", "b": [
+            "Das Projekt schreibt über sich selbst: „Vibecoded, unaudited, your risk“. Der Code wurde mit KI-Hilfe geschrieben und nicht unabhängig geprüft, getestet wurde je Modell an einem Gerät, und die Installation schreibt die Systempartition und kann das Gerät unbrauchbar machen (Fremdangabe). Die Radar-Seite markiert außerdem noch offene Prüfpunkte („verify“).",
+            "Bei uns wurden keine Schwierigkeiten festgehalten. Offen ist, ob Aufnahme, Wiedergabe, Stummschaltung und Neustarts dauerhaft stabil laufen. Wir haben nur Kurztests."
+          ]},
+          {"k": "eff", "b": [
+            {"effort": 1, "text": "(Owner)."},
+            "Zeit: zusammen mit Schritt 5 etwa 20 Minuten."
+          ]},
+          {"k": "proof", "b": ["Das Gerät erscheint in Home Assistant (Schritt 7). Eine eigene Abnahme jeder Funktion haben wir nicht gemacht. Beschreibungen des Projekts sind kein eigener Test."]},
+          {"k": "src", "b": [{"links": [
+            ["echo-dot-assist: Seite für den Echo 2 (radar)", "https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md"],
+            ["echo-dot-assist: Projektseite", "https://github.com/Gamer92000/echo-dot-assist"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u7",
+        "title": "Verbindung zu Home Assistant",
+        "tags": ["r"],
+        "fields": [
+          {"k": "pre", "b": [{"ul": ["Eine laufende Home-Assistant-Installation mit Assist.", "Der Echo im selben Netz."]}]},
+          {"k": "did", "b": [
+            "echo-dot-assist spricht die ESPHome-Schnittstelle. Der Echo wird in Home Assistant als ESPHome-Gerät eingebunden und erscheint dort als Assist-Satellit und als Media Player (Owner-Bericht).",
+            "Für den Echo wählt man Wakeword und Assist-Pipeline. Bei uns läuft eine eigene Pipeline für den Sprachassistenten.",
+            "**Datenweg:** Spracherkennung und Sprachausgabe laufen derzeit über Cloud-Dienste. Gesprochene Sätze verlassen dabei das Heimnetz. Wir betreiben das System also nicht vollständig offline."
+          ]},
+          {"k": "diff", "b": ["Bei uns wurden keine Schwierigkeiten festgehalten."]},
+          {"k": "eff", "b": [{"effort": 1, "text": "für „Echo mit Home Assistant verbinden“ einschließlich Wakeword und Assist-Pipeline (Owner)."}]},
+          {"k": "proof", "b": ["Der Echo ist in Home Assistant sichtbar, mit Assist-Satellit und Media Player (Owner-Bericht)."]},
+          {"k": "src", "b": [{"links": [
+            ["echo-dot-assist: Projektseite (ESPHome-Modus)", "https://github.com/Gamer92000/echo-dot-assist"],
+            ["Home Assistant: Fehlersuche bei Assist", "https://www.home-assistant.io/voice_control/troubleshooting/"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u8",
+        "title": "Lokales Wakeword „Okay Nabu“",
+        "tags": ["t", "f"],
+        "fields": [
+          {"k": "pre", "b": ["Die Verbindung aus Schritt 7."]},
+          {"k": "did", "b": [
+            "Das Wakeword wird lokal im Echo erkannt (microWakeWord). Wir nutzen das englische Standardmodell „Okay Nabu“ mit Schwellwert 0,97. Ein zweites Wakeword ist ausgeschaltet.",
+            "Kurztest: zehn Versuche im Abstand von 10 bis 15 Sekunden, zehn Erkennungen. Nach fünf Minuten Ruhe wurde „Okay Nabu“ beim ersten Versuch erkannt."
+          ]},
+          {"k": "diff", "b": [
+            "Der frühere Weg, das Wakeword auf dem Server zu erkennen („Hey Nova“), war im Dauerbetrieb instabil: Der Echo wurde nach Minuten taub. Deshalb erkennen wir lokal. Siehe [Befunde](#befunde).",
+            "Offen: Dauerbetrieb, Fehlaktivierungen, Erkennung aus größerer Entfernung und bei Musik. Das endgültige Wakeword ist noch nicht entschieden."
+          ]},
+          {"k": "eff", "b": [{"effort": 1, "text": "gemeinsam mit Schritt 7 bewertet (Owner)."}]},
+          {"k": "proof", "b": ["10 von 10 im Kurztest (Owner-Zählung, kein Log, etwa 15 Minuten Beobachtung)."]},
+          {"k": "src", "b": [{"links": [["microWakeWord (Projekt)", "https://github.com/kahrendt/microWakeWord"]]}]}
+        ]
+      },
+      {
+        "id": "u9",
+        "title": "Hermes-Speaker und Kinetic Voice Router",
+        "tags": ["t", "r", "d"],
+        "fields": [
+          {"k": "pre", "b": ["Ein Hermes-Agent als eigene, getrennte Instanz für den Sprachassistenten und ein Gesprächsagent in Home Assistant."]},
+          {"k": "did", "b": [
+            "**Ablauf:** Home Assistant verarbeitet Befehle für Geräte zuerst lokal. Nur was nicht lokal erledigt werden kann, geht als freie Frage an den Hermes-Speaker, einen KI-Agenten mit eigener Persönlichkeit (siehe [Persona](#soul)).",
+            "**26.10., Owner-Hörtest:** Der Echo stellte sich mit der vorgesehenen Persönlichkeit vor und antwortete auf die Abschlussfrage passend. Zuvor hatte der Gesprächsweg die Persönlichkeit umgangen (siehe [Befunde](#befunde)).",
+            "**27.10., Einzeltest:** Nach einem zusätzlichen Alias ließ sich eine freigegebene Steckdose mit ungefährlicher Testlast per Sprache ein- und ausschalten. Der Ausschaltlauf wurde lokal verarbeitet.",
+            "**Kinetic Voice Router (Eigenentwicklung):** Eine eigene Home-Assistant-Erweiterung, die einen Satz einordnet, bevor er an Hermes geht. Der Quellcode ist derzeit nicht veröffentlicht. Es gibt drei Betriebsarten: Aus, Beobachten (zählt nur) und Aktiv.",
+            "**Version 0.4.1** lief am 29.10. live. Im Betrieb „Beobachten“ zählte der Router zwei echte Wissensfragen am Echo als Wissensfrage, Hermes antwortete unverändert. Im Betrieb „Aktiv“ wurde die Frage nach dem Zustand eines echten Geräts lokal von Home Assistant beantwortet.",
+            "**Fehler:** Eine Frage zu einem Gerät, das es nicht gibt, ordnete der Router als Wissensfrage ein. Hermes erfand daraufhin einen Zustand. Außerdem dauerte die Verarbeitung einer Wissensfrage 21 Sekunden. Ob der Router daran beteiligt war, ist nicht belegt.",
+            "**Version 0.4.2** enthält Korrekturen dafür. Sie ist ein Entwicklungsstand mit Tests gegen Simulation, nicht installiert und nicht live abgenommen."
+          ]},
+          {"k": "diff", "b": [
+            "Die Grundeinrichtung ist überschaubar. Schwierig wird es, wenn man den Assistenten personalisieren will: eigene Persönlichkeit, ein sicherer Sprachweg, saubere Trennung von lokalem Befehl und freier Frage.",
+            "Unser Ziel, in 0.4.2 in Entwicklung: Ein Sprachmodell darf einen Gerätezustand nie raten. Fragen nach echten Zuständen müssen aus Home Assistant kommen oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden."
+          ]},
+          {"k": "eff", "b": [
+            {"effort": 2, "text": "für die Grundeinrichtung (Owner)."},
+            {"effort": 4, "to": 5, "text": "mit Personalisierung (Owner). Wir sind noch dabei."}
+          ]},
+          {"k": "proof", "b": ["Hörtest am Echo (26.10.), Einzeltest mit der Steckdose (27.10.) und die Zähler des Routers in Home Assistant (29.10.). Alles Owner-Beobachtungen ohne Messreihe."]},
+          {"k": "src", "b": [{"links": [["Abschnitt Persona (diese Seite)", "#soul"], ["Abschnitt Befunde (diese Seite)", "#befunde"]]}]}
+        ]
+      },
+      {
+        "id": "u10",
+        "title": "Funktionstests, Probleme und Grenzen",
+        "tags": ["t", "r", "d", "p", "n"],
+        "fields": [
+          {"k": "did", "b": [
+            {"table": [
+              ["Echo 2 entsperrt, TWRP erreichbar", "Fastboot- und TWRP-Ausgaben des Owners", "t"],
+              ["Wakeword „Okay Nabu“ lokal", "10 von 10 im Kurztest. Dauerbetrieb nicht getestet.", "t"],
+              ["Antwort in der Speaker-Persönlichkeit am Echo", "Ein Durchlauf (26.10.), Hörtest ohne Messung", "t"],
+              ["Schaltbefehl für eine freigegebene Steckdose", "Einzeltest (27.10.) mit ungefährlicher Testlast, kein Dauertest", "t"],
+              ["Kinetic Voice Router 0.4.1", "Live im Beobachtungsbetrieb (29.10.), im Aktivbetrieb mit bekanntem Fehler", "r"],
+              ["Kinetic Voice Router 0.4.2", "Korrekturen als Entwicklungsstand, nicht installiert", "d"],
+              ["Timer, Wecker, Erinnerungen, Listen, Kalender, Musik", "Nicht getestet", "n"],
+              ["Dauerbetrieb und Latenzmessung", "Nicht belegt, bisher nur Einzelbeobachtungen", "n"],
+              ["Rohbackup und Wiederherstellung des Echo", "Nicht nachgewiesen", "n"],
+              ["Offline-Fallback (lokale Spracherkennung und Sprachausgabe)", "Konzept, nicht installiert", "p"],
+              ["Follow-me Conversation, Alias-Pflege durch einen Hermes-Assistenten", "Ideen, nicht umgesetzt", "p"]
+            ]},
+            "**Wir ersetzen nicht alle Funktionen von Alexa und laufen nicht vollständig offline.** Spracherkennung und Sprachausgabe laufen über Cloud-Dienste, und freie Fragen beantwortet Hermes mit einem externen Sprachmodell. Auch dafür verlassen Inhalte das Heimnetz."
+          ]},
+          {"k": "src", "b": [{"links": [["Projektstand (diese Seite)", "#stand"], ["Befunde und Erkenntnisse (diese Seite)", "#befunde"]]}]}
+        ]
+      }
+    ]
+  },
+  "en": {
+    "eyebrow": "Experience report",
+    "h2": "How we converted our Echo 2",
+    "intro": "This is the route we took with exactly one device: Amazon Echo 2 (2017), model XC56PY, codename radar. It is an experience report, not build instructions. It does not replace the original guides of the projects, which are linked at every step. “We” means the project owner. Anything that only another project claims is marked as a third-party statement and has not been checked by us.",
+    "warn_title": "NO WARRANTY – AT YOUR OWN RISK",
+    "warn_p": [
+      "Bad electrical contacts, bootloader changes and modified firmware can **permanently damage** your device (“brick” it), destroy data and functions and end warranty or support claims.",
+      "Unlocking the bootloader permanently changes the device's boot chain. For our device we have **no verified full backup** and no tested way back.",
+      "This report only applies to the named combination of device and software. With other models, revisions or versions the same procedure may fail. We give no guarantee and accept no responsibility for damage. This notice replaces neither the original guides nor legal advice and is not a blanket legal release."
+    ],
+    "warn_third_title": "Safety rules from the LibreEcho guide (third-party statement, not checked by us)",
+    "warn_third": [
+      "Unplug the power adapter before connecting, moving or removing the contacts. Never probe a powered board.",
+      "Do not short any pads or components.",
+      "Do not connect a UART adapter to the USB pads.",
+      "Never run the installer if the reported product does not match the target device."
+    ],
+    "warn_mini": "This step can permanently damage the device. Read the notice above and the original guide first.",
+    "legend_title": "How to read this report",
+    "legend_ev_intro": "Every step carries markers that say where a statement comes from:",
+    "ev": {
+      "t": "Tested (owner observation)",
+      "r": "Reported",
+      "d": "In development",
+      "p": "Planned",
+      "f": "Statement of a third-party project",
+      "n": "Not proven"
+    },
+    "legend_scale": "Effort: the scale runs from 1 (very easy) to 5 (very hard). The rating comes from the owner, who brings basic experience. It is not an AI estimate and says nothing about how hard it will be for you.",
+    "toc_title": "The ten stages",
+    "step_word": "Step",
+    "labels": {
+      "pre": "Prerequisites",
+      "did": "What we did",
+      "diff": "Possible difficulties",
+      "eff": "Personal effort",
+      "proof": "Proof it worked",
+      "src": "Further sources"
+    },
+    "effort_word": "of 5",
+    "effort_to": "to",
+    "effort_label": "Effort",
+    "table_head": ["Function", "Status", "Type"],
+    "fig_credit": "Photos: project owner. We only link to 3D files and software of other projects, we do not provide them.",
+    "closing": "Tried a similar route? A test report with model number and software version helps others:",
+    "closing_link": "Create a test report",
+    "steps": [
+      {
+        "id": "u1",
+        "title": "Identify the right Echo model",
+        "tags": ["t", "f"],
+        "fields": [
+          {"k": "pre", "b": ["The device and a computer."]},
+          {"k": "did", "b": ["The model is printed on the label on the device, not on the power supply. Our device is an Echo 2 (2017), model XC56PY, codename radar. This was confirmed later in fastboot mode: `fastboot getvar product` reported `RADAR` (step 4)."]},
+          {"k": "diff", "b": ["Similar housings contain different hardware. Dot 3 original, Dot 3 refresh and Dot 3 with clock are different devices, and an Echo Plus is not an Echo 2. Everything in this report only applies to the Echo 2 (radar). The model overview is in the section [Devices](#geraete)."]},
+          {"k": "eff", "b": ["Not rated."]},
+          {"k": "proof", "b": ["The fastboot reply `RADAR` (step 4)."]},
+          {"k": "src", "b": [{"links": [["LibreEcho: installation guide, supported targets", "https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md"]]}]}
+        ]
+      },
+      {
+        "id": "u2",
+        "title": "Hardware and tools you need",
+        "tags": ["r", "f"],
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "A computer that runs `fastboot`.",
+            "The original power adapter of the Echo. According to LibreEcho and echo-dot-assist it is needed to enter fastboot (third-party statement)."
+          ]}]},
+          {"k": "did", "b": [
+            "This is what we used (owner report):",
+            {"ul": [
+              "a 3D-printed pogo holder that we bought already printed, the LibreEcho model “Echo Gen2 Pogo-Plug V5”, not printed by ourselves",
+              "pogo pins of type P50-B1, 16 mm long, 0.68 mm diameter (pack of 10, three of them sit in the holder)",
+              "jumper wire pins and connectors instead of soldering",
+              "a somewhat thicker USB cable from a power bank",
+              "a 0.8 mm drill bit to enlarge the holes",
+              "super glue"
+            ]},
+            "We worked entirely without soldering. Prior knowledge: the owner brings basic experience. We did not record what exactly that covers."
+          ]},
+          {"k": "diff", "b": [
+            "Finding a usable USB cable was tedious: with most cables we tried, one wire was missing.",
+            "Third-party statement (echo-dot-assist): a USB-A plug is intended at the computer end, or a USB-C cable with a 5.1 kΩ resistor on the CC pin."
+          ]},
+          {"k": "eff", "b": ["Not rated individually. Rating and time for the whole build are in step 3."]},
+          {"k": "proof", "b": ["The fastboot connection (step 4)."]},
+          {"k": "src", "b": [{"links": [
+            ["LibreEcho: installation guide, section Equipment", "https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md"],
+            ["echo-dot-assist: page for the Echo 2 (radar)", "https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u3",
+        "title": "Pogo pins, holder and contact adapter",
+        "tags": ["t", "r", "f"],
+        "warn": true,
+        "figs": [
+          {"src": "halter-gedruckt.jpg", "w": 410, "h": 560, "alt": "Four small white 3D-printed parts on a palm: three flat holders with small holes and one part with ridges.", "cap": "The parts as we bought them, printed."},
+          {"src": "halter-bestueckt.jpg", "w": 700, "h": 1556, "alt": "A white printed holder with three thin pogo pins sticking out at the bottom. Three black jumper wire connectors with red, yellow and orange wires sit on the pin ends at the top.", "cap": "The fitted holder: three pogo pins with connectors pushed on."},
+          {"src": "halter-echo-boden.jpg", "w": 700, "h": 1060, "alt": "The holder sits in the slot on the bottom of the Echo 2. The three black connectors with colored wires are plugged onto it.", "cap": "The holder in the slot on the bottom of the Echo 2."}
+        ],
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "The parts from step 2.",
+            "An Echo 2 (radar). According to LibreEcho only the outer cover on the base has to be removed for the holder (third-party statement). We did not record how we did that."
+          ]}]},
+          {"k": "did", "b": [
+            {"ol": [
+              "Got the holder: the LibreEcho model “Echo Gen2 Pogo-Plug V5”, bought already printed. According to the information on the holder it is about 10 × 7.6 × 7 mm, meant for a 0.4 mm nozzle and designed for P50-B1 pins of 0.68 mm diameter. It has to be printed at original size without scaling, and the small holes must stay completely open (third-party statement).",
+              "The holes were too tight for us. We enlarged them with a 0.8 mm drill bit because we had no smaller one.",
+              "Placed three pogo pins in the holder and fixed them with super glue (see photos).",
+              "Connected the pin ends with jumper wire connectors. We made the connection to the USB cable with jumper wire pins and connectors, without soldering.",
+              "Pushed the holder into the slot on the bottom of the Echo. It sat so tightly that it held by itself."
+            ]},
+            "Which pin belongs on which pad is described in the LibreEcho guide. We deliberately give no pin assignment of our own here: we did not measure the individual pads."
+          ]},
+          {"k": "diff", "b": [{"ul": [
+            "The connectors were fiddly.",
+            "The holes did not fit at first and had to be enlarged.",
+            "The setup is a makeshift solution. It was enough for fastboot, unlock and TWRP. A transfer lasting several minutes, such as a raw backup of about 3.9 GB, is not proven with it."
+          ]}]},
+          {"k": "eff", "b": [
+            {"effort": 2, "text": "for “prepare the holder, fit the pins and establish the USB contact” (owner)."},
+            "Time: about 30 minutes for the whole build (USB cable, pogo pins and so on). After that fastboot was visible."
+          ]},
+          {"k": "proof", "b": ["The photos show the setup. The contact is proven by the fastboot reply `RADAR` (step 4). The individual pads were not measured electrically."]},
+          {"k": "src", "b": [{"links": [
+            ["LibreEcho: pogo holder V5 (description)", "https://github.com/aslater3/LibreEcho/blob/main/tools/README.md#echo-gen-2-pogo-pin-carrier-v5"],
+            ["LibreEcho: print files V5 (ZIP, original)", "https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip"],
+            ["LibreEcho: disassembly guide Echo Gen 2 (alternative with soldering)", "https://github.com/aslater3/LibreEcho/tree/main/docs/disassembly/echo-gen-2"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u4",
+        "title": "USB connection and fastboot",
+        "tags": ["t", "f"],
+        "fields": [
+          {"k": "pre", "b": [{"ul": ["The setup from step 3.", "The original power adapter of the Echo."]}]},
+          {"k": "did", "b": [{"ol": [
+            "According to the LibreEcho guide (third-party statement): unplug the power adapter, attach the contacts, hold the Action button and plug in the power adapter while holding it. On an already unlocked device the Volume Down button applies instead.",
+            "Check read-only: `fastboot devices` and `fastboot getvar product`. For us the Echo reported `RADAR`.",
+            "We repeated the query several times. It ran without dropouts until we stopped it by hand.",
+            "The bootloader build of our device (`lk_build_desc: 63cb91b-20221007_073612`) is on the LibreEcho approval list. Check your own build. This is not an approval for arbitrary files."
+          ]}]},
+          {"k": "diff", "b": ["We had no difficulties beyond step 3. While fastboot is active, Alexa is not active."]},
+          {"k": "eff", "b": ["First attempt succeeded (owner). Effort and time together with step 3: 2 of 5, about 30 minutes."]},
+          {"k": "proof", "b": ["The output of `fastboot getvar product`: `RADAR` (owner terminal output)."]},
+          {"k": "src", "b": [{"links": [["LibreEcho: installation guide, section “Connect the device”", "https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md"]]}]}
+        ]
+      },
+      {
+        "id": "u5",
+        "title": "Bootloader unlock and TWRP",
+        "tags": ["t", "f"],
+        "warn": true,
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "The fastboot connection from step 4.",
+            "The unlock package for radar. LibreEcho names `amonet-radar-v1.0.0.zip` and does not distribute it itself. You have to obtain the file yourself (third-party statement).",
+            "A bootloader build that matches the package."
+          ]}]},
+          {"k": "did", "b": [{"ol": [
+            "Checked the checksum of the package file: SHA-256 `ecdb07bc05a508532e5ffed77121592d492b1a91572839e0f17545421f398f1a`.",
+            "Before starting, the owner checked the product (`RADAR`), the bootloader build and the image chosen by the script, and confirmed the script's prompt with `YES`.",
+            "The script reported “Exploit most likely successful!”. We did not rely on that but checked the state separately: the TWRP recovery 3.7.0_9-0 was reachable, and `fastboot getvar unlock_status` reported `true` (before: `false`).",
+            "After that the Echo booted normally and Alexa worked (owner observation)."
+          ]}]},
+          {"k": "diff", "b": [{"ul": [
+            "Unlocking is a permanent change to the boot chain.",
+            "Access to TWRP is not the same as root in the running Fire OS.",
+            "We have no verified raw backup (about 3.9 GB eMMC plus two small boot areas). That is a risk and not an example to follow."
+          ]}]},
+          {"k": "eff", "b": [
+            {"effort": 1, "text": "“for me, because I have basic experience” (owner)."},
+            "Time: unlock, TWRP and installing the software (step 6) together about 20 minutes."
+          ]},
+          {"k": "proof", "b": ["`unlock_status: true` and TWRP version 3.7.0_9-0 (owner terminal output, including `adb shell getprop ro.twrp.version`)."]},
+          {"k": "src", "b": [{"links": [
+            ["LibreEcho: notes on the unlock package for the Echo 2", "https://github.com/aslater3/LibreEcho/blob/main/tools/README.md"],
+            ["echo-dot-assist: page for the Echo 2, section “Unlock”", "https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u6",
+        "title": "Install the software: echo-dot-assist",
+        "tags": ["r", "f"],
+        "warn": true,
+        "fields": [
+          {"k": "pre", "b": [{"ul": [
+            "An unlocked Echo 2 with TWRP (step 5).",
+            "According to the project: the firmware named there, pinned to an exact build (Fire OS NS6572 for radar), and the further files (unlock package, root package) with the checksums named there. The device should stay offline until then (third-party statement)."
+          ]}]},
+          {"k": "did", "b": [
+            "Why this software? According to the project, echo-dot-assist keeps Amazon's microphone processing and wake word engine, replaces Alexa with a small program and connects the Echo to Home Assistant via ESPHome. Fire OS stays as the base. LibreEcho, in contrast, replaces Amazon's software entirely. The two routes should not be mixed (third-party statement).",
+            "We installed echo-dot-assist, build `2026.10.21.213542`, with Fire OS NS6572 as the base (owner report).",
+            "We deliberately did not copy the individual steps (firmware, wipe, flash, root package) here. They are on the project's radar page and may change."
+          ]},
+          {"k": "diff", "b": [
+            "The project says about itself: “Vibecoded, unaudited, your risk”. The code was written with AI help and not independently audited, it was tested on one device per model, and the installation writes the system partition and can make the device unusable (third-party statement). The radar page also still marks open points to verify (“verify”).",
+            "No difficulties were recorded on our side. It is open whether recording, playback, mute and restarts run stably over time. We only have short tests."
+          ]},
+          {"k": "eff", "b": [
+            {"effort": 1, "text": "(owner)."},
+            "Time: together with step 5 about 20 minutes."
+          ]},
+          {"k": "proof", "b": ["The device appears in Home Assistant (step 7). We did not run our own acceptance of every function. Descriptions by the project are not a test of our own."]},
+          {"k": "src", "b": [{"links": [
+            ["echo-dot-assist: page for the Echo 2 (radar)", "https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md"],
+            ["echo-dot-assist: project page", "https://github.com/Gamer92000/echo-dot-assist"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u7",
+        "title": "Connection to Home Assistant",
+        "tags": ["r"],
+        "fields": [
+          {"k": "pre", "b": [{"ul": ["A running Home Assistant installation with Assist.", "The Echo on the same network."]}]},
+          {"k": "did", "b": [
+            "echo-dot-assist speaks the ESPHome interface. The Echo is added to Home Assistant as an ESPHome device and shows up there as an Assist satellite and as a media player (owner report).",
+            "For the Echo you choose a wake word and an Assist pipeline. We run a dedicated pipeline for the voice assistant.",
+            "**Data path:** speech recognition and speech output currently run through cloud services. Spoken sentences leave the home network in the process. So we do not run the system completely offline."
+          ]},
+          {"k": "diff", "b": ["No difficulties were recorded on our side."]},
+          {"k": "eff", "b": [{"effort": 1, "text": "for “connect the Echo to Home Assistant” including wake word and Assist pipeline (owner)."}]},
+          {"k": "proof", "b": ["The Echo is visible in Home Assistant, with Assist satellite and media player (owner report)."]},
+          {"k": "src", "b": [{"links": [
+            ["echo-dot-assist: project page (ESPHome mode)", "https://github.com/Gamer92000/echo-dot-assist"],
+            ["Home Assistant: troubleshooting Assist", "https://www.home-assistant.io/voice_control/troubleshooting/"]
+          ]}]}
+        ]
+      },
+      {
+        "id": "u8",
+        "title": "Local wake word “Okay Nabu”",
+        "tags": ["t", "f"],
+        "fields": [
+          {"k": "pre", "b": ["The connection from step 7."]},
+          {"k": "did", "b": [
+            "The wake word is detected locally on the Echo (microWakeWord). We use the English standard model “Okay Nabu” with a threshold of 0.97. A second wake word is switched off.",
+            "Short test: ten attempts 10 to 15 seconds apart, ten detections. After five minutes of silence “Okay Nabu” was detected on the first attempt."
+          ]},
+          {"k": "diff", "b": [
+            "The earlier route of detecting the wake word on the server (“Hey Nova”) was unstable in continuous operation: the Echo went deaf after minutes. That is why we detect locally. See [Findings](#befunde).",
+            "Open: continuous operation, false activations, detection from a greater distance and during music. The final wake word is not yet decided."
+          ]},
+          {"k": "eff", "b": [{"effort": 1, "text": "rated together with step 7 (owner)."}]},
+          {"k": "proof", "b": ["10 of 10 in the short test (owner count, no log, about 15 minutes of observation)."]},
+          {"k": "src", "b": [{"links": [["microWakeWord (project)", "https://github.com/kahrendt/microWakeWord"]]}]}
+        ]
+      },
+      {
+        "id": "u9",
+        "title": "Hermes speaker and Kinetic Voice Router",
+        "tags": ["t", "r", "d"],
+        "fields": [
+          {"k": "pre", "b": ["A Hermes agent as its own separate instance for the voice assistant, and a conversation agent in Home Assistant."]},
+          {"k": "did", "b": [
+            "**Flow:** Home Assistant processes commands for devices locally first. Only what cannot be handled locally goes as a free question to the Hermes speaker, an AI agent with its own personality (see [Persona](#soul)).",
+            "**26 Oct, owner listening test:** the Echo introduced itself with the intended personality and answered the closing question fittingly. Before that, the conversation route had bypassed the personality (see [Findings](#befunde)).",
+            "**27 Oct, single test:** after an additional alias, an exposed smart plug with a harmless test load could be switched on and off by voice. The switch-off run was processed locally.",
+            "**Kinetic Voice Router (our own development):** our own Home Assistant extension that classifies a sentence before it goes to Hermes. The source code is not published at the moment. There are three operating modes: Off, Observe (only counts) and Active.",
+            "**Version 0.4.1** ran live on 29 Oct. In “Observe” mode the router counted two real knowledge questions on the Echo as knowledge questions, and Hermes answered unchanged. In “Active” mode, a question about the state of a real device was answered locally by Home Assistant.",
+            "**Fault:** a question about a device that does not exist was classified by the router as a knowledge question. Hermes then invented a state. In addition, processing one knowledge question took 21 seconds. Whether the router was involved in that is not proven.",
+            "**Version 0.4.2** contains fixes for this. It is a development state with tests against a simulation, not installed and not accepted live."
+          ]},
+          {"k": "diff", "b": [
+            "The basic setup is manageable. It gets hard when you want to personalize the assistant: its own personality, a safe voice path, a clean separation of local command and free question.",
+            "Our goal, in development in 0.4.2: a language model must never guess a device state. Questions about real states must come from Home Assistant or end honestly with “I cannot answer that reliably right now”."
+          ]},
+          {"k": "eff", "b": [
+            {"effort": 2, "text": "for the basic setup (owner)."},
+            {"effort": 4, "to": 5, "text": "with personalization (owner). We are still working on it."}
+          ]},
+          {"k": "proof", "b": ["Listening test on the Echo (26 Oct), single test with the smart plug (27 Oct) and the router's counters in Home Assistant (29 Oct). All owner observations without a measurement series."]},
+          {"k": "src", "b": [{"links": [["Persona section (this page)", "#soul"], ["Findings section (this page)", "#befunde"]]}]}
+        ]
+      },
+      {
+        "id": "u10",
+        "title": "Function tests, problems and limits",
+        "tags": ["t", "r", "d", "p", "n"],
+        "fields": [
+          {"k": "did", "b": [
+            {"table": [
+              ["Echo 2 unlocked, TWRP reachable", "Fastboot and TWRP outputs from the owner", "t"],
+              ["Wake word “Okay Nabu” locally", "10 of 10 in the short test. Continuous operation not tested.", "t"],
+              ["Answer in the speaker personality on the Echo", "One run (26 Oct), listening test without measurement", "t"],
+              ["Switching command for an exposed smart plug", "Single test (27 Oct) with a harmless test load, no long-term test", "t"],
+              ["Kinetic Voice Router 0.4.1", "Live in observe mode (29 Oct), in active mode with a known fault", "r"],
+              ["Kinetic Voice Router 0.4.2", "Fixes as a development state, not installed", "d"],
+              ["Timers, alarms, reminders, lists, calendar, music", "Not tested", "n"],
+              ["Continuous operation and latency measurement", "Not proven, only single observations so far", "n"],
+              ["Raw backup and restore of the Echo", "Not proven", "n"],
+              ["Offline fallback (local speech recognition and speech output)", "Concept, not installed", "p"],
+              ["Follow-me conversation, alias maintenance by a Hermes assistant", "Ideas, not implemented", "p"]
+            ]},
+            "**We do not replace all Alexa functions and we do not run completely offline.** Speech recognition and speech output run through cloud services, and free questions are answered by Hermes with an external language model. Content leaves the home network for that as well."
+          ]},
+          {"k": "src", "b": [{"links": [["Project status (this page)", "#stand"], ["Findings and lessons (this page)", "#befunde"]]}]}
+        ]
+      }
+    ]
+  }
+}

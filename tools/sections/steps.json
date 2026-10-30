@@ -37,7 +37,9 @@
       ]
     ],
     "callout": "Gefundene Ergebnisse helfen allen. Testberichte mit Modellnummer und Softwarestand gerne über das Website-Repository melden:",
-    "callout_link": "Testbericht anlegen"
+    "callout_link": "Testbericht anlegen",
+    "umbau_text": "Unseren konkreten Weg mit Fotos, Aufwand und Grenzen zeigt der Abschnitt",
+    "umbau_link": "So haben wir unseren Echo 2 umgebaut"
   },
   "en": {
     "eyebrow": "Build your own",
@@ -77,6 +79,8 @@
       ]
     ],
     "callout": "Results help everyone. Please report test results with model number and software version via the website repository:",
-    "callout_link": "Create a test report"
+    "callout_link": "Create a test report",
+    "umbau_text": "Our concrete route with photos, effort and limits is in the section",
+    "umbau_link": "How we converted our Echo 2"
   }
 }
