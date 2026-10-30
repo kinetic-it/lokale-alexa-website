@@ -1,0 +1,52 @@
+{{- $l := .Language.Lang -}}
+{{- $p := index hugo.Data.umbau $l -}}
+{{- $pre := cond (eq $l "en") "../" "" -}}
+<section id="umbau">
+  <div class="wrap">
+    <div class="eyebrow">{{ $p.eyebrow }}</div>
+    <h2>{{ $p.h2 }}</h2>
+    <p class="intro">{{ partial "inline.html" $p.intro }}</p>
+    <div class="warnbox" role="note" aria-labelledby="warn-t">
+      <p class="warn-big" id="warn-t">{{ $p.warn_title }}</p>
+{{ range $p.warn_p }}
+      <p>{{ partial "inline.html" . }}</p>
+{{ end }}
+      <p class="warn-sub">{{ $p.warn_third_title }}</p>
+      <ul>{{ range $p.warn_third }}<li>{{ partial "inline.html" . }}</li>{{ end }}</ul>
+    </div>
+    <div class="ulegend">
+      <h3>{{ $p.legend_title }}</h3>
+      <p>{{ $p.legend_ev_intro }}</p>
+      <p class="evs">{{ range $i, $k := slice "t" "r" "d" "p" "f" "n" }}{{ if $i }} {{ end }}<span class="ev ev-{{ $k }}">{{ index $p.ev $k }}</span>{{ end }}</p>
+      <p>{{ $p.legend_scale }}</p>
+    </div>
+    <nav class="utoc" aria-label="{{ $p.toc_title }}">
+      <h3>{{ $p.toc_title }}</h3>
+      <ol>{{ range $p.steps }}<li><a href="#{{ .id }}">{{ .title }}</a></li>{{ end }}</ol>
+    </nav>
+{{ range $n, $s := $p.steps }}
+    <article class="ustep" id="{{ $s.id }}">
+      <p class="unum">{{ $p.step_word }} {{ add $n 1 }}</p>
+      <h3>{{ $s.title }}</h3>
+      <p class="evs">{{ range $i, $k := $s.tags }}{{ if $i }} {{ end }}<span class="ev ev-{{ $k }}">{{ index $p.ev $k }}</span>{{ end }}</p>
+{{ if $s.warn }}
+      <p class="warn-mini"><strong>{{ $p.warn_title }}.</strong> {{ $p.warn_mini }}</p>
+{{ end }}
+{{ if $s.figs }}
+      <div class="ufigs">
+{{ range $s.figs }}
+        <figure class="ufig"><img src="{{ $pre }}images/{{ .src }}" width="{{ .w }}" height="{{ .h }}" alt="{{ .alt }}" loading="lazy"><figcaption>{{ .cap }}</figcaption></figure>
+{{ end }}
+      </div>
+      <p class="small">{{ $p.fig_credit }}</p>
+{{ end }}
+      <dl>
+{{ range $s.fields }}
+        <dt>{{ index $p.labels .k }}</dt><dd>{{ range .b }}{{ partial "umbau-block.html" (dict "b" . "p" $p) }}{{ end }}</dd>
+{{ end }}
+      </dl>
+    </article>
+{{ end }}
+    <div class="callout"><p>{{ $p.closing }} <a href="https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md">{{ $p.closing_link }}</a></p></div>
+  </div>
+</section>

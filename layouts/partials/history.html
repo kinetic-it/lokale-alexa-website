@@ -1,0 +1,7 @@
+{{- $lang := .Language.Lang -}}
+{{- $s := hugo.Data.status -}}
+{{- $texts := slice -}}
+{{- if eq $lang "en" }}{{ $texts = $s.en.history }}{{ else }}{{ range $s.history }}{{ $texts = $texts | append .text }}{{ end }}{{ end -}}
+{{ range $i, $h := $s.history }}
+          <li><time datetime="{{ $h.date }}">{{ partial "datefmt.html" (dict "d" $h.date "lang" $lang) }}</time><span>{{ index $texts $i }}</span></li>
+{{ end }}

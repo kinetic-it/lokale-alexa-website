@@ -1,0 +1,7 @@
+{{- $p := .p -}}
+{{- $s := hugo.Data.status -}}
+{{- $items := index $s .key -}}
+{{- if eq $p.Language.Lang "en" }}{{ $items = index $s.en .key }}{{ end -}}
+{{ range $items }}
+          <li>{{ . }}</li>
+{{ end }}

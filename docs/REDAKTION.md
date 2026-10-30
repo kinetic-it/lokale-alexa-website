@@ -57,14 +57,14 @@ Eigene Seiteninhalte sind zunächst nur gemäß GitHub-Sichtbarkeit lesbar, **ke
 
 ## SOUL.md-Beispiel
 
-Abschnitt `#soul` (Navigation „Persona“) und die Downloads `downloads/SOUL-beispiel.md` / `SOUL-example.md` entstehen aus **einer** Quelle: `tools/soul/content.json` (Deutsch und Englisch je Block). Ändern, dann `python3 tools/soul/build_soul.py`, dann `python3 tools/check_i18n.py`. Seiten und Downloads nicht von Hand ändern.
+Abschnitt `#soul` (Navigation „Persona“) und die Downloads `downloads/SOUL-beispiel.md` / `SOUL-example.md` entstehen aus **einer** Quelle: `data/soul.json` (Deutsch und Englisch je Block). Ändern, dann `python3 tools/soul/build_soul.py`, dann `python3 tools/check_i18n.py`. Seiten und Downloads nicht von Hand ändern.
 
 - Das Beispiel ist erfunden (Figur „Mika“). Nie die echte Persona (Nexis, Speaker) oder Namen, IPs, Schlüssel aus dem Projekt einfügen.
 - Aussagen zur Datei (Ablage `~/.hermes/SOUL.md`, Identität am Anfang des Systemprompts, leere Datei = Standard-Identität, Einlesen beim Sitzungsstart, Abgrenzung zu AGENTS.md) stammen aus der Hermes-Dokumentation (Abschnitt Personality). Stand 26.10.2026: nur über eine Suchzusammenfassung gelesen, die Originalseite war aus der Arbeitsumgebung nicht abrufbar, und nicht am eigenen Gerät geprüft. Vor einer Aussage wie „so funktioniert es bei uns“ gegen die Originalseite und die echte Installation prüfen.
 
 ## Nachbauen, Verlauf, Testberichte
 
-- Abschnitt `#nachbauen` (sechs Schritte) kommt aus `tools/sections/steps.json`, der **Verlauf** im Abschnitt „Stand“ aus `data/status.json` → `history` (mit `en.history`, gleiche Länge). Danach `python3 tools/sections/build_sections.py` (schreibt den statischen Fallback in beide Seiten; das JavaScript liest `history` zusätzlich live aus `status.json`).
+- Abschnitt `#nachbauen` (sechs Schritte) kommt aus `data/steps.json`, der **Verlauf** im Abschnitt „Stand“ aus `data/status.json` → `history` (mit `en.history`, gleiche Länge). Danach `python3 tools/sections/build_sections.py` (schreibt den statischen Fallback in beide Seiten; das JavaScript liest `history` zusätzlich live aus `status.json`).
 - Verlaufseinträge nur mit öffentlich freigegebenen Fakten, ohne interne Namen, Hosts oder Zahlen aus dem privaten Sicherheitsstatus.
 - Testberichte: Vorlage `.github/ISSUE_TEMPLATE/testbericht.md` (zweisprachig), verlinkt aus „Nachbauen“ und FAQ.
 - `python3 tools/check_i18n.py` prüft alle generierten Teile gegen ihre Quellen.
@@ -91,9 +91,22 @@ Beim Teilen erscheinen `og-de.png` und `og-en.png` (1200 × 630). `robots.txt`, 
 - **Muttersprachliche Durchsicht** der englischen Seite und der englischen PDF.
 - **Prüfung auf echten Geräten:** Safari (iPhone), Firefox, Android-Chrome. Geprüft ist bisher nur Chromium, mit axe-core (keine Verstöße) und ohne Überlauf bei 320 bis 1440 px.
 
+## Hugo (Umstellung der Seitengrundlage)
+
+Die Seite wird auf Hugo umgestellt. Stand während der Umstellung:
+
+- Das Hugo-Projekt liegt im Hauptordner: `hugo.toml`, `layouts/`, `assets/`, `content/`. Quellen bleiben, wo sie sind: Daten in `data/`, Downloads in `downloads/`, Bilder in `images/`. `hugo.toml` bindet sie als `static/` ein, es gibt nur je eine Kopie.
+- **Eine Quelle je Inhalt** wie bisher: `data/status.json`, `data/findings.json`, `data/steps.json`, `data/umbau.json`, `data/soul.json`. Hugo liest sie direkt; die Python-Generatoren sind nur noch für die Übergangszeit da.
+- Hand gepflegter Text steht in `layouts/partials/sections/<abschnitt>.<sprache>.html` (je Abschnitt und Sprache eine Datei). Kopf, Fuß, Kopfzeile und Navigation liegen in `layouts/partials/head|header|footer/<sprache>.html`. CSS und JavaScript stehen einmal in `assets/css/site.css` und `assets/js/site.js`, nicht mehr doppelt in beiden Seiten.
+- Erzeugte Abschnitte (Nachbauen, Umbau, Befunde, Persona, Stand, Verlauf, Feeds, Sitemap, JSON-LD) sind Vorlagen in `layouts/`. Sie ersetzen `build_sections.py`, `build_umbau.py` und `build_feed.py`.
+- **Bau lokal:** `hugo --destination /tmp/out`, danach `python3 tools/hugo_parity.py /tmp/out`. Das Skript vergleicht Tags, Attribute und Text mit den bisherigen Seiten und beiden Feeds und zeigt Abweichungen mit Abschnitts-ID.
+- **Veröffentlichung:** Solange die bisherigen Dateien im Hauptordner liegen und GitHub Pages von dort ausliefert, ändert sich nichts. Der Workflow `.github/workflows/hugo.yml` baut mit festgelegter Hugo-Version (Prüfsumme) und veröffentlicht erst, wenn Pages auf „GitHub Actions“ steht und die Repository-Variable `PAGES_VIA_ACTIONS` auf `true` gesetzt ist.
+- Hugo-Version nur bewusst hochziehen (Version und Prüfsumme im Workflow ändern), weil Hugo in fast jedem Release Verhalten ändert.
+- Der Download `downloads/SOUL-*.md` entsteht vorerst weiter mit `python3 tools/soul/build_soul.py`.
+
 ## Erfahrungsbericht „So haben wir unseren Echo 2 umgebaut“
 
-Abschnitt `#umbau` (Navigation „Umbau“ / „Our build“) entsteht aus **einer** Quelle: `tools/umbau/content.json` (Deutsch und Englisch je Etappe, gleiche Struktur). Ändern, dann `python3 tools/umbau/build_umbau.py`, dann `python3 tools/check_i18n.py`. Den Abschnitt zwischen `<!-- umbau:start -->` und `<!-- umbau:end -->` nie von Hand ändern.
+Abschnitt `#umbau` (Navigation „Umbau“ / „Our build“) entsteht aus **einer** Quelle: `data/umbau.json` (Deutsch und Englisch je Etappe, gleiche Struktur). Ändern, dann `python3 tools/umbau/build_umbau.py`, dann `python3 tools/check_i18n.py`. Den Abschnitt zwischen `<!-- umbau:start -->` und `<!-- umbau:end -->` nie von Hand ändern.
 
 - Jede Etappe hat feste Felder: Voraussetzungen, was wir gemacht haben, mögliche Schwierigkeiten, persönlicher Aufwand, Nachweis des Erfolgs, Quellen. Jede Etappe trägt Kennzeichen: Getestet (Owner-Beobachtung), Berichtet, In Entwicklung, Geplant, Angabe eines Fremdprojekts, Nicht belegt.
 - **Stimme:** Ich-Form, so als würde der Owner selbst schreiben. In öffentlichen Texten kein „Owner“ in der dritten Person und kein Aktenton wie „nicht festgehalten“; Evidenz als „Selbst getestet“ oder „Eigener Bericht“ kennzeichnen. Fremdangaben klar als solche benennen, aber freundlich und knapp, ohne wiederholte Warnsprüche (die große Warnung steht einmal oben und kurz vor den riskanten Etappen).

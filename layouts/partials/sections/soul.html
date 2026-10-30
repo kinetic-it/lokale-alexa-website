@@ -1,0 +1,24 @@
+{{- $l := .Language.Lang -}}
+{{- $c := hugo.Data.soul -}}
+{{- $p := index $c.page $l -}}
+{{- $pre := cond (eq $l "en") ".." "." -}}
+<section id="soul">
+  <div class="wrap">
+    <div class="eyebrow">{{ $p.eyebrow }}</div>
+    <h2>{{ $p.h2 }}</h2>
+    <p class="intro">{{ $p.intro }}</p>
+    <div class="soul">
+      <div class="shead"><span>{{ $p.head_file }}</span><span>{{ $p.head_why }}</span></div>
+{{ range $c.blocks }}{{ $t := index . $l }}
+      <div class="srow"><pre class="sfile"><code>{{ delimit $t.lines "\n" }}</code></pre><div class="swhy"><span class="label">{{ $t.title }}</span><p>{{ $t.why }}</p></div></div>
+{{ end }}
+    </div>
+    <p style="margin-top:22px"><a class="button" href="{{ $pre }}/downloads/{{ index $c.file_names $l }}" download>{{ $p.button }}</a></p>
+    <div class="grid two">
+{{ range $p.cards }}
+      <div class="card"><span class="label">{{ index . 0 }}</span><h3>{{ index . 1 }}</h3><p>{{ index . 2 }}</p></div>
+{{ end }}
+    </div>
+    <div class="callout"><p>{{ $p.callout }} <a href="{{ $c.doc_url }}">{{ $p.doc_link }}</a></p></div>
+  </div>
+</section>

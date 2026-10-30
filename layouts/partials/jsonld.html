@@ -1,0 +1,4 @@
+{{- $base := "https://kinetic-it.github.io/lokale-alexa-website/" -}}
+{{- $lang := .Language.Lang -}}
+{{- $d := dict "@context" "https://schema.org" "@type" "TechArticle" "headline" .Site.Params.headline "inLanguage" $lang "url" (cond (eq $lang "en") (printf "%sen/" $base) $base) "image" (printf "%sog-%s.png" $base $lang) "datePublished" "2026-10-25" "dateModified" hugo.Data.status.as_of "author" (dict "@type" "Organization" "name" "kinetic-it" "url" "https://github.com/kinetic-it") -}}
+<script type="application/ld+json">{{ $d | jsonify | safeJS }}</script>

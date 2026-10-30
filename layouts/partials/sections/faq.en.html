@@ -1,0 +1,17 @@
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Frequently asked questions</div>
+    <h2>FAQ</h2>
+    <div style="margin-top:26px">
+      <details><summary>Is this an official Amazon project?</summary><p>No. It is an independent community/homelab project with no connection to Amazon.</p></details>
+      <details><summary>Can I root any Echo?</summary><p>No. Many devices have no documented, repeatable path. Even similar-looking housings can contain completely different hardware. Always compare the full model number.</p></details>
+      <details><summary>Does “local” mean no data ever goes to the cloud?</summary><p>Not necessarily. Locally controllable is not the same as fully offline. If cloud speech-to-text, cloud text-to-speech or an online AI model is chosen, parts of the processing leave the home network. We want to be transparent about that; the cloud steps are marked in the diagram above.</p></details>
+      <details><summary>Can anyone in the room control everything?</summary><p>No, that is not the goal. By voice only explicitly approved, harmless actions should be possible. Personal data such as calendars and reminders need additional authentication. Guests are not recognised automatically.</p></details>
+      <details><summary>What about Alexa skills, Amazon Music and multiroom?</summary><p>These features are not carried over automatically. Replacement features must be integrated and tested one by one.</p></details>
+      <details><summary>Is the solution ready for my household yet?</summary><p>No. The Echo 2 pilot has some proven partial functions, but no complete long-term and end-to-end acceptance yet.</p></details>
+      <details><summary>Why Home Assistant and Hermes together?</summary><p>Home Assistant can manage everyday home functions and permissions. Hermes is intended for open questions and more demanding conversations; this separates simple switching commands from complex AI processing.</p></details>
+      <details><summary>What about timers, alarms, reminders and multiple people?</summary><p>These are core goals but not fully tested yet. For private reminders and guests in particular, permissions, ownership and confirmation are needed before sensitive answers.</p></details>
+      <details><summary>How can I help?</summary><p>Verifiable tests with the exact model number, firmware version and traceable error descriptions are valuable. There is a <a href="https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md">test report template</a> for this. Public sources and questions can be reported via the <a href="https://github.com/kinetic-it/lokale-alexa-website/issues">website repository</a>; please do not post tokens, serial numbers or voice recordings.</p></details>
+    </div>
+  </div>
+</section>

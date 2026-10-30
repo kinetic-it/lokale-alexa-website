@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Erzeugt aus tools/soul/content.json
+"""Erzeugt aus data/soul.json
   - downloads/SOUL-beispiel.md und downloads/SOUL-example.md
   - den Abschnitt <section id="soul"> in index.html und en/index.html (zwischen den Markern)
 Aufruf im Repo-Wurzelverzeichnis:
@@ -8,7 +8,7 @@ Aufruf im Repo-Wurzelverzeichnis:
 """
 import html, json, sys
 
-C = json.load(open('tools/soul/content.json', encoding='utf-8'))
+C = json.load(open('data/soul.json', encoding='utf-8'))
 START, END = '<!-- soul:start -->', '<!-- soul:end -->'
 E = html.escape
 
@@ -64,7 +64,7 @@ def main():
             except FileNotFoundError: ok = False
         else: open(f, 'w', encoding='utf-8').write(md(lang))
     if check and not ok:
-        print('soul: Seiten oder Downloads passen nicht zu tools/soul/content.json (python3 tools/soul/build_soul.py)'); sys.exit(1)
+        print('soul: Seiten oder Downloads passen nicht zu data/soul.json (python3 tools/soul/build_soul.py)'); sys.exit(1)
     print('soul: OK' if check else 'soul: geschrieben')
 
 main()
