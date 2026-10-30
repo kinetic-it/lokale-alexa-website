@@ -3,15 +3,15 @@
   "visibility": "public",
   "approved": true,
   "as_of": "2026-10-30",
-  "evidence": "Owner-Berichte und private Projektakte; keine unabhängige Live-Abnahme",
+  "evidence": "Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme",
   "title": "Echo-2-Pilot · Umbau dokumentiert; Kinetic Voice Router im Beobachtungsbetrieb, Fehler im Aktivbetrieb bekannt",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
-    "echo-dot-assist mit Home Assistant verbunden (Owner-Bericht)",
+    "echo-dot-assist mit Home Assistant verbunden (eigener Bericht)",
     "Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt",
-    "Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (Owner-Beobachtung).",
-    "Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (Owner-Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme.",
-    "Eigene Erweiterung „Kinetic Voice Router“ (Version 0.4.1) lief am 29.10. live: Im Beobachtungsbetrieb wurden zwei echte Wissensfragen am Echo korrekt als solche gezählt, Hermes antwortete unverändert. Im Aktivbetrieb wurde die Frage nach dem Zustand eines echten Geräts lokal von Home Assistant beantwortet (Owner-Beobachtung, keine Messreihe)."
+    "Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (eigene Beobachtung).",
+    "Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (eigene Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme.",
+    "Eigene Erweiterung „Kinetic Voice Router“ (Version 0.4.1) lief am 29.10. live: Im Beobachtungsbetrieb wurden zwei echte Wissensfragen am Echo korrekt als solche gezählt, Hermes antwortete unverändert. Im Aktivbetrieb wurde die Frage nach dem Zustand eines echten Geräts lokal von Home Assistant beantwortet (eigene Beobachtung, keine Messreihe)."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
@@ -20,7 +20,7 @@
     "Mehrbenutzerrechte, Gastmodus und sensible Antworten",
     "Recovery, vollständiges Rohbackup und Langzeittests",
     "Zukunftskonzept „Follow-me Conversation“: Gespräch beim Raumwechsel zwischen mehreren Echos übertragen, bei eindeutiger Sprecherzuordnung automatisch, sonst mit Rückfrage; erst laufenden Satz beenden. Nicht implementiert oder getestet.",
-    "Idee: Ein separater Hermes-Assistent für Verwaltungsaufgaben hilft bei der Pflege von Gerätealiasen (vorhandene Aliase lesen, Schreibweisen, Dubletten und Widersprüche erkennen, Vorschläge machen). Änderungen nur nach Freigabe durch den Owner, keine automatische Freigabe weiterer Geräte für Sprache. Konzept, nicht umgesetzt.",
+    "Idee: Ein separater Hermes-Assistent für Verwaltungsaufgaben hilft bei der Pflege von Gerätealiasen (vorhandene Aliase lesen, Schreibweisen, Dubletten und Widersprüche erkennen, Vorschläge machen). Änderungen nur nach meiner Freigabe, keine automatische Freigabe weiterer Geräte für Sprache. Konzept, nicht umgesetzt.",
     "Offline-Fallback mit lokaler Spracherkennung und Sprachausgabe: als Konzept beschlossen, nicht installiert. Derzeit laufen Spracherkennung und Sprachausgabe über Cloud-Dienste."
   ],
   "milestones": [
@@ -77,14 +77,14 @@
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
     "title": "Echo 2 pilot · conversion documented; Kinetic Voice Router in observe mode, fault in active mode known",
-    "evidence": "Owner reports and private project records; no independent live acceptance",
+    "evidence": "My own reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
-      "echo-dot-assist connected to Home Assistant (owner report)",
+      "echo-dot-assist connected to Home Assistant (own report)",
       "Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven",
-      "Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (owner observation).",
-      "An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (owner observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.",
-      "Our own extension “Kinetic Voice Router” (version 0.4.1) ran live on 29 Oct: in observe mode two real knowledge questions on the Echo were counted correctly and Hermes answered unchanged. In active mode, a question about the state of a real device was answered locally by Home Assistant (owner observation, no measurement series)."
+      "Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (own observation).",
+      "An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (own observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.",
+      "Our own extension “Kinetic Voice Router” (version 0.4.1) ran live on 29 Oct: in observe mode two real knowledge questions on the Echo were counted correctly and Hermes answered unchanged. In active mode, a question about the state of a real device was answered locally by Home Assistant (own observation, no measurement series)."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
@@ -93,7 +93,7 @@
       "Multi-user permissions, guest mode and sensitive answers",
       "Recovery, full raw backup and long-term tests",
       "Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested.",
-      "Idea: a separate Hermes assistant for admin tasks helps maintain device aliases (read existing aliases, spot spelling variants, duplicates and conflicts, suggest aliases). Changes only after approval by the owner; no automatic exposure of further devices to voice. Concept, not implemented.",
+      "Idea: a separate Hermes assistant for admin tasks helps maintain device aliases (read existing aliases, spot spelling variants, duplicates and conflicts, suggest aliases). Changes only after my approval; no automatic exposure of further devices to voice. Concept, not implemented.",
       "Offline fallback with local speech recognition and speech output: decided as a concept, not installed. Speech recognition and speech output currently run through cloud services."
     ],
     "known_issues": [
@@ -120,13 +120,13 @@
       "Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published",
       "English edition of the guide, SOUL.md example and build overview",
       "First voice test of a switching command on the Echo failed; investigation under way",
-      "Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.",
+      "Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (own voice test); device switching remains unresolved.",
       "Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven.",
       "A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open.",
       "Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.",
-      "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by the owner, sources and limits."
+      "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits."
     ],
-    "last_test": "Kinetic Voice Router 0.4.1 live: observe mode counted two real knowledge questions correctly, and in active mode a question about a real device was answered locally. A question about an unknown device was wrongly passed to Hermes, which invented a state; one knowledge question took 21 seconds (owner observations)."
+    "last_test": "Kinetic Voice Router 0.4.1 live: observe mode counted two real knowledge questions correctly, and in active mode a question about a real device was answered locally. A question about an unknown device was wrongly passed to Hermes, which invented a state; one knowledge question took 21 seconds (own observations)."
   },
   "history": [
     {
@@ -155,7 +155,7 @@
     },
     {
       "date": "2026-10-26",
-      "text": "Gesprächsweg zum separaten Hermes-Speaker korrigiert: Echo beantwortete Selbstvorstellung und Abschlussfrage passend zur vorgesehenen Persönlichkeit (Owner-Sprachtest); Schaltbefehle bleiben offen."
+      "text": "Gesprächsweg zum separaten Hermes-Speaker korrigiert: Echo beantwortete Selbstvorstellung und Abschlussfrage passend zur vorgesehenen Persönlichkeit (eigener Sprachtest); Schaltbefehle bleiben offen."
     },
     {
       "date": "2026-10-27",
@@ -171,11 +171,11 @@
     },
     {
       "date": "2026-10-30",
-      "text": "Erfahrungsbericht „So haben wir unseren Echo 2 umgebaut“ ergänzt: zehn Etappen mit Fotos, Aufwand nach Owner-Bewertung, Quellen und Grenzen."
+      "text": "Erfahrungsbericht „So haben wir unseren Echo 2 umgebaut“ ergänzt: zehn Etappen mit Fotos, Aufwand nach meiner eigenen Bewertung, Quellen und Grenzen."
     }
   ],
   "last_test": {
     "date": "2026-10-29",
-    "text": "Kinetic Voice Router 0.4.1 live: Beobachtungsbetrieb zählte zwei echte Wissensfragen korrekt, im Aktivbetrieb wurde eine Frage zu einem echten Gerät lokal beantwortet. Eine Frage zu einem unbekannten Gerät wurde fälschlich an Hermes gegeben, der einen Zustand erfand; eine Wissensfrage dauerte 21 Sekunden (Owner-Beobachtungen)."
+    "text": "Kinetic Voice Router 0.4.1 live: Beobachtungsbetrieb zählte zwei echte Wissensfragen korrekt, im Aktivbetrieb wurde eine Frage zu einem echten Gerät lokal beantwortet. Eine Frage zu einem unbekannten Gerät wurde fälschlich an Hermes gegeben, der einen Zustand erfand; eine Wissensfrage dauerte 21 Sekunden (eigene Beobachtungen)."
   }
 }

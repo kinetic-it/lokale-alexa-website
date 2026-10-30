@@ -49,8 +49,8 @@ def history(lang):
                      for x, t in zip(h, texts))
 
 LABELS = {
-    'de': {'owner_reported': 'Owner-Bericht', 'in_progress': 'in Arbeit', 'open': 'offen', 'failed': 'Test fehlgeschlagen', 'asof': 'Stand: ', 'last': 'Letzter Test'},
-    'en': {'owner_reported': 'Owner report', 'in_progress': 'in progress', 'open': 'open', 'failed': 'test failed', 'asof': 'As of ', 'last': 'Latest test'},
+    'de': {'owner_reported': 'Eigener Bericht', 'in_progress': 'in Arbeit', 'open': 'offen', 'failed': 'Test fehlgeschlagen', 'asof': 'Stand: ', 'last': 'Letzter Test'},
+    'en': {'owner_reported': 'Own report', 'in_progress': 'in progress', 'open': 'open', 'failed': 'test failed', 'asof': 'As of ', 'last': 'Latest test'},
 }
 
 def texts(lang):
