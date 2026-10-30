@@ -3,6 +3,20 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f9",
+      "date": "2026-10-29",
+      "type": "problem",
+      "state": "open",
+      "de": {
+        "title": "Ein Sprachmodell darf Gerätezustände nicht raten",
+        "text": "In einem Live-Test unserer eigenen Router-Erweiterung wurde eine Frage zum Zustand eines Geräts, das es nicht gibt, als Wissensfrage eingeordnet und an Hermes weitergegeben. Hermes erfand daraufhin einen Zustand. Lehre: Fragen nach echten Gerätezuständen müssen aus Home Assistant beantwortet werden oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden. Eine Wortmuster-Regel kann sich irren, deshalb führt eine Fehleinordnung nie zu einer Geräteaktion. Die Korrektur liegt als Entwicklungsstand vor und ist weder installiert noch live abgenommen. Der Befund bleibt offen, bis das belegt ist."
+      },
+      "en": {
+        "title": "A language model must not guess device states",
+        "text": "In a live test of our own router extension, a question about the state of a device that does not exist was classified as a knowledge question and passed to Hermes. Hermes then invented a state. Lesson: questions about real device states must be answered from Home Assistant or end honestly with “I cannot answer that reliably right now”. A word-pattern rule can be wrong, which is why a misclassification never leads to a device action. The fix exists as a development state and is neither installed nor accepted live. The finding stays open until that is proven."
+      }
+    },
+    {
       "id": "f8",
       "date": "2026-10-27",
       "type": "correction",

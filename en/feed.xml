@@ -5,8 +5,22 @@
   <id>https://kinetic-it.github.io/lokale-alexa-website/en/feed.xml</id>
   <link rel="self" type="application/atom+xml" href="https://kinetic-it.github.io/lokale-alexa-website/en/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/"/>
-  <updated>2026-10-27T00:00:00Z</updated>
+  <updated>2026-10-30T00:00:00Z</updated>
   <author><name>kinetic-it</name></author>
+  <entry>
+    <title>Experience report “How we converted our Echo 2” added: ten stages with photos, effort a...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-30-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <summary>Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by the owner, sources and limits.</summary>
+  </entry>
+  <entry>
+    <title>Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification o...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-29-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <summary>Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.</summary>
+  </entry>
   <entry>
     <title>A previously failing voice command worked after a matching device alias was added: on/o...</title>
     <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-10-27-2</id>
