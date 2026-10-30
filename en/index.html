@@ -219,6 +219,9 @@ tbody tr:hover td{background:#1a1f25}
 .ufig img{display:block;width:auto;max-width:100%;max-height:340px;height:auto;border:1px solid var(--line);border-radius:2px}
 .ufig figcaption{font-size:.8rem;color:var(--dim);margin-top:6px;max-width:30ch}
 .srcs{list-style:none;padding-left:0!important}
+.afig{margin:0 0 14px}
+.afig img{display:block;width:auto;max-width:100%;max-height:240px;height:auto;border:1px solid var(--line);border-radius:2px}
+.fremd{font-size:.88rem;color:var(--dim);border-top:1px solid var(--line2);padding-top:10px;margin-top:12px}
 @media (max-width:640px){.ustep{padding:18px 16px}.ustep dl{grid-template-columns:1fr;gap:4px}.ustep dd{margin-bottom:12px}.utoc ol{columns:1}}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .chips button{font:500 .76rem/1 var(--mono);color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:2px;padding:9px 12px;cursor:pointer}
@@ -338,11 +341,11 @@ footer p{font-size:.86rem}
       <div class="head"><span>Project status</span><span data-bind="asof">30 Oct 2026</span></div>
       <div class="body">
         <h2 data-bind="title">Echo 2 pilot · conversion documented; Kinetic Voice Router in observe mode, fault in active mode known</h2>
-        <p class="m" data-bind="evidence">Owner reports and private project records; no independent live acceptance</p>
+        <p class="m" data-bind="evidence">My own reports and private project records; no independent live acceptance</p>
         <ul class="ms" id="ms"><!-- ms:start -->
-          <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Owner report</span></li>
-          <li><i class="mk owner_reported"></i><span>Home Assistant integration</span><span class="st">Owner report</span></li>
-          <li><i class="mk owner_reported"></i><span>Local wake word short test</span><span class="st">Owner report</span></li>
+          <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Own report</span></li>
+          <li><i class="mk owner_reported"></i><span>Home Assistant integration</span><span class="st">Own report</span></li>
+          <li><i class="mk owner_reported"></i><span>Local wake word short test</span><span class="st">Own report</span></li>
           <li><i class="mk in_progress"></i><span>Review permissions and exposures</span><span class="st">in progress</span></li>
           <li><i class="mk in_progress"></i><span>Home commands end to end</span><span class="st">in progress</span></li>
           <li><i class="mk in_progress"></i><span>Hermes conversation end to end</span><span class="st">in progress</span></li>
@@ -350,7 +353,7 @@ footer p{font-size:.86rem}
           <li><i class="mk open"></i><span>Everyday functions and continuous operation</span><span class="st">open</span></li>
 <!-- ms:end -->
         </ul>
-        <p class="last"><strong data-bind="lastdate">Latest test · 29 Oct 2026</strong><span data-bind="lasttest">Kinetic Voice Router 0.4.1 live: observe mode counted two real knowledge questions correctly, and in active mode a question about a real device was answered locally. A question about an unknown device was wrongly passed to Hermes, which invented a state; one knowledge question took 21 seconds (owner observations).</span></p>
+        <p class="last"><strong data-bind="lastdate">Latest test · 29 Oct 2026</strong><span data-bind="lasttest">Kinetic Voice Router 0.4.1 live: observe mode counted two real knowledge questions correctly, and in active mode a question about a real device was answered locally. A question about an unknown device was wrongly passed to Hermes, which invented a state; one knowledge question took 21 seconds (own observations).</span></p>
       </div>
     </aside>
   </div>
@@ -444,7 +447,7 @@ footer p{font-size:.86rem}
       </svg>
       </div>
       <div class="legend" aria-label="Legend">
-        <span><i class="lg ok"></i>Short test passed (owner report)</span>
+        <span><i class="lg ok"></i>Short test passed (own report)</span>
         <span><i class="lg"></i>configured or planned, not yet accepted</span>
         <span><i class="lg cloud"></i>Cloud service, data leaves the home</span>
         <span><i class="lg block"></i>should not be possible</span>
@@ -504,12 +507,22 @@ footer p{font-size:.86rem}
     <p style="margin-top:18px">Newer Echo, Show, Spot, Studio and Plus variants must not simply be equated with the listed models. Fire TV, Cube and Fire tablets can have their own root or unlock paths without being usable as a local Echo voice satellite.</p>
     <div class="callout"><p>Before buying or converting: photograph the type label, check the firmware and read the matching project guide. Before any risky flashing, a verified backup including a restore path is required.</p></div>
     <h3 class="sub" id="adapter">Adapters to 3D print</h3>
-    <p>Printable holders from third-party projects exist for access via pogo pins. We used the V5 holder for the Echo 2 ourselves, see the <a href="#umbau">experience report</a>. We have not tested the holder for the Dot 3.</p>
+    <p>Printable holders exist for access via pogo pins. I use the one for the Echo 2 myself, and I only know the one for the Dot 3 from its description.</p>
     <div class="grid two">
-      <div class="card"><span class="label">Echo 2 · LibreEcho</span><h3>Pogo pin adapter V5</h3><p>ZIP archive with the print files from the LibreEcho project. Bought already printed and in use with us.</p><p><a href="https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip">Download print files (ZIP)</a></p></div>
-      <div class="card"><span class="label">Echo Dot 3 original · MakerWorld</span><h3>Programming Dock (donut)</h3><p>3D print model including pin carrier, designed for the original Echo Dot 3 (codename donut).</p><p><a href="https://makerworld.com/de/models/3394784-echo-dot-gen-3-donut-programming-dock#profileId-3864262">Open model on MakerWorld</a></p></div>
+      <div class="card">
+        <figure class="afig"><img src="../images/halter-bestueckt-nah.jpg" width="520" height="586" alt="The printed pogo holder with three pogo pins fitted and connectors pushed on." loading="lazy"></figure>
+        <span class="label">Echo 2 · LibreEcho</span><h3>Pogo pin adapter V5</h3>
+        <p>I use this holder myself. On mine, fastboot was visible on the first attempt. How I put it together is in the <a href="#umbau">experience report</a>.</p>
+        <p><a href="https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip">Download print files (ZIP)</a></p>
+        <p class="fremd"><strong>Third-party statement:</strong> LibreEcho describes the holder as a printable six-pin holder for the bottom contacts of the Echo 2. With pogo pins, only the outer cover on the base has to be removed.</p>
+      </div>
+      <div class="card">
+        <span class="label">Echo Dot 3 original · MakerWorld</span><h3>Programming Dock (donut)</h3>
+        <p>3D print model including pin carrier for the original Echo Dot 3 (codename donut), not for the Echo 2.</p>
+        <p><a href="https://makerworld.com/de/models/3394784-echo-dot-gen-3-donut-programming-dock#profileId-3864262">Open model on MakerWorld</a></p>
+        <p class="fremd"><strong>Third-party statement:</strong> According to its description the model is designed for this device generation. I have not tried whether it works.</p>
+      </div>
     </div>
-    <div class="callout"><p>The two adapters are not automatically interchangeable mechanically. Check the electrical pin assignment before connecting.</p></div>
   </div>
 </section>
 
@@ -538,7 +551,7 @@ footer p{font-size:.86rem}
   <div class="wrap">
     <div class="eyebrow">Experience report</div>
     <h2>How we converted our Echo 2</h2>
-    <p class="intro">This is the route we took with exactly one device: Amazon Echo 2 (2017), model XC56PY, codename radar. It is an experience report, not build instructions. It does not replace the original guides of the projects, which are linked at every step. “We” means the project owner. Anything that only another project claims is marked as a third-party statement and has not been checked by us.</p>
+    <p class="intro">This is the route we took with exactly one device: Amazon Echo 2 (2017), model XC56PY, codename radar. It is an experience report, not build instructions. It does not replace the original guides of the projects, which are linked at every step. Anything that only another project claims is marked as a third-party statement and has not been checked by us.</p>
     <div class="warnbox" role="note" aria-labelledby="warn-t">
       <p class="warn-big" id="warn-t">NO WARRANTY – AT YOUR OWN RISK</p>
       <p>Bad electrical contacts, bootloader changes and modified firmware can <strong>permanently damage</strong> your device (“brick” it), destroy data and functions and end warranty or support claims.</p>
@@ -549,9 +562,9 @@ footer p{font-size:.86rem}
     </div>
     <div class="ulegend">
       <h3>How to read this report</h3>
-      <p>Every step carries markers that say where a statement comes from:</p>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-r">Reported</span> <span class="ev ev-d">In development</span> <span class="ev ev-p">Planned</span> <span class="ev ev-f">Statement of a third-party project</span> <span class="ev ev-n">Not proven</span></p>
-      <p>Effort: the scale runs from 1 (very easy) to 5 (very hard). The rating comes from the owner, who brings basic experience. It is not an AI estimate and says nothing about how hard it will be for you.</p>
+      <p>Every step carries markers that say where a statement comes from. “Tried myself” means I saw or heard it myself but did not run a measurement series.</p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-r">My own report</span> <span class="ev ev-d">In development</span> <span class="ev ev-p">Planned</span> <span class="ev ev-f">Statement of a third-party project</span> <span class="ev ev-n">Not proven</span></p>
+      <p>Effort: the scale runs from 1 (very easy) to 5 (very hard). This is my own assessment, and I bring basic experience. It says nothing about how hard it will be for you.</p>
     </div>
     <nav class="utoc" aria-label="The ten stages">
       <h3>The ten stages</h3>
@@ -560,7 +573,7 @@ footer p{font-size:.86rem}
     <article class="ustep" id="u1">
       <p class="unum">Step 1</p>
       <h3>Identify the right Echo model</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <dl>
         <dt>Prerequisites</dt><dd><p>The device and a computer.</p></dd>
         <dt>What we did</dt><dd><p>The model is printed on the label on the device, not on the power supply. Our device is an Echo 2 (2017), model XC56PY, codename radar. This was confirmed later in fastboot mode: <code>fastboot getvar product</code> reported <code>RADAR</code> (step 4).</p></dd>
@@ -573,11 +586,11 @@ footer p{font-size:.86rem}
     <article class="ustep" id="u2">
       <p class="unum">Step 2</p>
       <h3>Hardware and tools you need</h3>
-      <p class="evs"><span class="ev ev-r">Reported</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-r">My own report</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <dl>
         <dt>Prerequisites</dt><dd><ul><li>A computer that runs <code>fastboot</code>.</li><li>The original power adapter of the Echo. According to LibreEcho and echo-dot-assist it is needed to enter fastboot (third-party statement).</li></ul></dd>
-        <dt>What we did</dt><dd><p>This is what we used (owner report):</p><ul><li>a 3D-printed pogo holder that we bought already printed, the LibreEcho model “Echo Gen2 Pogo-Plug V5”, not printed by ourselves</li><li>pogo pins of type P50-B1, 16 mm long, 0.68 mm diameter (pack of 10, three of them sit in the holder)</li><li>jumper wire pins and connectors instead of soldering</li><li>a somewhat thicker USB cable from a power bank</li><li>a 0.8 mm drill bit to enlarge the holes</li><li>super glue</li></ul><p>We worked entirely without soldering. Prior knowledge: the owner brings basic experience. We did not record what exactly that covers.</p></dd>
-        <dt>Possible difficulties</dt><dd><p>Finding a usable USB cable was tedious: with most cables we tried, one wire was missing.</p><p>Third-party statement (echo-dot-assist): a USB-A plug is intended at the computer end, or a USB-C cable with a 5.1 kΩ resistor on the CC pin.</p></dd>
+        <dt>What we did</dt><dd><p>This is what I used:</p><ul><li>a 3D-printed pogo holder that we bought already printed, the LibreEcho model “Echo Gen2 Pogo-Plug V5”, not printed by ourselves</li><li>pogo pins of type P50-B1, 16 mm long, 0.68 mm diameter (pack of 10, three of them sit in the holder)</li><li>jumper wire pins and connectors instead of soldering</li><li>a somewhat thicker USB cable from a power bank</li><li>a 0.8 mm drill bit to enlarge the holes</li><li>super glue</li></ul><p>I worked entirely without soldering. Prior knowledge: I bring basic experience.</p></dd>
+        <dt>Possible difficulties</dt><dd><p>Finding a usable USB cable was tedious: with most cables I tried, one wire was missing.</p><p>Third-party statement (echo-dot-assist): a USB-A plug is intended at the computer end, or a USB-C cable with a 5.1 kΩ resistor on the CC pin.</p></dd>
         <dt>Personal effort</dt><dd><p>Not rated individually. Rating and time for the whole build are in step 3.</p></dd>
         <dt>Proof it worked</dt><dd><p>The fastboot connection (step 4).</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md">LibreEcho: installation guide, section Equipment</a></li><li><a href="https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md">echo-dot-assist: page for the Echo 2 (radar)</a></li></ul></dd>
@@ -586,109 +599,109 @@ footer p{font-size:.86rem}
     <article class="ustep" id="u3">
       <p class="unum">Step 3</p>
       <h3>Pogo pins, holder and contact adapter</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-r">Reported</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-r">My own report</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <p class="warn-mini"><strong>NO WARRANTY – AT YOUR OWN RISK.</strong> This step can permanently damage the device. Read the notice above and the original guide first.</p>
       <div class="ufigs">
         <figure class="ufig"><img src="../images/halter-gedruckt.jpg" width="410" height="560" alt="Four small white 3D-printed parts on a palm: three flat holders with small holes and one part with ridges." loading="lazy"><figcaption>The parts as we bought them, printed.</figcaption></figure>
         <figure class="ufig"><img src="../images/halter-bestueckt.jpg" width="700" height="1556" alt="A white printed holder with three thin pogo pins sticking out at the bottom. Three black jumper wire connectors with red, yellow and orange wires sit on the pin ends at the top." loading="lazy"><figcaption>The fitted holder: three pogo pins with connectors pushed on.</figcaption></figure>
         <figure class="ufig"><img src="../images/halter-echo-boden.jpg" width="700" height="1060" alt="The holder sits in the slot on the bottom of the Echo 2. The three black connectors with colored wires are plugged onto it." loading="lazy"><figcaption>The holder in the slot on the bottom of the Echo 2.</figcaption></figure>
       </div>
-      <p class="small">Photos: project owner. We only link to 3D files and software of other projects, we do not provide them.</p>
+      <p class="small">Photos: mine. I only link to 3D files and software of other projects, I do not provide them.</p>
       <dl>
-        <dt>Prerequisites</dt><dd><ul><li>The parts from step 2.</li><li>An Echo 2 (radar). According to LibreEcho only the outer cover on the base has to be removed for the holder (third-party statement). We did not record how we did that.</li></ul></dd>
-        <dt>What we did</dt><dd><ol><li>Got the holder: the LibreEcho model “Echo Gen2 Pogo-Plug V5”, bought already printed. According to the information on the holder it is about 10 × 7.6 × 7 mm, meant for a 0.4 mm nozzle and designed for P50-B1 pins of 0.68 mm diameter. It has to be printed at original size without scaling, and the small holes must stay completely open (third-party statement).</li><li>The holes were too tight for us. We enlarged them with a 0.8 mm drill bit because we had no smaller one.</li><li>Placed three pogo pins in the holder and fixed them with super glue (see photos).</li><li>Connected the pin ends with jumper wire connectors. We made the connection to the USB cable with jumper wire pins and connectors, without soldering.</li><li>Pushed the holder into the slot on the bottom of the Echo. It sat so tightly that it held by itself.</li></ol><p>Which pin belongs on which pad is described in the LibreEcho guide. We deliberately give no pin assignment of our own here: we did not measure the individual pads.</p></dd>
-        <dt>Possible difficulties</dt><dd><ul><li>The connectors were fiddly.</li><li>The holes did not fit at first and had to be enlarged.</li><li>The setup is a makeshift solution. It was enough for fastboot, unlock and TWRP. A transfer lasting several minutes, such as a raw backup of about 3.9 GB, is not proven with it.</li></ul></dd>
-        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 2 of 5</strong> for “prepare the holder, fit the pins and establish the USB contact” (owner).</p><p>Time: about 30 minutes for the whole build (USB cable, pogo pins and so on). After that fastboot was visible.</p></dd>
-        <dt>Proof it worked</dt><dd><p>The photos show the setup. The contact is proven by the fastboot reply <code>RADAR</code> (step 4). The individual pads were not measured electrically.</p></dd>
+        <dt>Prerequisites</dt><dd><ul><li>The parts from step 2.</li><li>An Echo 2 (radar). LibreEcho describes that only the outer cover on the base has to be removed for the holder (third-party statement).</li></ul></dd>
+        <dt>What we did</dt><dd><ol><li>I bought the holder: the LibreEcho model “Echo Gen2 Pogo-Plug V5”, already printed. According to the information on the holder it is about 10 × 7.6 × 7 mm, meant for a 0.4 mm nozzle and designed for P50-B1 pins of 0.68 mm diameter. It has to be printed at original size without scaling, and the small holes must stay completely open (third-party statement).</li><li>The holes were too tight for me. I enlarged them with a 0.8 mm drill bit because I had no smaller one.</li><li>I placed three pogo pins in the holder and fixed them with super glue (see photos).</li><li>The pin ends sit in jumper wire connectors. I made the connection to the USB cable with jumper wire pins and connectors, without soldering.</li><li>Then I pushed the holder into the slot on the bottom of the Echo. It sat so tightly that it held by itself.</li></ol><p>Which pin belongs on which pad is described in the LibreEcho guide. I give no pin assignment of my own here because I did not measure the pads.</p></dd>
+        <dt>Possible difficulties</dt><dd><ul><li>The connectors were fiddly.</li><li>The holes did not fit at first and had to be enlarged.</li><li>My setup is a makeshift solution. It was enough for fastboot, unlock and TWRP. Whether it survives a transfer lasting several minutes, such as a raw backup of about 3.9 GB, I do not know.</li></ul></dd>
+        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 2 of 5</strong> for “prepare the holder, fit the pins and establish the USB contact”, my own assessment.</p><p>Time: about 30 minutes for the whole build (USB cable, pogo pins and so on). After that fastboot was visible.</p></dd>
+        <dt>Proof it worked</dt><dd><p>The photos show the setup. The contact is proven by the fastboot reply <code>RADAR</code> (step 4). I did not measure the individual pads electrically.</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/aslater3/LibreEcho/blob/main/tools/README.md#echo-gen-2-pogo-pin-carrier-v5">LibreEcho: pogo holder V5 (description)</a></li><li><a href="https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip">LibreEcho: print files V5 (ZIP, original)</a></li><li><a href="https://github.com/aslater3/LibreEcho/tree/main/docs/disassembly/echo-gen-2">LibreEcho: disassembly guide Echo Gen 2 (alternative with soldering)</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u4">
       <p class="unum">Step 4</p>
       <h3>USB connection and fastboot</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <dl>
         <dt>Prerequisites</dt><dd><ul><li>The setup from step 3.</li><li>The original power adapter of the Echo.</li></ul></dd>
-        <dt>What we did</dt><dd><ol><li>According to the LibreEcho guide (third-party statement): unplug the power adapter, attach the contacts, hold the Action button and plug in the power adapter while holding it. On an already unlocked device the Volume Down button applies instead.</li><li>Check read-only: <code>fastboot devices</code> and <code>fastboot getvar product</code>. For us the Echo reported <code>RADAR</code>.</li><li>We repeated the query several times. It ran without dropouts until we stopped it by hand.</li><li>The bootloader build of our device (<code>lk_build_desc: 63cb91b-20221007_073612</code>) is on the LibreEcho approval list. Check your own build. This is not an approval for arbitrary files.</li></ol></dd>
-        <dt>Possible difficulties</dt><dd><p>We had no difficulties beyond step 3. While fastboot is active, Alexa is not active.</p></dd>
-        <dt>Personal effort</dt><dd><p>First attempt succeeded (owner). Effort and time together with step 3: 2 of 5, about 30 minutes.</p></dd>
-        <dt>Proof it worked</dt><dd><p>The output of <code>fastboot getvar product</code>: <code>RADAR</code> (owner terminal output).</p></dd>
+        <dt>What we did</dt><dd><ol><li>According to the LibreEcho guide (third-party statement): unplug the power adapter, attach the contacts, hold the Action button and plug in the power adapter while holding it. On an already unlocked device the Volume Down button applies instead.</li><li>Check read-only: <code>fastboot devices</code> and <code>fastboot getvar product</code>. On mine the Echo reported <code>RADAR</code>.</li><li>I repeated the query several times. It ran without dropouts until I stopped it by hand.</li><li>The bootloader build of my device (<code>lk_build_desc: 63cb91b-20221007_073612</code>) is on the LibreEcho approval list. Check your own build. This is not an approval for arbitrary files.</li></ol></dd>
+        <dt>Possible difficulties</dt><dd><p>I had no difficulties beyond step 3. While fastboot is active, Alexa is not active.</p></dd>
+        <dt>Personal effort</dt><dd><p>It worked on the first attempt. Effort and time together with step 3: 2 of 5, about 30 minutes.</p></dd>
+        <dt>Proof it worked</dt><dd><p>The output of <code>fastboot getvar product</code>: <code>RADAR</code> (my terminal output).</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/aslater3/LibreEcho/blob/main/docs/install/README.md">LibreEcho: installation guide, section “Connect the device”</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u5">
       <p class="unum">Step 5</p>
       <h3>Bootloader unlock and TWRP</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <p class="warn-mini"><strong>NO WARRANTY – AT YOUR OWN RISK.</strong> This step can permanently damage the device. Read the notice above and the original guide first.</p>
       <dl>
         <dt>Prerequisites</dt><dd><ul><li>The fastboot connection from step 4.</li><li>The unlock package for radar. LibreEcho names <code>amonet-radar-v1.0.0.zip</code> and does not distribute it itself. You have to obtain the file yourself (third-party statement).</li><li>A bootloader build that matches the package.</li></ul></dd>
-        <dt>What we did</dt><dd><ol><li>Checked the checksum of the package file: SHA-256 <code>ecdb07bc05a508532e5ffed77121592d492b1a91572839e0f17545421f398f1a</code>.</li><li>Before starting, the owner checked the product (<code>RADAR</code>), the bootloader build and the image chosen by the script, and confirmed the script's prompt with <code>YES</code>.</li><li>The script reported “Exploit most likely successful!”. We did not rely on that but checked the state separately: the TWRP recovery 3.7.0_9-0 was reachable, and <code>fastboot getvar unlock_status</code> reported <code>true</code> (before: <code>false</code>).</li><li>After that the Echo booted normally and Alexa worked (owner observation).</li></ol></dd>
-        <dt>Possible difficulties</dt><dd><ul><li>Unlocking is a permanent change to the boot chain.</li><li>Access to TWRP is not the same as root in the running Fire OS.</li><li>We have no verified raw backup (about 3.9 GB eMMC plus two small boot areas). That is a risk and not an example to follow.</li></ul></dd>
-        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> “for me, because I have basic experience” (owner).</p><p>Time: unlock, TWRP and installing the software (step 6) together about 20 minutes.</p></dd>
-        <dt>Proof it worked</dt><dd><p><code>unlock_status: true</code> and TWRP version 3.7.0_9-0 (owner terminal output, including <code>adb shell getprop ro.twrp.version</code>).</p></dd>
+        <dt>What we did</dt><dd><ol><li>I checked the checksum of the package file: SHA-256 <code>ecdb07bc05a508532e5ffed77121592d492b1a91572839e0f17545421f398f1a</code>.</li><li>Before starting, I checked the product (<code>RADAR</code>), the bootloader build and the image chosen by the script, and confirmed the script's prompt with <code>YES</code>.</li><li>The script reported “Exploit most likely successful!”. I did not rely on that but checked the state separately: the TWRP recovery 3.7.0_9-0 was reachable, and <code>fastboot getvar unlock_status</code> reported <code>true</code> (before: <code>false</code>).</li><li>After that the Echo booted normally and Alexa worked.</li></ol></dd>
+        <dt>Possible difficulties</dt><dd><ul><li>Unlocking is a permanent change to the boot chain.</li><li>Access to TWRP is not the same as root in the running Fire OS.</li><li>I have no verified raw backup (about 3.9 GB eMMC plus two small boot areas). That is a risk and not an example to follow.</li></ul></dd>
+        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> for me, because I have basic experience.</p><p>Time: unlock, TWRP and installing the software (step 6) together about 20 minutes.</p></dd>
+        <dt>Proof it worked</dt><dd><p><code>unlock_status: true</code> and TWRP version 3.7.0_9-0 (my terminal output, including <code>adb shell getprop ro.twrp.version</code>).</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/aslater3/LibreEcho/blob/main/tools/README.md">LibreEcho: notes on the unlock package for the Echo 2</a></li><li><a href="https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md">echo-dot-assist: page for the Echo 2, section “Unlock”</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u6">
       <p class="unum">Step 6</p>
       <h3>Install the software: echo-dot-assist</h3>
-      <p class="evs"><span class="ev ev-r">Reported</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-r">My own report</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <p class="warn-mini"><strong>NO WARRANTY – AT YOUR OWN RISK.</strong> This step can permanently damage the device. Read the notice above and the original guide first.</p>
       <dl>
         <dt>Prerequisites</dt><dd><ul><li>An unlocked Echo 2 with TWRP (step 5).</li><li>According to the project: the firmware named there, pinned to an exact build (Fire OS NS6572 for radar), and the further files (unlock package, root package) with the checksums named there. The device should stay offline until then (third-party statement).</li></ul></dd>
-        <dt>What we did</dt><dd><p>Why this software? According to the project, echo-dot-assist keeps Amazon's microphone processing and wake word engine, replaces Alexa with a small program and connects the Echo to Home Assistant via ESPHome. Fire OS stays as the base. LibreEcho, in contrast, replaces Amazon's software entirely. The two routes should not be mixed (third-party statement).</p><p>We installed echo-dot-assist, build <code>2026.10.21.213542</code>, with Fire OS NS6572 as the base (owner report).</p><p>We deliberately did not copy the individual steps (firmware, wipe, flash, root package) here. They are on the project's radar page and may change.</p></dd>
-        <dt>Possible difficulties</dt><dd><p>The project says about itself: “Vibecoded, unaudited, your risk”. The code was written with AI help and not independently audited, it was tested on one device per model, and the installation writes the system partition and can make the device unusable (third-party statement). The radar page also still marks open points to verify (“verify”).</p><p>No difficulties were recorded on our side. It is open whether recording, playback, mute and restarts run stably over time. We only have short tests.</p></dd>
-        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> (owner).</p><p>Time: together with step 5 about 20 minutes.</p></dd>
-        <dt>Proof it worked</dt><dd><p>The device appears in Home Assistant (step 7). We did not run our own acceptance of every function. Descriptions by the project are not a test of our own.</p></dd>
+        <dt>What we did</dt><dd><p>Why this software? According to the project, echo-dot-assist keeps Amazon's microphone processing and wake word engine, replaces Alexa with a small program and connects the Echo to Home Assistant via ESPHome. Fire OS stays as the base. LibreEcho, in contrast, replaces Amazon's software entirely. The two routes should not be mixed (third-party statement).</p><p>I installed echo-dot-assist, build <code>2026.10.21.213542</code>, with Fire OS NS6572 as the base.</p><p>I deliberately did not copy the individual steps (firmware, wipe, flash, root package) here. They are on the project's radar page and may change.</p></dd>
+        <dt>Possible difficulties</dt><dd><p>The project says about itself: “Vibecoded, unaudited, your risk”. The code was written with AI help and not independently audited, it was tested on one device per model, and the installation writes the system partition and can make the device unusable (third-party statement). The radar page also still marks open points to verify (“verify”).</p><p>I had no major difficulties here. It is open whether recording, playback, mute and restarts run stably over time. I have only run short tests so far.</p></dd>
+        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> my own assessment.</p><p>Time: together with step 5 about 20 minutes.</p></dd>
+        <dt>Proof it worked</dt><dd><p>The device appears in Home Assistant (step 7). I did not run my own acceptance of every function. Descriptions by the project are not a test of our own.</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/Gamer92000/echo-dot-assist/blob/main/devices/radar/README.md">echo-dot-assist: page for the Echo 2 (radar)</a></li><li><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist: project page</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u7">
       <p class="unum">Step 7</p>
       <h3>Connection to Home Assistant</h3>
-      <p class="evs"><span class="ev ev-r">Reported</span></p>
+      <p class="evs"><span class="ev ev-r">My own report</span></p>
       <dl>
         <dt>Prerequisites</dt><dd><ul><li>A running Home Assistant installation with Assist.</li><li>The Echo on the same network.</li></ul></dd>
-        <dt>What we did</dt><dd><p>echo-dot-assist speaks the ESPHome interface. The Echo is added to Home Assistant as an ESPHome device and shows up there as an Assist satellite and as a media player (owner report).</p><p>For the Echo you choose a wake word and an Assist pipeline. We run a dedicated pipeline for the voice assistant.</p><p><strong>Data path:</strong> speech recognition and speech output currently run through cloud services. Spoken sentences leave the home network in the process. So we do not run the system completely offline.</p></dd>
-        <dt>Possible difficulties</dt><dd><p>No difficulties were recorded on our side.</p></dd>
-        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> for “connect the Echo to Home Assistant” including wake word and Assist pipeline (owner).</p></dd>
-        <dt>Proof it worked</dt><dd><p>The Echo is visible in Home Assistant, with Assist satellite and media player (owner report).</p></dd>
+        <dt>What we did</dt><dd><p>echo-dot-assist speaks the ESPHome interface. The Echo is added to Home Assistant as an ESPHome device and shows up there as an Assist satellite and as a media player.</p><p>For the Echo you choose a wake word and an Assist pipeline. We run a dedicated pipeline for the voice assistant.</p><p><strong>Data path:</strong> speech recognition and speech output currently run through cloud services. Spoken sentences leave the home network in the process. So we do not run the system completely offline.</p></dd>
+        <dt>Possible difficulties</dt><dd><p>I had no major difficulties here.</p></dd>
+        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> for “connect the Echo to Home Assistant” including wake word and Assist pipeline, my own assessment.</p></dd>
+        <dt>Proof it worked</dt><dd><p>The Echo is visible in Home Assistant, with Assist satellite and media player.</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist: project page (ESPHome mode)</a></li><li><a href="https://www.home-assistant.io/voice_control/troubleshooting/">Home Assistant: troubleshooting Assist</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u8">
       <p class="unum">Step 8</p>
       <h3>Local wake word “Okay Nabu”</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-f">Statement of a third-party project</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-f">Statement of a third-party project</span></p>
       <dl>
         <dt>Prerequisites</dt><dd><p>The connection from step 7.</p></dd>
         <dt>What we did</dt><dd><p>The wake word is detected locally on the Echo (microWakeWord). We use the English standard model “Okay Nabu” with a threshold of 0.97. A second wake word is switched off.</p><p>Short test: ten attempts 10 to 15 seconds apart, ten detections. After five minutes of silence “Okay Nabu” was detected on the first attempt.</p></dd>
         <dt>Possible difficulties</dt><dd><p>The earlier route of detecting the wake word on the server (“Hey Nova”) was unstable in continuous operation: the Echo went deaf after minutes. That is why we detect locally. See <a href="#befunde">Findings</a>.</p><p>Open: continuous operation, false activations, detection from a greater distance and during music. The final wake word is not yet decided.</p></dd>
-        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> rated together with step 7 (owner).</p></dd>
-        <dt>Proof it worked</dt><dd><p>10 of 10 in the short test (owner count, no log, about 15 minutes of observation).</p></dd>
+        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 1 of 5</strong> rated together with step 7.</p></dd>
+        <dt>Proof it worked</dt><dd><p>10 of 10 in the short test (counted by me, no log, about 15 minutes of observation).</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="https://github.com/kahrendt/microWakeWord">microWakeWord (project)</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u9">
       <p class="unum">Step 9</p>
       <h3>Hermes speaker and Kinetic Voice Router</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-r">Reported</span> <span class="ev ev-d">In development</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-r">My own report</span> <span class="ev ev-d">In development</span></p>
       <dl>
         <dt>Prerequisites</dt><dd><p>A Hermes agent as its own separate instance for the voice assistant, and a conversation agent in Home Assistant.</p></dd>
-        <dt>What we did</dt><dd><p><strong>Flow:</strong> Home Assistant processes commands for devices locally first. Only what cannot be handled locally goes as a free question to the Hermes speaker, an AI agent with its own personality (see <a href="#soul">Persona</a>).</p><p><strong>26 Oct, owner listening test:</strong> the Echo introduced itself with the intended personality and answered the closing question fittingly. Before that, the conversation route had bypassed the personality (see <a href="#befunde">Findings</a>).</p><p><strong>27 Oct, single test:</strong> after an additional alias, an exposed smart plug with a harmless test load could be switched on and off by voice. The switch-off run was processed locally.</p><p><strong>Kinetic Voice Router (our own development):</strong> our own Home Assistant extension that classifies a sentence before it goes to Hermes. The source code is not published at the moment. There are three operating modes: Off, Observe (only counts) and Active.</p><p><strong>Version 0.4.1</strong> ran live on 29 Oct. In “Observe” mode the router counted two real knowledge questions on the Echo as knowledge questions, and Hermes answered unchanged. In “Active” mode, a question about the state of a real device was answered locally by Home Assistant.</p><p><strong>Fault:</strong> a question about a device that does not exist was classified by the router as a knowledge question. Hermes then invented a state. In addition, processing one knowledge question took 21 seconds. Whether the router was involved in that is not proven.</p><p><strong>Version 0.4.2</strong> contains fixes for this. It is a development state with tests against a simulation, not installed and not accepted live.</p></dd>
+        <dt>What we did</dt><dd><p><strong>Flow:</strong> Home Assistant processes commands for devices locally first. Only what cannot be handled locally goes as a free question to the Hermes speaker, an AI agent with its own personality (see <a href="#soul">Persona</a>).</p><p><strong>26 Oct, listening test:</strong> the Echo introduced itself with the intended personality and answered the closing question fittingly. Before that, the conversation route had bypassed the personality (see <a href="#befunde">Findings</a>).</p><p><strong>27 Oct, single test:</strong> after an additional alias, an exposed smart plug with a harmless test load could be switched on and off by voice. The switch-off run was processed locally.</p><p><strong>Kinetic Voice Router (our own development):</strong> our own Home Assistant extension that classifies a sentence before it goes to Hermes. The source code is not published at the moment. There are three operating modes: Off, Observe (only counts) and Active.</p><p><strong>Version 0.4.1</strong> ran live on 29 Oct. In “Observe” mode the router counted two real knowledge questions on the Echo as knowledge questions, and Hermes answered unchanged. In “Active” mode, a question about the state of a real device was answered locally by Home Assistant.</p><p><strong>Fault:</strong> a question about a device that does not exist was classified by the router as a knowledge question. Hermes then invented a state. In addition, processing one knowledge question took 21 seconds. Whether the router was involved in that is not proven.</p><p><strong>Version 0.4.2</strong> contains fixes for this. It is a development state with tests against a simulation, not installed and not accepted live.</p></dd>
         <dt>Possible difficulties</dt><dd><p>The basic setup is manageable. It gets hard when you want to personalize the assistant: its own personality, a safe voice path, a clean separation of local command and free question.</p><p>Our goal, in development in 0.4.2: a language model must never guess a device state. Questions about real states must come from Home Assistant or end honestly with “I cannot answer that reliably right now”.</p></dd>
-        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 2 of 5</strong> for the basic setup (owner).</p><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="rng"></i></span> <strong>Effort: 4 to 5 of 5</strong> with personalization (owner). We are still working on it.</p></dd>
-        <dt>Proof it worked</dt><dd><p>Listening test on the Echo (26 Oct), single test with the smart plug (27 Oct) and the router's counters in Home Assistant (29 Oct). All owner observations without a measurement series.</p></dd>
+        <dt>Personal effort</dt><dd><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span> <strong>Effort: 2 of 5</strong> for the basic setup.</p><p class="eff"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="rng"></i></span> <strong>Effort: 4 to 5 of 5</strong> with personalization. I am still working on it.</p></dd>
+        <dt>Proof it worked</dt><dd><p>Listening test on the Echo (26 Oct), single test with the smart plug (27 Oct) and the router's counters in Home Assistant (29 Oct). All my own observations without a measurement series.</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="#soul">Persona section (this page)</a></li><li><a href="#befunde">Findings section (this page)</a></li></ul></dd>
       </dl>
     </article>
     <article class="ustep" id="u10">
       <p class="unum">Step 10</p>
       <h3>Function tests, problems and limits</h3>
-      <p class="evs"><span class="ev ev-t">Tested (owner observation)</span> <span class="ev ev-r">Reported</span> <span class="ev ev-d">In development</span> <span class="ev ev-p">Planned</span> <span class="ev ev-n">Not proven</span></p>
+      <p class="evs"><span class="ev ev-t">Tried myself</span> <span class="ev ev-r">My own report</span> <span class="ev ev-d">In development</span> <span class="ev ev-p">Planned</span> <span class="ev ev-n">Not proven</span></p>
       <dl>
-        <dt>What we did</dt><dd><div class="tablewrap" tabindex="0" role="region" aria-label="Function tests, problems and limits"><table class="stack"><thead><tr><th>Function</th><th>Status</th><th>Type</th></tr></thead><tbody><tr><td data-l="Function">Echo 2 unlocked, TWRP reachable</td><td data-l="Status">Fastboot and TWRP outputs from the owner</td><td data-l="Type"><span class="ev ev-t">Tested (owner observation)</span></td></tr><tr><td data-l="Function">Wake word “Okay Nabu” locally</td><td data-l="Status">10 of 10 in the short test. Continuous operation not tested.</td><td data-l="Type"><span class="ev ev-t">Tested (owner observation)</span></td></tr><tr><td data-l="Function">Answer in the speaker personality on the Echo</td><td data-l="Status">One run (26 Oct), listening test without measurement</td><td data-l="Type"><span class="ev ev-t">Tested (owner observation)</span></td></tr><tr><td data-l="Function">Switching command for an exposed smart plug</td><td data-l="Status">Single test (27 Oct) with a harmless test load, no long-term test</td><td data-l="Type"><span class="ev ev-t">Tested (owner observation)</span></td></tr><tr><td data-l="Function">Kinetic Voice Router 0.4.1</td><td data-l="Status">Live in observe mode (29 Oct), in active mode with a known fault</td><td data-l="Type"><span class="ev ev-r">Reported</span></td></tr><tr><td data-l="Function">Kinetic Voice Router 0.4.2</td><td data-l="Status">Fixes as a development state, not installed</td><td data-l="Type"><span class="ev ev-d">In development</span></td></tr><tr><td data-l="Function">Timers, alarms, reminders, lists, calendar, music</td><td data-l="Status">Not tested</td><td data-l="Type"><span class="ev ev-n">Not proven</span></td></tr><tr><td data-l="Function">Continuous operation and latency measurement</td><td data-l="Status">Not proven, only single observations so far</td><td data-l="Type"><span class="ev ev-n">Not proven</span></td></tr><tr><td data-l="Function">Raw backup and restore of the Echo</td><td data-l="Status">Not proven</td><td data-l="Type"><span class="ev ev-n">Not proven</span></td></tr><tr><td data-l="Function">Offline fallback (local speech recognition and speech output)</td><td data-l="Status">Concept, not installed</td><td data-l="Type"><span class="ev ev-p">Planned</span></td></tr><tr><td data-l="Function">Follow-me conversation, alias maintenance by a Hermes assistant</td><td data-l="Status">Ideas, not implemented</td><td data-l="Type"><span class="ev ev-p">Planned</span></td></tr></tbody></table></div><p><strong>We do not replace all Alexa functions and we do not run completely offline.</strong> Speech recognition and speech output run through cloud services, and free questions are answered by Hermes with an external language model. Content leaves the home network for that as well.</p></dd>
+        <dt>What we did</dt><dd><div class="tablewrap" tabindex="0" role="region" aria-label="Function tests, problems and limits"><table class="stack"><thead><tr><th>Function</th><th>Status</th><th>Type</th></tr></thead><tbody><tr><td data-l="Function">Echo 2 unlocked, TWRP reachable</td><td data-l="Status">My fastboot and TWRP outputs</td><td data-l="Type"><span class="ev ev-t">Tried myself</span></td></tr><tr><td data-l="Function">Wake word “Okay Nabu” locally</td><td data-l="Status">10 of 10 in the short test. Continuous operation not tested.</td><td data-l="Type"><span class="ev ev-t">Tried myself</span></td></tr><tr><td data-l="Function">Answer in the speaker personality on the Echo</td><td data-l="Status">One run (26 Oct), listening test without measurement</td><td data-l="Type"><span class="ev ev-t">Tried myself</span></td></tr><tr><td data-l="Function">Switching command for an exposed smart plug</td><td data-l="Status">Single test (27 Oct) with a harmless test load, no long-term test</td><td data-l="Type"><span class="ev ev-t">Tried myself</span></td></tr><tr><td data-l="Function">Kinetic Voice Router 0.4.1</td><td data-l="Status">Live in observe mode (29 Oct), in active mode with a known fault</td><td data-l="Type"><span class="ev ev-r">My own report</span></td></tr><tr><td data-l="Function">Kinetic Voice Router 0.4.2</td><td data-l="Status">Fixes as a development state, not installed</td><td data-l="Type"><span class="ev ev-d">In development</span></td></tr><tr><td data-l="Function">Timers, alarms, reminders, lists, calendar, music</td><td data-l="Status">Not tested</td><td data-l="Type"><span class="ev ev-n">Not proven</span></td></tr><tr><td data-l="Function">Continuous operation and latency measurement</td><td data-l="Status">Not proven, only single observations so far</td><td data-l="Type"><span class="ev ev-n">Not proven</span></td></tr><tr><td data-l="Function">Raw backup and restore of the Echo</td><td data-l="Status">Not proven</td><td data-l="Type"><span class="ev ev-n">Not proven</span></td></tr><tr><td data-l="Function">Offline fallback (local speech recognition and speech output)</td><td data-l="Status">Concept, not installed</td><td data-l="Type"><span class="ev ev-p">Planned</span></td></tr><tr><td data-l="Function">Follow-me conversation, alias maintenance by a Hermes assistant</td><td data-l="Status">Ideas, not implemented</td><td data-l="Type"><span class="ev ev-p">Planned</span></td></tr></tbody></table></div><p><strong>We do not replace all Alexa functions and we do not run completely offline.</strong> Speech recognition and speech output run through cloud services, and free questions are answered by Hermes with an external language model. Content leaves the home network for that as well.</p></dd>
         <dt>Further sources</dt><dd><ul class="srcs"><li><a href="#stand">Project status (this page)</a></li><li><a href="#befunde">Findings and lessons (this page)</a></li></ul></dd>
       </dl>
     </article>
@@ -702,16 +715,16 @@ footer p{font-size:.86rem}
     <div class="eyebrow">Transparency</div>
     <h2>Current public project status</h2>
     <p class="intro">Only statements released for publication appear here. The internal development and security status stays in private repositories. The status deliberately distinguishes between <strong>reported</strong> and <strong>accepted</strong>.</p>
-    <p class="small" data-bind="meta">As of 30 Oct 2026 · Owner reports and private project records; no independent live acceptance</p>
+    <p class="small" data-bind="meta">As of 30 Oct 2026 · My own reports and private project records; no independent live acceptance</p>
     <div class="board">
       <div class="card good"><span class="label">Reported so far</span>
         <ul id="l-confirmed"><!-- confirmed:start -->
           <li>Echo 2 (XC56PY/radar): unlock and TWRP documented</li>
-          <li>echo-dot-assist connected to Home Assistant (owner report)</li>
+          <li>echo-dot-assist connected to Home Assistant (own report)</li>
           <li>Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven</li>
-          <li>Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (owner observation).</li>
-          <li>An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (owner observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.</li>
-          <li>Our own extension “Kinetic Voice Router” (version 0.4.1) ran live on 29 Oct: in observe mode two real knowledge questions on the Echo were counted correctly and Hermes answered unchanged. In active mode, a question about the state of a real device was answered locally by Home Assistant (owner observation, no measurement series).</li>
+          <li>Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (own observation).</li>
+          <li>An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (own observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.</li>
+          <li>Our own extension “Kinetic Voice Router” (version 0.4.1) ran live on 29 Oct: in observe mode two real knowledge questions on the Echo were counted correctly and Hermes answered unchanged. In active mode, a question about the state of a real device was answered locally by Home Assistant (own observation, no measurement series).</li>
 <!-- confirmed:end -->
         </ul>
       </div>
@@ -723,7 +736,7 @@ footer p{font-size:.86rem}
           <li>Multi-user permissions, guest mode and sensitive answers</li>
           <li>Recovery, full raw backup and long-term tests</li>
           <li>Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested.</li>
-          <li>Idea: a separate Hermes assistant for admin tasks helps maintain device aliases (read existing aliases, spot spelling variants, duplicates and conflicts, suggest aliases). Changes only after approval by the owner; no automatic exposure of further devices to voice. Concept, not implemented.</li>
+          <li>Idea: a separate Hermes assistant for admin tasks helps maintain device aliases (read existing aliases, spot spelling variants, duplicates and conflicts, suggest aliases). Changes only after my approval; no automatic exposure of further devices to voice. Concept, not implemented.</li>
           <li>Offline fallback with local speech recognition and speech output: decided as a concept, not installed. Speech recognition and speech output currently run through cloud services.</li>
 <!-- open:end -->
         </ul>
@@ -746,11 +759,11 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-25">25 Oct 2026</time><span>Hermes speaker registered in Home Assistant as a conversation agent; review of voice exposures started; website published</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>English edition of the guide, SOUL.md example and build overview</span></li>
           <li><time datetime="2026-10-26">26 Oct 2026</time><span>First voice test of a switching command on the Echo failed; investigation under way</span></li>
-          <li><time datetime="2026-10-26">26 Oct 2026</time><span>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (owner voice test); device switching remains unresolved.</span></li>
+          <li><time datetime="2026-10-26">26 Oct 2026</time><span>Conversation route to the separate Hermes speaker corrected: the Echo introduced itself and gave a natural closing response in the intended personality (own voice test); device switching remains unresolved.</span></li>
           <li><time datetime="2026-10-27">27 Oct 2026</time><span>Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven.</span></li>
           <li><time datetime="2026-10-27">27 Oct 2026</time><span>A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open.</span></li>
           <li><time datetime="2026-10-29">29 Oct 2026</time><span>Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.</span></li>
-          <li><time datetime="2026-10-30">30 Oct 2026</time><span>Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by the owner, sources and limits.</span></li>
+          <li><time datetime="2026-10-30">30 Oct 2026</time><span>Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits.</span></li>
 <!-- history:end --></ol>
         <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Subscribe to the history feed (Atom)</a></p>
       </div>
@@ -878,7 +891,7 @@ Only ask if you would otherwise answer wrongly. One question, not several.</code
   /* Statusdaten (freigegebener Stand) laden; ohne JavaScript bleibt der statische Text stehen.
      Sprache ergibt sich aus <html lang>; Englisch liest das Objekt "en" in status.json. */
   var EN=document.documentElement.lang==='en';
-  var ST=EN?{owner_reported:'Owner report',in_progress:'in progress',open:'open',failed:'test failed'}:{owner_reported:'Owner-Bericht',in_progress:'in Arbeit',open:'offen',failed:'Test fehlgeschlagen'};
+  var ST=EN?{owner_reported:'Own report',in_progress:'in progress',open:'open',failed:'test failed'}:{owner_reported:'Eigener Bericht',in_progress:'in Arbeit',open:'offen',failed:'Test fehlgeschlagen'};
   var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function fmt(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');if(!m)return d;return EN?(+m[3])+' '+MON[+m[2]-1]+' '+m[1]:m[3]+'.'+m[2]+'.'+m[1]}
   function bind(k,v){if(typeof v!=='string')return;$$('[data-bind="'+k+'"]').forEach(function(e){e.textContent=v})}
