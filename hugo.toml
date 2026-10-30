@@ -1,0 +1,126 @@
+# Hugo-Projekt der öffentlichen Seite. Hugo-Version: siehe .github/workflows/hugo.yml (festgelegt).
+# Während der Umstellung bleiben index.html, en/index.html, feed.xml und sitemap.xml im Hauptordner
+# unverändert, bis die Seite von Hugo veröffentlicht wird. tools/hugo_parity.py beweist, dass beide gleich sind.
+baseURL = "https://kinetic-it.github.io/lokale-alexa-website/"
+title = "Lokale Alexa"
+defaultContentLanguage = "de"
+defaultContentLanguageInSubdir = false
+disableKinds = ["taxonomy", "term", "RSS", "section", "sitemap"]
+disableAliases = true
+disableHugoGeneratorInject = true
+enableRobotsTXT = false
+
+# Die Sitemap kommt aus layouts/index.sitemap.xml, nur einmal (über die deutsche Startseite), mit Sprachverweisen.
+[outputs]
+  home = ["HTML", "Atom"]
+
+[mediaTypes."application/atom+xml"]
+  suffixes = ["xml"]
+
+[mediaTypes."application/xml"]
+  suffixes = ["xml"]
+
+[outputFormats.Sitemap]
+  mediaType = "application/xml"
+  baseName = "sitemap"
+  isHTML = false
+  notAlternative = true
+
+[outputFormats.Atom]
+  mediaType = "application/atom+xml"
+  baseName = "feed"
+  isHTML = false
+  notAlternative = true
+
+# Quellen im Hauptordner werden unter static/ eingebunden, damit es nur je eine Kopie gibt.
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "data"
+    target = "static/data"
+    files = ["status.json"]
+  [[module.mounts]]
+    source = "downloads"
+    target = "static/downloads"
+  [[module.mounts]]
+    source = "images"
+    target = "static/images"
+  [[module.mounts]]
+    source = "og-de.png"
+    target = "static/og-de.png"
+  [[module.mounts]]
+    source = "og-en.png"
+    target = "static/og-en.png"
+  [[module.mounts]]
+    source = "robots.txt"
+    target = "static/robots.txt"
+
+[languages]
+  [languages.de]
+    locale = "de"
+    label = "Deutsch"
+    weight = 1
+    [languages.de.outputs]
+      home = ["HTML", "Atom", "Sitemap"]
+    [languages.de.params]
+      feedtitle = "Lokale Alexa: Projektverlauf"
+      feedsub = "Neue Einträge im öffentlichen Projektverlauf. Berichtet ist nicht gleich getestet ist nicht gleich abgenommen."
+      headline = "Lokale Alexa: Ein Echo bekommt ein zweites Leben"
+      stale = ' \u00b7 Stand älter als 14 Tage'
+      [languages.de.params.labels]
+        owner_reported = "Eigener Bericht"
+        in_progress = "in Arbeit"
+        open = "offen"
+        failed = "Test fehlgeschlagen"
+        asof = "Stand: "
+        last = "Letzter Test"
+      [languages.de.params.find]
+        eyebrow = "Ehrlich festgehalten"
+        h2 = "Befunde und Erkenntnisse"
+        intro = "Hier stehen Dinge, die schiefgegangen sind oder die wir gelernt haben, neueste zuerst. Offene Sicherheitsdetails nennen wir erst, wenn sie behoben sind; öffentlich steht dann die Lehre daraus."
+        [languages.de.params.find.type]
+          finding = "Erkenntnis"
+          problem = "Problem"
+          correction = "Korrektur"
+        [languages.de.params.find.state]
+          open = "offen"
+          resolved = "geklärt"
+  [languages.en]
+    locale = "en"
+    label = "English"
+    weight = 2
+    disableKinds = ["taxonomy", "term", "RSS", "section", "sitemap", "404"]
+    [languages.en.params]
+      feedtitle = "Local Alexa: project history"
+      feedsub = "New entries in the public project history. Reported is not tested is not accepted."
+      headline = "Local Alexa: an Echo gets a second life"
+      stale = ' \u00b7 Status older than 14 days'
+      [languages.en.params.labels]
+        owner_reported = "Own report"
+        in_progress = "in progress"
+        open = "open"
+        failed = "test failed"
+        asof = "As of "
+        last = "Latest test"
+      [languages.en.params.find]
+        eyebrow = "Recorded honestly"
+        h2 = "Findings and lessons"
+        intro = "This is where we record what went wrong or what we learned, newest first. We name open security details only once they are fixed; what we learned is published then."
+        [languages.en.params.find.type]
+          finding = "Finding"
+          problem = "Problem"
+          correction = "Correction"
+        [languages.en.params.find.state]
+          open = "open"
+          resolved = "resolved"

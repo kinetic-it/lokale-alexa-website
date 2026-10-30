@@ -1,0 +1,32 @@
+{{- $lang := .Language.Lang -}}
+{{- $s := hugo.Data.status -}}
+{{- $base := "https://kinetic-it.github.io/lokale-alexa-website/" -}}
+{{- $page := cond (eq $lang "en") (printf "%sen/" $base) $base -}}
+{{- $self := cond (eq $lang "en") (printf "%sen/feed.xml" $base) (printf "%sfeed.xml" $base) -}}
+{{- $texts := slice -}}
+{{- if eq $lang "en" }}{{ $texts = $s.en.history }}{{ else }}{{ range $s.history }}{{ $texts = $texts | append .text }}{{ end }}{{ end -}}
+{{- $sc := newScratch -}}
+{{- $entries := slice -}}
+{{- range $i, $h := $s.history -}}
+{{- $n := add ($sc.Get $h.date | default 0) 1 -}}{{- $sc.Set $h.date $n -}}
+{{- $entries = $entries | append (dict "d" $h.date "n" $n "t" (index $texts $i)) -}}
+{{- end -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ $lang }}">
+  <title>{{ .Site.Params.feedtitle }}</title>
+  <subtitle>{{ .Site.Params.feedsub }}</subtitle>
+  <id>{{ $self }}</id>
+  <link rel="self" type="application/atom+xml" href="{{ $self }}"/>
+  <link rel="alternate" type="text/html" href="{{ $page }}"/>
+  <updated>{{ $s.as_of }}T00:00:00Z</updated>
+  <author><name>kinetic-it</name></author>
+{{- range $i := seq (len $entries) 1 }}{{ $e := index $entries (sub $i 1) }}
+  <entry>
+    <title>{{ if gt (strings.RuneCount $e.t) 90 }}{{ printf "%s..." (strings.TrimRight " " (substr $e.t 0 87)) }}{{ else }}{{ $e.t }}{{ end }}</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/{{ $lang }}/{{ $e.d }}-{{ $e.n }}</id>
+    <link rel="alternate" type="text/html" href="{{ $page }}#stand"/>
+    <updated>{{ $e.d }}T00:00:00Z</updated>
+    <summary>{{ $e.t }}</summary>
+  </entry>
+{{- end }}
+</feed>

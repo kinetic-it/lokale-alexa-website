@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Erzeugt zweisprachige Seitenteile aus einer Quelle:
   - JSON-LD im Kopf (dateModified aus status.json -> as_of)
-  - Abschnitt "Nachbauen" (<section id="nachbauen">) aus tools/sections/steps.json
+  - Abschnitt "Nachbauen" (<section id="nachbauen">) aus data/steps.json
   - Abschnitt "Befunde und Erkenntnisse" aus data/findings.json
   - statischer Fallback des Projektstands aus data/status.json: Kopfkarte (Titel, Datum, Meilensteine,
     letzter Test), Listen "berichtet / offen / Probleme" und Verlauf. Das JavaScript liest dieselben Daten live.
@@ -12,7 +12,7 @@ Aufruf im Repo-Wurzelverzeichnis:
 import html, json, re, sys
 
 E = html.escape
-STEPS = json.load(open('tools/sections/steps.json', encoding='utf-8'))
+STEPS = json.load(open('data/steps.json', encoding='utf-8'))
 STATUS = json.load(open('data/status.json', encoding='utf-8'))
 FINDINGS = json.load(open('data/findings.json', encoding='utf-8'))
 ISSUE = 'https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md'

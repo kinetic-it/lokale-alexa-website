@@ -1,0 +1,17 @@
+{{- $b := .b -}}
+{{- $p := .p -}}
+{{- if eq (printf "%T" $b) "string" -}}
+<p>{{ partial "inline.html" $b }}</p>
+{{- else if isset $b "ul" -}}
+<ul>{{ range $b.ul }}<li>{{ partial "inline.html" . }}</li>{{ end }}</ul>
+{{- else if isset $b "ol" -}}
+<ol>{{ range $b.ol }}<li>{{ partial "inline.html" . }}</li>{{ end }}</ol>
+{{- else if isset $b "effort" -}}
+{{- $n := int $b.effort -}}{{- $to := $n -}}{{- if isset $b "to" }}{{ $to = int $b.to }}{{ end -}}
+<p class="eff"><span class="dots" aria-hidden="true">{{ range $i := seq 1 5 }}<i class="{{ if le $i $n }}on{{ else if le $i $to }}rng{{ end }}"></i>{{ end }}</span> <strong>{{ $p.effort_label }}: {{ if ne $to $n }}{{ $n }} {{ $p.effort_to }} {{ $to }} {{ $p.effort_word }}{{ else }}{{ $n }} {{ $p.effort_word }}{{ end }}</strong> {{ partial "inline.html" $b.text }}</p>
+{{- else if isset $b "links" -}}
+<ul class="srcs">{{ range $b.links }}<li><a href="{{ index . 1 }}">{{ index . 0 }}</a></li>{{ end }}</ul>
+{{- else if isset $b "table" -}}
+{{- $h := $p.table_head -}}
+<div class="tablewrap" tabindex="0" role="region" aria-label="{{ (index $p.steps (sub (len $p.steps) 1)).title }}"><table class="stack"><thead><tr>{{ range $h }}<th>{{ . }}</th>{{ end }}</tr></thead><tbody>{{ range $b.table }}<tr><td data-l="{{ index $h 0 }}">{{ partial "inline.html" (index . 0) }}</td><td data-l="{{ index $h 1 }}">{{ partial "inline.html" (index . 1) }}</td><td data-l="{{ index $h 2 }}"><span class="ev ev-{{ index . 2 }}">{{ index $p.ev (index . 2) }}</span></td></tr>{{ end }}</tbody></table></div>
+{{- end -}}

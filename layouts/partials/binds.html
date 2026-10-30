@@ -1,0 +1,10 @@
+{{- /* Werte für die data-bind-Stellen in Kopfkarte und Stand (wie binds() im alten Generator). */ -}}
+{{- $lang := .Language.Lang -}}
+{{- $s := hugo.Data.status -}}
+{{- $t := $s -}}
+{{- $lt := $s.last_test.text -}}
+{{- if eq $lang "en" }}{{ $t = $s.en }}{{ $lt = $s.en.last_test }}{{ end -}}
+{{- $L := .Site.Params.labels -}}
+{{- $asof := partial "datefmt.html" (dict "d" $s.as_of "lang" $lang) -}}
+{{- $lastdate := partial "datefmt.html" (dict "d" $s.last_test.date "lang" $lang) -}}
+{{- return (dict "title" $t.title "asof" $asof "evidence" $t.evidence "meta" (printf "%s%s · %s" $L.asof $asof $t.evidence) "lasttest" $lt "lastdate" (printf "%s · %s" $L.last $lastdate)) -}}

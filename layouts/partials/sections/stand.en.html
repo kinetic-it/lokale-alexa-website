@@ -1,0 +1,28 @@
+{{ $b := partial "binds.html" . }}
+<section id="stand">
+  <div class="wrap">
+    <div class="eyebrow">Transparency</div>
+    <h2>Current public project status</h2>
+    <p class="intro">Only statements released for publication appear here. The internal development and security status stays in private repositories. The status deliberately distinguishes between <strong>reported</strong> and <strong>accepted</strong>.</p>
+    <p class="small" data-bind="meta">{{ $b.meta }}</p>
+    <div class="board">
+      <div class="card good"><span class="label">Reported so far</span>
+        <ul id="l-confirmed">{{ partial "list.html" (dict "p" . "key" "confirmed") }}
+        </ul>
+      </div>
+      <div class="card"><span class="label">Not yet accepted</span>
+        <ul id="l-open">{{ partial "list.html" (dict "p" . "key" "not_yet_verified") }}
+        </ul>
+      </div>
+      <div class="card issues wide"><span class="label">Known issues</span>
+        <ul id="l-issues">{{ partial "list.html" (dict "p" . "key" "known_issues") }}
+        </ul>
+      </div>
+      <div class="card wide"><span class="label">History</span>
+        <ol class="hist" id="l-history">{{ partial "history.html" . }}</ol>
+        <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Subscribe to the history feed (Atom)</a></p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:20px">Automatic publication is not automatic functional testing. The status is adopted after expert approval; the page then updates via GitHub Pages.</p>
+  </div>
+</section>

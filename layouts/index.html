@@ -1,0 +1,27 @@
+{{- $l := .Language.Lang -}}
+<!doctype html>
+<html lang="{{ $l }}">
+<head>
+{{ partial (printf "head/%s.html" $l) . }}
+<style>
+{{ (resources.Get "css/site.css").Content | safeCSS }}
+</style>
+{{ partial "head-tail.html" . }}
+</head>
+<body>
+{{ partial (printf "header/%s.html" $l) . }}
+
+<main>
+{{ partial (printf "sections/hero.%s.html" $l) . }}
+{{ range $id := slice "idee" "technik" "geraete" "nachbauen" "umbau" "stand" "befunde" "sicherheit" "soul" "faq" "leitfaden" }}
+{{ if in (slice "nachbauen" "umbau" "befunde" "soul") $id }}{{ partial (printf "sections/%s.html" $id) $ }}{{ else }}{{ partial (printf "sections/%s.%s.html" $id $l) $ }}{{ end }}
+{{ end }}
+</main>
+
+{{ partial (printf "footer/%s.html" $l) . }}
+
+<script>
+{{ (resources.Get "js/site.js").Content | replaceRE "__STALE__" (index .Site.Params "stale") | safeJS }}
+</script>
+</body>
+</html>

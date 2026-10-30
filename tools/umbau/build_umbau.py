@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Erzeugt den Abschnitt "So haben wir unseren Echo 2 umgebaut" (<section id="umbau">) in beiden Seiten
-aus tools/umbau/content.json (Deutsch und Englisch je Block, gleiche Struktur).
+aus data/umbau.json (Deutsch und Englisch je Block, gleiche Struktur).
 Inline: `code`, **fett**, [Text](Link). Bilder liegen in images/ (EN-Seite: ../images/).
 Aufruf im Repo-Wurzelverzeichnis:
   python3 tools/umbau/build_umbau.py          # schreibt index.html und en/index.html
@@ -9,7 +9,7 @@ Aufruf im Repo-Wurzelverzeichnis:
 import html, json, os, re, sys
 
 E = html.escape
-C = json.load(open('tools/umbau/content.json', encoding='utf-8'))
+C = json.load(open('data/umbau.json', encoding='utf-8'))
 ISSUE = 'https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md'
 
 def inline(s):

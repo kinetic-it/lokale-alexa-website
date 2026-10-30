@@ -1,0 +1,16 @@
+{{- $l := .Language.Lang -}}
+{{- $p := index hugo.Data.steps $l -}}
+<section id="nachbauen">
+  <div class="wrap">
+    <div class="eyebrow">{{ $p.eyebrow }}</div>
+    <h2>{{ $p.h2 }}</h2>
+    <p class="intro">{{ $p.intro }}</p>
+    <ol class="steps">
+{{ range $n, $s := $p.steps }}
+      <li class="step"><span class="label">{{ $p.step }} {{ add $n 1 }}</span><h3>{{ index $s 0 }}</h3><p>{{ index $s 1 }}</p><p class="ref">{{ index $s 2 }}</p></li>
+{{ end }}
+    </ol>
+    <div class="callout"><p>{{ $p.callout }} <a href="https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md">{{ $p.callout_link }}</a></p></div>
+    <div class="callout"><p>{{ $p.umbau_text }} <a href="#umbau">{{ $p.umbau_link }}</a></p></div>
+  </div>
+</section>

@@ -1,0 +1,6 @@
+{{- $lang := .Language.Lang -}}
+{{- $s := hugo.Data.status -}}
+{{- $L := .Site.Params.labels -}}
+{{ range $s.milestones }}
+          <li><i class="mk {{ .state }}"></i><span>{{ if eq $lang "en" }}{{ index $s.en.milestones .id }}{{ else }}{{ .name }}{{ end }}</span><span class="st">{{ index $L .state }}</span></li>
+{{ end }}

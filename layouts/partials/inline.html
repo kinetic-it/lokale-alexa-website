@@ -1,0 +1,6 @@
+{{- /* Inline-Format wie im alten Generator: `code`, **fett**, [Text](Link). Eingabe: ein Text. */ -}}
+{{- $s := . | htmlEscape -}}
+{{- $s = replaceRE "`([^`]+)`" "<code>$1</code>" $s -}}
+{{- $s = replaceRE `\*\*([^*]+)\*\*` "<strong>$1</strong>" $s -}}
+{{- $s = replaceRE `\[([^\]]+)\]\(([^)]+)\)` `<a href="$2">$1</a>` $s -}}
+{{- return ($s | safeHTML) -}}

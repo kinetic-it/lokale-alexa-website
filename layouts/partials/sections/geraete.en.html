@@ -1,0 +1,50 @@
+<section id="geraete">
+  <div class="wrap">
+    <div class="eyebrow">Hardware</div>
+    <h2>Which Echo devices are candidates?</h2>
+    <p class="intro">What matters are <strong>model number, codename, generation and software version</strong>. “Rootable” only means system access and is not the same as a working voice assistant.</p>
+    <div class="chips" id="chips" role="group" aria-label="Filter devices" hidden>
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="port" aria-pressed="false">Published voice port</button>
+      <button type="button" data-f="exp" aria-pressed="false">Experimental</button>
+      <button type="button" data-f="root" aria-pressed="false">Root proof only</button>
+      <button type="button" data-f="none" aria-pressed="false">No proven port</button>
+    </div>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Table: Echo devices and their classification"><table id="devices">
+      <caption class="sr">Echo devices with model number, codename and assessment</caption>
+      <thead><tr><th>Device</th><th>Model / codename</th><th>Assessment from the guide</th></tr></thead>
+      <tbody>
+        <tr data-c="port"><td>Echo Dot 2</td><td>RS03QR / biscuit</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo 2 (2017)</td><td>XC56PY / radar</td><td><span class="tag">Published voice port</span> · pilot device</td></tr>
+        <tr data-c="port"><td>Echo Dot 3 original (2018)</td><td>D9N29T / donut</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Show 5 Gen. 1</td><td>H23K37 / checkers</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Show 5 Gen. 2</td><td>C76N8S / cronos</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Show 8 Gen. 1</td><td>C7H6N3 / crown</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="port"><td>Echo Spot original (2017)</td><td>VN94DQ / rook</td><td><span class="tag">Published voice port</span></td></tr>
+        <tr data-c="exp"><td>Echo Show 8 Gen. 2</td><td>A8H3N2 / athena</td><td><span class="tag warn">Experimental path</span> · now supported according to projects</td></tr>
+        <tr data-c="root"><td>Echo 1</td><td>SK705DI</td><td><span class="tag warn">Historical root proof</span></td></tr>
+        <tr data-c="none"><td>Echo Dot 3 Refresh</td><td>C78MP8 / crumpet</td><td><span class="tag no">No proven full port</span></td></tr>
+        <tr data-c="none"><td>Echo Dot 3 with clock</td><td>36EBT3 / doebrite</td><td><span class="tag no">No proven full port</span></td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:18px">Newer Echo, Show, Spot, Studio and Plus variants must not simply be equated with the listed models. Fire TV, Cube and Fire tablets can have their own root or unlock paths without being usable as a local Echo voice satellite.</p>
+    <div class="callout"><p>Before buying or converting: photograph the type label, check the firmware and read the matching project guide. Before any risky flashing, a verified backup including a restore path is required.</p></div>
+    <h3 class="sub" id="adapter">Adapters to 3D print</h3>
+    <p>Printable holders exist for access via pogo pins. I use the one for the Echo 2 myself, and I only know the one for the Dot 3 from its description.</p>
+    <div class="grid two">
+      <div class="card">
+        <figure class="afig"><img src="../images/halter-bestueckt-nah.jpg" width="520" height="586" alt="The printed pogo holder with three pogo pins fitted and connectors pushed on." loading="lazy"></figure>
+        <span class="label">Echo 2 · LibreEcho</span><h3>Pogo pin adapter V5</h3>
+        <p>I use this holder myself. On mine, fastboot was visible on the first attempt. How I put it together is in the <a href="#umbau">experience report</a>.</p>
+        <p><a href="https://github.com/aslater3/LibreEcho/raw/refs/heads/main/tools/libreecho-echo-gen2-pogo-plug-v5.zip">Download print files (ZIP)</a></p>
+        <p class="fremd"><strong>Third-party statement:</strong> LibreEcho describes the holder as a printable six-pin holder for the bottom contacts of the Echo 2. With pogo pins, only the outer cover on the base has to be removed.</p>
+      </div>
+      <div class="card">
+        <span class="label">Echo Dot 3 original · MakerWorld</span><h3>Programming Dock (donut)</h3>
+        <p>3D print model including pin carrier for the original Echo Dot 3 (codename donut), not for the Echo 2.</p>
+        <p><a href="https://makerworld.com/de/models/3394784-echo-dot-gen-3-donut-programming-dock#profileId-3864262">Open model on MakerWorld</a></p>
+        <p class="fremd"><strong>Third-party statement:</strong> According to its description the model is designed for this device generation. I have not tried whether it works.</p>
+      </div>
+    </div>
+  </div>
+</section>

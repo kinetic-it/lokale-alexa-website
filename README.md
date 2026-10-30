@@ -19,3 +19,7 @@ Work Item (privat): WI-0181.
 ## PDF-Leitfaden
 
 Deutsches Original und englische Fassung: `downloads/`. Die englische PDF wird aus `tools/leitfaden/` gebaut; Pflegeprozess in `docs/PDF-LEITFADEN.md`.
+
+## Hugo
+
+Die Seite wird mit [Hugo](https://gohugo.io/) gebaut (Umstellung läuft, siehe `docs/REDAKTION.md`, Abschnitt „Hugo“). Lokal: `hugo --destination /tmp/out` und `python3 tools/hugo_parity.py /tmp/out`.

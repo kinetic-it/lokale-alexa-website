@@ -1,0 +1,14 @@
+{{- $l := .Language.Lang -}}
+{{- $f := .Site.Params.find -}}
+<section id="befunde">
+  <div class="wrap">
+    <div class="eyebrow">{{ $f.eyebrow }}</div>
+    <h2>{{ $f.h2 }}</h2>
+    <p class="intro">{{ $f.intro }}</p>
+    <ol class="finds">
+{{ range hugo.Data.findings.entries }}{{ $e := . }}{{ $t := index $e $l }}
+      <li class="find {{ $e.type }}" id="{{ $e.id }}"><div class="fhead"><span class="ftype">{{ index $f.type $e.type }}</span>{{ with $e.state }}<span class="fstate {{ . }}">{{ index $f.state . }}</span>{{ end }}<time datetime="{{ $e.date }}">{{ partial "datefmt.html" (dict "d" $e.date "lang" $l) }}</time></div><h3>{{ $t.title }}</h3><p>{{ $t.text }}</p></li>
+{{ end }}
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+<section id="technik">
+  <div class="wrap">
+    <div class="eyebrow">Aufbau</div>
+    <h2>Der Sprachweg: von „Okay Nabu“ bis zur Antwort</h2>
+    <p class="intro">Der Echo hört zu und spricht. Home Assistant ist die Zentrale für den Haushalt und prüft jeden Satz zuerst auf eigene Befehle. Nur was kein Hausbefehl ist, geht an Hermes. Spalten zeigen, <strong>wo</strong> etwas passiert, von oben nach unten die <strong>Reihenfolge</strong>.</p>
+
+    <figure class="diagram">
+      <div class="scroll" tabindex="0" role="region" aria-label="Schaubild Sprachweg, waagerecht scrollbar">
+      <svg viewBox="0 0 760 746" role="img" aria-labelledby="dg-t dg-d">
+        <title id="dg-t">Sprachweg der Lokalen Alexa</title>
+        <desc id="dg-d">Der Echo erkennt das Aktivierungswort lokal. Ein Cloud-Dienst wandelt die Sprache in Text. Home Assistant prüft zuerst eigene Befehle und schaltet nur freigegebene Geräte. Alles andere geht an Hermes und ein externes Sprachmodell. Ein Cloud-Dienst macht aus dem Antworttext Sprache, die der Echo abspielt. Hermes soll keinen direkten Zugriff auf die Haussteuerung haben.</desc>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--risk)"/></marker>
+        </defs>
+        <rect class="d-lane" x="10" y="44" width="180" height="692" rx="3"/>
+        <rect class="d-lane" x="200" y="44" width="180" height="692" rx="3"/>
+        <rect class="d-lane" x="390" y="44" width="180" height="692" rx="3"/>
+        <rect class="d-cloud" x="580" y="44" width="170" height="692" rx="3"/>
+        <text class="d-hd" x="100" y="30" text-anchor="middle">ECHO 2</text>
+        <text class="d-hd" x="290" y="30" text-anchor="middle">HOME ASSISTANT</text>
+        <text class="d-hd" x="480" y="30" text-anchor="middle">HERMES (OPTIONAL)</text>
+        <text class="d-hd" x="665" y="30" text-anchor="middle">CLOUD (DERZEIT)</text>
+
+        <rect class="d-box" x="25" y="70" width="150" height="56" rx="3"/><circle class="d-ok" cx="163" cy="80" r="5"/>
+        <text class="d-t1" x="37" y="94">1 Aktivierung</text><text class="d-t2" x="37" y="112">Wakeword, lokal</text>
+
+        <rect class="d-box" x="215" y="160" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="170" r="4.5"/>
+        <text class="d-t1" x="227" y="184">2 Sprache annehmen</text><text class="d-t2" x="227" y="202">leitet Audio weiter</text>
+
+        <rect class="d-box" x="590" y="160" width="150" height="56" rx="3"/><circle class="d-open" cx="728" cy="170" r="4.5"/>
+        <text class="d-t1" x="602" y="184">3 Spracherkennung</text><text class="d-t2" x="602" y="202">Audio → Text</text>
+
+        <rect class="d-box" x="215" y="260" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="270" r="4.5"/>
+        <text class="d-t1" x="227" y="284">4 Eigener Befehl?</text><text class="d-t2" x="227" y="302">lokale Befehle zuerst</text>
+
+        <rect class="d-box" x="215" y="370" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="380" r="4.5"/>
+        <text class="d-t1" x="227" y="394">5a Aktion im Haus</text><text class="d-t2" x="227" y="412">nur Freigegebenes</text>
+
+        <rect class="d-box" x="405" y="260" width="150" height="56" rx="3"/><circle class="d-open" cx="543" cy="270" r="4.5"/>
+        <text class="d-t1" x="417" y="284">5b Hermes</text><text class="d-t2" x="417" y="302">freie Fragen</text>
+
+        <rect class="d-box" x="590" y="260" width="150" height="56" rx="3"/><circle class="d-open" cx="728" cy="270" r="4.5"/>
+        <text class="d-t1" x="602" y="284">5c Sprachmodell</text><text class="d-t2" x="602" y="302">extern</text>
+
+        <rect class="d-box" x="215" y="490" width="150" height="56" rx="3"/><circle class="d-open" cx="353" cy="500" r="4.5"/>
+        <text class="d-t1" x="227" y="514">6 Antworttext</text><text class="d-t2" x="227" y="532">von HA oder Hermes</text>
+
+        <rect class="d-box" x="590" y="560" width="150" height="56" rx="3"/><circle class="d-open" cx="728" cy="570" r="4.5"/>
+        <text class="d-t1" x="602" y="584">7 Sprachausgabe</text><text class="d-t2" x="602" y="602">Text → Audio</text>
+
+        <rect class="d-box" x="25" y="660" width="150" height="56" rx="3"/><circle class="d-open" cx="163" cy="670" r="4.5"/>
+        <text class="d-t1" x="37" y="684">8 Lautsprecher</text><text class="d-t2" x="37" y="702">Antwort hörbar</text>
+
+        <polyline class="d-arr" points="100,126 100,188 213,188" marker-end="url(#ah)"/><text class="d-lb" x="108" y="181">Sprache</text>
+        <line class="d-arr" x1="365" y1="180" x2="588" y2="180" marker-end="url(#ah)"/><text class="d-lb" x="476" y="173" text-anchor="middle">Audio</text>
+        <line class="d-arr" x1="590" y1="200" x2="367" y2="200" marker-end="url(#ah)"/><text class="d-lb" x="476" y="215" text-anchor="middle">Text</text>
+        <line class="d-arr" x1="290" y1="216" x2="290" y2="258" marker-end="url(#ah)"/>
+        <line class="d-arr" x1="290" y1="316" x2="290" y2="368" marker-end="url(#ah)"/><text class="d-lb" x="298" y="347">ja</text>
+        <line class="d-arr" x1="365" y1="288" x2="403" y2="288" marker-end="url(#ah)"/><text class="d-lb" x="384" y="280" text-anchor="middle">nein</text>
+        <line class="d-arr" x1="555" y1="280" x2="588" y2="280" marker-end="url(#ah)"/>
+        <line class="d-arr" x1="590" y1="300" x2="557" y2="300" marker-end="url(#ah)"/>
+        <polyline class="d-arr" points="530,316 530,518 367,518" marker-end="url(#ah)"/><text class="d-lb" x="522" y="440" text-anchor="end">Antwort</text>
+        <line class="d-arr" x1="290" y1="426" x2="290" y2="488" marker-end="url(#ah)"/><text class="d-lb" x="298" y="461">Bestätigung</text>
+        <polyline class="d-arr" points="290,546 290,588 588,588" marker-end="url(#ah)"/><text class="d-lb" x="440" y="581" text-anchor="middle">Text</text>
+        <polyline class="d-arr" points="665,616 665,688 177,688" marker-end="url(#ah)"/><text class="d-lb" x="420" y="681" text-anchor="middle">Audio</text>
+
+        <polyline class="d-arr block" points="420,316 420,398 368,398" marker-end="url(#ahr)"/>
+        <path d="M388,391 L400,405 M400,391 L388,405" style="stroke:var(--risk)" stroke-width="2" fill="none"/>
+        <text class="d-lb risk" x="430" y="342">kein Zugriff</text><text class="d-lb risk" x="430" y="356">aufs Haus</text><text class="d-lb risk" x="430" y="370">(Ziel)</text>
+      </svg>
+      </div>
+      <div class="legend" aria-label="Legende">
+        <span><i class="lg ok"></i>Kurztest bestanden (eigener Bericht)</span>
+        <span><i class="lg"></i>konfiguriert oder geplant, noch nicht abgenommen</span>
+        <span><i class="lg cloud"></i>Cloud-Dienst, Daten verlassen das Haus</span>
+        <span><i class="lg block"></i>soll nicht möglich sein</span>
+      </div>
+      <figcaption>Eine Anfrage nimmt einen von zwei Wegen: Erkennt Home Assistant einen eigenen Befehl, führt es ihn selbst aus (5a), aber nur für ausdrücklich freigegebene Geräte. Alles andere geht als Frage an Hermes und ein externes Sprachmodell (5b, 5c). Beide Wege enden als Text, der in der Cloud zu Sprache wird. Spracherkennung, Sprachausgabe und Sprachmodell laufen derzeit über Cloud-Dienste; lokale Alternativen werden verglichen.</figcaption>
+    </figure>
+
+    <div class="grid two">
+      <div class="card"><span class="label">Schneller Hausbefehl</span><h3>„Schalte das Licht ein.“</h3><p>Lokale Befehle zuerst, ohne jedes Kommando an ein Sprachmodell zu schicken. Ziel: wenige Sekunden, bevorzugt auch ohne Internet.</p></div>
+      <div class="card"><span class="label">Freie Sprache</span><h3>„Erklär mir, warum …“</h3><p>Nur nach geprüfter Integration an das getrennte Hermes-Profil weitergeben. Benutzerrechte und private Inhalte bleiben explizit geregelt.</p></div>
+    </div>
+
+    <h3 class="sub">Welche Software gibt es?</h3>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Tabelle: Softwarelösungen für Echo-Geräte"><table class="stack">
+      <thead><tr><th>Projekt</th><th>Geräte laut Projekt</th><th>Was es macht</th><th>Hinweise</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/Gamer92000/echo-dot-assist">echo-dot-assist / hassmic</a></td><td data-l="Geräte laut Projekt">Echo Dot 2, Echo 2, Echo Dot 3 original. Nicht: Dot 3 Refresh, Dot 3 mit Uhr</td><td data-l="Was es macht">Ersetzt Alexa durch ein kleines Programm; Anbindung über die ESPHome-API, alternativ Wyoming</td><td data-l="Hinweise">Behält Amazons Mikrofonverarbeitung und Wakeword-Engine. Laut Projekt mit KI geschrieben, ungeprüft, je Modell an einem Gerät getestet. Weg unseres Echo-2-Piloten</td></tr>
+        <tr><td><a href="https://github.com/ygelfand/echolocal">EchoLocal</a></td><td data-l="Geräte laut Projekt">Echo Dot 2, Echo Show 5 Gen. 1 und 2, Echo Show 8 Gen. 1 und 2</td><td data-l="Was es macht">Sprachsatellit, Mediaplayer, Display und Bluetooth-Proxy auf Fire-OS-Basis; ESPHome-API</td><td data-l="Hinweise">Wakeword auf dem Gerät; Installation per USB und TWRP</td></tr>
+        <tr><td><a href="https://github.com/wilbowes/EchoMuse">EchoMuse / emOS</a></td><td data-l="Geräte laut Projekt">Echo Dot 2; weitere Modelle laut Projekt in Arbeit</td><td data-l="Was es macht">ESPHome-Sprachsatellit mit Controller als Home-Assistant-Add-on oder Docker; emOS ersetzt Fire OS durch ein eigenes kleines Linux</td><td data-l="Hinweise">Wakeword standardmäßig auf dem Gerät. Bekannt: kein WPA3 unter emOS auf Fire OS 6</td></tr>
+        <tr><td><a href="https://github.com/HuskerMinion/techo5">TECHO5</a></td><td data-l="Geräte laut Projekt">Echo Show 5 Gen. 1 und 2, Show 8 Gen. 1 und 2, Spot, Dot 2; Echo 2 und Dot 3 original laut Projekt an je einem Gerät</td><td data-l="Was es macht">Alpine Linux statt Fire OS, ein Dienst für alles; ESPHome-API</td><td data-l="Hinweise">Wakeword auf dem Gerät, Amazons Sprachchip wird nicht genutzt. Laut Autor ein Hobbyprojekt, kein Produkt</td></tr>
+        <tr><td><a href="https://github.com/aslater3/LibreEcho">LibreEcho</a></td><td data-l="Geräte laut Projekt">Echo 2, Echo Dot 2</td><td data-l="Was es macht">Eigenes Linux mit Kernel 6.1, signierte Updates, Web-Oberfläche; ESPHome-API</td><td data-l="Hinweise">Echo 2 braucht USB-Zugang über Pogo-Pins oder Lötpunkte (siehe Adapter unten). Unterstützung für den Dot ist jünger und weniger getestet</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small" style="margin-top:12px">Angaben aus den Beschreibungen der Projekte (README), gelesen am 27.10.2026. Fremde Projektangaben sind kein eigener Test. Die Geräteeinordnung unten stammt aus dem Leitfaden vom 22.10.2026; einzelne Projekte nennen inzwischen weitere Modelle, zum Beispiel den Echo Show 8 Gen. 2.</p>
+  </div>
+</section>
