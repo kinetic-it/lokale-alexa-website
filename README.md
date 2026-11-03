@@ -8,7 +8,7 @@
 
 ## Aktualisierung
 
-`data/status.json` ist der **freigegebene** öffentliche Status. Inhalte und FAQ werden manuell gepflegt, Statusänderungen nach einem Review übernommen. GitHub Pages veröffentlicht Änderungen auf `main` automatisch (Branch `main`, Ordner `/ (root)`). Es existiert **kein** automatischer Direktzugriff auf das private Repository.
+`data/status.json` ist der **freigegebene** öffentliche Status. Inhalte und FAQ werden manuell gepflegt, Statusänderungen nach einem Review übernommen. GitHub Pages wird laut Projektakte seit 30.10.2026 über **GitHub Actions/Hugo** veröffentlicht (`.github/workflows/hugo.yml`, sofern `PAGES_VIA_ACTIONS=true` und Pages als Actions-Quelle eingerichtet ist). Der frühere Branch-Root-Pfad bleibt ein möglicher Rückfall. Ob der aktuelle Live-Deploy erfolgreich ausgeliefert wurde, wird getrennt verifiziert. Es existiert **kein** automatischer Direktzugriff auf das private Repository.
 
 Die Seite zeigt Sprachweg-Schaubild, Gerätefilter, Sicherheitsgrundsätze und den freigegebenen Pilotstand (aus `data/status.json`). Sie lädt keine externen Ressourcen. Es gibt eine deutsche und eine englische Fassung (`en/`), siehe `docs/REDAKTION.md`.
 
@@ -22,4 +22,4 @@ Deutsches Original und englische Fassung: `downloads/`. Die englische PDF wird a
 
 ## Hugo
 
-Die Seite wird mit [Hugo](https://gohugo.io/) gebaut (Umstellung läuft, siehe `docs/REDAKTION.md`, Abschnitt „Hugo“). Lokal: `hugo --destination /tmp/out` und `python3 tools/hugo_parity.py /tmp/out`.
+Die Seite wird mit [Hugo](https://gohugo.io/) gebaut (Actions-Publikation laut Projektakte vom 30.10. aktiv, siehe `docs/REDAKTION.md`, Abschnitt „Hugo“). Lokal: `hugo --destination /tmp/out` und `python3 tools/hugo_parity.py /tmp/out`.
