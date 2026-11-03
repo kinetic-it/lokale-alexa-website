@@ -92,7 +92,7 @@
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
       "Complex knowledge queries, conversational follow-up and technical end-to-end measurements",
-      "Timers, alarms, reminders, lists and media",
+      "Timer remaining-time queries, reliable extensions/shortenings and multiple named timers; alarms, reminders, lists and music are not yet accepted",
       "Multi-user permissions, guest mode and sensitive answers",
       "Recovery, full raw backup and long-term tests",
       "Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested.",
