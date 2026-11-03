@@ -3,17 +3,31 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f10",
+      "date": "2026-11-03",
+      "type": "finding",
+      "state": "open",
+      "de": {
+        "title": "Sprachtimer können bereits klingeln – Folgeanfragen bleiben eine Lücke",
+        "text": "Unser Echo 2 hat mit Kinetic Voice Router v0.5.0b4 einen Timer per Sprache gestartet, hörbar ausgelöst und abgebrochen. Ein benannter Timer funktionierte ebenfalls in einem Einzelversuch. Eine natürliche Restzeitfrage und eine Bitte um Verlängerung wurden hingegen nicht als lokale Home-Assistant-Befehle behandelt. Bei einer anderen Formulierung wurde ein unerwünschtes Wort Teil des Timernamens. Lehre: Funktionierende Einzelfälle sind keine vollständige Alltagstauglichkeit. Zunächst wird der First Run geprüft; eine komfortable Alexa-ähnliche Verwaltung folgt danach."
+      },
+      "en": {
+        "title": "Voice timers can ring, but follow-up commands still need work",
+        "text": "In a limited test, our Echo 2 running Kinetic Voice Router v0.5.0b4 started a spoken timer, rang audibly and cancelled the timer by voice. One named timer also worked. A natural remaining-time question and a request to extend the timer were not handled as local Home Assistant commands, while another phrase introduced an unwanted word into a timer name. Lesson: isolated successes are not proof of reliable daily use. First Run comes first; more comfortable Alexa-like management is planned later."
+      }
+    },
+    {
       "id": "f9",
       "date": "2026-10-29",
       "type": "problem",
       "state": "open",
       "de": {
         "title": "Ein Sprachmodell darf Gerätezustände nicht raten",
-        "text": "In einem Live-Test unserer eigenen Router-Erweiterung wurde eine Frage zum Zustand eines Geräts, das es nicht gibt, als Wissensfrage eingeordnet und an Hermes weitergegeben. Hermes erfand daraufhin einen Zustand. Lehre: Fragen nach echten Gerätezuständen müssen aus Home Assistant beantwortet werden oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden. Eine Wortmuster-Regel kann sich irren, deshalb führt eine Fehleinordnung nie zu einer Geräteaktion. Die Korrektur liegt als Entwicklungsstand vor und ist weder installiert noch live abgenommen. Der Befund bleibt offen, bis das belegt ist."
+        "text": "In einem Live-Test unserer eigenen Router-Erweiterung wurde eine Frage zum Zustand eines Geräts, das es nicht gibt, als Wissensfrage eingeordnet und an Hermes weitergegeben. Hermes erfand daraufhin einen Zustand. Lehre: Fragen nach echten Gerätezuständen müssen aus Home Assistant beantwortet werden oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden. Eine Wortmuster-Regel kann sich irren, deshalb führt eine Fehleinordnung nie zu einer Geräteaktion. Inzwischen ist Router v0.5.0b4 als experimentelle Beta auf Home Assistant installiert; die betreffende negative Gerätefrage wurde dort jedoch noch nicht nachgetestet. Der konkrete Befund bleibt bis zu diesem Gegenbeleg offen."
       },
       "en": {
         "title": "A language model must not guess device states",
-        "text": "In a live test of our own router extension, a question about the state of a device that does not exist was classified as a knowledge question and passed to Hermes. Hermes then invented a state. Lesson: questions about real device states must be answered from Home Assistant or end honestly with “I cannot answer that reliably right now”. A word-pattern rule can be wrong, which is why a misclassification never leads to a device action. The fix exists as a development state and is neither installed nor accepted live. The finding stays open until that is proven."
+        "text": "In a live test of our own router extension, a question about the state of a device that does not exist was classified as a knowledge question and passed to Hermes. Hermes then invented a state. Lesson: questions about real device states must be answered from Home Assistant or end honestly with “I cannot answer that reliably right now”. A word-pattern rule can be wrong, which is why a misclassification never leads to a device action. Experimental router beta v0.5.0b4 is now installed in Home Assistant, but this specific negative device question has not yet been retested there. The finding stays open until that regression test succeeds."
       }
     },
     {

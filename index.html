@@ -308,7 +308,7 @@ footer p{font-size:.86rem}
 </style>
 <link rel="alternate" type="application/atom+xml" title="Lokale Alexa: Projektverlauf" href="feed.xml">
 <!-- jsonld:start -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Lokale Alexa: Ein Echo bekommt ein zweites Leben", "inLanguage": "de", "url": "https://kinetic-it.github.io/lokale-alexa-website/", "image": "https://kinetic-it.github.io/lokale-alexa-website/og-de.png", "datePublished": "2026-10-25", "dateModified": "2026-10-30", "author": {"@type": "Organization", "name": "kinetic-it", "url": "https://github.com/kinetic-it"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Lokale Alexa: Ein Echo bekommt ein zweites Leben", "inLanguage": "de", "url": "https://kinetic-it.github.io/lokale-alexa-website/", "image": "https://kinetic-it.github.io/lokale-alexa-website/og-de.png", "datePublished": "2026-10-25", "dateModified": "2026-11-03", "author": {"@type": "Organization", "name": "kinetic-it", "url": "https://github.com/kinetic-it"}}</script>
 <!-- jsonld:end -->
 </head>
 <body>
@@ -338,9 +338,9 @@ footer p{font-size:.86rem}
       <div class="meta"><span>Öffentliches Projektjournal</span><span>Ein Pilot: Echo 2 (2017)</span><span>Keine fertige Installationslösung</span></div>
     </div>
     <aside class="statuscard" aria-label="Projektstand in Kurzform">
-      <div class="head"><span>Projektstand</span><span data-bind="asof">30.10.2026</span></div>
+      <div class="head"><span>Projektstand</span><span data-bind="asof">03.11.2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo-2-Pilot · Umbau dokumentiert; Kinetic Voice Router im Beobachtungsbetrieb, Fehler im Aktivbetrieb bekannt</h2>
+        <h2 data-bind="title">Echo-2-Pilot · Kinetic Voice Router v0.5.0b4 im Live-Einzeltest; First Run wird vorbereitet</h2>
         <p class="m" data-bind="evidence">Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
         <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo-2-Bootzugang</span><span class="st">Eigener Bericht</span></li>
@@ -350,10 +350,10 @@ footer p{font-size:.86rem}
           <li><i class="mk in_progress"></i><span>Hausbefehle Ende-zu-Ende</span><span class="st">in Arbeit</span></li>
           <li><i class="mk in_progress"></i><span>Hermes-Konversation Ende-zu-Ende</span><span class="st">in Arbeit</span></li>
           <li><i class="mk in_progress"></i><span>Kinetic Voice Router (Eigenentwicklung)</span><span class="st">in Arbeit</span></li>
-          <li><i class="mk open"></i><span>Alltagsfunktionen und Dauerbetrieb</span><span class="st">offen</span></li>
+          <li><i class="mk in_progress"></i><span>Alltagsfunktionen und Dauerbetrieb</span><span class="st">in Arbeit</span></li>
 <!-- ms:end -->
         </ul>
-        <p class="last"><strong data-bind="lastdate">Letzter Test · 29.10.2026</strong><span data-bind="lasttest">Kinetic Voice Router 0.4.1 live: Beobachtungsbetrieb zählte zwei echte Wissensfragen korrekt, im Aktivbetrieb wurde eine Frage zu einem echten Gerät lokal beantwortet. Eine Frage zu einem unbekannten Gerät wurde fälschlich an Hermes gegeben, der einen Zustand erfand; eine Wissensfrage dauerte 21 Sekunden (eigene Beobachtungen).</span></p>
+        <p class="last"><strong data-bind="lastdate">Letzter Test · 03.11.2026</strong><span data-bind="lasttest">First-Run-Einzeltests: Kinetic Voice Router v0.5.0b4 in HA als Agent ausgewählt. Sprach-Timerstart, hörbarer Ablauf und Abbruch am Echo erfolgreich; Benennung nur teilweise robust. Restzeitfrage/Verlängerungsbefehl scheiterten beim lokalen Intent-Matching. Wecker, Spotify/YouTube Music und Alltagseinsatz sind nicht abgenommen.</span></p>
       </div>
     </aside>
   </div>
@@ -715,7 +715,7 @@ footer p{font-size:.86rem}
     <div class="eyebrow">Transparenz</div>
     <h2>Aktueller öffentlicher Projektstand</h2>
     <p class="intro">Hier erscheinen ausschließlich zur Veröffentlichung freigegebene Aussagen. Der interne Entwicklungs- und Sicherheitsstatus bleibt in privaten Repositories. Der Stand unterscheidet bewusst zwischen <strong>berichtet</strong> und <strong>abgenommen</strong>.</p>
-    <p class="small" data-bind="meta">Stand: 30.10.2026 · Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
+    <p class="small" data-bind="meta">Stand: 03.11.2026 · Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme</p>
     <div class="board">
       <div class="card good"><span class="label">Bereits berichtet</span>
         <ul id="l-confirmed"><!-- confirmed:start -->
@@ -724,7 +724,8 @@ footer p{font-size:.86rem}
           <li>Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt</li>
           <li>Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (eigene Beobachtung).</li>
           <li>Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (eigene Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme.</li>
-          <li>Eigene Erweiterung „Kinetic Voice Router“ (Version 0.4.1) lief am 29.10. live: Im Beobachtungsbetrieb wurden zwei echte Wissensfragen am Echo korrekt als solche gezählt, Hermes antwortete unverändert. Im Aktivbetrieb wurde die Frage nach dem Zustand eines echten Geräts lokal von Home Assistant beantwortet (eigene Beobachtung, keine Messreihe).</li>
+          <li>Kinetic Voice Router v0.5.0b4 ist laut Home-Assistant-Oberfläche als Gesprächsagent der Pipeline „Speaker“ installiert; Home Assistant versucht lokale Befehle zuerst. Einzelfunktionen sind getestet, aber noch keine vollständige Alltagsabnahme.</li>
+          <li>Sprachtimer wurden am Echo 2 im Einzeltest lokal erstellt, nach Ablauf hörbar ausgelöst und per Sprache gestoppt; einzelne benannte Timer konnten gestartet werden (eigene Beobachtung vom 03.11.).</li>
 <!-- confirmed:end -->
         </ul>
       </div>
@@ -732,7 +733,7 @@ footer p{font-size:.86rem}
         <ul id="l-open"><!-- open:start -->
           <li>Stabiler Dauerbetrieb und Audio unter Musik</li>
           <li>Komplexe Wissensfragen, Folgekontext und technische Ende-zu-Ende-Messungen</li>
-          <li>Timer, Wecker, Erinnerungen, Listen und Medien</li>
+          <li>Timer-Restzeit abfragen, Timer verlängern/verkürzen, mehrere benannte Timer im Alltag zuverlässig verwalten; Wecker, Erinnerungen, Listen und Musik sind nicht abgenommen</li>
           <li>Mehrbenutzerrechte, Gastmodus und sensible Antworten</li>
           <li>Recovery, vollständiges Rohbackup und Langzeittests</li>
           <li>Zukunftskonzept „Follow-me Conversation“: Gespräch beim Raumwechsel zwischen mehreren Echos übertragen, bei eindeutiger Sprecherzuordnung automatisch, sonst mit Rückfrage; erst laufenden Satz beenden. Nicht implementiert oder getestet.</li>
@@ -743,7 +744,8 @@ footer p{font-size:.86rem}
       </div>
       <div class="card issues wide"><span class="label">Bekannte Probleme</span>
         <ul id="l-issues"><!-- issues:start -->
-          <li>Kinetic Voice Router im Aktivbetrieb (29.10.): Eine Frage zu einem Gerät, das es nicht gibt, wurde als Wissensfrage an Hermes weitergegeben, und Hermes erfand einen Zustand. Die Korrektur liegt als Entwicklungsstand (Version 0.4.2) vor, ist nicht installiert und nicht live abgenommen</li>
+          <li>Einige natürliche Timer-Anschlussfragen und Verlängerungssätze werden aktuell nicht als lokale Home-Assistant-Intents erkannt; ein Satz erzeugte einen unerwünschten Zusatz im Timernamen. Keine Behauptung, dass Timerstatus/Verlängerung bereits funktionieren.</li>
+          <li>Historischer Fehler vom 29.10.: Eine Frage zu einem nicht vorhandenen Gerät führte zu einer erfundenen Hermes-Geräteantwort. Der Router wurde inzwischen auf v0.5.0b4 aktualisiert, aber die konkrete negative E2E-Gegenprobe auf echtem Home Assistant ist noch offen.</li>
           <li>Eine Wissensfrage brauchte am 29.10. 21 Sekunden bis zur Antwort. Ob der Router daran beteiligt war, ist nicht belegt; eine Gegenprobe ohne Router fehlt</li>
           <li>Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt</li>
           <li>Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden</li>
@@ -764,6 +766,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-27">27.10.2026</time><span>Ein zuvor fehlgeschlagener Sprachbefehl funktionierte nach Ergänzung eines passenden Gerätealias: Ein/Aus über Echo mit ungefährlicher Testlast, lokaler Ausschalt-Debuglauf bestätigt. Einzeltest bestanden; Negativ- und Dauertests offen.</span></li>
           <li><time datetime="2026-10-29">29.10.2026</time><span>Kinetic Voice Router 0.4.1 live getestet: Beobachtungsbetrieb wie erwartet, im Aktivbetrieb Fehleinordnung einer Frage zu einem unbekannten Gerät gefunden. Korrektur (0.4.2) liegt als Entwicklungsstand vor, nicht installiert.</span></li>
           <li><time datetime="2026-10-30">30.10.2026</time><span>Erfahrungsbericht „So haben wir unseren Echo 2 umgebaut“ ergänzt: zehn Etappen mit Fotos, Aufwand nach meiner eigenen Bewertung, Quellen und Grenzen.</span></li>
+          <li><time datetime="2026-11-03">03.11.2026</time><span>First Run bis möglichst 8. November priorisiert; Kinetic Voice Router v0.5.0b4 in HA aktiv. Sprach-Timerstart, hörbarer Ablauf und Abbruch im Einzeltest erfolgreich, Status-/Verlängerungsbefehle noch offen. Komfortfunktionen folgen in einer späteren Phase.</span></li>
 <!-- history:end --></ol>
         <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Verlauf als Feed abonnieren (Atom)</a></p>
       </div>
@@ -779,7 +782,8 @@ footer p{font-size:.86rem}
     <h2>Befunde und Erkenntnisse</h2>
     <p class="intro">Hier stehen Dinge, die schiefgegangen sind oder die wir gelernt haben, neueste zuerst. Offene Sicherheitsdetails nennen wir erst, wenn sie behoben sind; öffentlich steht dann die Lehre daraus.</p>
     <ol class="finds">
-      <li class="find problem" id="f9"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">offen</span><time datetime="2026-10-29">29.10.2026</time></div><h3>Ein Sprachmodell darf Gerätezustände nicht raten</h3><p>In einem Live-Test unserer eigenen Router-Erweiterung wurde eine Frage zum Zustand eines Geräts, das es nicht gibt, als Wissensfrage eingeordnet und an Hermes weitergegeben. Hermes erfand daraufhin einen Zustand. Lehre: Fragen nach echten Gerätezuständen müssen aus Home Assistant beantwortet werden oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden. Eine Wortmuster-Regel kann sich irren, deshalb führt eine Fehleinordnung nie zu einer Geräteaktion. Die Korrektur liegt als Entwicklungsstand vor und ist weder installiert noch live abgenommen. Der Befund bleibt offen, bis das belegt ist.</p></li>
+      <li class="find finding" id="f10"><div class="fhead"><span class="ftype">Erkenntnis</span><span class="fstate open">offen</span><time datetime="2026-11-03">03.11.2026</time></div><h3>Sprachtimer können bereits klingeln – Folgeanfragen bleiben eine Lücke</h3><p>Unser Echo 2 hat mit Kinetic Voice Router v0.5.0b4 einen Timer per Sprache gestartet, hörbar ausgelöst und abgebrochen. Ein benannter Timer funktionierte ebenfalls in einem Einzelversuch. Eine natürliche Restzeitfrage und eine Bitte um Verlängerung wurden hingegen nicht als lokale Home-Assistant-Befehle behandelt. Bei einer anderen Formulierung wurde ein unerwünschtes Wort Teil des Timernamens. Lehre: Funktionierende Einzelfälle sind keine vollständige Alltagstauglichkeit. Zunächst wird der First Run geprüft; eine komfortable Alexa-ähnliche Verwaltung folgt danach.</p></li>
+      <li class="find problem" id="f9"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">offen</span><time datetime="2026-10-29">29.10.2026</time></div><h3>Ein Sprachmodell darf Gerätezustände nicht raten</h3><p>In einem Live-Test unserer eigenen Router-Erweiterung wurde eine Frage zum Zustand eines Geräts, das es nicht gibt, als Wissensfrage eingeordnet und an Hermes weitergegeben. Hermes erfand daraufhin einen Zustand. Lehre: Fragen nach echten Gerätezuständen müssen aus Home Assistant beantwortet werden oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden. Eine Wortmuster-Regel kann sich irren, deshalb führt eine Fehleinordnung nie zu einer Geräteaktion. Inzwischen ist Router v0.5.0b4 als experimentelle Beta auf Home Assistant installiert; die betreffende negative Gerätefrage wurde dort jedoch noch nicht nachgetestet. Der konkrete Befund bleibt bis zu diesem Gegenbeleg offen.</p></li>
       <li class="find correction" id="f8"><div class="fhead"><span class="ftype">Korrektur</span><span class="fstate resolved">geklärt</span><time datetime="2026-10-27">27.10.2026</time></div><h3>Nachtrag: Der zuvor offene Schaltfehler wurde im Einzeltest behoben</h3><p>Unsere vorherige Statusmeldung beschrieb den fehlgeschlagenen Befehl als weiterhin offen. Nach einem zusätzlichen Gerätealias funktionierten Ein- und Ausschalten mit einer ungefährlichen Testlast über den Echo. Der Debuglauf des Ausschaltens zeigte die lokale Befehlsverarbeitung. Der öffentliche Teststatus ist deshalb korrigiert; Sicherheits-Negativtests und längerer Betrieb sind weiterhin nicht abgenommen.</p></li>
       <li class="find finding" id="f7"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-27">27.10.2026</time></div><h3>Richtig verstanden heißt nicht richtig zugeordnet</h3><p>Ein Sprachassistent kann einen Befehl korrekt transkribieren und trotzdem an der Zuordnung zum richtigen Gerät scheitern. In unserem Test schaltete Home Assistant eine freigegebene Steckdose lokal, wenn der Befehl als Text kam (0,05 s Verarbeitung) oder per Sprache der kurze, hinterlegte Gerätename fiel. Mit einer zusammengeschriebenen Gerätebezeichnung erkannte die Spracherkennung den Satz korrekt, Home Assistant ordnete ihn aber keinem Gerät zu und gab ihn an den KI-Assistenten weiter. Der erklärte etwas, schaltete aber nichts. Lehre: natürliche Gerätenamen und passende Aliase pflegen und jeden Lauf in der Debug-Ansicht nachvollziehen. Der KI-Assistent bekommt dafür bewusst keine Verwaltungsrechte in Home Assistant; die Lösung gehört in die normale Sprachverarbeitung. Nach Ergänzung eines passenden Alias gelangen im Nachtest Ein- und Ausschalten über den Echo; der Ausschalt-Debuglauf zeigte lokale Verarbeitung. Das bestätigt den konkreten Korrekturweg, nicht die allgemeine Zuverlässigkeit aller Befehle.</p></li>
       <li class="find finding" id="f6"><div class="fhead"><span class="ftype">Erkenntnis</span><time datetime="2026-10-26">26.10.2026</time></div><h3>Neue KI-Schnittstelle ersetzt keine überprüfte Haussteuerung</h3><p>Home Assistant 2026.10 macht die Einrichtung seines MCP-Servers einfacher. Das eröffnet zusätzliche Möglichkeiten für KI-Apps, repariert jedoch nicht automatisch fehlgeschlagene Sprachbefehle und verschickt selbst keine proaktiven Statusmeldungen. Für konkrete Zustandsprüfungen bleiben gewöhnliche Home-Assistant-Automationen der verlässlichere Ausgangspunkt. Unser Pilot hat diese Erweiterung noch nicht als neue Funktion abgenommen.</p></li>
