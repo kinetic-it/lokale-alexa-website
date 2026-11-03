@@ -2,21 +2,22 @@
   "schema_version": 1,
   "visibility": "public",
   "approved": true,
-  "as_of": "2026-10-30",
+  "as_of": "2026-11-03",
   "evidence": "Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Umbau dokumentiert; Kinetic Voice Router im Beobachtungsbetrieb, Fehler im Aktivbetrieb bekannt",
+  "title": "Echo-2-Pilot · Kinetic Voice Router v0.5.0b4 im Live-Einzeltest; First Run wird vorbereitet",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "echo-dot-assist mit Home Assistant verbunden (eigener Bericht)",
     "Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt",
     "Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (eigene Beobachtung).",
     "Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (eigene Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme.",
-    "Eigene Erweiterung „Kinetic Voice Router“ (Version 0.4.1) lief am 29.10. live: Im Beobachtungsbetrieb wurden zwei echte Wissensfragen am Echo korrekt als solche gezählt, Hermes antwortete unverändert. Im Aktivbetrieb wurde die Frage nach dem Zustand eines echten Geräts lokal von Home Assistant beantwortet (eigene Beobachtung, keine Messreihe)."
+    "Kinetic Voice Router v0.5.0b4 ist laut Home-Assistant-Oberfläche als Gesprächsagent der Pipeline „Speaker“ installiert; Home Assistant versucht lokale Befehle zuerst. Einzelfunktionen sind getestet, aber noch keine vollständige Alltagsabnahme.",
+    "Sprachtimer wurden am Echo 2 im Einzeltest lokal erstellt, nach Ablauf hörbar ausgelöst und per Sprache gestoppt; einzelne benannte Timer konnten gestartet werden (eigene Beobachtung vom 03.11.)."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
     "Komplexe Wissensfragen, Folgekontext und technische Ende-zu-Ende-Messungen",
-    "Timer, Wecker, Erinnerungen, Listen und Medien",
+    "Timer-Restzeit abfragen, Timer verlängern/verkürzen, mehrere benannte Timer im Alltag zuverlässig verwalten; Wecker, Erinnerungen, Listen und Musik sind nicht abgenommen",
     "Mehrbenutzerrechte, Gastmodus und sensible Antworten",
     "Recovery, vollständiges Rohbackup und Langzeittests",
     "Zukunftskonzept „Follow-me Conversation“: Gespräch beim Raumwechsel zwischen mehreren Echos übertragen, bei eindeutiger Sprecherzuordnung automatisch, sonst mit Rückfrage; erst laufenden Satz beenden. Nicht implementiert oder getestet.",
@@ -62,11 +63,12 @@
     {
       "id": "m6",
       "name": "Alltagsfunktionen und Dauerbetrieb",
-      "state": "open"
+      "state": "in_progress"
     }
   ],
   "known_issues": [
-    "Kinetic Voice Router im Aktivbetrieb (29.10.): Eine Frage zu einem Gerät, das es nicht gibt, wurde als Wissensfrage an Hermes weitergegeben, und Hermes erfand einen Zustand. Die Korrektur liegt als Entwicklungsstand (Version 0.4.2) vor, ist nicht installiert und nicht live abgenommen",
+    "Einige natürliche Timer-Anschlussfragen und Verlängerungssätze werden aktuell nicht als lokale Home-Assistant-Intents erkannt; ein Satz erzeugte einen unerwünschten Zusatz im Timernamen. Keine Behauptung, dass Timerstatus/Verlängerung bereits funktionieren.",
+    "Historischer Fehler vom 29.10.: Eine Frage zu einem nicht vorhandenen Gerät führte zu einer erfundenen Hermes-Geräteantwort. Der Router wurde inzwischen auf v0.5.0b4 aktualisiert, aber die konkrete negative E2E-Gegenprobe auf echtem Home Assistant ist noch offen.",
     "Eine Wissensfrage brauchte am 29.10. 21 Sekunden bis zur Antwort. Ob der Router daran beteiligt war, ist nicht belegt; eine Gegenprobe ohne Router fehlt",
     "Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt",
     "Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden",
@@ -76,7 +78,7 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · conversion documented; Kinetic Voice Router in observe mode, fault in active mode known",
+    "title": "Echo 2 pilot · Kinetic Voice Router v0.5.0b4 in limited live testing; First Run in progress",
     "evidence": "My own reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
@@ -84,7 +86,8 @@
       "Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven",
       "Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (own observation).",
       "An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (own observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.",
-      "Our own extension “Kinetic Voice Router” (version 0.4.1) ran live on 29 Oct: in observe mode two real knowledge questions on the Echo were counted correctly and Hermes answered unchanged. In active mode, a question about the state of a real device was answered locally by Home Assistant (own observation, no measurement series)."
+      "Kinetic Voice Router v0.5.0b4 is installed as the conversation agent of the Home Assistant “Speaker” pipeline according to the owner’s UI; Home Assistant tries local intents first. Limited features have been tested, not an overall everyday-use acceptance.",
+      "On 3 November, spoken timers were started locally, rang audibly on the Echo 2, and were cancelled by voice in individual tests. Some named timers were also started (owner observation)."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
@@ -97,7 +100,8 @@
       "Offline fallback with local speech recognition and speech output: decided as a concept, not installed. Speech recognition and speech output currently run through cloud services."
     ],
     "known_issues": [
-      "Kinetic Voice Router in active mode (29 Oct): a question about a device that does not exist was passed to Hermes as a knowledge question, and Hermes invented a state. The fix exists as a development state (version 0.4.2), is not installed and has not been accepted live",
+      "Some natural timer follow-up and extension phrases are not matched to Home Assistant local intents; one phrase accidentally included an extra word in the timer name. Timer status queries and extension are not claimed to work.",
+      "Historical 29 October bug: a question about a non-existent device produced an invented Hermes device-state reply. The router is now updated to v0.5.0b4, but that specific negative end-to-end regression test on real Home Assistant is still outstanding.",
       "One knowledge question took 21 seconds to answer on 29 Oct. Whether the router was involved is not proven; a control run without the router is missing",
       "The streaming wake word path was unstable; the local wake word is therefore preferred",
       "An open question was not understood in an earlier test, via a conversation agent that has since been replaced",
@@ -124,9 +128,10 @@
       "Switching command narrowed down: works locally as text and by voice with the short device name; a compound device name is transcribed correctly but not matched locally. Cause not conclusively proven.",
       "A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open.",
       "Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.",
-      "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits."
+      "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits.",
+      "First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase."
     ],
-    "last_test": "Kinetic Voice Router 0.4.1 live: observe mode counted two real knowledge questions correctly, and in active mode a question about a real device was answered locally. A question about an unknown device was wrongly passed to Hermes, which invented a state; one knowledge question took 21 seconds (own observations)."
+    "last_test": "Limited First Run tests: Kinetic Voice Router v0.5.0b4 selected as Home Assistant agent. Voice timer start, audible alert and cancellation worked; naming was not fully reliable. Remaining-time and extension phrases failed local intent matching. Alarms, Spotify/YouTube Music and everyday use have not been accepted."
   },
   "history": [
     {
@@ -172,10 +177,14 @@
     {
       "date": "2026-10-30",
       "text": "Erfahrungsbericht „So haben wir unseren Echo 2 umgebaut“ ergänzt: zehn Etappen mit Fotos, Aufwand nach meiner eigenen Bewertung, Quellen und Grenzen."
+    },
+    {
+      "date": "2026-11-03",
+      "text": "First Run bis möglichst 8. November priorisiert; Kinetic Voice Router v0.5.0b4 in HA aktiv. Sprach-Timerstart, hörbarer Ablauf und Abbruch im Einzeltest erfolgreich, Status-/Verlängerungsbefehle noch offen. Komfortfunktionen folgen in einer späteren Phase."
     }
   ],
   "last_test": {
-    "date": "2026-10-29",
-    "text": "Kinetic Voice Router 0.4.1 live: Beobachtungsbetrieb zählte zwei echte Wissensfragen korrekt, im Aktivbetrieb wurde eine Frage zu einem echten Gerät lokal beantwortet. Eine Frage zu einem unbekannten Gerät wurde fälschlich an Hermes gegeben, der einen Zustand erfand; eine Wissensfrage dauerte 21 Sekunden (eigene Beobachtungen)."
+    "date": "2026-11-03",
+    "text": "First-Run-Einzeltests: Kinetic Voice Router v0.5.0b4 in HA als Agent ausgewählt. Sprach-Timerstart, hörbarer Ablauf und Abbruch am Echo erfolgreich; Benennung nur teilweise robust. Restzeitfrage/Verlängerungsbefehl scheiterten beim lokalen Intent-Matching. Wecker, Spotify/YouTube Music und Alltagseinsatz sind nicht abgenommen."
   }
 }
