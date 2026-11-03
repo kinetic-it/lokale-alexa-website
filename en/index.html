@@ -308,7 +308,7 @@ footer p{font-size:.86rem}
 </style>
 <link rel="alternate" type="application/atom+xml" title="Local Alexa: project history" href="feed.xml">
 <!-- jsonld:start -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Local Alexa: an Echo gets a second life", "inLanguage": "en", "url": "https://kinetic-it.github.io/lokale-alexa-website/en/", "image": "https://kinetic-it.github.io/lokale-alexa-website/og-en.png", "datePublished": "2026-10-25", "dateModified": "2026-10-30", "author": {"@type": "Organization", "name": "kinetic-it", "url": "https://github.com/kinetic-it"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Local Alexa: an Echo gets a second life", "inLanguage": "en", "url": "https://kinetic-it.github.io/lokale-alexa-website/en/", "image": "https://kinetic-it.github.io/lokale-alexa-website/og-en.png", "datePublished": "2026-10-25", "dateModified": "2026-11-03", "author": {"@type": "Organization", "name": "kinetic-it", "url": "https://github.com/kinetic-it"}}</script>
 <!-- jsonld:end -->
 </head>
 <body>
@@ -338,9 +338,9 @@ footer p{font-size:.86rem}
       <div class="meta"><span>Public project journal</span><span>One pilot: Echo 2 (2017)</span><span>Not a ready-made installation</span></div>
     </div>
     <aside class="statuscard" aria-label="Project status at a glance">
-      <div class="head"><span>Project status</span><span data-bind="asof">30 Oct 2026</span></div>
+      <div class="head"><span>Project status</span><span data-bind="asof">3 Nov 2026</span></div>
       <div class="body">
-        <h2 data-bind="title">Echo 2 pilot · conversion documented; Kinetic Voice Router in observe mode, fault in active mode known</h2>
+        <h2 data-bind="title">Echo 2 pilot · Kinetic Voice Router v0.5.0b4 in limited live testing; First Run in progress</h2>
         <p class="m" data-bind="evidence">My own reports and private project records; no independent live acceptance</p>
         <ul class="ms" id="ms"><!-- ms:start -->
           <li><i class="mk owner_reported"></i><span>Echo 2 boot access</span><span class="st">Own report</span></li>
@@ -350,10 +350,10 @@ footer p{font-size:.86rem}
           <li><i class="mk in_progress"></i><span>Home commands end to end</span><span class="st">in progress</span></li>
           <li><i class="mk in_progress"></i><span>Hermes conversation end to end</span><span class="st">in progress</span></li>
           <li><i class="mk in_progress"></i><span>Kinetic Voice Router (own development)</span><span class="st">in progress</span></li>
-          <li><i class="mk open"></i><span>Everyday functions and continuous operation</span><span class="st">open</span></li>
+          <li><i class="mk in_progress"></i><span>Everyday functions and continuous operation</span><span class="st">in progress</span></li>
 <!-- ms:end -->
         </ul>
-        <p class="last"><strong data-bind="lastdate">Latest test · 29 Oct 2026</strong><span data-bind="lasttest">Kinetic Voice Router 0.4.1 live: observe mode counted two real knowledge questions correctly, and in active mode a question about a real device was answered locally. A question about an unknown device was wrongly passed to Hermes, which invented a state; one knowledge question took 21 seconds (own observations).</span></p>
+        <p class="last"><strong data-bind="lastdate">Latest test · 3 Nov 2026</strong><span data-bind="lasttest">Limited First Run tests: Kinetic Voice Router v0.5.0b4 selected as Home Assistant agent. Voice timer start, audible alert and cancellation worked; naming was not fully reliable. Remaining-time and extension phrases failed local intent matching. Alarms, Spotify/YouTube Music and everyday use have not been accepted.</span></p>
       </div>
     </aside>
   </div>
@@ -715,7 +715,7 @@ footer p{font-size:.86rem}
     <div class="eyebrow">Transparency</div>
     <h2>Current public project status</h2>
     <p class="intro">Only statements released for publication appear here. The internal development and security status stays in private repositories. The status deliberately distinguishes between <strong>reported</strong> and <strong>accepted</strong>.</p>
-    <p class="small" data-bind="meta">As of 30 Oct 2026 · My own reports and private project records; no independent live acceptance</p>
+    <p class="small" data-bind="meta">As of 3 Nov 2026 · My own reports and private project records; no independent live acceptance</p>
     <div class="board">
       <div class="card good"><span class="label">Reported so far</span>
         <ul id="l-confirmed"><!-- confirmed:start -->
@@ -724,7 +724,8 @@ footer p{font-size:.86rem}
           <li>Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven</li>
           <li>Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (own observation).</li>
           <li>An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (own observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.</li>
-          <li>Our own extension “Kinetic Voice Router” (version 0.4.1) ran live on 29 Oct: in observe mode two real knowledge questions on the Echo were counted correctly and Hermes answered unchanged. In active mode, a question about the state of a real device was answered locally by Home Assistant (own observation, no measurement series).</li>
+          <li>Kinetic Voice Router v0.5.0b4 is installed as the conversation agent of the Home Assistant “Speaker” pipeline according to the owner’s UI; Home Assistant tries local intents first. Limited features have been tested, not an overall everyday-use acceptance.</li>
+          <li>On 3 November, spoken timers were started locally, rang audibly on the Echo 2, and were cancelled by voice in individual tests. Some named timers were also started (owner observation).</li>
 <!-- confirmed:end -->
         </ul>
       </div>
@@ -732,7 +733,7 @@ footer p{font-size:.86rem}
         <ul id="l-open"><!-- open:start -->
           <li>Stable continuous operation and audio while music is playing</li>
           <li>Complex knowledge queries, conversational follow-up and technical end-to-end measurements</li>
-          <li>Timers, alarms, reminders, lists and media</li>
+          <li>Timer remaining-time queries, reliable extensions/shortenings and multiple named timers; alarms, reminders, lists and music are not yet accepted</li>
           <li>Multi-user permissions, guest mode and sensitive answers</li>
           <li>Recovery, full raw backup and long-term tests</li>
           <li>Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested.</li>
@@ -743,7 +744,8 @@ footer p{font-size:.86rem}
       </div>
       <div class="card issues wide"><span class="label">Known issues</span>
         <ul id="l-issues"><!-- issues:start -->
-          <li>Kinetic Voice Router in active mode (29 Oct): a question about a device that does not exist was passed to Hermes as a knowledge question, and Hermes invented a state. The fix exists as a development state (version 0.4.2), is not installed and has not been accepted live</li>
+          <li>Some natural timer follow-up and extension phrases are not matched to Home Assistant local intents; one phrase accidentally included an extra word in the timer name. Timer status queries and extension are not claimed to work.</li>
+          <li>Historical 29 October bug: a question about a non-existent device produced an invented Hermes device-state reply. The router is now updated to v0.5.0b4, but that specific negative end-to-end regression test on real Home Assistant is still outstanding.</li>
           <li>One knowledge question took 21 seconds to answer on 29 Oct. Whether the router was involved is not proven; a control run without the router is missing</li>
           <li>The streaming wake word path was unstable; the local wake word is therefore preferred</li>
           <li>An open question was not understood in an earlier test, via a conversation agent that has since been replaced</li>
@@ -764,6 +766,7 @@ footer p{font-size:.86rem}
           <li><time datetime="2026-10-27">27 Oct 2026</time><span>A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open.</span></li>
           <li><time datetime="2026-10-29">29 Oct 2026</time><span>Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.</span></li>
           <li><time datetime="2026-10-30">30 Oct 2026</time><span>Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits.</span></li>
+          <li><time datetime="2026-11-03">3 Nov 2026</time><span>First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase.</span></li>
 <!-- history:end --></ol>
         <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Subscribe to the history feed (Atom)</a></p>
       </div>
@@ -779,7 +782,8 @@ footer p{font-size:.86rem}
     <h2>Findings and lessons</h2>
     <p class="intro">This is where we record what went wrong or what we learned, newest first. We name open security details only once they are fixed; what we learned is published then.</p>
     <ol class="finds">
-      <li class="find problem" id="f9"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">open</span><time datetime="2026-10-29">29 Oct 2026</time></div><h3>A language model must not guess device states</h3><p>In a live test of our own router extension, a question about the state of a device that does not exist was classified as a knowledge question and passed to Hermes. Hermes then invented a state. Lesson: questions about real device states must be answered from Home Assistant or end honestly with “I cannot answer that reliably right now”. A word-pattern rule can be wrong, which is why a misclassification never leads to a device action. The fix exists as a development state and is neither installed nor accepted live. The finding stays open until that is proven.</p></li>
+      <li class="find finding" id="f10"><div class="fhead"><span class="ftype">Finding</span><span class="fstate open">open</span><time datetime="2026-11-03">3 Nov 2026</time></div><h3>Voice timers can ring, but follow-up commands still need work</h3><p>In a limited test, our Echo 2 running Kinetic Voice Router v0.5.0b4 started a spoken timer, rang audibly and cancelled the timer by voice. One named timer also worked. A natural remaining-time question and a request to extend the timer were not handled as local Home Assistant commands, while another phrase introduced an unwanted word into a timer name. Lesson: isolated successes are not proof of reliable daily use. First Run comes first; more comfortable Alexa-like management is planned later.</p></li>
+      <li class="find problem" id="f9"><div class="fhead"><span class="ftype">Problem</span><span class="fstate open">open</span><time datetime="2026-10-29">29 Oct 2026</time></div><h3>A language model must not guess device states</h3><p>In a live test of our own router extension, a question about the state of a device that does not exist was classified as a knowledge question and passed to Hermes. Hermes then invented a state. Lesson: questions about real device states must be answered from Home Assistant or end honestly with “I cannot answer that reliably right now”. A word-pattern rule can be wrong, which is why a misclassification never leads to a device action. Experimental router beta v0.5.0b4 is now installed in Home Assistant, but this specific negative device question has not yet been retested there. The finding stays open until that regression test succeeds.</p></li>
       <li class="find correction" id="f8"><div class="fhead"><span class="ftype">Correction</span><span class="fstate resolved">resolved</span><time datetime="2026-10-27">27 Oct 2026</time></div><h3>Update: the previously open switching failure was fixed in a limited test</h3><p>Our previous status described the failed command as still unresolved. After an additional device alias was added, switching on and off through the Echo worked with a harmless test load. The switch-off debug run showed local command processing. We have corrected the public test status; security negative tests and long-term operation have not yet been accepted.</p></li>
       <li class="find finding" id="f7"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-27">27 Oct 2026</time></div><h3>Correctly heard is not correctly matched</h3><p>A voice assistant can transcribe a command correctly and still fail to match it to the right device. In our test, Home Assistant switched an exposed smart plug locally when the command came as text (0.05 s processing) or when the short stored device name was spoken. With a compound device name, speech recognition got the sentence right, but Home Assistant did not match it to any device and passed it to the AI assistant, which explained something but switched nothing. Lesson: maintain natural device names and fitting aliases, and trace every run in the debug view. The AI assistant deliberately gets no admin rights in Home Assistant for this; the fix belongs in the normal voice processing. After a matching alias was added, the Echo switched on and off in a follow-up test; the switch-off debug run showed local processing. This confirms the fix for this particular command, not reliability for every command.</p></li>
       <li class="find finding" id="f6"><div class="fhead"><span class="ftype">Finding</span><time datetime="2026-10-26">26 Oct 2026</time></div><h3>A simpler AI connection does not replace verified home control</h3><p>Home Assistant 2026.10 makes its MCP server easier to set up. This gives AI apps additional integration options, but it does not automatically fix failed voice commands or send proactive status updates. Ordinary Home Assistant automations remain a more reliable starting point for predictable state checks. This feature has not been accepted as part of our pilot.</p></li>
