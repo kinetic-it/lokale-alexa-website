@@ -49,7 +49,7 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 
 **Ziel:** `https://kinetic-it.github.io/lokale-alexa-website/`.
 
-GitHub → Repository → Settings → Pages → **Deploy from a branch**, Branch `main`, Ordner `/ (root)`. Seit 25.10.2026 aktiv; Website, `data/status.json` und PDF waren live erreichbar. Offen: vollständige Mobilansicht und Test aller Navigationspunkte.
+**Deployment-Stand laut WI-0181 vom 30.10.2026:** Pages-Quelle auf **GitHub Actions** umgestellt; Workflow `.github/workflows/hugo.yml` mit Hugo 0.169.0 und Variable `PAGES_VIA_ACTIONS=true` meldete damals einen erfolgreichen Deploy. Aktuelle Live-Auslieferung ist separat zu verifizieren; hier nicht als dauerhaft garantiert markieren. Rückfall laut Projektakte: **Deploy from a branch**, `main`, `/(root)`. Offen: mobile Realgeräte-, Browser- und Navigationsprüfung.
 
 ## Open Source / Copyright
 
@@ -115,7 +115,7 @@ Abschnitt `#umbau` (Navigation „Umbau“ / „Our build“) entsteht aus **ein
 - Die Warnung „OHNE GEWÄHR – AUF EIGENE GEFAHR“ (englisch „NO WARRANTY – AT YOUR OWN RISK“) steht groß vor der Anleitung und als Kurzhinweis vor Etappen mit Hardware-, Unlock- oder Flash-Eingriff (`"warn": true`). Sie ist ein deutlicher Hinweis und keine rechtliche Pauschalfreistellung.
 - Fremde 3D-Dateien und Software nur verlinken, nicht in dieses Repository kopieren (Lizenzen nicht geprüft).
 - **Fotos** liegen in `images/`, nur mit ausdrücklicher Freigabe des Owners. Vor dem Ablegen: Metadaten entfernen (EXIF, GPS, Aufnahmedatum), Seriennummern, Aufkleber, MAC-Adressen und private Umgebung wegschneiden, auf höchstens 700 px Breite verkleinern. Jedes Bild braucht einen Alternativtext in beiden Sprachen.
-- Zahlen zum Kinetic Voice Router stammen aus Owner-Beobachtungen. Eine Version gilt erst als installiert oder abgenommen, wenn der Owner das gemeldet hat. Der Quellcode des Routers ist nicht öffentlich und wird nicht verlinkt.
+- Zahlen zum Kinetic Voice Router stammen aus Owner-Beobachtungen. Eine Version gilt erst als installiert oder abgenommen, wenn der Owner das gemeldet hat. Der eigenständige Kinetic Voice Router wird inzwischen öffentlich unter `https://github.com/kinetic-it/kinetic-voice-router` entwickelt; historische Berichtsstände im Umbau-Abschnitt sind auf ihren jeweiligen Berichtstag zu beziehen.
 
 ## Befunde und Erkenntnisse
 
