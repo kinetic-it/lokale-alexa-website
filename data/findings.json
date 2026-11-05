@@ -3,17 +3,45 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f12",
+      "date": "2026-11-05",
+      "type": "finding",
+      "state": "open",
+      "de": {
+        "title": "Erst die Systemfrage klären, dann weiter ausbauen",
+        "text": "Wir haben die Umsetzung pausiert und bewerten das Gesamtsystem neu: welche Firmware auf dem Echo 2 läuft, welche Rolle Home Assistant und der Kinetic Voice Router haben und wie ein alltagstauglicher, möglichst lokaler Assistent im Haushalt aussehen kann. Der bisherige Zieltermin 8. November für den First Run ist ausgesetzt. TECHO5, EchoLocal und LibreEcho werden neu untersucht und mit unserem jetzigen Weg (echo-dot-assist/hassmic) verglichen. Es gibt keine Wechselentscheidung, und Angaben der Projekte sind keine eigenen Tests. Bisherige Tests bleiben, was sie waren: Einzeltests. Lehre: Bevor man weitere Funktionen aufsetzt, lohnt sich die Frage, ob die Grundlage trägt."
+      },
+      "en": {
+        "title": "Settle the system question first, then build further",
+        "text": "We have paused implementation and are reassessing the whole system: which firmware runs on the Echo 2, what role Home Assistant and the Kinetic Voice Router play, and what a practical, as-local-as-possible assistant for the household could look like. The previous 8 November target for the First Run is suspended. TECHO5, EchoLocal and LibreEcho are being reassessed and compared with our current route (echo-dot-assist/hassmic). There is no decision to switch, and statements by those projects are not our own tests. Earlier tests remain what they were: single tests. Lesson: before building more features on top, ask whether the foundation holds."
+      }
+    },
+    {
+      "id": "f11",
+      "date": "2026-11-05",
+      "type": "finding",
+      "state": "open",
+      "de": {
+        "title": "Ein Wecker-Prototyp ist noch kein verlässlicher Wecker",
+        "text": "Ein Wecker-Prototyp in Home Assistant startete zur geplanten Zeit, klingelte wiederholt, ließ sich von Hand stoppen und endete nach etwa sieben Minuten von selbst. Das ist ein Einzeltest nach meiner Beobachtung, ohne unabhängige Zeitmessung. Ein früherer Lauf war manuell ausgelöst und belegt keinen zeitgesteuerten Start. Offen sind Sprachstopp, mehrere Wecker sowie das Verhalten nach einem Neustart oder bei Internetausfall. Lehre: Ein Einzeltest zeigt, dass der Weg möglich ist, nicht dass ein Wecker im Alltag zuverlässig weckt."
+      },
+      "en": {
+        "title": "An alarm prototype is not yet a reliable alarm clock",
+        "text": "An alarm prototype in Home Assistant started at the scheduled time, rang repeatedly, could be stopped by hand and ended by itself after about seven minutes. That is a single test by my own observation, without independent timing. An earlier run was triggered manually and does not prove a scheduled start. Voice stop, multiple alarms and the behaviour after a restart or an internet outage are still open. Lesson: a single test shows the route is possible, not that an alarm reliably wakes you in daily use."
+      }
+    },
+    {
       "id": "f10",
       "date": "2026-11-03",
       "type": "finding",
       "state": "open",
       "de": {
         "title": "Sprachtimer können bereits klingeln – Folgeanfragen bleiben eine Lücke",
-        "text": "Unser Echo 2 hat mit Kinetic Voice Router v0.5.0b4 einen Timer per Sprache gestartet, hörbar ausgelöst und abgebrochen. Ein benannter Timer funktionierte ebenfalls in einem Einzelversuch. Eine natürliche Restzeitfrage und eine Bitte um Verlängerung wurden hingegen nicht als lokale Home-Assistant-Befehle behandelt. Bei einer anderen Formulierung wurde ein unerwünschtes Wort Teil des Timernamens. Lehre: Funktionierende Einzelfälle sind keine vollständige Alltagstauglichkeit. Zunächst wird der First Run geprüft; eine komfortable Alexa-ähnliche Verwaltung folgt danach."
+        "text": "Unser Echo 2 hat mit Kinetic Voice Router v0.5.0b4 einen Timer per Sprache gestartet, hörbar ausgelöst und abgebrochen. Ein benannter Timer funktionierte ebenfalls in einem Einzelversuch. Eine natürliche Restzeitfrage und eine Bitte um Verlängerung wurden hingegen nicht als lokale Home-Assistant-Befehle behandelt. Bei einer anderen Formulierung wurde ein unerwünschtes Wort Teil des Timernamens. Lehre: Funktionierende Einzelfälle sind keine vollständige Alltagstauglichkeit. Zunächst wird der First Run geprüft; eine komfortable Alexa-ähnliche Verwaltung folgt danach. Nachtrag 05.11.: Dieser Zeitplan ist ausgesetzt, die Umsetzung pausiert (siehe die Einträge vom 05.11.)."
       },
       "en": {
         "title": "Voice timers can ring, but follow-up commands still need work",
-        "text": "In a limited test, our Echo 2 running Kinetic Voice Router v0.5.0b4 started a spoken timer, rang audibly and cancelled the timer by voice. One named timer also worked. A natural remaining-time question and a request to extend the timer were not handled as local Home Assistant commands, while another phrase introduced an unwanted word into a timer name. Lesson: isolated successes are not proof of reliable daily use. First Run comes first; more comfortable Alexa-like management is planned later."
+        "text": "In a limited test, our Echo 2 running Kinetic Voice Router v0.5.0b4 started a spoken timer, rang audibly and cancelled the timer by voice. One named timer also worked. A natural remaining-time question and a request to extend the timer were not handled as local Home Assistant commands, while another phrase introduced an unwanted word into a timer name. Lesson: isolated successes are not proof of reliable daily use. First Run comes first; more comfortable Alexa-like management is planned later. Update 5 Nov.: this schedule is suspended and implementation is paused (see the 5 Nov. entries)."
       }
     },
     {

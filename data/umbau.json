@@ -651,14 +651,14 @@
               "**Kinetic Voice Router (Eigenentwicklung):** Eine eigene Home-Assistant-Erweiterung, die einen Satz einordnet, bevor er an Hermes geht. Der Quellcode ist derzeit nicht veröffentlicht. Es gibt drei Betriebsarten: Aus, Beobachten (zählt nur) und Aktiv.",
               "**Version 0.4.1** lief am 29.10. live. Im Betrieb „Beobachten“ zählte der Router zwei echte Wissensfragen am Echo als Wissensfrage, Hermes antwortete unverändert. Im Betrieb „Aktiv“ wurde die Frage nach dem Zustand eines echten Geräts lokal von Home Assistant beantwortet.",
               "**Fehler:** Eine Frage zu einem Gerät, das es nicht gibt, ordnete der Router als Wissensfrage ein. Hermes erfand daraufhin einen Zustand. Außerdem dauerte die Verarbeitung einer Wissensfrage 21 Sekunden. Ob der Router daran beteiligt war, ist nicht belegt.",
-              "**Version 0.4.2** enthält Korrekturen dafür. Sie ist ein Entwicklungsstand mit Tests gegen Simulation, nicht installiert und nicht live abgenommen."
+              "**Stand 05.11.:** Auf 0.4.1 folgten weitere Versionen; aktuell ist die experimentelle Beta v0.5.0b4 laut Home-Assistant-Oberfläche als Gesprächsagent installiert und nur in Einzeltests erprobt (Timer). Ob der oben beschriebene Fehler damit behoben ist, ist nicht belegt; die Gegenprobe steht aus."
             ]
           },
           {
             "k": "diff",
             "b": [
               "Die Grundeinrichtung ist überschaubar. Schwierig wird es, wenn man den Assistenten personalisieren will: eigene Persönlichkeit, ein sicherer Sprachweg, saubere Trennung von lokalem Befehl und freier Frage.",
-              "Unser Ziel, in 0.4.2 in Entwicklung: Ein Sprachmodell darf einen Gerätezustand nie raten. Fragen nach echten Zuständen müssen aus Home Assistant kommen oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden."
+              "Unser Ziel (Entwicklungsstand 29.10., Gegenprobe offen): Ein Sprachmodell darf einen Gerätezustand nie raten. Fragen nach echten Zuständen müssen aus Home Assistant kommen oder ehrlich mit „Das kann ich gerade nicht sicher beantworten“ enden."
             ]
           },
           {
@@ -742,12 +742,22 @@
                     "r"
                   ],
                   [
-                    "Kinetic Voice Router 0.4.2",
-                    "Korrekturen als Entwicklungsstand, nicht installiert",
-                    "d"
+                    "Kinetic Voice Router 0.5.0b4 (experimentelle Beta)",
+                    "Laut Home-Assistant-Oberfläche installiert (03.11.), nur Einzeltests, keine Gesamtabnahme",
+                    "r"
                   ],
                   [
-                    "Timer, Wecker, Erinnerungen, Listen, Kalender, Musik",
+                    "Sprach-Timer",
+                    "Einzeltests (03.11.): Start, Klingeln und Abbruch ja; Restzeit und Verlängerung nein",
+                    "t"
+                  ],
+                  [
+                    "Wecker-Prototyp",
+                    "Einzeltest (05.11.), keine Zeitmessung, kein Neustart- oder Offline-Test",
+                    "t"
+                  ],
+                  [
+                    "Erinnerungen, Listen, Kalender, Musik",
                     "Nicht getestet",
                     "n"
                   ],
@@ -1449,14 +1459,14 @@
               "**Kinetic Voice Router (our own development):** our own Home Assistant extension that classifies a sentence before it goes to Hermes. The source code is not published at the moment. There are three operating modes: Off, Observe (only counts) and Active.",
               "**Version 0.4.1** ran live on 29 Oct. In “Observe” mode the router counted two real knowledge questions on the Echo as knowledge questions, and Hermes answered unchanged. In “Active” mode, a question about the state of a real device was answered locally by Home Assistant.",
               "**Fault:** a question about a device that does not exist was classified by the router as a knowledge question. Hermes then invented a state. In addition, processing one knowledge question took 21 seconds. Whether the router was involved in that is not proven.",
-              "**Version 0.4.2** contains fixes for this. It is a development state with tests against a simulation, not installed and not accepted live."
+              "**Status 5 Nov.:** 0.4.1 was followed by further versions; the current one is the experimental beta v0.5.0b4, which is installed as the conversation agent according to the Home Assistant interface and has only been tried in single tests (timers). Whether the fault described above is fixed is not proven; the counter-test is still open."
             ]
           },
           {
             "k": "diff",
             "b": [
               "The basic setup is manageable. It gets hard when you want to personalize the assistant: its own personality, a safe voice path, a clean separation of local command and free question.",
-              "Our goal, in development in 0.4.2: a language model must never guess a device state. Questions about real states must come from Home Assistant or end honestly with “I cannot answer that reliably right now”."
+              "Our goal (development state of 29 Oct., counter-test open): a language model must never guess a device state. Questions about real states must come from Home Assistant or end honestly with “I cannot answer that reliably right now”."
             ]
           },
           {
@@ -1540,12 +1550,22 @@
                     "r"
                   ],
                   [
-                    "Kinetic Voice Router 0.4.2",
-                    "Fixes as a development state, not installed",
-                    "d"
+                    "Kinetic Voice Router 0.5.0b4 (experimental beta)",
+                    "Installed according to the Home Assistant interface (3 Nov), single tests only, no overall acceptance",
+                    "r"
                   ],
                   [
-                    "Timers, alarms, reminders, lists, calendar, music",
+                    "Voice timers",
+                    "Single tests (3 Nov): start, ringing and cancellation yes; remaining time and extension no",
+                    "t"
+                  ],
+                  [
+                    "Alarm prototype",
+                    "Single test (5 Nov), no timing, no restart or offline test",
+                    "t"
+                  ],
+                  [
+                    "Reminders, lists, calendar, music",
                     "Not tested",
                     "n"
                   ],

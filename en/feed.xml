@@ -5,8 +5,15 @@
   <id>https://kinetic-it.github.io/lokale-alexa-website/en/feed.xml</id>
   <link rel="self" type="application/atom+xml" href="https://kinetic-it.github.io/lokale-alexa-website/en/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/"/>
-  <updated>2026-11-03T00:00:00Z</updated>
+  <updated>2026-11-05T00:00:00Z</updated>
   <author><name>kinetic-it</name></author>
+  <entry>
+    <title>Strategic reassessment started: implementation is paused and the 8 November First Run t...</title>
+    <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-11-05-1</id>
+    <link rel="alternate" type="text/html" href="https://kinetic-it.github.io/lokale-alexa-website/en/#stand"/>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <summary>Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch.</summary>
+  </entry>
   <entry>
     <title>First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0....</title>
     <id>tag:kinetic-it.github.io,2026:lokale-alexa/en/2026-11-03-1</id>

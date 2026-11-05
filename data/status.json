@@ -2,22 +2,25 @@
   "schema_version": 1,
   "visibility": "public",
   "approved": true,
-  "as_of": "2026-11-03",
+  "as_of": "2026-11-05",
   "evidence": "Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Kinetic Voice Router v0.5.0b4 im Live-Einzeltest; First Run wird vorbereitet",
+  "title": "Echo-2-Pilot · Strategische Neubewertung läuft, Umsetzung pausiert; Kinetic Voice Router v0.5.0b4 in Einzeltests",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
-    "echo-dot-assist mit Home Assistant verbunden (eigener Bericht)",
+    "Echo 2 läuft aktuell mit echo-dot-assist (hassmic) und ist mit Home Assistant verbunden (eigener Bericht)",
     "Lokales microWakeWord „Okay Nabu“ in 10 von 10 Kurztests erkannt; kein Dauerbetrieb belegt",
     "Hermes-Speaker ist als Gesprächsagent eingebunden: Ein Echo-Sprachtest mit Selbstvorstellung und kurzer Anschlussantwort war nach Korrektur des Gesprächswegs erfolgreich (eigene Beobachtung).",
     "Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (eigene Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme.",
-    "Kinetic Voice Router v0.5.0b4 ist laut Home-Assistant-Oberfläche als Gesprächsagent der Pipeline „Speaker“ installiert; Home Assistant versucht lokale Befehle zuerst. Einzelfunktionen sind getestet, aber noch keine vollständige Alltagsabnahme.",
-    "Sprachtimer wurden am Echo 2 im Einzeltest lokal erstellt, nach Ablauf hörbar ausgelöst und per Sprache gestoppt; einzelne benannte Timer konnten gestartet werden (eigene Beobachtung vom 03.11.)."
+    "Kinetic Voice Router v0.5.0b4 (experimentelle Beta) ist laut Home-Assistant-Oberfläche als Gesprächsagent der Pipeline „Speaker“ installiert; Home Assistant versucht lokale Befehle zuerst. Einzelfunktionen sind getestet, aber noch keine vollständige Alltagsabnahme.",
+    "Sprachtimer wurden am Echo 2 im Einzeltest lokal erstellt, nach Ablauf hörbar ausgelöst und per Sprache gestoppt; einzelne benannte Timer konnten gestartet werden (eigene Beobachtung vom 03.11.).",
+    "Wecker-Prototyp in Home Assistant: geplanter Start, wiederholtes Klingeln, manuelles Stoppen und automatisches Ende nach ungefähr sieben Minuten waren in einem Einzeltest erfolgreich (eigene Beobachtung vom 05.11.). Keine unabhängige Zeitmessung; Neustart, Internetausfall, Sprachstopp und mehrere Wecker sind nicht geprüft."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
     "Komplexe Wissensfragen, Folgekontext und technische Ende-zu-Ende-Messungen",
-    "Timer-Restzeit abfragen, Timer verlängern/verkürzen, mehrere benannte Timer im Alltag zuverlässig verwalten; Wecker, Erinnerungen, Listen und Musik sind nicht abgenommen",
+    "Timer-Restzeit abfragen, Timer verlängern/verkürzen, mehrere benannte Timer im Alltag zuverlässig verwalten; Wecker per Sprache stoppen, mehrere Wecker, Wecker nach Neustart oder bei Internetausfall; Erinnerungen und Listen sind nicht abgenommen",
+    "Musik (Spotify, YouTube Music), Multiroom, vollständige Offline-Sprachsteuerung und Alltagstauglichkeit sind nicht abgenommen",
+    "Offen: Ob wir bei der aktuellen Firmware bleiben oder zu TECHO5, EchoLocal oder LibreEcho wechseln, ist nicht entschieden. Die Projekte werden neu untersucht; Angaben der Projekte sind keine eigenen Tests.",
     "Mehrbenutzerrechte, Gastmodus und sensible Antworten",
     "Recovery, vollständiges Rohbackup und Langzeittests",
     "Zukunftskonzept „Follow-me Conversation“: Gespräch beim Raumwechsel zwischen mehreren Echos übertragen, bei eindeutiger Sprecherzuordnung automatisch, sonst mit Rückfrage; erst laufenden Satz beenden. Nicht implementiert oder getestet.",
@@ -61,6 +64,11 @@
       "state": "in_progress"
     },
     {
+      "id": "m9",
+      "name": "Strategische Neubewertung (Firmware und Architektur)",
+      "state": "in_progress"
+    },
+    {
       "id": "m6",
       "name": "Alltagsfunktionen und Dauerbetrieb",
       "state": "in_progress"
@@ -78,21 +86,24 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · Kinetic Voice Router v0.5.0b4 in limited live testing; First Run in progress",
+    "title": "Echo 2 pilot · Strategic reassessment under way, implementation paused; Kinetic Voice Router v0.5.0b4 in single tests",
     "evidence": "My own reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
-      "echo-dot-assist connected to Home Assistant (own report)",
+      "The Echo 2 currently runs echo-dot-assist (hassmic) and is connected to Home Assistant (own report)",
       "Local microWakeWord “Okay Nabu” detected in 10 of 10 short tests; no continuous operation proven",
       "Hermes speaker is connected as a conversation agent: an Echo voice test with self-introduction and a short follow-up reply succeeded after the conversation route was corrected (own observation).",
       "An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (own observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.",
-      "Kinetic Voice Router v0.5.0b4 is installed as the conversation agent of the Home Assistant “Speaker” pipeline according to the owner’s UI; Home Assistant tries local intents first. Limited features have been tested, not an overall everyday-use acceptance.",
-      "On 3 November, spoken timers were started locally, rang audibly on the Echo 2, and were cancelled by voice in individual tests. Some named timers were also started (owner observation)."
+      "Kinetic Voice Router v0.5.0b4 (experimental beta) is installed as the conversation agent of the Home Assistant “Speaker” pipeline according to the Home Assistant interface; Home Assistant tries local intents first. Individual functions have been tested, but there is no full everyday acceptance yet.",
+      "On 3 November, spoken timers were started locally, rang audibly on the Echo 2, and were cancelled by voice in individual tests. Some named timers were also started (owner observation).",
+      "Alarm prototype in Home Assistant: scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked in a single test (own observation, 5 Nov.). No independent timing; restart, internet outage, voice stop and multiple alarms are not tested."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
       "Complex knowledge queries, conversational follow-up and technical end-to-end measurements",
-      "Timer remaining-time queries, reliable extensions/shortenings and multiple named timers; alarms, reminders, lists and music are not yet accepted",
+      "Timer remaining-time queries, reliable extensions/shortenings and multiple named timers; stopping alarms by voice, multiple alarms, alarms after a restart or internet outage; reminders and lists are not yet accepted",
+      "Music (Spotify, YouTube Music), multiroom, fully offline voice control and everyday readiness are not yet accepted",
+      "Open: whether we stay with the current firmware or move to TECHO5, EchoLocal or LibreEcho is undecided. The projects are being reassessed; project statements are not our own tests.",
       "Multi-user permissions, guest mode and sensitive answers",
       "Recovery, full raw backup and long-term tests",
       "Future concept “Follow-me Conversation”: hand off an ongoing conversation between Echos when changing rooms, automatically when speaker identity is unambiguous, otherwise after asking; finish the current sentence first. Not implemented or tested.",
@@ -115,7 +126,8 @@
       "m4": "Home commands end to end",
       "m5": "Hermes conversation end to end",
       "m6": "Everyday functions and continuous operation",
-      "m8": "Kinetic Voice Router (own development)"
+      "m8": "Kinetic Voice Router (own development)",
+      "m9": "Strategic reassessment (firmware and architecture)"
     },
     "history": [
       "Research guide on Amazon devices completed (21 pages)",
@@ -129,9 +141,10 @@
       "A previously failing voice command worked after a matching device alias was added: on/off via Echo with a harmless test load, with local processing confirmed by the switch-off debug trace. Limited test passed; negative and long-term tests remain open.",
       "Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.",
       "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits.",
-      "First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase."
+      "First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase.",
+      "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch."
     ],
-    "last_test": "Limited First Run tests: Kinetic Voice Router v0.5.0b4 selected as Home Assistant agent. Voice timer start, audible alert and cancellation worked; naming was not fully reliable. Remaining-time and extension phrases failed local intent matching. Alarms, Spotify/YouTube Music and everyday use have not been accepted."
+    "last_test": "Alarm prototype in Home Assistant (single test, own observation): scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked. No independent timing; an earlier run that was triggered manually does not prove a scheduled start. Restart, internet outage, voice stop and multiple alarms are not tested. Earlier (3 Nov.): timer start and cancellation at the Echo worked; the remaining-time question and extension failed."
   },
   "history": [
     {
@@ -181,10 +194,14 @@
     {
       "date": "2026-11-03",
       "text": "First Run bis möglichst 8. November priorisiert; Kinetic Voice Router v0.5.0b4 in HA aktiv. Sprach-Timerstart, hörbarer Ablauf und Abbruch im Einzeltest erfolgreich, Status-/Verlängerungsbefehle noch offen. Komfortfunktionen folgen in einer späteren Phase."
+    },
+    {
+      "date": "2026-11-05",
+      "text": "Strategische Neubewertung begonnen: Die Umsetzung ist pausiert, der First-Run-Zieltermin 8. November ist ausgesetzt. Wecker-Prototyp in Home Assistant im Einzeltest erfolgreich (Start, wiederholtes Klingeln, Stopp, Ende nach etwa sieben Minuten). Firmwarealternativen werden neu untersucht; es gibt keine Wechselentscheidung."
     }
   ],
   "last_test": {
-    "date": "2026-11-03",
-    "text": "First-Run-Einzeltests: Kinetic Voice Router v0.5.0b4 in HA als Agent ausgewählt. Sprach-Timerstart, hörbarer Ablauf und Abbruch am Echo erfolgreich; Benennung nur teilweise robust. Restzeitfrage/Verlängerungsbefehl scheiterten beim lokalen Intent-Matching. Wecker, Spotify/YouTube Music und Alltagseinsatz sind nicht abgenommen."
+    "date": "2026-11-05",
+    "text": "Wecker-Prototyp in Home Assistant (Einzeltest, eigene Beobachtung): geplanter Start, wiederholtes Klingeln, manuelles Stoppen und automatisches Ende nach ungefähr sieben Minuten waren erfolgreich. Keine unabhängige Zeitmessung; ein früherer, manuell ausgelöster Lauf belegt keinen zeitgesteuerten Start. Neustart, Internetausfall, Sprachstopp und mehrere Wecker sind nicht geprüft. Zuvor (03.11.): Timer-Start und Abbruch am Echo erfolgreich; Restzeitfrage und Verlängerung scheiterten."
   }
 }
