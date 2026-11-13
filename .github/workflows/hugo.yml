@@ -1,11 +1,10 @@
 name: Hugo
 
-# Baut die Seite mit festgelegter Hugo-Version und beweist, dass sie der bisherigen Seite entspricht
-# (tools/hugo_parity.py). Veröffentlicht wird nur, wenn in den Repository-Einstellungen unter
-# Pages die Quelle auf "GitHub Actions" steht UND die Variable PAGES_VIA_ACTIONS auf "true" gesetzt ist.
-# Solange das nicht der Fall ist, liefert GitHub Pages weiter die Dateien aus dem Hauptordner aus.
-# Beim Umstellen: index.html, en/index.html, feed.xml, sitemap.xml und die Python-Generatoren entfernen
-# und den Vergleichsschritt streichen.
+# Baut die Seite mit festgelegter Hugo-Version, prüft die gebaute Seite (tools/check_i18n.py public)
+# und veröffentlicht sie von main aus über GitHub Pages. Veröffentlicht wird nur, wenn in den
+# Repository-Einstellungen unter Pages die Quelle auf "GitHub Actions" steht UND die Variable
+# PAGES_VIA_ACTIONS auf "true" gesetzt ist. Im Hauptordner liegen keine fertigen Seiten mehr;
+# ein Zurück auf "Deploy from a branch" geht deshalb nicht mehr. Rückweg bei Fehlern: Commit zurücknehmen.
 
 on:
   pull_request:
@@ -39,8 +38,8 @@ jobs:
           echo "$HOME/.local/hugo" >> "$GITHUB_PATH"
       - name: Seite bauen
         run: hugo version && hugo --destination public
-      - name: Mit der bisherigen Seite vergleichen
-        run: python3 tools/hugo_parity.py public
+      - name: Gebaute Seite prüfen (Sprachen, Links, Feeds, private Angaben)
+        run: python3 tools/check_i18n.py public
       - name: Für Pages bereitstellen
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.PAGES_VIA_ACTIONS == 'true'
         uses: actions/upload-pages-artifact@v5

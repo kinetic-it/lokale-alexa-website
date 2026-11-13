@@ -26,7 +26,7 @@ Layoutprüfung: Das deutsche PDF, das aus `content.de.json` gebaut wird, hat die
 2. Dieselbe Stelle (gleiche ID) in `content.en.json` übersetzen. Nur Geändertes.
 3. `python3 tools/check_i18n.py` muss grün sein (gleiche IDs, Typen, Zahlen, Quellen-IDs, Tabellenform, keine Umlaute im Englischen).
 4. PDFs bauen. Bei neuer Fassung Datum in `meta` (Titel, Stand, Fußzeile) und im Dateinamen anpassen.
-5. Links in `index.html` und `en/index.html` anpassen.
+5. Links in `layouts/partials/sections/leitfaden.de.html` und `leitfaden.en.html` anpassen.
 
 Links: Die Quellen Q1 bis Q32 sind im deutschen Original als klickbare Web-Links hinterlegt (URL nicht sichtbar im Text). Die URLs stehen im Quellblock beider JSON-Dateien unter `urls` und werden in beiden PDFs als Links gesetzt; `check_i18n.py` prüft, dass sie in de und en gleich sind. Dazu kommen Lesezeichen und ein verlinktes Inhaltsverzeichnis.
 
