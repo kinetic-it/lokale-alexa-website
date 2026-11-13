@@ -1,6 +1,5 @@
 {{- $l := .Language.Lang -}}
 {{- $p := index hugo.Data.umbau $l -}}
-{{- $pre := cond (eq $l "en") "../" "" -}}
 <section id="umbau">
   <div class="wrap">
     <div class="eyebrow">{{ $p.eyebrow }}</div>
@@ -35,7 +34,7 @@
 {{ if $s.figs }}
       <div class="ufigs">
 {{ range $s.figs }}
-        <figure class="ufig"><img src="{{ $pre }}images/{{ .src }}" width="{{ .w }}" height="{{ .h }}" alt="{{ .alt }}" loading="lazy"><figcaption>{{ .cap }}</figcaption></figure>
+        <figure class="ufig"><img src="{{ printf "images/%s" .src | relURL }}" width="{{ .w }}" height="{{ .h }}" alt="{{ .alt }}" loading="lazy"><figcaption>{{ .cap }}</figcaption></figure>
 {{ end }}
       </div>
       <p class="small">{{ $p.fig_credit }}</p>

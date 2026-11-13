@@ -1,7 +1,6 @@
 {{- $l := .Language.Lang -}}
 {{- $c := hugo.Data.soul -}}
 {{- $p := index $c.page $l -}}
-{{- $pre := cond (eq $l "en") ".." "." -}}
 <section id="soul">
   <div class="wrap">
     <div class="eyebrow">{{ $p.eyebrow }}</div>
@@ -13,7 +12,7 @@
       <div class="srow"><pre class="sfile"><code>{{ delimit $t.lines "\n" }}</code></pre><div class="swhy"><span class="label">{{ $t.title }}</span><p>{{ $t.why }}</p></div></div>
 {{ end }}
     </div>
-    <p style="margin-top:22px"><a class="button" href="{{ $pre }}/downloads/{{ index $c.file_names $l }}" download>{{ $p.button }}</a></p>
+    <p style="margin-top:22px"><a class="button" href="{{ printf "downloads/%s" (index $c.file_names $l) | relURL }}" download>{{ $p.button }}</a></p>
     <div class="grid two">
 {{ range $p.cards }}
       <div class="card"><span class="label">{{ index . 0 }}</span><h3>{{ index . 1 }}</h3><p>{{ index . 2 }}</p></div>

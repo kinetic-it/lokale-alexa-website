@@ -4,7 +4,7 @@
     <div class="eyebrow">Transparenz</div>
     <h2>Aktueller öffentlicher Projektstand</h2>
     <p class="intro">Hier erscheinen ausschließlich zur Veröffentlichung freigegebene Aussagen. Der interne Entwicklungs- und Sicherheitsstatus bleibt in privaten Repositories. Der Stand unterscheidet bewusst zwischen <strong>berichtet</strong> und <strong>abgenommen</strong>.</p>
-    <p class="small" data-bind="meta">{{ $b.meta }}</p>
+    <p class="small" data-asof="{{ hugo.Data.status.as_of }}" data-stale-append>{{ $b.meta }}</p>
     <div class="board">
       <div class="card good"><span class="label">Bereits berichtet</span>
         <ul id="l-confirmed">{{ partial "list.html" (dict "p" . "key" "confirmed") }}
@@ -20,7 +20,7 @@
       </div>
       <div class="card wide"><span class="label">Verlauf</span>
         <ol class="hist" id="l-history">{{ partial "history.html" . }}</ol>
-        <p class="small" style="margin-top:12px"><a href="feed.xml" type="application/atom+xml">Verlauf als Feed abonnieren (Atom)</a></p>
+        <p class="small" style="margin-top:12px"><a href="{{ "feed.xml" | relLangURL }}" type="application/atom+xml">Verlauf als Feed abonnieren (Atom)</a></p>
       </div>
     </div>
     <p class="small" style="margin-top:20px">Automatische Veröffentlichung ist keine automatische Funktionsprüfung. Der Status wird nach fachlicher Freigabe übernommen; die Seite aktualisiert sich dann über GitHub Pages.</p>

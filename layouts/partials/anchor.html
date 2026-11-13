@@ -1,0 +1,9 @@
+{{- /* Verweis aus den Datendateien: "#abschnitt" wird zur Adresse der Seite, auf der der Abschnitt jetzt steht. Alles andere bleibt unverändert. */ -}}
+{{- $href := . -}}
+{{- if strings.HasPrefix $href "#" -}}
+{{- $id := strings.TrimPrefix "#" $href -}}
+{{- range (slice site.Home | append site.RegularPages) -}}
+{{- if in (.Params.sections | default slice) $id }}{{ $href = printf "%s#%s" .RelPermalink $id }}{{ end -}}
+{{- end -}}
+{{- end -}}
+{{- return $href -}}

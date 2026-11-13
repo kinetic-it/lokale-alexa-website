@@ -1,0 +1,35 @@
+{{- $l := .Language.Lang -}}
+{{- $neutral := slice "nachbauen" "umbau" "befunde" "soul" "news" -}}
+{{- /* Alte Sprungmarken der früheren Ein-Seiten-Fassung: Abschnitt -> neue Seite (nur auf der Startseite gebraucht). */ -}}
+{{- $moved := dict -}}
+{{- if .IsHome }}{{ range .Site.RegularPages }}{{ $p := . }}{{ range .Params.sections }}{{ $moved = merge $moved (dict . $p.RelPermalink) }}{{ end }}{{ end }}{{ end -}}
+<!doctype html>
+<html lang="{{ $l }}">
+<head>
+{{ partial "head.html" . }}
+<style>
+{{ (resources.Get "css/site.css").Content | safeCSS }}
+</style>
+{{ partial "head-tail.html" . }}
+</head>
+<body>
+{{ partial "header.html" . }}
+
+<main id="inhalt">
+{{ range $i, $id := .Params.sections }}
+{{- $name := printf "sections/%s.%s.html" $id $l -}}
+{{- if in $neutral $id }}{{ $name = printf "sections/%s.html" $id }}{{ end -}}
+{{- $html := string (partial $name $) -}}
+{{- /* Auf Unterseiten ist die Überschrift des ersten Abschnitts die Seitenüberschrift; dessen Zwischenüberschriften rücken eine Ebene hoch. */ -}}
+{{- if and (not $.IsHome) (eq $i 0) }}{{ $html = replaceRE `(?s)<h2>(.*?)</h2>` "<h1>$1</h1>" $html 1 }}{{ $html = replace (replace $html "<h3" "<h2 data-h3") "</h3>" "</h2>" }}{{ end -}}
+{{ $html | safeHTML }}
+{{ end }}
+</main>
+
+{{ partial (printf "footer/%s.html" $l) . }}
+
+<script>
+{{ (resources.Get "js/site.js").Content | replaceRE "__STALE__" (index .Site.Params "stale") | replaceRE "__MOVED__" ($moved | jsonify) | safeJS }}
+</script>
+</body>
+</html>

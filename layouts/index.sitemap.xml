@@ -1,13 +1,13 @@
 {{- $lastmod := hugo.Data.status.as_of -}}
 {{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-{{- range .AllTranslations }}
+{{- range hugo.Sites }}{{ range where .Pages "Kind" "in" (slice "home" "page") }}{{ $p := . }}
   <url>
     <loc>{{ .Permalink }}</loc>
     <lastmod>{{ $lastmod }}</lastmod>
-{{- range $.AllTranslations }}
+{{- range $p.AllTranslations }}
     <xhtml:link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}"/>
 {{- end }}
   </url>
-{{- end }}
+{{- end }}{{ end }}
 </urlset>

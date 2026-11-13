@@ -3,4 +3,8 @@
 {{- $s = replaceRE "`([^`]+)`" "<code>$1</code>" $s -}}
 {{- $s = replaceRE `\*\*([^*]+)\*\*` "<strong>$1</strong>" $s -}}
 {{- $s = replaceRE `\[([^\]]+)\]\(([^)]+)\)` `<a href="$2">$1</a>` $s -}}
+{{- /* Verweise auf Abschnitte, die auf einer anderen Seite stehen: "#abschnitt" -> Adresse dieser Seite. */ -}}
+{{- range (slice site.Home | append site.RegularPages) -}}{{- $p := . -}}
+{{- range (.Params.sections | default slice) }}{{ $s = replace $s (printf `href="#%s"` .) (printf `href="%s#%s"` $p.RelPermalink .) }}{{ end -}}
+{{- end -}}
 {{- return ($s | safeHTML) -}}
