@@ -2,24 +2,53 @@
 
 Öffentliche Projektinformationen zu einem wiederverwendeten Amazon Echo als Home-Assistant-Sprachsatellit mit optionalem Hermes-Speaker.
 
-- Projektüberblick, Gerätekompatibilität, Softwarewege, FAQ und Sicherheitsgrenzen: [Website](https://kinetic-it.github.io/lokale-alexa-website/) (GitHub Pages aktiv seit 25.10.2026)
+- Website: https://kinetic-it.github.io/lokale-alexa-website/ (Deutsch) und `/en/` (Englisch)
 - **Öffentlich:** nur geprüfte, ausdrücklich freigegebene Aussagen.
-- **Privat:** technische Projektakte, Work Items, Konfigurationen und interne Evidenz verbleiben in `kinetic-it/lokale_alexa` und `kinetic-it/work-items`.
-
-## Aktualisierung
-
-`data/status.json` ist der **freigegebene** öffentliche Status. Inhalte und FAQ werden manuell gepflegt, Statusänderungen nach einem Review übernommen. GitHub Pages wird laut Projektakte seit 30.10.2026 über **GitHub Actions/Hugo** veröffentlicht (`.github/workflows/hugo.yml`, sofern `PAGES_VIA_ACTIONS=true` und Pages als Actions-Quelle eingerichtet ist). Der frühere Branch-Root-Pfad bleibt ein möglicher Rückfall. Ob der aktuelle Live-Deploy erfolgreich ausgeliefert wurde, wird getrennt verifiziert. Es existiert **kein** automatischer Direktzugriff auf das private Repository.
-
-Die Seite zeigt Sprachweg-Schaubild, Gerätefilter, Sicherheitsgrundsätze und den freigegebenen Pilotstand (aus `data/status.json`). Sie lädt keine externen Ressourcen. Es gibt eine deutsche und eine englische Fassung (`en/`), siehe `docs/REDAKTION.md`.
-
-Die Grundlagen stammen aus „Amazon-Geräte als offene Sprach- und Smart-Home-Geräte“ (Redaktionsstand 22.10.2026). Geräteunterstützung und tatsächliche Projektabnahme werden getrennt dargestellt.
+- **Privat:** technische Projektakte, Work Items, Konfigurationen und interne Evidenz verbleiben in `kinetic-it/lokale_alexa` und `kinetic-it/work-items`. Es gibt keinen automatischen Zugriff auf private Repositories.
 
 Work Item (privat): WI-0181.
 
-## PDF-Leitfaden
+## Aufbau
 
-Deutsches Original und englische Fassung: `downloads/`. Die englische PDF wird aus `tools/leitfaden/` gebaut; Pflegeprozess in `docs/PDF-LEITFADEN.md`.
+Die Seite wird ausschließlich mit [Hugo](https://gohugo.io/) gebaut. Im Hauptordner liegen keine fertigen Seiten.
 
-## Hugo
+| Pfad | Inhalt |
+|---|---|
+| `data/status.json` | freigegebener öffentlicher Projektstand, Meilensteine, Verlauf (Deutsch und Englisch) |
+| `data/findings.json` | Befunde und Erkenntnisse |
+| `data/steps.json`, `data/umbau.json`, `data/soul.json` | Abschnitte Nachbauen, Umbau, Persona |
+| `layouts/partials/sections/*.de.html` / `*.en.html` | von Hand gepflegte Texte je Abschnitt und Sprache |
+| `layouts/` (übrige Dateien) | Vorlagen für Seite, Feeds, Sitemap, 404 |
+| `assets/` | CSS und JavaScript (einmal, für beide Sprachen) |
+| `downloads/`, `images/` | PDFs, SOUL-Beispiel, Fotos |
+| `tools/check_i18n.py` | Prüfung der Quellen und der gebauten Seite |
+| `tools/leitfaden/`, `tools/soul/` | bauen die englische PDF und die SOUL-Downloads |
 
-Die Seite wird mit [Hugo](https://gohugo.io/) gebaut (Actions-Publikation laut Projektakte vom 30.10. aktiv, siehe `docs/REDAKTION.md`, Abschnitt „Hugo“). Lokal: `hugo --destination /tmp/out` und `python3 tools/hugo_parity.py /tmp/out`.
+## Stand aktualisieren
+
+1. `data/status.json` (und bei Bedarf `data/findings.json`) ändern, immer Deutsch und Englisch.
+2. Betrifft die Änderung auch Fließtext (zum Beispiel FAQ oder Sprachweg), die passenden Dateien unter `layouts/partials/sections/` in beiden Sprachen anpassen.
+3. Pull Request öffnen. Die Prüfungen laufen automatisch.
+4. Nach Durchsicht und Merge auf `main` baut und veröffentlicht GitHub Actions die Seite.
+
+Regeln für Inhalte, Freigabe und Sprache: `docs/REDAKTION.md`. PDF-Leitfaden: `docs/PDF-LEITFADEN.md`.
+
+## Lokal bauen und prüfen
+
+Hugo-Version wie in `.github/workflows/hugo.yml` festgelegt.
+
+```bash
+hugo --destination /tmp/out
+```
+
+```bash
+python3 tools/check_i18n.py /tmp/out
+```
+
+Ohne Ordnerangabe prüft `tools/check_i18n.py` nur die Quellen.
+
+## Veröffentlichung
+
+`.github/workflows/hugo.yml` baut bei jedem Pull Request und jedem Push auf `main`, prüft die gebaute Seite und veröffentlicht von `main` aus über GitHub Pages (Quelle „GitHub Actions“, Repository-Variable `PAGES_VIA_ACTIONS=true`). Ein Zurückschalten auf „Deploy from a branch“ ist nicht mehr möglich, weil der Hauptordner keine fertige Seite enthält. Rückweg bei einem Fehler: den betreffenden Commit zurücknehmen.
+
+Die Seite lädt keine externen Schriften, Skripte oder Tracker.

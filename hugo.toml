@@ -1,6 +1,6 @@
 # Hugo-Projekt der öffentlichen Seite. Hugo-Version: siehe .github/workflows/hugo.yml (festgelegt).
-# Während der Umstellung bleiben index.html, en/index.html, feed.xml und sitemap.xml im Hauptordner
-# unverändert, bis die Seite von Hugo veröffentlicht wird. tools/hugo_parity.py beweist, dass beide gleich sind.
+# Die Seite entsteht ausschließlich aus diesem Hugo-Projekt (layouts/, assets/, data/). Im Hauptordner liegen
+# keine fertigen Seiten mehr. Prüfung der gebauten Seite: python3 tools/check_i18n.py <Ausgabeordner>.
 baseURL = "https://kinetic-it.github.io/lokale-alexa-website/"
 title = "Lokale Alexa"
 defaultContentLanguage = "de"
