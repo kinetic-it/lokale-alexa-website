@@ -74,10 +74,29 @@ enableRobotsTXT = false
     [languages.de.outputs]
       home = ["HTML", "Atom", "Sitemap"]
     [languages.de.params]
+      sitename = "Lokale Alexa"
+      hometitle = "Lokale Alexa | Ein Echo bekommt ein zweites Leben"
+      homeogdesc = "Wiederverwendete Echo-Hardware als selbst betriebener Sprachassistent mit Home Assistant. Offener Projektstand, ehrlich getrennt in getestet und geplant."
+      oglocale = "de_DE"
+      oglocalealt = "en_US"
+      brand = "LOKALE ALEXA"
+      brandlabel = "Lokale Alexa, zur Startseite"
+      navlabel = "Hauptnavigation"
+      langlabel = "Sprache"
+      menu = "Menü"
+      skip = "Zum Inhalt springen"
+      home = "Start"
       feedtitle = "Lokale Alexa: Projektverlauf"
       feedsub = "Neue Einträge im öffentlichen Projektverlauf. Berichtet ist nicht gleich getestet ist nicht gleich abgenommen."
       headline = "Lokale Alexa: Ein Echo bekommt ein zweites Leben"
       stale = ' \u00b7 Stand älter als 14 Tage'
+      [languages.de.params.news]
+        eyebrow = "Neu"
+        h2 = "Was zuletzt passiert ist"
+        intro = "Die drei neuesten Einträge aus dem öffentlichen Verlauf. Berichtet ist nicht gleich getestet ist nicht gleich abgenommen."
+        all = "Ganzer Stand und Verlauf"
+        findings = "Befunde und Erkenntnisse"
+        feed = "Als Feed abonnieren"
       [languages.de.params.labels]
         owner_reported = "Eigener Bericht"
         in_progress = "in Arbeit"
@@ -102,10 +121,29 @@ enableRobotsTXT = false
     weight = 2
     disableKinds = ["taxonomy", "term", "RSS", "section", "sitemap", "404"]
     [languages.en.params]
+      sitename = "Local Alexa"
+      hometitle = "Local Alexa | An Echo gets a second life"
+      homeogdesc = "Repurposed Echo hardware as a self-hosted voice assistant with Home Assistant. Open project status, honestly separated into tested and planned."
+      oglocale = "en_US"
+      oglocalealt = "de_DE"
+      brand = "LOCAL ALEXA"
+      brandlabel = "Local Alexa, home"
+      navlabel = "Main navigation"
+      langlabel = "Language"
+      menu = "Menu"
+      skip = "Skip to content"
+      home = "Home"
       feedtitle = "Local Alexa: project history"
       feedsub = "New entries in the public project history. Reported is not tested is not accepted."
       headline = "Local Alexa: an Echo gets a second life"
       stale = ' \u00b7 Status older than 14 days'
+      [languages.en.params.news]
+        eyebrow = "New"
+        h2 = "What happened most recently"
+        intro = "The three newest entries from the public history. Reported is not tested is not accepted."
+        all = "Full status and history"
+        findings = "Findings and lessons"
+        feed = "Subscribe to the feed"
       [languages.en.params.labels]
         owner_reported = "Own report"
         in_progress = "in progress"

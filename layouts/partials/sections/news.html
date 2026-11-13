@@ -1,0 +1,19 @@
+{{- $l := .Language.Lang -}}
+{{- $n := .Site.Params.news -}}
+{{- $s := hugo.Data.status -}}
+{{- $texts := slice -}}
+{{- if eq $l "en" }}{{ $texts = $s.en.history }}{{ else }}{{ range $s.history }}{{ $texts = $texts | append .text }}{{ end }}{{ end -}}
+{{- $len := len $s.history -}}
+<section id="neu">
+  <div class="wrap">
+    <div class="eyebrow">{{ $n.eyebrow }}</div>
+    <h2>{{ $n.h2 }}</h2>
+    <p class="intro">{{ $n.intro }}</p>
+    <ol class="hist news">
+{{ range $k := seq 1 (math.Min 3 $len) }}{{ $i := sub $len $k }}{{ $h := index $s.history $i }}
+      <li><time datetime="{{ $h.date }}">{{ partial "datefmt.html" (dict "d" $h.date "lang" $l) }}</time><span>{{ index $texts $i }}</span></li>
+{{ end }}
+    </ol>
+    <div class="actions"><a class="button" href="{{ partial "url.html" "stand" }}">{{ $n.all }}</a><a class="button alt" href="{{ partial "url.html" "befunde" }}">{{ $n.findings }}</a><a class="button alt" href="{{ "feed.xml" | relLangURL }}" type="application/atom+xml">{{ $n.feed }}</a></div>
+  </div>
+</section>

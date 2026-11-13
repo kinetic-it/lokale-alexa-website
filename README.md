@@ -10,13 +10,14 @@ Work Item (privat): WI-0181.
 
 ## Aufbau
 
-Die Seite wird ausschließlich mit [Hugo](https://gohugo.io/) gebaut. Im Hauptordner liegen keine fertigen Seiten.
+Die Website wird ausschließlich mit [Hugo](https://gohugo.io/) gebaut. Im Hauptordner liegen keine fertigen Seiten. Sie besteht aus sieben Seiten je Sprache: Start, Stand, Befunde, Geräte, Nachbauen, Umbau, FAQ (Zuordnung der Abschnitte: `docs/REDAKTION.md`, Abschnitt „Seiten“).
 
 | Pfad | Inhalt |
 |---|---|
 | `data/status.json` | freigegebener öffentlicher Projektstand, Meilensteine, Verlauf (Deutsch und Englisch) |
 | `data/findings.json` | Befunde und Erkenntnisse |
 | `data/steps.json`, `data/umbau.json`, `data/soul.json` | Abschnitte Nachbauen, Umbau, Persona |
+| `content/<seite>.de.md` / `.en.md` | je Seite: Titel, Beschreibung, Name in der Navigation und welche Abschnitte darauf stehen |
 | `layouts/partials/sections/*.de.html` / `*.en.html` | von Hand gepflegte Texte je Abschnitt und Sprache |
 | `layouts/` (übrige Dateien) | Vorlagen für Seite, Feeds, Sitemap, 404 |
 | `assets/` | CSS und JavaScript (einmal, für beide Sprachen) |

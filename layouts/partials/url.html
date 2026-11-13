@@ -1,0 +1,4 @@
+{{- /* Adresse einer Seite in der aktuellen Sprache. Eingabe: Dateiname ohne Endung, z. B. "stand". */ -}}
+{{- $p := site.GetPage (printf "/%s" .) -}}
+{{- if not $p }}{{ errorf "url.html: Seite %q fehlt" . }}{{ end -}}
+{{- return $p.RelPermalink -}}

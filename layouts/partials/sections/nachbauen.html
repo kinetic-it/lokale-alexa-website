@@ -11,6 +11,6 @@
 {{ end }}
     </ol>
     <div class="callout"><p>{{ $p.callout }} <a href="https://github.com/kinetic-it/lokale-alexa-website/issues/new?template=testbericht.md">{{ $p.callout_link }}</a></p></div>
-    <div class="callout"><p>{{ $p.umbau_text }} <a href="#umbau">{{ $p.umbau_link }}</a></p></div>
+    <div class="callout"><p>{{ $p.umbau_text }} <a href="{{ partial "url.html" "umbau" }}">{{ $p.umbau_link }}</a></p></div>
   </div>
 </section>

@@ -1,2 +1,2 @@
-<link rel="alternate" type="application/atom+xml" title="{{ .Site.Params.feedtitle }}" href="feed.xml">
-{{ partial "jsonld.html" . }}
+<link rel="alternate" type="application/atom+xml" title="{{ .Site.Params.feedtitle }}" href="{{ "feed.xml" | relLangURL }}">
+{{ if .IsHome }}{{ partial "jsonld.html" . }}{{ end }}

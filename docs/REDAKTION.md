@@ -22,14 +22,34 @@ Ein vollautomatischer, unbeaufsichtigter Export aus dem privaten Repo ist **nich
 ## Redaktioneller Umfang
 
 - `layouts/partials/sections/<abschnitt>.<sprache>.html`: dauerhafte Erklärungen, Sprachweg-Schaubild, Geräte, Sicherheitsgrundsätze, FAQ und Quellenkontext – Änderungen bewusst von Hand, immer in beiden Sprachen. Die Seite bindet keine externen Schriften, Skripte oder Tracker ein; das soll so bleiben.
-- `data/status.json`: freigegebener aktueller Projektstand. Hugo baut ihn in die Seite ein; das JavaScript liest dieselbe Datei beim Aufruf zusätzlich live.
+- `data/status.json`: freigegebener aktueller Projektstand. Hugo baut ihn fest in die Seiten ein; es gibt kein Nachladen im Browser mehr. Das JavaScript prüft beim Aufruf nur, ob der Stand älter als 14 Tage ist.
 - `downloads/`: freigegebene PDFs / öffentliche Dokumente. Datei muss tatsächlich im Repository liegen und in der Vorlage korrekt verlinkt sein; `tools/check_i18n.py <Ausgabeordner>` meldet Links auf nicht vorhandene Dateien.
 - `README.md`: Repo-Zweck und Betrieb.
 - `.github/workflows/`: `check.yml` prüft die Quellen, `hugo.yml` baut, prüft die gebaute Seite und veröffentlicht von `main`.
 
+## Seiten
+
+Seit 13.11.2026 besteht die Website aus mehreren Seiten statt einer langen. Welche Abschnitte auf welcher Seite stehen, legt das Feld `sections` in `content/<seite>.<sprache>.md` fest; dort stehen auch Seitentitel, Beschreibung für Suchmaschinen und der Name in der Navigation.
+
+| Seite | Adresse (DE / EN) | Abschnitte |
+|---|---|---|
+| Start | `/` · `/en/` | hero, idee, news, technik, sicherheit, leitfaden |
+| Stand | `/stand/` · `/en/status/` | stand |
+| Befunde | `/befunde/` · `/en/findings/` | befunde |
+| Geräte | `/geraete/` · `/en/devices/` | geraete |
+| Nachbauen | `/nachbauen/` · `/en/build/` | nachbauen, soul |
+| Umbau | `/umbau/` · `/en/our-build/` | umbau |
+| FAQ | `/faq/` · `/en/faq/` | faq |
+
+- **Neue Seite:** zwei Dateien `content/<name>.de.md` und `content/<name>.en.md` anlegen (gleicher Dateiname, in der englischen ein `slug`), `sections`, `title`, `navtitle`, `description` und `weight` (Reihenfolge in der Navigation) setzen. Die Abschnittsdateien liegen unter `layouts/partials/sections/`.
+- **Abschnitt verschieben:** nur `sections` in beiden Sprachdateien ändern. Verweise der Form `#abschnitt` aus den Datendateien und die alten Sprungmarken werden beim Bauen automatisch auf die richtige Seite gelenkt.
+- **Alte Adressen:** Die frühere Ein-Seiten-Fassung hatte Sprungmarken wie `/#stand`, `/#f12` oder `/#u3`. Die Startseite leitet sie per JavaScript auf die neue Seite um. Ohne JavaScript landet man auf der Startseite.
+- **Überschriften:** In den Abschnittsdateien bleibt die Abschnittsüberschrift `<h2>`. Auf Unterseiten macht die Vorlage daraus die Seitenüberschrift `<h1>` und rückt die Zwischenüberschriften des ersten Abschnitts eine Ebene hoch. Nicht von Hand `<h1>` setzen.
+- **Verweise zwischen Seiten** in den Abschnittsdateien mit `{{ partial "url.html" "<dateiname>" }}` schreiben, Dateien mit `{{ "downloads/…" | relURL }}`; keine relativen Pfade wie `../`.
+
 ## Sprachen (Deutsch und Englisch)
 
-- Deutsch erscheint unter `/`, Englisch unter `/en/`. Beide Seiten entstehen aus denselben Vorlagen, mit Umschalter DE/EN im Kopf, `hreflang`-Verweisen und eigenem `canonical`.
+- Deutsch erscheint unter `/`, Englisch unter `/en/`. Jede Seite gibt es in beiden Sprachen (`content/<seite>.de.md` und `content/<seite>.en.md`), mit Umschalter DE/EN im Kopf, `hreflang`-Verweisen und eigenem `canonical`. Englische Adressen haben englische Namen (`slug` in der englischen Datei).
 - Von Hand gepflegter Text liegt je Abschnitt in zwei Dateien: `layouts/partials/sections/<abschnitt>.de.html` und `<abschnitt>.en.html`. Jede inhaltliche Änderung gehört in beide Dateien. Kurze Beschriftungen stehen in `hugo.toml` unter `languages.<sprache>.params`.
 - Die dynamischen Statusdaten liegen in `data/status.json`. Deutsche Texte stehen auf oberster Ebene, die englischen im Objekt `en` (mit `milestones` als Zuordnung von ID zu Name). Ohne `en` zeigt die englische Seite den deutschen Text.
 - PDF: Deutsch ist der Master (`downloads/Amazon-Geraete-Leitfaden-2026-10-22-neutral.pdf`, unverändert). Die englische Fassung wird aus `tools/leitfaden/` gebaut und ist maschinell übersetzt, ohne Muttersprachler-Prüfung. Pflegeprozess: `docs/PDF-LEITFADEN.md`.
@@ -71,14 +91,14 @@ Abschnitt `#soul` (Navigation „Persona“) und die Downloads `downloads/SOUL-b
 
 ## Stand der Seite aus einer Quelle
 
-`data/status.json` ist die einzige Quelle für den Projektstand. Hugo baut daraus Kopfkarte mit Meilensteinen und letztem Test, die Listen „berichtet / offen / Probleme“, Verlauf, Titel und Datum (auch das Datum im Seitenfuß und im Abschnitt Sprachweg). Das JavaScript liest dieselben Daten live. Meilenstein-Zustände: `owner_reported`, `in_progress`, `open`, `failed`. Neue Felder immer mit englischem Gegenstück unter `en` (`last_test`, `history`, …). Wird der Stand älter als 14 Tage, markiert die Seite das selbst.
+`data/status.json` ist die einzige Quelle für den Projektstand. Hugo baut daraus die Kopfkarte der Startseite mit Meilensteinen und letztem Test, die drei neuesten Verlaufseinträge auf der Startseite, die Seite „Stand“ (Listen „berichtet / offen / Probleme“, Verlauf) sowie Titel und Datum (auch im Seitenfuß und im Abschnitt Sprachweg). Meilenstein-Zustände: `owner_reported`, `in_progress`, `open`, `failed`. Neue Felder immer mit englischem Gegenstück unter `en` (`last_test`, `history`, …). Wird der Stand älter als 14 Tage, markiert die Seite das selbst.
 
 Aus derselben Quelle entstehen außerdem:
 
-- **Atom-Feeds** `feed.xml` und `en/feed.xml` aus `history` (neueste zuerst), Vorlage `layouts/index.atom.xml`. Eintrags-IDs bestehen aus Datum und laufender Nummer an diesem Tag; neue Verlaufseinträge deshalb immer hinten anfügen, bestehende nicht umsortieren.
+- **Atom-Feeds** `feed.xml` und `en/feed.xml` (neueste zuerst), Vorlage `layouts/index.atom.xml`. Sie enthalten den Verlauf (`history`) und seit 13.11.2026 auch die Befunde (`data/findings.json`, mit Titel). Jeder Eintrag verweist auf seine eigene Sprungmarke (`…/stand/#v-<Datum>-<Nr>` bzw. `…/befunde/#f<Nr>`). Eintrags-IDs im Verlauf bestehen aus Datum und laufender Nummer an diesem Tag; neue Verlaufseinträge deshalb immer hinten anfügen, bestehende nicht umsortieren. Befund-IDs (`f1`, `f2`, …) nie neu vergeben.
 - **JSON-LD** im Seitenkopf (`TechArticle`, `dateModified` = `as_of`), Vorlage `layouts/partials/jsonld.html`.
 
-`check_i18n.py <Ausgabeordner>` prüft Feeds und Sitemap gegen `status.json`.
+`check_i18n.py <Ausgabeordner>` prüft Feeds und Sitemap gegen die Daten und die gebauten Seiten.
 
 Abschnittsflächen wechseln per CSS (`main>section:nth-of-type(even)`), keine Klassen von Hand setzen.
 
@@ -89,7 +109,7 @@ Beim Teilen erscheinen `og-de.png` und `og-en.png` (1200 × 630). `sitemap.xml` 
 - **Impressum / Kontakt:** Die Seite hat keines. Ob eines nötig ist, hängt von der rechtlichen Einordnung ab (privates, nicht kommerzielles Projekt oder nicht); das entscheidet der Owner. Keine Angaben erfinden.
 - **Echtes Foto** des Pilotgeräts (ohne Seriennummer und ohne Umgebung, die etwas verrät) für „Geräte“ oder den Seitenkopf.
 - **Muttersprachliche Durchsicht** der englischen Seite und der englischen PDF.
-- **Prüfung auf echten Geräten:** Safari (iPhone), Firefox, Android-Chrome. Geprüft ist bisher nur Chromium, mit axe-core (keine Verstöße) und ohne Überlauf bei 320 bis 1440 px.
+- **Prüfung auf echten Geräten:** Safari (iPhone), Firefox, Android-Chrome. Geprüft ist bisher nur Chromium (alle 14 Seiten, Desktop und Mobil-Emulation), mit axe-core (keine Verstöße), ohne Überlauf bei 320 bis 1440 px; die Farbpaare der Seite erreichen rechnerisch mindestens 4,6:1.
 
 ## Hugo
 
@@ -97,7 +117,7 @@ Die Seite entsteht ausschließlich aus dem Hugo-Projekt; die Umstellung ist seit
 
 - Das Hugo-Projekt liegt im Hauptordner: `hugo.toml`, `layouts/`, `assets/`, `content/`. Daten in `data/`, Downloads in `downloads/`, Bilder in `images/`. `hugo.toml` bindet sie als `static/` ein, es gibt nur je eine Kopie.
 - **Eine Quelle je Inhalt:** `data/status.json`, `data/findings.json`, `data/steps.json`, `data/umbau.json`, `data/soul.json`. Hugo liest sie direkt.
-- Hand gepflegter Text steht in `layouts/partials/sections/<abschnitt>.<sprache>.html` (je Abschnitt und Sprache eine Datei). Kopf, Fuß, Kopfzeile und Navigation liegen in `layouts/partials/head|header|footer/<sprache>.html`. CSS und JavaScript stehen einmal in `assets/css/site.css` und `assets/js/site.js`.
+- Hand gepflegter Text steht in `layouts/partials/sections/<abschnitt>.<sprache>.html` (je Abschnitt und Sprache eine Datei). Seitenkopf und Navigation sind gemeinsame Vorlagen (`layouts/partials/head.html`, `header.html`, Rahmen in `document.html`); ihre Texte je Sprache stehen in `hugo.toml`. Der Seitenfuß liegt in `layouts/partials/footer/<sprache>.html`. CSS und JavaScript stehen einmal in `assets/css/site.css` und `assets/js/site.js`.
 - Erzeugte Abschnitte (Nachbauen, Umbau, Befunde, Persona, Stand, Verlauf, Feeds, Sitemap, JSON-LD) sind Vorlagen in `layouts/`.
 - **Bau lokal:** `hugo --destination /tmp/out`, danach `python3 tools/check_i18n.py /tmp/out`.
 - **Veröffentlichung:** Merge auf `main`; `.github/workflows/hugo.yml` baut, prüft und veröffentlicht.

@@ -1,0 +1,17 @@
+{{- $l := .Language.Lang -}}
+{{- $P := .Site.Params -}}
+{{- $here := .RelPermalink -}}
+<a class="skip" href="#inhalt">{{ $P.skip }}</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="{{ .Site.Home.RelPermalink }}" aria-label="{{ $P.brandlabel }}">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="3" fill="#171b20" stroke="#363c43"/><path d="M4 16h6l3-8 4 16 3-8h8" fill="none" stroke="#d5b77e" stroke-width="2"/></svg>
+      <span class="t">KINETIC<b>/</b>IT &nbsp;{{ $P.brand }}</span>
+    </a>
+    <nav class="main" id="nav" aria-label="{{ $P.navlabel }}">
+      <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>{{ $P.home }}</a>{{ range .Site.RegularPages.ByWeight }}<a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $here }} aria-current="page"{{ end }}>{{ .Params.navtitle }}</a>{{ end }}
+    </nav>
+    <div class="head-right"><button class="menu" type="button" aria-controls="nav" aria-expanded="false"><i aria-hidden="true"></i>{{ $P.menu }}</button><div class="lang" role="group" aria-label="{{ $P.langlabel }}">{{ range .AllTranslations }}<a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}"{{ if eq .Language.Lang $l }} aria-current="true"{{ end }}>{{ upper .Language.Lang }}</a>{{ end }}</div></div>
+  </div>
+</header>

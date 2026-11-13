@@ -5,17 +5,17 @@
       <div class="eyebrow">Open Hardware · Home Assistant · Privacy by Design</div>
       <h1>Ein Echo bekommt<br>ein zweites Leben.</h1>
       <p class="lead">Ein Amazon Echo als selbst betriebener Sprachassistent: Home Assistant steuert das Haus, Hermes beantwortet freie Fragen. Offenes Pilotprojekt mit ehrlichem Stand, keine fertige Lösung.</p>
-      <div class="actions"><a class="button" href="#stand">Projektstand ansehen</a><a class="button alt" href="#technik">Sprachweg verstehen</a><a class="button alt" href="#geraete">Mein Gerät prüfen</a></div>
+      <div class="actions"><a class="button" href="{{ partial "url.html" "stand" }}">Projektstand ansehen</a><a class="button alt" href="#technik">Sprachweg verstehen</a><a class="button alt" href="{{ partial "url.html" "geraete" }}">Mein Gerät prüfen</a></div>
       <div class="meta"><span>Öffentliches Projektjournal</span><span>Ein Pilot: Echo 2 (2017)</span><span>Keine fertige Installationslösung</span></div>
     </div>
     <aside class="statuscard" aria-label="Projektstand in Kurzform">
-      <div class="head"><span>Projektstand</span><span data-bind="asof">{{ $b.asof }}</span></div>
+      <div class="head"><span>Projektstand</span><span>{{ $b.asof }}</span></div>
       <div class="body">
-        <h2 data-bind="title">{{ $b.title }}</h2>
-        <p class="m" data-bind="evidence">{{ $b.evidence }}</p>
+        <h2>{{ $b.title }}</h2>
+        <p class="m" data-asof="{{ hugo.Data.status.as_of }}" data-stale-append>{{ $b.evidence }}</p>
         <ul class="ms" id="ms">{{ partial "ms.html" . }}
         </ul>
-        <p class="last"><strong data-bind="lastdate">{{ $b.lastdate }}</strong><span data-bind="lasttest">{{ $b.lasttest }}</span></p>
+        <p class="last"><strong>{{ $b.lastdate }}</strong><span>{{ $b.lasttest }}</span></p>
       </div>
     </aside>
   </div>
