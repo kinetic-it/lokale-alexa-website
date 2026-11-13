@@ -4,7 +4,7 @@
   "approved": true,
   "as_of": "2026-11-05",
   "evidence": "Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Strategische Neubewertung läuft, Umsetzung pausiert; Kinetic Voice Router v0.5.0b4 in Einzeltests",
+  "title": "Echo-2-Pilot · Analyse und begrenzte Tests laufen; Kinetic Voice Router v0.5.0b4 in Einzeltests",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "Echo 2 läuft aktuell mit echo-dot-assist (hassmic) und ist mit Home Assistant verbunden (eigener Bericht)",
@@ -86,7 +86,7 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · Strategic reassessment under way, implementation paused; Kinetic Voice Router v0.5.0b4 in single tests",
+    "title": "Echo 2 pilot · Analysis and limited tests under way; Kinetic Voice Router v0.5.0b4 in single tests",
     "evidence": "My own reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
