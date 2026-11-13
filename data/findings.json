@@ -3,17 +3,31 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f13",
+      "date": "2026-11-13",
+      "type": "correction",
+      "state": "resolved",
+      "de": {
+        "title": "Korrektur: „Umsetzung pausiert“ traf so nicht mehr zu",
+        "text": "Unser Eintrag vom 05.11. sagte, wir hätten die Umsetzung pausiert. Das beschreibt den Stand nicht mehr richtig: Die Neubewertung des Gesamtsystems läuft weiter, und dabei machen wir begrenzte Tests. Statuskarte, FAQ und der Abschnitt Sprachweg sind angepasst. Unverändert gilt: Der Zieltermin 8. November für den First Run ist ausgesetzt, es gibt keine Wechselentscheidung zur Firmware, und eine vollständige Alltagsabnahme gibt es nicht. Lehre: Ändert sich eine Aussage, muss sie an jeder Stelle der Seite nachgezogen werden, nicht nur in der Überschrift."
+      },
+      "en": {
+        "title": "Correction: \"implementation paused\" was no longer accurate",
+        "text": "Our entry dated 5 Nov. said we had paused implementation. That no longer describes the situation correctly: the reassessment of the whole system continues, and we are running limited tests along the way. The status card, the FAQ and the voice path section have been updated. Unchanged: the 8 November target for the First Run is suspended, there is no decision to switch firmware, and there is no full acceptance for daily use. Lesson: when a statement changes, it has to be updated everywhere on the page, not only in the headline."
+      }
+    },
+    {
       "id": "f12",
       "date": "2026-11-05",
       "type": "finding",
       "state": "open",
       "de": {
         "title": "Erst die Systemfrage klären, dann weiter ausbauen",
-        "text": "Wir haben die Umsetzung pausiert und bewerten das Gesamtsystem neu: welche Firmware auf dem Echo 2 läuft, welche Rolle Home Assistant und der Kinetic Voice Router haben und wie ein alltagstauglicher, möglichst lokaler Assistent im Haushalt aussehen kann. Der bisherige Zieltermin 8. November für den First Run ist ausgesetzt. TECHO5, EchoLocal und LibreEcho werden neu untersucht und mit unserem jetzigen Weg (echo-dot-assist/hassmic) verglichen. Es gibt keine Wechselentscheidung, und Angaben der Projekte sind keine eigenen Tests. Bisherige Tests bleiben, was sie waren: Einzeltests. Lehre: Bevor man weitere Funktionen aufsetzt, lohnt sich die Frage, ob die Grundlage trägt."
+        "text": "Wir haben die Umsetzung pausiert und bewerten das Gesamtsystem neu: welche Firmware auf dem Echo 2 läuft, welche Rolle Home Assistant und der Kinetic Voice Router haben und wie ein alltagstauglicher, möglichst lokaler Assistent im Haushalt aussehen kann. Der bisherige Zieltermin 8. November für den First Run ist ausgesetzt. TECHO5, EchoLocal und LibreEcho werden neu untersucht und mit unserem jetzigen Weg (echo-dot-assist/hassmic) verglichen. Es gibt keine Wechselentscheidung, und Angaben der Projekte sind keine eigenen Tests. Bisherige Tests bleiben, was sie waren: Einzeltests. Lehre: Bevor man weitere Funktionen aufsetzt, lohnt sich die Frage, ob die Grundlage trägt. Nachtrag 13.11.: „Pausiert“ trifft so nicht mehr zu; Analyse und begrenzte Tests laufen (siehe Korrektur vom 13.11.)."
       },
       "en": {
         "title": "Settle the system question first, then build further",
-        "text": "We have paused implementation and are reassessing the whole system: which firmware runs on the Echo 2, what role Home Assistant and the Kinetic Voice Router play, and what a practical, as-local-as-possible assistant for the household could look like. The previous 8 November target for the First Run is suspended. TECHO5, EchoLocal and LibreEcho are being reassessed and compared with our current route (echo-dot-assist/hassmic). There is no decision to switch, and statements by those projects are not our own tests. Earlier tests remain what they were: single tests. Lesson: before building more features on top, ask whether the foundation holds."
+        "text": "We have paused implementation and are reassessing the whole system: which firmware runs on the Echo 2, what role Home Assistant and the Kinetic Voice Router play, and what a practical, as-local-as-possible assistant for the household could look like. The previous 8 November target for the First Run is suspended. TECHO5, EchoLocal and LibreEcho are being reassessed and compared with our current route (echo-dot-assist/hassmic). There is no decision to switch, and statements by those projects are not our own tests. Earlier tests remain what they were: single tests. Lesson: before building more features on top, ask whether the foundation holds. Update 13 Nov.: \"paused\" no longer describes it; analysis and limited tests are under way (see the correction dated 13 Nov.)."
       }
     },
     {
