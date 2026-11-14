@@ -1,0 +1,340 @@
+{
+  "de": {
+    "eyebrow": "Einordnung",
+    "h2": "Warum sind wir nicht nach zwei Stunden fertig?",
+    "sub": "Einen Echo zum Sprechen bringen ist das eine. Einen zuverlässigen Haushaltsassistenten entwickeln das andere.",
+    "intro": [
+      "Oft liest man, ein gerooteter Echo sei in etwa zwei Stunden mit Home Assistant verbunden, mit einem Cloud-Sprachmodell und einer Cloud-Stimme. Das kann stimmen. Wir haben diese Zeit nicht gemessen und können sie nicht bestätigen. Verglichen werden deshalb zwei Ziele, nicht zwei Stoppuhren.",
+      "Beide Wege sind gültig. Sie beantworten verschiedene Fragen: Wie schnell spricht der Echo mit Home Assistant? Und wie verlässlich funktioniert das im Alltag, wenn niemand mehr nachschaut?"
+    ],
+    "question_label": "Die Frage, die sich viele stellen",
+    "question": "Wenn andere ihren gerooteten Echo in zwei Stunden mit Home Assistant, OpenAI und ElevenLabs zum Laufen bringen, warum dauert euer Projekt so viel länger?",
+    "va": {
+      "title": "A · Der einfache Home-Assistant-Ansatz",
+      "tag": "Mögliche Konfiguration, kein nachgewiesener Aufbau",
+      "chain": "Echo → hassmic → Home Assistant Assist → Cloud-KI und Cloud-Stimme (z. B. OpenAI, ElevenLabs)",
+      "lead": "Dieser Aufbau nutzt vorhandene Bausteine. Der Echo wird mit hassmic an Home Assistant angebunden, Home Assistant übernimmt Sprachsteuerung und Geräte, und für freie Gespräche und die Sprachausgabe wird ein Cloud-Dienst eingebunden.",
+      "points": [
+        "Vorhandene Integrationen statt eigener Software.",
+        "Ein Cloud-KI-Dienst führt das freie Gespräch. Dabei verlassen die Gesprächsdaten das Haus.",
+        "Die Sprachausgabe kann ein Cloud-Dienst wie ElevenLabs liefern.",
+        "Home Assistant steuert Licht, Steckdosen und Szenen.",
+        "Der Einrichtungsaufwand ist gering, wenn Rooting, Firmware und Home Assistant bereits laufen."
+      ],
+      "note": "Zwei Stunden sind für diesen Weg möglich, aber nicht allgemein garantiert. Sie hängen von Vorwissen, Gerät und Zugangsdaten ab. Wir haben diese Konfiguration nicht selbst aufgebaut und nicht gemessen."
+    },
+    "vb": {
+      "title": "B · Unser Projekt Lokale Alexa",
+      "tag": "Ziel mit Pilotstand, nicht fertig",
+      "chain": "Echo 2 (Sprachsatellit) → Home Assistant (Zentrale) → Kinetic Voice Router → Hermes (Gespräche und Wissensfragen)",
+      "lead": "Wir wollen nicht nur, dass der Echo antwortet, sondern dass Haushaltsaufgaben verlässlich und nachvollziehbar funktionieren. Dafür sind die Zuständigkeiten getrennt:",
+      "points": [
+        "Echo 2: Wakeword, Mikrofon und Lautsprecher, sonst nichts.",
+        "Home Assistant: fachliche Zentrale für Haushalt, Zustände, Timer, Wecker und Erinnerungen. Nur freigegebene Geräte werden gesteuert.",
+        "Kinetic Voice Router: Gesprächsagent in der Home-Assistant-Pipeline. Er bevorzugt lokale Befehle, passende Fragen gehen an Hermes.",
+        "Hermes: Wissensfragen, Erklärungen und freie Gespräche, ohne eigenen Zugang zur Haussteuerung.",
+        "Berechtigungen: Jede Aktion braucht eine ausdrückliche Freigabe. Persönliche Daten bleiben getrennt."
+      ],
+      "note": "Dafür kostet der Weg mehr Zeit: Wir testen jede Funktion einzeln, bauen Rückwege ein und dokumentieren, was nachgewiesen ist."
+    },
+    "table": {
+      "head": [
+        "Funktion",
+        "A · Home Assistant mit hassmic (Beispiel)",
+        "B · Lokale Alexa"
+      ],
+      "rows": [
+        [
+          "Echo-Anbindung",
+          "Verfügbar: hassmic verbindet den Echo mit Home Assistant.",
+          "f",
+          "Verfügbar: Echo 2 läuft so mit Home Assistant.",
+          "r"
+        ],
+        [
+          "KI-Gespräche",
+          "Über eine Cloud-KI-Integration möglich.",
+          "f",
+          "Hermes hat sich im Sprachtest vorgestellt und eine Anschlussantwort gegeben. Folgekontext und Ausfallverhalten sind offen.",
+          "r"
+        ],
+        [
+          "Natürliche Sprachbedienung",
+          "Abhängig von der Satzabdeckung der Integration.",
+          "f",
+          "Einzelne Befehle funktionieren. Viele Formulierungen sind noch nicht abgedeckt.",
+          "t"
+        ],
+        [
+          "Timer",
+          "Native Assist-Timer mit Ton und Stopp. Die Satzabdeckung hängt an Home Assistant.",
+          "f",
+          "Start, Ablauf und Abbruch im Einzeltest. Benennen teilweise; Restzeit und Verlängern noch nicht zuverlässig.",
+          "t"
+        ],
+        [
+          "Wecker",
+          "Mit einer Automation einrichtbar. Von uns nicht geprüft.",
+          "n",
+          "Prototyp im Einzeltest: geplanter Start, wiederholtes Klingeln, Stopp. Mehrere Wecker, Neustart und Internetausfall sind offen.",
+          "t"
+        ],
+        [
+          "Erinnerungen",
+          "Mit Kalender und Automation konfigurierbar. Von uns nicht geprüft.",
+          "n",
+          "Ziel: speichern, ändern, wiederholen, nach Neustart auslösen. Noch nicht umgesetzt.",
+          "p"
+        ],
+        [
+          "Personenprofile",
+          "Nur mit zusätzlichen Lösungen.",
+          "n",
+          "Geplant: personenbezogene Rechte. Eine Stimme allein gilt nicht als sichere Identität.",
+          "p"
+        ],
+        [
+          "Offline-Betrieb",
+          "Hängt an der Pipeline. Mit Cloud-Sprachdiensten fällt die Sprache ohne Internet aus.",
+          "n",
+          "Lokaler Notbetrieb ist beschlossen, aber nicht installiert.",
+          "p"
+        ],
+        [
+          "Musik und Multiroom",
+          "Über Music Assistant oder Medien-Integrationen möglich, je Gerät zu prüfen.",
+          "f",
+          "Ziel, nicht abgenommen. Bisher ist nur ein Gerät als Satellit eingerichtet.",
+          "p"
+        ],
+        [
+          "Fehlertoleranz und Wiederherstellung",
+          "Abhängig vom Setup. Backups liegen beim Betreiber.",
+          "n",
+          "Noch nicht nachgewiesen: Wiederherstellung und vollständiger Backup-Ablauf. Der Notbetrieb ist Konzept.",
+          "p"
+        ],
+        [
+          "Verwaltung",
+          "Home Assistant: Geräte, Automationen, Verlauf.",
+          "f",
+          "Home Assistant bietet die Oberfläche. Eine zentrale Verwaltungsoberfläche für mehrere Echos ist Konzept.",
+          "p"
+        ]
+      ]
+    },
+    "reuse": {
+      "title": "Was Home Assistant und hassmic schon können",
+      "text": "Vieles, was wir tun, bauen wir nicht neu: Gerätesteuerung, Automationen, Timer-Ton und die Wakeword-Erkennung kommen aus Home Assistant und hassmic. Eigene Software ist nur dort gerechtfertigt, wo diese Bausteine nicht reichen."
+    },
+    "daily": {
+      "title": "Alltag statt Demo",
+      "intro": "Eine Demo zeigt, dass etwas funktioniert. Im Alltag zählt, ob es immer funktioniert. Die folgenden Beispiele sind Anforderungen, die wir prüfen. Es sind keine Fehlerbehauptungen über andere Systeme.",
+      "items": [
+        {
+          "t": "Timer",
+          "x": "Ein Timer lässt sich starten. Entscheidend ist, ob man ihn benennen und verlängern kann, seine Restzeit erfragen kann und das Klingeln zuverlässig stoppt. Start, Ablauf und Abbruch haben wir im Einzeltest geprüft. Die übrigen Fälle prüfen wir noch."
+        },
+        {
+          "t": "Erinnerungen",
+          "x": "Eine KI kann sagen: „Ich erinnere dich morgen.“ Die Frage ist, ob die Erinnerung wirklich gespeichert wurde und nach einem Neustart noch ausgelöst wird. Eine Bestätigung im Gespräch gilt bei uns nicht als Nachweis."
+        },
+        {
+          "t": "Personalisierung",
+          "x": "Wie unterscheidet das System die Erinnerungen zweier Personen? Dass jemand im Raum ist, ist keine sichere Identität. Persönliche Informationen geben wir nur nach Authentifizierung preis."
+        },
+        {
+          "t": "Ausfallsicherheit",
+          "x": "Was passiert, wenn Internet, KI-Dienst, Home Assistant oder der Echo nicht erreichbar sind? Heute fallen die Cloud-Sprachdienste mit dem Internet aus. Ein lokaler Notbetrieb ist beschlossen, aber noch nicht gebaut."
+        },
+        {
+          "t": "Sicherheit",
+          "x": "Welche Aktionen dürfen ohne Rückfrage laufen? Bei uns nur ausdrücklich freigegebene Geräte. Jede Freigabe prüfen wir auf ihre tatsächliche Wirkung, bevor sie gilt."
+        }
+      ]
+    },
+    "closing": {
+      "title": "Was wir daraus ziehen",
+      "lines": [
+        "Unser Ziel ist nicht nur ein Echo, der antwortet. Unser Ziel ist ein Sprachassistent, auf den wir uns im Alltag verlassen können.",
+        "Mehr eigene Software bedeutet nicht automatisch bessere Software. Wo Home Assistant eine gute Lösung hat, bevorzugen wir sie.",
+        "Nicht jede Funktion braucht einen eigenen Dienst. Die Architektur soll überprüfbar bleiben und kann vereinfacht werden.",
+        "Auch unser Projekt hat offene Probleme und Funktionen, die nicht abgenommen sind. Sie stehen auf der Seite Befunde und im Stand."
+      ],
+      "time": "Wie lange unser Weg gedauert hat, zeigen die Zeitangaben je Etappe im Erfahrungsbericht unten. Eine Gesamtzeit nennen wir nicht, weil wir keine belastbare Zahl haben.",
+      "link_findings": "Befunde und Erkenntnisse",
+      "link_status": "Projektstand"
+    },
+    "ev_note": "Die Kennzeichen entsprechen dem Erfahrungsbericht: Selbst getestet, Eigener Bericht, In Entwicklung, Geplant, Angabe eines Fremdprojekts, Nicht belegt. „Angabe eines Fremdprojekts“ heißt: Das steht in der Dokumentation der Software, wir haben es nicht selbst geprüft.",
+    "table_title": "Der Vergleich in einer Tabelle"
+  },
+  "en": {
+    "eyebrow": "Context",
+    "h2": "Why aren't we finished after two hours?",
+    "sub": "Getting an Echo to talk is one thing. Developing a reliable household assistant is another.",
+    "intro": [
+      "You often read that a rooted Echo can be connected to Home Assistant in about two hours, with a cloud language model and a cloud voice. That may be true. We have not measured that time and cannot confirm it. So we compare two goals, not two stopwatches.",
+      "Both routes are valid. They answer different questions: how fast does the Echo talk with Home Assistant? And how reliable is that in daily use, when nobody checks any more?"
+    ],
+    "question_label": "The question many people ask",
+    "question": "If others get their rooted Echo working with Home Assistant, OpenAI and ElevenLabs in two hours, why does your project take so much longer?",
+    "va": {
+      "title": "A · The simple Home Assistant approach",
+      "tag": "Possible configuration, not a verified setup",
+      "chain": "Echo → hassmic → Home Assistant Assist → cloud AI and cloud voice (e.g. OpenAI, ElevenLabs)",
+      "lead": "This setup uses existing building blocks. The Echo is connected to Home Assistant with hassmic, Home Assistant handles voice control and devices, and a cloud service is added for free conversation and speech output.",
+      "points": [
+        "Existing integrations instead of our own software.",
+        "A cloud AI service carries the free conversation. Conversation data leaves the house in the process.",
+        "The speech output can come from a cloud service such as ElevenLabs.",
+        "Home Assistant controls lights, sockets and scenes.",
+        "The setup effort is small if rooting, firmware and Home Assistant are already running."
+      ],
+      "note": "Two hours are possible for this route, but not guaranteed in general. They depend on prior knowledge, the device and access data. We have not built this configuration ourselves and have not measured it."
+    },
+    "vb": {
+      "title": "B · Our project, Local Alexa",
+      "tag": "Goal with a pilot status, not finished",
+      "chain": "Echo 2 (voice satellite) → Home Assistant (hub) → Kinetic Voice Router → Hermes (conversation and knowledge questions)",
+      "lead": "We want more than an Echo that answers. We want household tasks to work reliably and traceably. That is why responsibilities are separated:",
+      "points": [
+        "Echo 2: wake word, microphone and speaker, nothing else.",
+        "Home Assistant: the central hub for the household, states, timers, alarms and reminders. Only approved devices are controlled.",
+        "Kinetic Voice Router: the conversation agent in the Home Assistant pipeline. It prefers local commands, and suitable questions go to Hermes.",
+        "Hermes: knowledge questions, explanations and free conversation, with no direct access to home control.",
+        "Permissions: every action needs an explicit approval. Personal data stays separate."
+      ],
+      "note": "This route takes more time: we test each function on its own, build in fallbacks and document what is proven."
+    },
+    "table": {
+      "head": [
+        "Function",
+        "A · Home Assistant with hassmic (example)",
+        "B · Local Alexa"
+      ],
+      "rows": [
+        [
+          "Echo connection",
+          "Available: hassmic connects the Echo to Home Assistant.",
+          "f",
+          "Available: Echo 2 runs this way with Home Assistant.",
+          "r"
+        ],
+        [
+          "AI conversations",
+          "Possible through a cloud AI integration.",
+          "f",
+          "Hermes introduced itself in a voice test and gave a follow-up answer. Follow-up context and failure behaviour are open.",
+          "r"
+        ],
+        [
+          "Natural voice control",
+          "Depends on the sentence coverage of the integration.",
+          "f",
+          "Single commands work. Many phrasings are not covered yet.",
+          "t"
+        ],
+        [
+          "Timers",
+          "Native Assist timers with sound and stop. Sentence coverage depends on Home Assistant.",
+          "f",
+          "Start, expiry and cancel in a single test. Naming partly works; remaining time and extending are not yet reliable.",
+          "t"
+        ],
+        [
+          "Alarms",
+          "Can be set up with an automation. Not tested by us.",
+          "n",
+          "Prototype in a single test: scheduled start, repeated ringing, stop. Several alarms, restart and internet outage are open.",
+          "t"
+        ],
+        [
+          "Reminders",
+          "Configurable with a calendar and an automation. Not tested by us.",
+          "n",
+          "Goal: store, change, repeat, trigger after a restart. Not implemented yet.",
+          "p"
+        ],
+        [
+          "Person profiles",
+          "Only with additional solutions.",
+          "n",
+          "Planned: person-related permissions. A voice alone does not count as a secure identity.",
+          "p"
+        ],
+        [
+          "Offline operation",
+          "Depends on the pipeline. With cloud speech services, speech fails without internet.",
+          "n",
+          "A local fallback mode is decided but not installed.",
+          "p"
+        ],
+        [
+          "Music and multiroom",
+          "Possible via Music Assistant or media integrations, to be checked per device.",
+          "f",
+          "Goal, not accepted. So far only one device is set up as a satellite.",
+          "p"
+        ],
+        [
+          "Fault tolerance and recovery",
+          "Depends on the setup. Backups are the operator's responsibility.",
+          "n",
+          "Not yet demonstrated: restoring and a complete backup routine. The offline mode is a concept.",
+          "p"
+        ],
+        [
+          "Administration",
+          "Home Assistant: devices, automations, history.",
+          "f",
+          "Home Assistant provides the interface. A central administration interface for several Echos is a concept.",
+          "p"
+        ]
+      ]
+    },
+    "reuse": {
+      "title": "What Home Assistant and hassmic already do",
+      "text": "We do not rebuild much of what we use: device control, automations, the timer sound and wake-word detection come from Home Assistant and hassmic. Our own software is justified only where these building blocks are not enough."
+    },
+    "daily": {
+      "title": "Daily use instead of demo",
+      "intro": "A demo shows that something works. In daily use, what matters is whether it always works. The examples below are requirements we are testing. They are not claims that other systems fail.",
+      "items": [
+        {
+          "t": "Timers",
+          "x": "A timer can be started. What matters is whether you can name it and extend it, ask for the remaining time, and reliably stop the ringing. We have tested start, expiry and cancel in single tests. The other cases are still to be tested."
+        },
+        {
+          "t": "Reminders",
+          "x": "An AI can say: \"I'll remind you tomorrow.\" The question is whether the reminder was really stored and still fires after a restart. A confirmation in the conversation does not count as proof for us."
+        },
+        {
+          "t": "Personalisation",
+          "x": "How does the system keep two people's reminders apart? Someone being in the room is not a secure identity. We only share personal information after authentication."
+        },
+        {
+          "t": "Resilience",
+          "x": "What happens if the internet, the AI service, Home Assistant or the Echo is unreachable? Today the cloud speech services fail along with the internet. A local fallback mode is decided but not yet built."
+        },
+        {
+          "t": "Security",
+          "x": "Which actions may run without asking again? For us, only explicitly approved devices. We check each approval for its actual effect before it applies."
+        }
+      ]
+    },
+    "closing": {
+      "title": "What we take from this",
+      "lines": [
+        "Our goal is not just an Echo that answers. Our goal is a voice assistant we can rely on in daily life.",
+        "More of our own software does not automatically mean better software. Where Home Assistant has a good solution, we prefer it.",
+        "Not every function needs its own service. The architecture should stay checkable and can be simplified.",
+        "Our project also has open problems and functions that are not accepted yet. They are listed on the findings page and in the status."
+      ],
+      "time": "How long our route took is shown by the time figures per stage in the conversion report below. We do not give a total time, because we have no reliable figure.",
+      "link_findings": "Findings and lessons",
+      "link_status": "Project status"
+    },
+    "ev_note": "The labels match the conversion report: self-tested, own report, in development, planned, third-party statement, not verified. \"Third-party statement\" means the claim comes from the software's documentation; we have not checked it ourselves.",
+    "table_title": "The comparison in a table"
+  }
+}
