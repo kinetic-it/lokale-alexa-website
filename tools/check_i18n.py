@@ -84,12 +84,21 @@ except FileNotFoundError:
     errors.append('data/findings.json fehlt')
 
 # Nachbauen, Umbau, Persona: Deutsch und Englisch gleich aufgebaut
-for name in ('steps','umbau'):
+for name in ('steps','umbau','warum'):
     try:
         c=load(f'data/{name}.json')
         if shape(c.get('de'))!=shape(c.get('en')): errors.append(f'{name}.json: Aufbau von de und en unterschiedlich')
     except FileNotFoundError:
         errors.append(f'data/{name}.json fehlt')
+try:
+    w=load('data/warum.json')
+    if shape(w.get('de'))!=shape(w.get('en')): errors.append('warum.json: Aufbau von de und en unterschiedlich')
+    kennzeichen=set(load('data/umbau.json')['de']['ev'])
+    for lang in ('de','en'):
+        for i,row in enumerate(w[lang]['table']['rows']):
+            if row[2] not in kennzeichen or row[4] not in kennzeichen: errors.append(f'warum.json {lang}: Zeile {i+1} hat ein unbekanntes Kennzeichen')
+except FileNotFoundError:
+    errors.append('data/warum.json fehlt')
 try:
     c=load('data/soul.json')
     if shape(c['page'].get('de'))!=shape(c['page'].get('en')): errors.append('soul.json: page.de und page.en unterschiedlich aufgebaut')

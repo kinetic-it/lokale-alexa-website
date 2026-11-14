@@ -1,7 +1,7 @@
 ---
-title: "So haben wir unseren Echo 2 umgebaut"
+title: "Warum es länger dauert, und wie wir umgebaut haben"
 navtitle: "Umbau"
-description: "Erfahrungsbericht in zehn Etappen: Umbau eines Echo 2 mit Fotos, eigenem Aufwand, Quellen und Grenzen. Ohne Gewähr, auf eigene Gefahr."
+description: "Warum unser Projekt länger dauert als ein schneller hassmic-Aufbau, und der Erfahrungsbericht in zehn Etappen mit Fotos, Quellen und Grenzen. Ohne Gewähr, auf eigene Gefahr."
 weight: 50
-sections: ["umbau"]
+sections: ["warum", "umbau"]
 ---

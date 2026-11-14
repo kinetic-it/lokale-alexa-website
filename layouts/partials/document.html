@@ -1,5 +1,5 @@
 {{- $l := .Language.Lang -}}
-{{- $neutral := slice "nachbauen" "umbau" "befunde" "soul" "news" -}}
+{{- $neutral := slice "nachbauen" "umbau" "befunde" "soul" "news" "warum" -}}
 {{- /* Alte Sprungmarken der früheren Ein-Seiten-Fassung: Abschnitt -> neue Seite (nur auf der Startseite gebraucht). */ -}}
 {{- $moved := dict -}}
 {{- if .IsHome }}{{ range .Site.RegularPages }}{{ $p := . }}{{ range .Params.sections }}{{ $moved = merge $moved (dict . $p.RelPermalink) }}{{ end }}{{ end }}{{ end -}}
