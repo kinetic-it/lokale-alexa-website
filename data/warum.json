@@ -30,10 +30,11 @@
       "lead": "Wir wollen nicht nur, dass der Echo antwortet, sondern dass Haushaltsaufgaben verlässlich und nachvollziehbar funktionieren. Dafür sind die Zuständigkeiten getrennt:",
       "points": [
         "Echo 2: Wakeword, Mikrofon und Lautsprecher, sonst nichts.",
-        "Home Assistant: fachliche Zentrale für Haushalt, Zustände, Timer, Wecker und Erinnerungen. Nur freigegebene Geräte werden gesteuert.",
-        "Kinetic Voice Router: Gesprächsagent in der Home-Assistant-Pipeline. Er bevorzugt lokale Befehle, passende Fragen gehen an Hermes.",
+        "Home Assistant: Zentrale für Haushalt und Gerätezustände. Auch Timer, Wecker und Erinnerungen sollen dort liegen. Nur freigegebene Geräte werden gesteuert.",
+        "Kinetic Voice Router: Gesprächsagent in der Home-Assistant-Pipeline. Home Assistant versucht lokale Befehle zuerst; was übrig bleibt, nimmt der Router an und gibt passende Fragen an Hermes weiter.",
         "Hermes: Wissensfragen, Erklärungen und freie Gespräche, ohne eigenen Zugang zur Haussteuerung.",
-        "Berechtigungen: Jede Aktion braucht eine ausdrückliche Freigabe. Persönliche Daten bleiben getrennt."
+        "Berechtigungen: Jede Aktion braucht eine ausdrückliche Freigabe. Persönliche Daten sollen getrennt bleiben.",
+        "Auch wir nutzen derzeit Cloud-Dienste für Spracherkennung und Sprachausgabe."
       ],
       "note": "Dafür kostet der Weg mehr Zeit: Wir testen jede Funktion einzeln, bauen Rückwege ein und dokumentieren, was nachgewiesen ist."
     },
@@ -69,28 +70,35 @@
           "Timer",
           "Native Assist-Timer mit Ton und Stopp. Die Satzabdeckung hängt an Home Assistant.",
           "f",
-          "Start, Ablauf und Abbruch im Einzeltest. Benennen teilweise; Restzeit und Verlängern noch nicht zuverlässig.",
+          "Dieselben nativen Timer. Start, Ablauf und Abbruch im Einzeltest; Benennen teilweise. Restzeit, Verlängern und mehrere Timer gleichzeitig noch nicht zuverlässig bzw. nicht geprüft.",
           "t"
         ],
         [
           "Wecker",
-          "Mit einer Automation einrichtbar. Von uns nicht geprüft.",
-          "n",
-          "Prototyp im Einzeltest: geplanter Start, wiederholtes Klingeln, Stopp. Mehrere Wecker, Neustart und Internetausfall sind offen.",
+          "Mit einer Home-Assistant-Automation einrichtbar. Unser Prototyp nutzt genau diesen Weg.",
+          "t",
+          "Prototyp als Home-Assistant-Automation im Einzeltest: geplanter Start, wiederholtes Klingeln, Stopp. Mehrere Wecker, Neustart und Internetausfall sind offen.",
           "t"
         ],
         [
           "Erinnerungen",
           "Mit Kalender und Automation konfigurierbar. Von uns nicht geprüft.",
           "n",
-          "Ziel: speichern, ändern, wiederholen, nach Neustart auslösen. Noch nicht umgesetzt.",
+          "Ziel in Home Assistant: speichern, ändern, wiederholen, nach Neustart auslösen. Noch nicht umgesetzt.",
           "p"
         ],
         [
           "Personenprofile",
           "Nur mit zusätzlichen Lösungen.",
           "n",
-          "Geplant: personenbezogene Rechte. Eine Stimme allein gilt nicht als sichere Identität.",
+          "Geplant: personenbezogene Rechte. Ein fest zugeordnetes Gerät oder Anwesenheit im Raum ist keine Sprechererkennung.",
+          "p"
+        ],
+        [
+          "Gedächtnis und Personen-Aliase",
+          "Abhängig vom KI-Dienst. Von uns nicht geprüft.",
+          "n",
+          "Ziel für eine spätere Phase: kontrolliertes Gedächtnis und Namen für Personen. Noch nicht festgelegt oder gebaut.",
           "p"
         ],
         [
@@ -141,7 +149,7 @@
         },
         {
           "t": "Personalisierung",
-          "x": "Wie unterscheidet das System die Erinnerungen zweier Personen? Dass jemand im Raum ist, ist keine sichere Identität. Persönliche Informationen geben wir nur nach Authentifizierung preis."
+          "x": "Wie unterscheidet das System die Erinnerungen zweier Personen? Dass jemand im Raum ist oder ein Gerät fest einer Person zugeordnet ist, ist keine Sprechererkennung. Unsere Regel: persönliche Informationen nur nach Authentifizierung."
         },
         {
           "t": "Ausfallsicherheit",
@@ -149,7 +157,7 @@
         },
         {
           "t": "Sicherheit",
-          "x": "Welche Aktionen dürfen ohne Rückfrage laufen? Bei uns nur ausdrücklich freigegebene Geräte. Jede Freigabe prüfen wir auf ihre tatsächliche Wirkung, bevor sie gilt."
+          "x": "Welche Aktionen dürfen ohne Rückfrage laufen? Bei uns nur ausdrücklich freigegebene Geräte. Jede Freigabe soll auf ihre tatsächliche Wirkung geprüft werden. Diese Prüfung ist noch nicht abgeschlossen; bis dahin testen wir Schaltbefehle nur an einem einzelnen Gerät."
         }
       ]
     },
@@ -199,10 +207,11 @@
       "lead": "We want more than an Echo that answers. We want household tasks to work reliably and traceably. That is why responsibilities are separated:",
       "points": [
         "Echo 2: wake word, microphone and speaker, nothing else.",
-        "Home Assistant: the central hub for the household, states, timers, alarms and reminders. Only approved devices are controlled.",
-        "Kinetic Voice Router: the conversation agent in the Home Assistant pipeline. It prefers local commands, and suitable questions go to Hermes.",
+        "Home Assistant: the hub for the household and device states. Timers, alarms and reminders are meant to live there too. Only approved devices are controlled.",
+        "Kinetic Voice Router: the conversation agent in the Home Assistant pipeline. Home Assistant tries local commands first; the router takes what is left and passes suitable questions on to Hermes.",
         "Hermes: knowledge questions, explanations and free conversation, with no direct access to home control.",
-        "Permissions: every action needs an explicit approval. Personal data stays separate."
+        "Permissions: every action needs an explicit approval. Personal data is meant to stay separate.",
+        "We also currently use cloud services for speech recognition and speech output."
       ],
       "note": "This route takes more time: we test each function on its own, build in fallbacks and document what is proven."
     },
@@ -238,28 +247,35 @@
           "Timers",
           "Native Assist timers with sound and stop. Sentence coverage depends on Home Assistant.",
           "f",
-          "Start, expiry and cancel in a single test. Naming partly works; remaining time and extending are not yet reliable.",
+          "The same native timers. Start, expiry and cancel in a single test; naming partly works. Remaining time, extending and several timers at once are not yet reliable or not tested.",
           "t"
         ],
         [
           "Alarms",
-          "Can be set up with an automation. Not tested by us.",
-          "n",
-          "Prototype in a single test: scheduled start, repeated ringing, stop. Several alarms, restart and internet outage are open.",
+          "Can be set up with a Home Assistant automation. Our prototype uses exactly this route.",
+          "t",
+          "Prototype as a Home Assistant automation in a single test: scheduled start, repeated ringing, stop. Several alarms, restart and internet outage are open.",
           "t"
         ],
         [
           "Reminders",
           "Configurable with a calendar and an automation. Not tested by us.",
           "n",
-          "Goal: store, change, repeat, trigger after a restart. Not implemented yet.",
+          "Goal in Home Assistant: store, change, repeat, trigger after a restart. Not implemented yet.",
           "p"
         ],
         [
           "Person profiles",
           "Only with additional solutions.",
           "n",
-          "Planned: person-related permissions. A voice alone does not count as a secure identity.",
+          "Planned: person-related permissions. A fixed device assignment or someone being in the room is not speaker recognition.",
+          "p"
+        ],
+        [
+          "Memory and person aliases",
+          "Depends on the AI service. Not tested by us.",
+          "n",
+          "Goal for a later phase: controlled memory and names for people. Not yet specified or built.",
           "p"
         ],
         [
@@ -310,7 +326,7 @@
         },
         {
           "t": "Personalisation",
-          "x": "How does the system keep two people's reminders apart? Someone being in the room is not a secure identity. We only share personal information after authentication."
+          "x": "How does the system keep two people's reminders apart? Someone being in the room, or a device assigned to one person, is not speaker recognition. Our rule: personal information only after authentication."
         },
         {
           "t": "Resilience",
@@ -318,7 +334,7 @@
         },
         {
           "t": "Security",
-          "x": "Which actions may run without asking again? For us, only explicitly approved devices. We check each approval for its actual effect before it applies."
+          "x": "Which actions may run without asking again? For us, only explicitly approved devices. Each approval is to be checked for its actual effect. That check is not finished yet; until then we test switching commands on a single device only."
         }
       ]
     },
