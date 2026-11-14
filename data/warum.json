@@ -98,7 +98,7 @@
           "Gedächtnis und Personen-Aliase",
           "Abhängig vom KI-Dienst. Von uns nicht geprüft.",
           "n",
-          "Ziel für eine spätere Phase: kontrolliertes Gedächtnis und Namen für Personen. Noch nicht festgelegt oder gebaut.",
+          "Als Ziel für eine spätere Phase festgelegt: kontrolliertes Gedächtnis und bestätigbare Personen-Aliase. Noch nicht implementiert oder getestet.",
           "p"
         ],
         [
@@ -275,7 +275,7 @@
           "Memory and person aliases",
           "Depends on the AI service. Not tested by us.",
           "n",
-          "Goal for a later phase: controlled memory and names for people. Not yet specified or built.",
+          "Confirmed as a goal for a later phase: controlled memory and person aliases requiring confirmation. Not implemented or tested yet.",
           "p"
         ],
         [
