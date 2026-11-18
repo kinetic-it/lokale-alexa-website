@@ -2,9 +2,9 @@
   "schema_version": 1,
   "visibility": "public",
   "approved": true,
-  "as_of": "2026-11-05",
+  "as_of": "2026-11-18",
   "evidence": "Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Analyse und begrenzte Tests laufen; Kinetic Voice Router v0.5.0b4 in Einzeltests",
+  "title": "Echo-2-Pilot · Begrenzter Wecker-Pilot; Nabu Core im Labor",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "Echo 2 läuft aktuell mit echo-dot-assist (hassmic) und ist mit Home Assistant verbunden (eigener Bericht)",
@@ -13,12 +13,14 @@
     "Ein freigegebener Schaltbefehl wurde zunächst wegen einer Gerätenamen-Variante nicht ausgeführt. Nach Ergänzung eines passenden Alias funktionierten Ein- und Ausschalten am Echo mit ungefährlicher Testlast (eigene Beobachtung); ein Home-Assistant-Debug-Lauf bestätigt die lokale Verarbeitung des Ausschaltens. Keine vollständige Sicherheits- oder Dauerbetriebsabnahme.",
     "Kinetic Voice Router v0.5.0b4 (experimentelle Beta) ist laut Home-Assistant-Oberfläche als Gesprächsagent der Pipeline „Speaker“ installiert; Home Assistant versucht lokale Befehle zuerst. Einzelfunktionen sind getestet, aber noch keine vollständige Alltagsabnahme.",
     "Sprachtimer wurden am Echo 2 im Einzeltest lokal erstellt, nach Ablauf hörbar ausgelöst und per Sprache gestoppt; einzelne benannte Timer konnten gestartet werden (eigene Beobachtung vom 03.11.).",
-    "Wecker-Prototyp in Home Assistant: geplanter Start, wiederholtes Klingeln, manuelles Stoppen und automatisches Ende nach ungefähr sieben Minuten waren in einem Einzeltest erfolgreich (eigene Beobachtung vom 05.11.). Keine unabhängige Zeitmessung; Neustart, Internetausfall, Sprachstopp und mehrere Wecker sind nicht geprüft."
+    "Wecker-Prototyp in Home Assistant: geplanter Start, wiederholtes Klingeln, manuelles Stoppen und automatisches Ende nach ungefähr sieben Minuten waren in einem Einzeltest erfolgreich (eigene Beobachtung vom 05.11.). Keine unabhängige Zeitmessung; Neustart, Internetausfall, Sprachstopp und mehrere Wecker waren in diesem Test nicht geprüft.",
+    "Ein Weckerkoordinator wird seit dem 13.11. begrenzt am Echo 2 erprobt. Ein geplanter Wecker klingelte am 14.11. hörbar und wurde anschließend manuell gestoppt (eigener Bericht). Sprachstart und Sprachstopp sowie Dauerbetrieb sind nicht nachgewiesen.",
+    "Nabu Core wird als Nachfolger des Kinetic Voice Routers entwickelt. Ein Weckerkern mit bis zu zehn Weckern wurde in einer isolierten Home-Assistant-Umgebung mit simuliertem Lautsprecher getestet; ein Test am echten Echo und die produktive Umstellung stehen noch aus."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
     "Komplexe Wissensfragen, Folgekontext und technische Ende-zu-Ende-Messungen",
-    "Timer-Restzeit abfragen, Timer verlängern/verkürzen, mehrere benannte Timer im Alltag zuverlässig verwalten; Wecker per Sprache stoppen, mehrere Wecker, Wecker nach Neustart oder bei Internetausfall; Erinnerungen und Listen sind nicht abgenommen",
+    "Timer-Restzeit abfragen, Timer verlängern/verkürzen, mehrere benannte Timer im Alltag zuverlässig verwalten; Wecker per Sprache stoppen, mehrere Wecker im Alltag, Wecker nach Neustart oder bei Internetausfall; Erinnerungen und Listen sind nicht abgenommen",
     "Musik (Spotify, YouTube Music), Multiroom, vollständige Offline-Sprachsteuerung und Alltagstauglichkeit sind nicht abgenommen",
     "Offen: Ob wir bei der aktuellen Firmware bleiben oder zu TECHO5, EchoLocal oder LibreEcho wechseln, ist nicht entschieden. Die Projekte werden neu untersucht; Angaben der Projekte sind keine eigenen Tests.",
     "Mehrbenutzerrechte, Gastmodus und sensible Antworten",
@@ -86,7 +88,7 @@
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · Analysis and limited tests under way; Kinetic Voice Router v0.5.0b4 in single tests",
+    "title": "Echo 2 pilot · Limited alarm pilot; Nabu Core in the lab",
     "evidence": "My own reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
@@ -96,12 +98,14 @@
       "An exposed switching command initially failed because of a device-name variant. After adding a matching alias, switching on and off through the Echo worked with a harmless test load (own observation); a Home Assistant debug run confirmed local processing for switching off. No complete security or long-term acceptance.",
       "Kinetic Voice Router v0.5.0b4 (experimental beta) is installed as the conversation agent of the Home Assistant “Speaker” pipeline according to the Home Assistant interface; Home Assistant tries local intents first. Individual functions have been tested, but there is no full everyday acceptance yet.",
       "On 3 November, spoken timers were started locally, rang audibly on the Echo 2, and were cancelled by voice in individual tests. Some named timers were also started (owner observation).",
-      "Alarm prototype in Home Assistant: scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked in a single test (own observation, 5 Nov.). No independent timing; restart, internet outage, voice stop and multiple alarms are not tested."
+      "Alarm prototype in Home Assistant: scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked in a single test (own observation, 5 Nov.). No independent timing; restart, internet outage, voice stop and multiple alarms were not tested in that run.",
+      "An alarm coordinator has been running as a limited Echo 2 pilot since 13 November. A scheduled alarm rang audibly on 14 November and was subsequently stopped manually (own report). Voice creation and voice cancellation, as well as long-term reliability, are not proven.",
+      "Nabu Core is being developed as the successor to the Kinetic Voice Router. An alarm core supporting up to ten alarms was tested in an isolated Home Assistant environment with a simulated speaker; testing on a real Echo and production migration remain outstanding."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
       "Complex knowledge queries, conversational follow-up and technical end-to-end measurements",
-      "Timer remaining-time queries, reliable extensions/shortenings and multiple named timers; stopping alarms by voice, multiple alarms, alarms after a restart or internet outage; reminders and lists are not yet accepted",
+      "Timer remaining-time queries, reliable extensions/shortenings and multiple named timers; stopping alarms by voice, multiple alarms in everyday use, alarms after a restart or internet outage; reminders and lists are not yet accepted",
       "Music (Spotify, YouTube Music), multiroom, fully offline voice control and everyday readiness are not yet accepted",
       "Open: whether we stay with the current firmware or move to TECHO5, EchoLocal or LibreEcho is undecided. The projects are being reassessed; project statements are not our own tests.",
       "Multi-user permissions, guest mode and sensitive answers",
@@ -142,9 +146,12 @@
       "Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.",
       "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits.",
       "First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase.",
-      "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch."
+      "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch.",
+      "Upstream news: hassmic published a beta port for the Echo Dot 5 (cannoli) on 16 November. Not tested by us; see the device overview for sources and installation limits.",
+      "14 November update: an alarm rang at its scheduled time during the limited Echo 2 pilot; it was subsequently stopped manually. Voice control and long-term operation remain unverified.",
+      "Nabu Core was tested in the lab as a future successor: multiple alarms were tested in an isolated Home Assistant environment with a simulated speaker. Hardware testing and production migration remain outstanding."
     ],
-    "last_test": "Alarm prototype in Home Assistant (single test, own observation): scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked. No independent timing; an earlier run that was triggered manually does not prove a scheduled start. Restart, internet outage, voice stop and multiple alarms are not tested. Earlier (3 Nov.): timer start and cancellation at the Echo worked; the remaining-time question and extension failed."
+    "last_test": "Nabu Core: 28 laboratory checks passed in an isolated Home Assistant environment, including multiple alarms due at the same time. The speaker was simulated; there is no proof of audible output on an Echo or production acceptance."
   },
   "history": [
     {
@@ -198,10 +205,22 @@
     {
       "date": "2026-11-05",
       "text": "Strategische Neubewertung begonnen: Die Umsetzung ist pausiert, der First-Run-Zieltermin 8. November ist ausgesetzt. Wecker-Prototyp in Home Assistant im Einzeltest erfolgreich (Start, wiederholtes Klingeln, Stopp, Ende nach etwa sieben Minuten). Firmwarealternativen werden neu untersucht; es gibt keine Wechselentscheidung."
+    },
+    {
+      "date": "2026-11-18",
+      "text": "Upstream-Neuigkeit: hassmic hat am 16.11. einen Beta-Port für den Echo Dot 5 (cannoli) veröffentlicht. Nicht selbst getestet; Quellen und Installationsgrenzen in der Geräteübersicht."
+    },
+    {
+      "date": "2026-11-18",
+      "text": "Rückblick 14.11.: Ein Wecker klingelte im begrenzten Echo-2-Pilotbetrieb zur eingestellten Zeit; der anschließende Stopp wurde manuell ausgelöst. Sprachbedienung und Dauerbetrieb bleiben offen."
+    },
+    {
+      "date": "2026-11-18",
+      "text": "Nabu Core als künftiger Nachfolger im Labor geprüft: Mehrere Wecker wurden in einer isolierten Home-Assistant-Umgebung mit simuliertem Lautsprecher getestet. Hardwaretest und produktive Umstellung stehen aus."
     }
   ],
   "last_test": {
-    "date": "2026-11-05",
-    "text": "Wecker-Prototyp in Home Assistant (Einzeltest, eigene Beobachtung): geplanter Start, wiederholtes Klingeln, manuelles Stoppen und automatisches Ende nach ungefähr sieben Minuten waren erfolgreich. Keine unabhängige Zeitmessung; ein früherer, manuell ausgelöster Lauf belegt keinen zeitgesteuerten Start. Neustart, Internetausfall, Sprachstopp und mehrere Wecker sind nicht geprüft. Zuvor (03.11.): Timer-Start und Abbruch am Echo erfolgreich; Restzeitfrage und Verlängerung scheiterten."
+    "date": "2026-11-18",
+    "text": "Nabu Core: 28 Laborprüfungen in einer isolierten Home-Assistant-Umgebung bestanden, darunter mehrere gleichzeitig fällige Wecker. Der Lautsprecher war simuliert; keine Hörbarkeit am Echo und keine Produktivabnahme."
   }
 }
