@@ -148,7 +148,7 @@
       "First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase.",
       "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch.",
       "Upstream news: hassmic published a beta port for the Echo Dot 5 (cannoli) on 16 November. Not tested by us; see the device overview for sources and installation limits.",
-      "An alarm rang at its scheduled time during the limited Echo 2 pilot; it was subsequently stopped manually. Voice control and long-term operation remain unverified.",
+      "14 November update: an alarm rang at its scheduled time during the limited Echo 2 pilot; it was subsequently stopped manually. Voice control and long-term operation remain unverified.",
       "Nabu Core was tested in the lab as a future successor: multiple alarms were tested in an isolated Home Assistant environment with a simulated speaker. Hardware testing and production migration remain outstanding."
     ],
     "last_test": "Nabu Core: 28 laboratory checks passed in an isolated Home Assistant environment, including multiple alarms due at the same time. The speaker was simulated; there is no proof of audible output on an Echo or production acceptance."
@@ -211,8 +211,8 @@
       "text": "Upstream-Neuigkeit: hassmic hat am 16.11. einen Beta-Port für den Echo Dot 5 (cannoli) veröffentlicht. Nicht selbst getestet; Quellen und Installationsgrenzen in der Geräteübersicht."
     },
     {
-      "date": "2026-11-14",
-      "text": "Ein Wecker klingelte im begrenzten Echo-2-Pilotbetrieb zur eingestellten Zeit; der anschließende Stopp wurde manuell ausgelöst. Sprachbedienung und Dauerbetrieb bleiben offen."
+      "date": "2026-11-18",
+      "text": "Rückblick 14.11.: Ein Wecker klingelte im begrenzten Echo-2-Pilotbetrieb zur eingestellten Zeit; der anschließende Stopp wurde manuell ausgelöst. Sprachbedienung und Dauerbetrieb bleiben offen."
     },
     {
       "date": "2026-11-18",
