@@ -31,7 +31,7 @@
       "points": [
         "Echo 2: Wakeword, Mikrofon und Lautsprecher, sonst nichts.",
         "Home Assistant: Zentrale für Haushalt und Gerätezustände. Auch Timer, Wecker und Erinnerungen sollen dort liegen. Nur freigegebene Geräte werden gesteuert.",
-        "Kinetic Voice Router: Gesprächsagent in der Home-Assistant-Pipeline. Home Assistant versucht lokale Befehle zuerst; was übrig bleibt, nimmt der Router an und gibt passende Fragen an Hermes weiter.",
+        "Kinetic Voice Router: Gesprächsagent in der Home-Assistant-Pipeline. Home Assistant versucht lokale Befehle zuerst; was übrig bleibt, nimmt der Router an und gibt passende Fragen an Hermes weiter. Als Nachfolger wird Nabu Core entwickelt, bisher nur im Labor getestet.",
         "Hermes: Wissensfragen, Erklärungen und freie Gespräche, ohne eigenen Zugang zur Haussteuerung.",
         "Berechtigungen: Jede Aktion braucht eine ausdrückliche Freigabe. Persönliche Daten sollen getrennt bleiben.",
         "Auch wir nutzen derzeit Cloud-Dienste für Spracherkennung und Sprachausgabe."
@@ -77,7 +77,7 @@
           "Wecker",
           "Mit einer Home-Assistant-Automation einrichtbar. Unser Prototyp nutzt genau diesen Weg.",
           "t",
-          "Prototyp als Home-Assistant-Automation im Einzeltest: geplanter Start, wiederholtes Klingeln, Stopp. Mehrere Wecker, Neustart und Internetausfall sind offen.",
+          "Prototyp als Home-Assistant-Automation im Einzeltest (05.11.). Seit 13.11. wird ein Weckerkoordinator begrenzt erprobt; ein geplanter Wecker klingelte am 14.11. hörbar. Sprachstart, Sprachstopp, mehrere Wecker im Alltag, Neustart und Internetausfall sind offen.",
           "t"
         ],
         [
@@ -208,7 +208,7 @@
       "points": [
         "Echo 2: wake word, microphone and speaker, nothing else.",
         "Home Assistant: the hub for the household and device states. Timers, alarms and reminders are meant to live there too. Only approved devices are controlled.",
-        "Kinetic Voice Router: the conversation agent in the Home Assistant pipeline. Home Assistant tries local commands first; the router takes what is left and passes suitable questions on to Hermes.",
+        "Kinetic Voice Router: the conversation agent in the Home Assistant pipeline. Home Assistant tries local commands first; the router takes what is left and passes suitable questions on to Hermes. Nabu Core is being developed as its successor and has so far only been tested in a lab.",
         "Hermes: knowledge questions, explanations and free conversation, with no direct access to home control.",
         "Permissions: every action needs an explicit approval. Personal data is meant to stay separate.",
         "We also currently use cloud services for speech recognition and speech output."
@@ -254,7 +254,7 @@
           "Alarms",
           "Can be set up with a Home Assistant automation. Our prototype uses exactly this route.",
           "t",
-          "Prototype as a Home Assistant automation in a single test: scheduled start, repeated ringing, stop. Several alarms, restart and internet outage are open.",
+          "Prototype as a Home Assistant automation in a single test (5 Nov). Since 13 Nov an alarm coordinator has been trialled on a limited basis; a scheduled alarm rang audibly on 14 Nov. Voice start, voice stop, several alarms in daily use, restart and internet outage are open.",
           "t"
         ],
         [
