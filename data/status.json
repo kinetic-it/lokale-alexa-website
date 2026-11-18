@@ -142,7 +142,8 @@
       "Kinetic Voice Router 0.4.1 tested live: observe mode as expected, a misclassification of a question about an unknown device was found in active mode. The fix (0.4.2) exists as a development state, not installed.",
       "Experience report “How we converted our Echo 2” added: ten stages with photos, effort as rated by me, sources and limits.",
       "First Run prioritised for an aspirational 8 November deadline; Kinetic Voice Router v0.5.0b4 active in Home Assistant. Voice timer start, audible expiry and cancellation passed limited tests; remaining-time/extension queries remain unresolved. Comfort features are planned for a later phase.",
-      "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch."
+      "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch.",
+      "Upstream news: hassmic published a beta port for the Echo Dot 5 (cannoli) on 16 November. Not tested by us; see the device overview for sources and installation limits."
     ],
     "last_test": "Alarm prototype in Home Assistant (single test, own observation): scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked. No independent timing; an earlier run that was triggered manually does not prove a scheduled start. Restart, internet outage, voice stop and multiple alarms are not tested. Earlier (3 Nov.): timer start and cancellation at the Echo worked; the remaining-time question and extension failed."
   },
@@ -198,6 +199,10 @@
     {
       "date": "2026-11-05",
       "text": "Strategische Neubewertung begonnen: Die Umsetzung ist pausiert, der First-Run-Zieltermin 8. November ist ausgesetzt. Wecker-Prototyp in Home Assistant im Einzeltest erfolgreich (Start, wiederholtes Klingeln, Stopp, Ende nach etwa sieben Minuten). Firmwarealternativen werden neu untersucht; es gibt keine Wechselentscheidung."
+    },
+    {
+      "date": "2026-11-18",
+      "text": "Upstream-Neuigkeit: hassmic hat am 16.11. einen Beta-Port für den Echo Dot 5 (cannoli) veröffentlicht. Nicht selbst getestet; Quellen und Installationsgrenzen in der Geräteübersicht."
     }
   ],
   "last_test": {
