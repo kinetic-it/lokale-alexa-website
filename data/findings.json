@@ -3,6 +3,20 @@
   "note": "Öffentliche Befunde. Nur freigegebene Aussagen, keine Namen, Hosts, IPs oder Geräte aus dem Haushalt. Offene Sicherheitsdetails erst nach der Behebung (siehe docs/REDAKTION.md). Neueste zuerst.",
   "entries": [
     {
+      "id": "f14",
+      "date": "2026-11-18",
+      "type": "finding",
+      "state": "open",
+      "de": {
+        "title": "Echo Dot 5: hassmic-Port veröffentlicht",
+        "text": "Seit dem 16.11.2026 unterstützt hassmic den Echo Dot 5 (2022, C2N6L4, cannoli) als Beta-Sprachsatellit. Laut Fremdprojekt sind Root, Unlock, TWRP und Sprachsatellitenfunktionen auf Hardware erprobt. Drei USB-Testpunkte müssen verlötet werden; die Einrichtung bleibt manuell. Bluetooth-Audio und geführte Einrichtung sind noch offen. Kein eigener Test oder Kaufentscheid. Originalquellen stehen in der Geräteübersicht."
+      },
+      "en": {
+        "title": "Echo Dot 5: hassmic port published",
+        "text": "Since 16 November 2026, hassmic supports the Echo Dot 5 (2022, C2N6L4, cannoli) as a beta voice satellite. Upstream reports hardware tests of root, unlock, TWRP and voice satellite features. Three USB test pads require soldering; setup remains manual. Bluetooth audio and guided setup are still open. No testing or purchase decision of our own. Original sources are in the device overview."
+      }
+    },
+    {
       "id": "f13",
       "date": "2026-11-13",
       "type": "correction",
