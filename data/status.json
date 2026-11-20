@@ -2,9 +2,9 @@
   "schema_version": 1,
   "visibility": "public",
   "approved": true,
-  "as_of": "2026-11-18",
+  "as_of": "2026-11-19",
   "evidence": "Eigene Berichte und private Projektakte; keine unabhängige Live-Abnahme",
-  "title": "Echo-2-Pilot · Begrenzter Wecker-Pilot; Nabu Core im Labor",
+  "title": "Echo-2-Pilot · Nabu Core im begrenzten Sprachwecker-Test",
   "confirmed": [
     "Echo 2 (XC56PY/radar): Unlock und TWRP dokumentiert",
     "Echo 2 läuft aktuell mit echo-dot-assist (hassmic) und ist mit Home Assistant verbunden (eigener Bericht)",
@@ -14,8 +14,8 @@
     "Kinetic Voice Router v0.5.0b4 (experimentelle Beta) ist laut Home-Assistant-Oberfläche als Gesprächsagent der Pipeline „Speaker“ installiert; Home Assistant versucht lokale Befehle zuerst. Einzelfunktionen sind getestet, aber noch keine vollständige Alltagsabnahme.",
     "Sprachtimer wurden am Echo 2 im Einzeltest lokal erstellt, nach Ablauf hörbar ausgelöst und per Sprache gestoppt; einzelne benannte Timer konnten gestartet werden (eigene Beobachtung vom 03.11.).",
     "Wecker-Prototyp in Home Assistant: geplanter Start, wiederholtes Klingeln, manuelles Stoppen und automatisches Ende nach ungefähr sieben Minuten waren in einem Einzeltest erfolgreich (eigene Beobachtung vom 05.11.). Keine unabhängige Zeitmessung; Neustart, Internetausfall, Sprachstopp und mehrere Wecker waren in diesem Test nicht geprüft.",
-    "Ein Weckerkoordinator wird seit dem 13.11. begrenzt am Echo 2 erprobt. Ein geplanter Wecker klingelte am 14.11. hörbar und wurde anschließend manuell gestoppt (eigener Bericht). Sprachstart und Sprachstopp sowie Dauerbetrieb sind nicht nachgewiesen.",
-    "Nabu Core wird als Nachfolger des Kinetic Voice Routers entwickelt. Ein Weckerkern mit bis zu zehn Weckern wurde in einer isolierten Home-Assistant-Umgebung mit simuliertem Lautsprecher getestet; ein Test am echten Echo und die produktive Umstellung stehen noch aus."
+    "Ein Weckerkoordinator wird seit dem 13.11. begrenzt am Echo 2 erprobt. Ein geplanter Wecker klingelte am 14.11. hörbar und wurde anschließend manuell gestoppt (eigener Bericht). Bei diesem Test wurden Sprachstart und Sprachstopp nicht nachgewiesen.",
+    "Nabu Core wird als Nachfolger des Kinetic Voice Routers entwickelt und in Home Assistant begrenzt erprobt. Laut übermitteltem Testbericht wurden am Echo 2 ein Wecker per Sprache angelegt, hörbar ausgelöst und in einem einzelnen weiteren Test per Sprache gestoppt. Wiederholbarkeit und Dauerbetrieb sind nicht abgenommen."
   ],
   "not_yet_verified": [
     "Stabiler Dauerbetrieb und Audio unter Musik",
@@ -82,13 +82,14 @@
     "Eine Wissensfrage brauchte am 29.10. 21 Sekunden bis zur Antwort. Ob der Router daran beteiligt war, ist nicht belegt; eine Gegenprobe ohne Router fehlt",
     "Streaming-Wakeword-Pfad war instabil; lokales Wakeword wird deshalb bevorzugt",
     "Freie Frage wurde in einem früheren Test über einen inzwischen ersetzten Gesprächsagenten nicht verstanden",
-    "Die Prüfung der Sprachfreigaben ist nicht abgeschlossen; Schaltbefehle werden bis dahin nur an einem einzelnen, bereits freigegebenen Gerät getestet"
+    "Die Prüfung der Sprachfreigaben ist nicht abgeschlossen; Schaltbefehle werden bis dahin nur an einem einzelnen, bereits freigegebenen Gerät getestet",
+    "Während des Klingelns wurde das Aktivierungswort in einzelnen Versuchen unzuverlässig erkannt. Ein erfolgreicher Sprachstopp ist ein Einzeltest; zuverlässige Wiederholung bleibt offen."
   ],
   "source": "manual-public-review",
   "internal_reference": "not_public",
   "publication_note": "Nicht direkt aus privaten Dateien generieren. Public-Daten nach evidenzbasiertem Review freigeben.",
   "en": {
-    "title": "Echo 2 pilot · Limited alarm pilot; Nabu Core in the lab",
+    "title": "Echo 2 pilot · Nabu Core in limited voice-alarm testing",
     "evidence": "My own reports and private project records; no independent live acceptance",
     "confirmed": [
       "Echo 2 (XC56PY/radar): unlock and TWRP documented",
@@ -99,8 +100,8 @@
       "Kinetic Voice Router v0.5.0b4 (experimental beta) is installed as the conversation agent of the Home Assistant “Speaker” pipeline according to the Home Assistant interface; Home Assistant tries local intents first. Individual functions have been tested, but there is no full everyday acceptance yet.",
       "On 3 November, spoken timers were started locally, rang audibly on the Echo 2, and were cancelled by voice in individual tests. Some named timers were also started (owner observation).",
       "Alarm prototype in Home Assistant: scheduled start, repeated ringing, manual stop and automatic end after roughly seven minutes worked in a single test (own observation, 5 Nov.). No independent timing; restart, internet outage, voice stop and multiple alarms were not tested in that run.",
-      "An alarm coordinator has been running as a limited Echo 2 pilot since 13 November. A scheduled alarm rang audibly on 14 November and was subsequently stopped manually (own report). Voice creation and voice cancellation, as well as long-term reliability, are not proven.",
-      "Nabu Core is being developed as the successor to the Kinetic Voice Router. An alarm core supporting up to ten alarms was tested in an isolated Home Assistant environment with a simulated speaker; testing on a real Echo and production migration remain outstanding."
+      "An alarm coordinator has been running as a limited Echo 2 pilot since 13 November. A scheduled alarm rang audibly on 14 November and was subsequently stopped manually (own report). Voice creation and cancellation were not demonstrated in that test.",
+      "Nabu Core is being developed as the successor to the Kinetic Voice Router and is being piloted in Home Assistant. According to the supplied test report, an alarm was created by voice and rang audibly on the Echo 2; in one further test it was stopped by voice. Repeatability and continuous operation have not been accepted."
     ],
     "not_yet_verified": [
       "Stable continuous operation and audio while music is playing",
@@ -120,7 +121,8 @@
       "One knowledge question took 21 seconds to answer on 29 Oct. Whether the router was involved is not proven; a control run without the router is missing",
       "The streaming wake word path was unstable; the local wake word is therefore preferred",
       "An open question was not understood in an earlier test, via a conversation agent that has since been replaced",
-      "The review of voice exposures is not complete; until then switching commands are only tested on a single device that is already exposed"
+      "The review of voice exposures is not complete; until then switching commands are only tested on a single device that is already exposed",
+      "During ringing, the wake word was unreliable in individual attempts. One successful voice stop is a single test; reliable repetition remains unverified."
     ],
     "milestones": {
       "m1": "Echo 2 boot access",
@@ -149,9 +151,10 @@
       "Strategic reassessment started: implementation is paused and the 8 November First Run target is suspended. Alarm prototype in Home Assistant passed a single test (start, repeated ringing, stop, end after about seven minutes). Firmware alternatives are being reassessed; there is no decision to switch.",
       "Upstream news: hassmic published a beta port for the Echo Dot 5 (cannoli) on 16 November. Not tested by us; see the device overview for sources and installation limits.",
       "14 November update: an alarm rang at its scheduled time during the limited Echo 2 pilot; it was subsequently stopped manually. Voice control and long-term operation remain unverified.",
-      "Nabu Core was tested in the lab as a future successor: multiple alarms were tested in an isolated Home Assistant environment with a simulated speaker. Hardware testing and production migration remain outstanding."
+      "Nabu Core was tested in the lab as a future successor: multiple alarms were tested in an isolated Home Assistant environment with a simulated speaker. Hardware testing and production migration remain outstanding.",
+      "Nabu Core: a voice alarm and audible output were tested on the Echo 2 in a limited pilot. One voice stop succeeded; recognition while ringing and reliability remain open."
     ],
-    "last_test": "Nabu Core: 28 laboratory checks passed in an isolated Home Assistant environment, including multiple alarms due at the same time. The speaker was simulated; there is no proof of audible output on an Echo or production acceptance."
+    "last_test": "According to the supplied test report, an alarm was created by voice and rang audibly on the Echo 2; in one further test it was also stopped by voice. The wake word did not respond reliably during ringing. This does not demonstrate continuous operation or consistently reliable voice cancellation."
   },
   "history": [
     {
@@ -217,10 +220,14 @@
     {
       "date": "2026-11-18",
       "text": "Nabu Core als künftiger Nachfolger im Labor geprüft: Mehrere Wecker wurden in einer isolierten Home-Assistant-Umgebung mit simuliertem Lautsprecher getestet. Hardwaretest und produktive Umstellung stehen aus."
+    },
+    {
+      "date": "2026-11-19",
+      "text": "Nabu Core: Sprachwecker und hörbare Ausgabe am Echo 2 im begrenzten Pilot getestet. Ein Sprachstopp gelang einmal; die Erkennung während des Klingelns und die Zuverlässigkeit bleiben offen."
     }
   ],
   "last_test": {
-    "date": "2026-11-18",
-    "text": "Nabu Core: 28 Laborprüfungen in einer isolierten Home-Assistant-Umgebung bestanden, darunter mehrere gleichzeitig fällige Wecker. Der Lautsprecher war simuliert; keine Hörbarkeit am Echo und keine Produktivabnahme."
+    "date": "2026-11-19",
+    "text": "Laut übermitteltem Testbericht gelang das sprachliche Anlegen und hörbare Auslösen eines Weckers am Echo 2; in einem weiteren Einzeltest gelang auch ein Sprachstopp. Das Aktivierungswort reagierte während des Klingelns nicht zuverlässig. Kein Nachweis für Dauerbetrieb oder wiederholbar sicheren Sprachstopp."
   }
 }
