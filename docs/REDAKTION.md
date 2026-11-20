@@ -137,6 +137,14 @@ Abschnitt `#umbau` (Navigation „Umbau“ / „Our build“) entsteht aus **ein
 - **Fotos** liegen in `images/`, nur mit ausdrücklicher Freigabe des Owners. Vor dem Ablegen: Metadaten entfernen (EXIF, GPS, Aufnahmedatum), Seriennummern, Aufkleber, MAC-Adressen und private Umgebung wegschneiden, auf höchstens 700 px Breite verkleinern. Jedes Bild braucht einen Alternativtext in beiden Sprachen.
 - Zahlen zum Kinetic Voice Router stammen aus Owner-Beobachtungen. Eine Version gilt erst als installiert oder abgenommen, wenn der Owner das gemeldet hat. Der eigenständige Kinetic Voice Router wird inzwischen öffentlich unter `https://github.com/kinetic-it/kinetic-voice-router` entwickelt; historische Berichtsstände im Umbau-Abschnitt sind auf ihren jeweiligen Berichtstag zu beziehen.
 
+## Vergleich „Warum nicht nach zwei Stunden fertig?“
+
+Der Abschnitt steht ganz oben auf der Seite Umbau (`#warum`), von der Startseite und aus der FAQ verlinkt. Texte in `data/warum.json` (de und en mit gleichem Aufbau). Die Tabelle nutzt die Kennzeichen aus `data/umbau.json` (`ev`). Pro Zeile: Funktion, Text und Kennzeichen für Beispielaufbau (A), dann Text und Kennzeichen für Lokale Alexa (B). `check_i18n.py` prüft Aufbau und gültige Kennzeichen.
+
+- **Nur freigegebene Stände:** Die Tabelle nennt nur Aussagen, die auf der Seite Stand bereits freigegeben sind. Interne Ergebnisse, die noch keine Freigabe haben, kommen erst nach Entscheidung in den Abschnitt.
+- **Keine Gesamtzeit:** Eine „Zeit bis fertig“ wird nicht genannt, solange keine belastbare Messung vorliegt. Zeitangaben stehen je Etappe im Erfahrungsbericht.
+- **Beispielaufbau:** Die Spalte A ist eine mögliche Konfiguration, kein nachgewiesener Aufbau einer bestimmten Person. Sie wird nicht als eigener Test dargestellt.
+
 ## Befunde und Erkenntnisse
 
 Abschnitt `#befunde` kommt aus `data/findings.json` (je Eintrag Deutsch und Englisch, neueste zuerst). Neuer Eintrag: Objekt oben einfügen, `python3 tools/check_i18n.py`, PR. Typen: `finding` (Erkenntnis), `problem` (mit Zustand `open` oder `resolved`), `correction` (Korrektur einer früheren öffentlichen Aussage).

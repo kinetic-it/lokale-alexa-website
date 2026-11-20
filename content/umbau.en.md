@@ -1,8 +1,8 @@
 ---
-title: "How we converted our Echo 2"
+title: "Why it takes longer, and how we converted our Echo 2"
 navtitle: "Our build"
-description: "A report in ten stages: converting an Echo 2, with photos, our own effort, sources and limits. No warranty, at your own risk."
+description: "Why our project takes longer than a quick hassmic setup, and a report in ten stages with photos, sources and limits. No warranty, at your own risk."
 slug: "our-build"
 weight: 50
-sections: ["umbau"]
+sections: ["warum", "umbau"]
 ---

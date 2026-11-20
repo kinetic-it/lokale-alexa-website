@@ -1,0 +1,72 @@
+{{- $l := .Language.Lang -}}
+{{- $w := index hugo.Data.warum $l -}}
+{{- $ev := (index hugo.Data.umbau $l).ev -}}
+<section id="warum" class="warum">
+  <div class="wrap">
+    <div class="eyebrow">{{ $w.eyebrow }}</div>
+    <h2>{{ $w.h2 }}</h2>
+    <p class="intro">{{ $w.sub }}</p>
+{{ range $w.intro }}
+    <p>{{ . }}</p>
+{{ end }}
+    <div class="callout qcall">
+      <p class="qlabel">{{ $w.question_label }}</p>
+      <p class="qtext">{{ $w.question }}</p>
+    </div>
+
+    <div class="variants">
+      <article class="variant va" aria-labelledby="va-t">
+        <span class="vtag">{{ $w.va.tag }}</span>
+        <h3 id="va-t">{{ $w.va.title }}</h3>
+        <p class="chain">{{ $w.va.chain }}</p>
+        <p>{{ $w.va.lead }}</p>
+        <ul>{{ range $w.va.points }}<li>{{ . }}</li>{{ end }}</ul>
+        <p class="vnote">{{ $w.va.note }}</p>
+      </article>
+      <article class="variant vb" aria-labelledby="vb-t">
+        <span class="vtag">{{ $w.vb.tag }}</span>
+        <h3 id="vb-t">{{ $w.vb.title }}</h3>
+        <p class="chain">{{ $w.vb.chain }}</p>
+        <p>{{ $w.vb.lead }}</p>
+        <ul>{{ range $w.vb.points }}<li>{{ . }}</li>{{ end }}</ul>
+        <p class="vnote">{{ $w.vb.note }}</p>
+      </article>
+    </div>
+
+    <h3 class="sub">{{ $w.table_title }}</h3>
+    <p class="small">{{ $w.ev_note }}</p>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="{{ $w.h2 }}">
+      <table class="stack cmp">
+        <thead><tr>{{ range $w.table.head }}<th>{{ . }}</th>{{ end }}</tr></thead>
+        <tbody>
+{{ range $w.table.rows }}
+          <tr>
+            <td data-l="{{ index $w.table.head 0 }}"><strong>{{ index . 0 }}</strong></td>
+            <td data-l="{{ index $w.table.head 1 }}"><span class="ev ev-{{ index . 2 }}">{{ index $ev (index . 2) }}</span> {{ index . 1 }}</td>
+            <td data-l="{{ index $w.table.head 2 }}"><span class="ev ev-{{ index . 4 }}">{{ index $ev (index . 4) }}</span> {{ index . 3 }}</td>
+          </tr>
+{{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout reuse">
+      <p><strong>{{ $w.reuse.title }}.</strong> {{ $w.reuse.text }}</p>
+    </div>
+
+    <h3 class="sub">{{ $w.daily.title }}</h3>
+    <p class="intro">{{ $w.daily.intro }}</p>
+    <div class="grid two">
+{{ range $w.daily.items }}
+      <div class="card"><span class="label">{{ .t }}</span><p>{{ .x }}</p></div>
+{{ end }}
+    </div>
+
+    <div class="closing">
+      <h3 class="sub">{{ $w.closing.title }}</h3>
+      <ul class="closing-list">{{ range $w.closing.lines }}<li>{{ . }}</li>{{ end }}</ul>
+      <p class="small">{{ $w.closing.time }}</p>
+      <p class="actions"><a class="button alt" href="{{ partial "url.html" "befunde" }}">{{ $w.closing.link_findings }}</a><a class="button alt" href="{{ partial "url.html" "stand" }}">{{ $w.closing.link_status }}</a></p>
+    </div>
+  </div>
+</section>
